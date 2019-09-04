@@ -30,11 +30,25 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        localhostDebug {
+            signingConfig debug.signingConfig
+
+            resValue "string", "BASE_URL", "https://localhost:44355/api/"
+            resValue "string", "GET_ALL_OFFERS_URL", "Offer"
+
+        }
+        dummyDebug {
+            signingConfig debug.signingConfig
+
+            resValue "string", "BASE_URL", "http://dummy.restapiexample.com/api/v1/employees"
+            resValue "string", "GET_ALL_OFFERS_URL", ""
+        }
     }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    flavorDimensions 'localhost', 'production'
 }
 
 dependencies {

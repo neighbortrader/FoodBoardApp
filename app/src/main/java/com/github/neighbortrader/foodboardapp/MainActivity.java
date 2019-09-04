@@ -1,5 +1,6 @@
 package com.github.neighbortrader.foodboardapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
+import com.github.neighbortrader.foodboardapp.transfer.GetAllOffersRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                new GetAllOffersRequest().get();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -106,5 +110,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+    }
+
+    public Context getContext(){
+        return getApplicationContext();
     }
 }
