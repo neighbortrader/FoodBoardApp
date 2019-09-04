@@ -63,21 +63,19 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
-
+                new GetAllOffersRequest<Offer>(getApplicationContext(), new OnEventListener<Offer>() {
                     @Override
                     public void onResponse(List<Offer> object) {
-                        Snackbar.make(view, "onResponse" + object, Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-
                     }
 
                     @Override
                     public void onFailure(Exception e) {
-                        Snackbar.make(view, "onFailure" + e, Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, "onFailure\n" + e, Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
-                });
+                }).execute();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
