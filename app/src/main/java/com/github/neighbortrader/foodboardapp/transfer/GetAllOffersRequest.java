@@ -1,6 +1,11 @@
 package com.github.neighbortrader.foodboardapp.transfer;
 
+import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.github.neighbortrader.foodboardapp.MyApplication;
 
 import java.io.IOException;
 
@@ -12,6 +17,7 @@ import okhttp3.Response;
 
 public class GetAllOffersRequest implements Get {
     public final static String TAG = GetAllOffersRequest.class.getSimpleName();
+    private Context context = MyApplication.getAppContext();
 
     @Override
     public boolean get() {
@@ -30,7 +36,7 @@ public class GetAllOffersRequest implements Get {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Request Callback: onFailure()", e);
             }
 
             @Override
@@ -38,7 +44,9 @@ public class GetAllOffersRequest implements Get {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    Log.d(TAG, String.format("Successful repose:\n%s", response.toString()));
+                    Log.d(TAG, String.format("Successful response:\n%s", response.toString()));
+                    Looper.prepare();
+                    Toast.makeText(context, String.format("Successful response:\n%s", response.toString()), Toast.LENGTH_SHORT).show();
                 }
             }
         });

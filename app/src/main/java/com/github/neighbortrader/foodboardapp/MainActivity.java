@@ -1,6 +1,9 @@
 package com.github.neighbortrader.foodboardapp;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
+import com.github.neighbortrader.foodboardapp.transfer.Constant;
 import com.github.neighbortrader.foodboardapp.transfer.GetAllOffersRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -29,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
     public static String TAG = MainActivity.class.getSimpleName();
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Constant.ACTION_ALL_OFFERS)){
+                Toast.makeText(getApplicationContext(),"Recived from server: " + intent.getStringExtra(Constant.EXTRA_ALL_OFFERS),Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart()");
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.ACTION_ALL_OFFERS);
+        registerReceiver(broadcastReceiver, intentFilter);
     }
 
     @Override
@@ -98,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop()");
+
+        unregisterReceiver(broadcastReceiver);
     }
 
     @Override
@@ -112,7 +131,4 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onDestroy()");
     }
 
-    public Context getContext(){
-        return getApplicationContext();
-    }
 }

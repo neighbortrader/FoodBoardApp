@@ -17,5 +17,12 @@ public class Offer {
     @Setter
     private String description;
 
-
+    @Override
+    public String toString() {
+        return "Offer{" +
+                "price=" + price +
+                ", groceryCategory='" + groceryCategory + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
