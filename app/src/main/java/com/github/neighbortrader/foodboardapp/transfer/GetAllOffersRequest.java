@@ -20,8 +20,6 @@ public class GetAllOffersRequest <T> extends GetRequest<T> {
         super(context, callback);
     }
 
-
-
     @Override
     protected List<T> doInBackground(Void... params) {
         {

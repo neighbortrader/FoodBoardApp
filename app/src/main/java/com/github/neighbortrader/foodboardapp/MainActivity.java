@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
 
                 new GetAllOffersRequest<Offer>(getApplicationContext(), new OnEventListener<Offer>() {

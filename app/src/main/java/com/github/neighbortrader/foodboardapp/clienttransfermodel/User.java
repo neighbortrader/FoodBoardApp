@@ -1,14 +1,13 @@
 package com.github.neighbortrader.foodboardapp.clienttransfermodel;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Address;
-import com.github.neighbortrader.foodboardapp.transfer.Header;
 
 import java.util.ArrayList;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class User implements Header {
+public class User {
 
     @Getter
     @Setter
@@ -26,8 +25,5 @@ public class User implements Header {
     @Setter
     private ArrayList<Offer> offerList;
 
-    @Override
-    public String toHeader() {
-        return null;
-    }
+
 }
