@@ -43,6 +43,7 @@ public class GetAllOffersRequest <T> extends GetRequest<T> {
 
                 // TODO READ OBJECTS FROM REQUEST
 
+                // This is dummy data
                 ArrayList<T> resultList = new ArrayList<>();
 
                 resultList.add((T) new Offer(new Price(1d), "a", "Test"));
