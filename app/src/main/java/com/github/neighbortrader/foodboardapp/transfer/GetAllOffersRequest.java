@@ -44,9 +44,7 @@ public class GetAllOffersRequest implements Get {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    Log.d(TAG, String.format("Successful response:\n%s", response.toString()));
-                    Looper.prepare();
-                    Toast.makeText(context, String.format("Successful response:\n%s", response.toString()), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, String.format("Successful response:\n%s\n%s", response.toString(), response.body().toString()));
                 }
             }
         });
