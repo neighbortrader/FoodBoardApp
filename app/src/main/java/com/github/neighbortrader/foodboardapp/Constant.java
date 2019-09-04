@@ -1,9 +1,8 @@
-package com.github.neighbortrader.foodboardapp.transfer;
+package com.github.neighbortrader.foodboardapp;
 
 import android.app.Application;
 import android.content.Context;
 
-import com.github.neighbortrader.foodboardapp.MainActivity;
 import com.github.neighbortrader.foodboardapp.MyApplication;
 import com.github.neighbortrader.foodboardapp.R;
 

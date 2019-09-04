@@ -1,6 +1,7 @@
-package com.github.neighbortrader.foodboardapp.clienttransfermodel;
+package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Address;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 
 import java.util.ArrayList;
 

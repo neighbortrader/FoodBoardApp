@@ -1,6 +1,8 @@
-package com.github.neighbortrader.foodboardapp.clienttransfermodel;
+package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
+
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,14 @@ public class Offer {
     @Getter
     @Setter
     private String description;
+
+    @Getter
+    @Setter
+    private LocalDateTime purchaseDate;
+
+    @Getter
+    @Setter
+    private LocalDateTime expireDate;
 
     @Override
     public String toString() {

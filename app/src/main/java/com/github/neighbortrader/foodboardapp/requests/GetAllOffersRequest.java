@@ -1,10 +1,11 @@
-package com.github.neighbortrader.foodboardapp.transfer;
+package com.github.neighbortrader.foodboardapp.requests;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.github.neighbortrader.foodboardapp.Constant;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
-import com.github.neighbortrader.foodboardapp.clienttransfermodel.Offer;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 
 import java.util.ArrayList;
 import java.util.List;

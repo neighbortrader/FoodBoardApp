@@ -19,16 +19,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Price;
-import com.github.neighbortrader.foodboardapp.clienttransfermodel.Offer;
-import com.github.neighbortrader.foodboardapp.transfer.Constant;
-import com.github.neighbortrader.foodboardapp.transfer.GetAllOffersRequest;
-import com.github.neighbortrader.foodboardapp.transfer.OnEventListener;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
