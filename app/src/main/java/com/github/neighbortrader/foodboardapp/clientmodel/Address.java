@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.model;
+package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,14 @@ public class Address {
         this.country = country;
     }
 
-    @Getter
-    @Setter
-    private ArrayList<Offer> userOfferList;
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", streetnumber='" + streetnumber + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

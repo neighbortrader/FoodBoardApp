@@ -19,7 +19,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.github.neighbortrader.foodboardapp"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 2
         versionName "1.1"
