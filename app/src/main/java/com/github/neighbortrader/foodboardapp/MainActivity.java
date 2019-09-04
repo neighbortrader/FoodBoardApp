@@ -20,11 +20,16 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
+import com.github.neighbortrader.foodboardapp.clienttransfermodel.Offer;
 import com.github.neighbortrader.foodboardapp.transfer.Constant;
 import com.github.neighbortrader.foodboardapp.transfer.GetAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.transfer.OnEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -55,10 +60,24 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                new GetAllOffersRequest().get();
+                new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
+
+                    @Override
+                    public void onResponse(List<Offer> object) {
+                        Snackbar.make(view, "onResponse" + object, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        Snackbar.make(view, "onFailure" + e, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                });
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

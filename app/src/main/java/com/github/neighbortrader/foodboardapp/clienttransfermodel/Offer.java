@@ -25,4 +25,10 @@ public class Offer {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    public Offer(Price price, String groceryCategory, String description) {
+        this.price = price;
+        this.groceryCategory = groceryCategory;
+        this.description = description;
+    }
 }

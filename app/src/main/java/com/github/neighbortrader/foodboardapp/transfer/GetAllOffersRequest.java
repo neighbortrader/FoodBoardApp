@@ -1,54 +1,55 @@
 package com.github.neighbortrader.foodboardapp.transfer;
 
 import android.content.Context;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.github.neighbortrader.foodboardapp.MyApplication;
+import com.github.neighbortrader.foodboardapp.clientmodel.Price;
+import com.github.neighbortrader.foodboardapp.clienttransfermodel.Offer;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetAllOffersRequest implements Get {
+public class GetAllOffersRequest<T> extends GetRequest {
     public final static String TAG = GetAllOffersRequest.class.getSimpleName();
-    private Context context = MyApplication.getAppContext();
+
+    public GetAllOffersRequest(Context context, OnEventListener callback) {
+        super(context, callback);
+    }
 
     @Override
-    public boolean get() {
-        //HttpUrl.Builder urlBuilder = HttpUrl.parse(Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS_REQUEST).newBuilder();
-        //urlBuilder.addQueryParameter("v", "1.0");
-        final String url = Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS_REQUEST;
+    protected List<T> doInBackground(Void... params) {
+        {
+            //HttpUrl.Builder urlBuilder = HttpUrl.parse(Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS_REQUEST).newBuilder();
+            //urlBuilder.addQueryParameter("v", "1.0");
+            final String url = Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS_REQUEST;
 
-        OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient();
 
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
 
-        //request.header(("Authorization", "your token"));
+            //request.header(("Authorization", "your token"));
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e(TAG, "Request Callback: onFailure()", e);
+            try {
+                Response response = client.newCall(request).execute();
+
+                // TODO READ OBJECTS FROM REQUEST
+
+                ArrayList<T> resultList = new ArrayList<>();
+
+                resultList.add((T) new Offer(new Price(1d), "a", "Test"));
+
+                return resultList;
+
+            } catch (Exception e) {
+                exception = e;
             }
 
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                } else {
-                    Log.d(TAG, String.format("Successful response:\n%s\n%s", response.toString(), response.body().toString()));
-                }
-            }
-        });
-
-        return true;
+            return null;
+        }
     }
 }
