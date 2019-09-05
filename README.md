@@ -12,6 +12,6 @@
 
 1) Launch Android Studio application
 
-2) Choose File -> Settings (For Mac Preference )
+2) Choose File -> Settings 
 
 3) Search for Plugins
