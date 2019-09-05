@@ -33,6 +33,7 @@ android {
             resValue "string", "BASE_URL", "https://localhost:44355/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
         }
         localhostDebug {
             signingConfig debug.signingConfig
@@ -40,6 +41,7 @@ android {
             resValue "string", "BASE_URL", "https://localhost:44355/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
         }
         debug {
             signingConfig debug.signingConfig
@@ -47,6 +49,7 @@ android {
             resValue "string", "BASE_URL", ""
             resValue "string", "GET_ALL_OFFERS_URL", ""
             resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
         }
         dummyDebug {
             signingConfig debug.signingConfig
@@ -54,6 +57,7 @@ android {
             resValue "string", "BASE_URL", "http://dummy.restapiexample.com/api/v1/employees"
             resValue "string", "GET_ALL_OFFERS_URL", ""
             resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
         }
     }
     compileOptions {

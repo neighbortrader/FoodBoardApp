@@ -3,7 +3,6 @@ package com.github.neighbortrader.foodboardapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,11 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.requests.CreateNewOfferRequest;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
-import com.github.neighbortrader.foodboardapp.requests.RequestFactory;
-import com.github.neighbortrader.foodboardapp.requests.RequestTyps;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -49,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
-            RequestFactory.buildRequest(getApplicationContext(), new OnEventListener<Offer>() {
+            new CreateNewOfferRequest(getApplicationContext(), new OnEventListener<Void>() {
                 @Override
-                public void onResponse(List<Offer> object) {
+                public void onResponse(List<Void> object) {
                     Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(view, "onFailure\n" + e, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-            }, GET_ALL_OFFERS).execute();
+            }).execute();
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

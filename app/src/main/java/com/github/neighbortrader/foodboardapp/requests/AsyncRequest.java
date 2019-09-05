@@ -3,7 +3,10 @@ package com.github.neighbortrader.foodboardapp.requests;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.text.Normalizer;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.FormBody;
 
@@ -37,6 +40,16 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
                 callBack.onFailure(exception);
             }
         }
+    }
+
+    protected FormBody nameValueMapToFormbody(Map<String, String> nameValueMap){
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+
+        nameValueMap.forEach((k, v) ->{
+            formBodyBuilder.add(k, v);
+        });
+
+        return  formBodyBuilder.build();
     }
 
     public RequestTyps getRequestTyps() {

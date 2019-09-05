@@ -39,8 +39,12 @@ public class GetAllOffersRequest extends AsyncRequest<Offer> {
                     .url(url)
                     .build();
 
+            Log.d(TAG, "Request: " + request);
+
             try {
                 Response response = client.newCall(request).execute();
+
+                Log.d(TAG, "Response: " + response);
 
                 // TODO READ OBJECTS FROM REQUEST
 
