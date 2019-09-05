@@ -1,17 +1,17 @@
 package com.github.neighbortrader.foodboardapp.requests;
 
-        import android.content.Context;
-        import android.os.AsyncTask;
+import android.content.Context;
+import android.os.AsyncTask;
 
-        import java.util.List;
+import java.util.List;
 
-public abstract class GetRequest<T> extends AsyncTask<Void, Void, List<T>> {
+public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
 
     private OnEventListener<T> callBack;
     private Context context;
     public Exception exception;
 
-    public GetRequest(Context context, OnEventListener callback) {
+    public AsyncRequest(Context context, OnEventListener callback) {
         callBack = callback;
         this.context = context;
     }

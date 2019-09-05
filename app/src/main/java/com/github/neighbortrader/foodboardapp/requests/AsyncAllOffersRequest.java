@@ -14,10 +14,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetAllOffersRequest extends GetRequest<Offer> {
-    public final static String TAG = GetAllOffersRequest.class.getSimpleName();
+public class AsyncAllOffersRequest extends AsyncRequest<Offer> {
+    public final static String TAG = AsyncAllOffersRequest.class.getSimpleName();
 
-    public GetAllOffersRequest(Context context, OnEventListener callback) {
+    public AsyncAllOffersRequest(Context context, OnEventListener callback) {
         super(context, callback);
     }
 

@@ -20,7 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.requests.AsyncAllOffersRequest;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "AsyncAllOffersRequest", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
 
-                new GetAllOffersRequest<Offer>(getApplicationContext(), new OnEventListener<Offer>() {
+                new AsyncAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
                     @Override
                     public void onResponse(List<Offer> object) {
                         Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
