@@ -13,13 +13,20 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
     private Context context;
     public Exception exception;
 
-    public AsyncRequest(Context context, OnEventListener callback) {
+    private RequestTyps requestTyps;
+
+    // Do subclass level processing in this method
+    protected abstract void construct();
+
+    public AsyncRequest(Context context, OnEventListener callback, RequestTyps requestTyps) {
         callBack = callback;
         this.context = context;
+        this.requestTyps = requestTyps;
     }
 
     @Override
     abstract protected List<T> doInBackground(Void... params);
+
 
     @Override
     protected void onPostExecute(List<T> result) {
@@ -30,5 +37,13 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
                 callBack.onFailure(exception);
             }
         }
+    }
+
+    public RequestTyps getRequestTyps() {
+        return requestTyps;
+    }
+
+    public void setRequestTyps(RequestTyps requestTyps) {
+        this.requestTyps = requestTyps;
     }
 }

@@ -1,14 +1,9 @@
 package com.github.neighbortrader.foodboardapp;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,9 +15,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.requests.Constant;
 import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
+import com.github.neighbortrader.foodboardapp.requests.RequestFactory;
+import com.github.neighbortrader.foodboardapp.requests.RequestTyps;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,6 +26,8 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
+
+import static com.github.neighbortrader.foodboardapp.requests.RequestTyps.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,27 +44,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
 
-                new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
-                    @Override
-                    public void onResponse(List<Offer> object) {
-                        Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
+        fab.setOnClickListener(view -> {
+            Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        Snackbar.make(view, "onFailure\n" + e, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                }).execute();
-            }
+            RequestFactory.buildRequest(getApplicationContext(), new OnEventListener<Offer>() {
+                @Override
+                public void onResponse(List<Offer> object) {
+                    Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Snackbar.make(view, "onFailure\n" + e, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }, GET_ALL_OFFERS).execute();
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

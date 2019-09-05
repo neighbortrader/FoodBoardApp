@@ -37,6 +37,7 @@ public class User implements ToFormBody{
 
         nameValueMap.put("password", password);
         nameValueMap.put("email", password);
+        nameValueMap.put("address", address.toString());
 
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
 
