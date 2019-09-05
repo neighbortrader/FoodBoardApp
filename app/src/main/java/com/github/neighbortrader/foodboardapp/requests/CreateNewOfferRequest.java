@@ -18,7 +18,7 @@ public class CreateNewOfferRequest extends AsyncRequest<Void> {
     private final String url = Constant.BASE_URL + Constant.ENDPOINT_CREATE_NEW_OFFER;
 
     public CreateNewOfferRequest(Context context, OnEventListener callback) {
-        super(context, callback, RequestTyps.CREATE_NEW_OFFER);
+        super(context, callback);
     }
 
     public Offer getOfferToPost() {
@@ -27,11 +27,6 @@ public class CreateNewOfferRequest extends AsyncRequest<Void> {
 
     public void setOfferToPost(Offer offerToPost) {
         this.offerToPost = offerToPost;
-    }
-
-    @Override
-    protected void construct() {
-        this.offerToPost = null;
     }
 
     @Override
@@ -64,6 +59,5 @@ public class CreateNewOfferRequest extends AsyncRequest<Void> {
 
         return null;
     }
-
 
 }

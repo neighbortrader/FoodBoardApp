@@ -19,13 +19,8 @@ public class GetAllOffersRequest extends AsyncRequest<Offer> {
 
     private final String url = Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS;
 
-    GetAllOffersRequest(Context context, OnEventListener callback) {
-        super(context, callback, RequestTyps.GET_ALL_OFFERS);
-    }
-
-    @Override
-    protected void construct() {
-        // in this case empty
+    public GetAllOffersRequest(Context context, OnEventListener callback) {
+        super(context, callback);
     }
 
     @Override

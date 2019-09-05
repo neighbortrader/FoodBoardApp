@@ -13,7 +13,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.requests.CreateNewOfferRequest;
+import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -22,8 +24,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
-
-import static com.github.neighbortrader.foodboardapp.requests.RequestTyps.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
-            new CreateNewOfferRequest(getApplicationContext(), new OnEventListener<Void>() {
+            new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
-                public void onResponse(List<Void> object) {
+                public void onResponse(List<Offer> object) {
                     Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }

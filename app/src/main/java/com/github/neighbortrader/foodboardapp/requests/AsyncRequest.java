@@ -16,10 +16,8 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
     private Context context;
     public Exception exception;
 
-    // Do subclass level processing in this method
-    protected abstract void construct();
 
-    public AsyncRequest(Context context, OnEventListener callback) {
+    protected AsyncRequest(Context context, OnEventListener callback) {
         callBack = callback;
         this.context = context;
     }
@@ -49,11 +47,4 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
         return  formBodyBuilder.build();
     }
 
-    public RequestTyps getRequestTyps() {
-        return requestTyps;
-    }
-
-    public void setRequestTyps(RequestTyps requestTyps) {
-        this.requestTyps = requestTyps;
-    }
 }
