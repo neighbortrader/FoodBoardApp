@@ -20,7 +20,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.requests.AsyncAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.requests.Constant;
+import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -36,15 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Constant.ACTION_ALL_OFFERS)){
-                Toast.makeText(getApplicationContext(),"Recived from server: " + intent.getStringExtra(Constant.EXTRA_ALL_OFFERS),Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -57,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "AsyncAllOffersRequest", Snackbar.LENGTH_SHORT)
+                Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
 
-                new AsyncAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
+                new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
                     @Override
                     public void onResponse(List<Offer> object) {
                         Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
@@ -107,10 +99,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart()");
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Constant.ACTION_ALL_OFFERS);
-        registerReceiver(broadcastReceiver, intentFilter);
     }
 
     @Override
@@ -129,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop()");
-
-        unregisterReceiver(broadcastReceiver);
     }
 
     @Override
