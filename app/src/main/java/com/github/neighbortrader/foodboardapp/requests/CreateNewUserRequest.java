@@ -18,11 +18,9 @@ public class CreateNewUserRequest extends AsyncRequest<Void> {
     private User userToCreate;
     private final String url = Constant.BASE_URL + Constant.ENDPOINT_CREATE_NEW_USER;
 
-
     public CreateNewUserRequest(Context context, OnEventListener callback) {
         super(context, callback);
     }
-
 
     public void setUserToCreate(User userToCreate) {
         this.userToCreate = userToCreate;

@@ -13,9 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.requests.CreateNewOfferRequest;
-import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.requests.CreateNewUserRequest;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
+            /*
             new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
                 public void onResponse(List<Offer> object) {
@@ -58,6 +58,24 @@ public class MainActivity extends AppCompatActivity {
                             .setAction("Action", null).show();
                 }
             }).execute();
+
+             */
+
+            CreateNewUserRequest createNewUserRequest = new CreateNewUserRequest(getApplicationContext(), new OnEventListener<Void>() {
+
+                @Override
+                public void onResponse(List<Void> object) {
+
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+
+                }
+            });
+
+            createNewUserRequest.setUserToCreate(new User());
+            createNewUserRequest.execute();
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -123,5 +141,4 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
     }
-
 }
