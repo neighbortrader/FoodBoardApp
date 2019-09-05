@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GetAllOffersRequest <T> extends GetRequest<T> {
+public class GetAllOffersRequest extends GetRequest<Offer> {
     public final static String TAG = GetAllOffersRequest.class.getSimpleName();
 
     public GetAllOffersRequest(Context context, OnEventListener callback) {
@@ -22,7 +22,7 @@ public class GetAllOffersRequest <T> extends GetRequest<T> {
     }
 
     @Override
-    protected List<T> doInBackground(Void... params) {
+    protected List<Offer> doInBackground(Void... params) {
         {
             Log.d(TAG, "doInBackground()");
             //HttpUrl.Builder urlBuilder = HttpUrl.parse(Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS_REQUEST).newBuilder();
@@ -43,9 +43,9 @@ public class GetAllOffersRequest <T> extends GetRequest<T> {
                 // TODO READ OBJECTS FROM REQUEST
 
                 // This is dummy data
-                ArrayList<T> resultList = new ArrayList<>();
+                ArrayList<Offer> resultList = new ArrayList<>();
 
-                resultList.add((T) new Offer(new Price(1d), "a", "Test"));
+                resultList.add(new Offer(new Price(1d), "a", "Test"));
 
                 return resultList;
 
