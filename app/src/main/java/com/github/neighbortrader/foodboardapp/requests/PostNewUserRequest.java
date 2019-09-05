@@ -21,7 +21,12 @@ public class PostNewUserRequest extends AsyncRequest<Void>  {
     private final String url =  Constant.BASE_URL + Constant.ENDPOINT_CREATE_NEW_USER;
 
     public PostNewUserRequest(Context context, OnEventListener callback) {
-        super(context, callback);
+        super(context, callback, RequestTyps.POST_NEW_USER);
+        construct();
+    }
+
+    @Override
+    protected void construct() {
         this.userToCreate = null;
     }
 
@@ -44,7 +49,7 @@ public class PostNewUserRequest extends AsyncRequest<Void>  {
             // Create a http request object.
             Request.Builder builder = new Request.Builder();
             builder = builder.url(url);
-            builder = builder.post(userToCreate.toFormBody());
+            builder = builder.post(nameValueMapToFormbody(userToCreate.toNameValueMap()));
 
             Request request = builder.build();
 
