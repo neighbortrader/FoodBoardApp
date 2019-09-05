@@ -19,7 +19,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.github.neighbortrader.foodboardapp"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 3
         versionName "1.2"
@@ -72,7 +72,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     // okHttp

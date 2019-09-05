@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import okhttp3.FormBody;
+
 public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
 
     private OnEventListener<T> callBack;

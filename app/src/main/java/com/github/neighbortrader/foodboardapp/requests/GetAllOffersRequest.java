@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 public class GetAllOffersRequest extends AsyncRequest<Offer> {
     public final static String TAG = GetAllOffersRequest.class.getSimpleName();
 

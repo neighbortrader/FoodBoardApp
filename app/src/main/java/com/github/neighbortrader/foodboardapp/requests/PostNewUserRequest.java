@@ -7,6 +7,8 @@ import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -39,9 +41,12 @@ public class PostNewUserRequest extends AsyncRequest<Void>  {
         if (userToCreate != null) {
             OkHttpClient client = new OkHttpClient();
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
+            // Create a http request object.
+            Request.Builder builder = new Request.Builder();
+            builder = builder.url(url);
+            builder = builder.post(userToCreate.toFormBody());
+
+            Request request = builder.build();
 
             try {
                 Response response = client.newCall(request).execute();
