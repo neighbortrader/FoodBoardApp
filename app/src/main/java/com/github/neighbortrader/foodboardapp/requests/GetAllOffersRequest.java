@@ -7,11 +7,15 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import okhttp3.CipherSuite;
+import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.TlsVersion;
 
 
 public class GetAllOffersRequest extends AsyncRequest<Offer> {
@@ -27,18 +31,20 @@ public class GetAllOffersRequest extends AsyncRequest<Offer> {
     protected List<Offer> doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
-        Log.d(TAG, "Request: " + request);
+        Log.d(TAG, "Request: " + request.body());
 
         try {
             Response response = client.newCall(request).execute();
 
             Log.d(TAG, "Response: " + response);
+
+            Log.d(TAG, response.body().string());
 
             // TODO READ OBJECTS FROM REQUEST
 
@@ -51,6 +57,7 @@ public class GetAllOffersRequest extends AsyncRequest<Offer> {
 
         } catch (Exception e) {
             exception = e;
+            Log.e(TAG, "Exception while waiting for Result.", e);
         }
 
         return null;

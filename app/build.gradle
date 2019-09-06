@@ -21,8 +21,8 @@ android {
         applicationId "com.github.neighbortrader.foodboardapp"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -46,8 +46,8 @@ android {
         debug {
             signingConfig debug.signingConfig
 
-            resValue "string", "BASE_URL", ""
-            resValue "string", "GET_ALL_OFFERS_URL", ""
+            resValue "string", "BASE_URL", "https://10.0.2.2:44355/api/"
+            resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
         }
