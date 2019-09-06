@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
 
 public class GetAllOffersRequest extends AsyncRequest<Offer> {
     public final static String TAG = GetAllOffersRequest.class.getSimpleName();
@@ -46,8 +44,6 @@ public class GetAllOffersRequest extends AsyncRequest<Offer> {
             responseBody.string();
 
             ArrayList<Offer> resultList = new ArrayList<>();
-
-
 
             return null;
 
