@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
-
             new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
                 public void onResponse(List<Offer> object) {

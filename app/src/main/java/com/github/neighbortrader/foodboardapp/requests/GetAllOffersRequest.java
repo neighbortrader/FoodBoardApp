@@ -7,15 +7,12 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import okhttp3.CipherSuite;
-import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.TlsVersion;
+import okhttp3.ResponseBody;
 
 
 public class GetAllOffersRequest extends AsyncRequest<Offer> {
@@ -37,30 +34,28 @@ public class GetAllOffersRequest extends AsyncRequest<Offer> {
                 .url(url)
                 .build();
 
-        Log.d(TAG, "Request: " + request.body());
+        Log.d(TAG, "Request: " + request);
 
         try {
             Response response = client.newCall(request).execute();
+            ResponseBody responseBody = response.body();
 
             Log.d(TAG, "Response: " + response);
+            Log.d(TAG, "Responsebody: " + response.body().string());
 
-            Log.d(TAG, response.body().string());
+            responseBody.string();
 
-            // TODO READ OBJECTS FROM REQUEST
-
-            // This is dummy data
             ArrayList<Offer> resultList = new ArrayList<>();
 
-            resultList.add(new Offer(new Price(1d), "a", "Test"));
 
-            return resultList;
+
+            return null;
 
         } catch (Exception e) {
             exception = e;
-            Log.e(TAG, "Exception while waiting for Result.", e);
+            Log.e(TAG, "Exception while waiting for Result", e);
         }
 
         return null;
-
     }
 }
