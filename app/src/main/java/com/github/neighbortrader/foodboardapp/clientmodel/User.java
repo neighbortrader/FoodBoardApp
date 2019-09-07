@@ -9,6 +9,16 @@ import lombok.Setter;
 
 public class User implements ToNameValueMap {
 
+    private static User userInstance;
+
+    private static void createUserInstance(User userInstance){
+        User.userInstance = userInstance;
+    }
+
+    public static User getCurrentUserInstance() {
+        return User.userInstance;
+    }
+
     @Getter
     @Setter
     private String password;

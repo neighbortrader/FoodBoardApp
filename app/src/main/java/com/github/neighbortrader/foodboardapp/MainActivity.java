@@ -3,6 +3,7 @@ package com.github.neighbortrader.foodboardapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,9 +14,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.requests.GetAllOffersRequest;
+import com.github.neighbortrader.foodboardapp.requests.OfferHandler;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
+import com.github.neighbortrader.foodboardapp.requests.RequestTyps;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -40,24 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(view -> {
-            Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
-
-            new GetAllOffersRequest(getApplicationContext(), new OnEventListener<Offer>() {
-                @Override
-                public void onResponse(List<Offer> object) {
-                    Snackbar.make(view, "onResponse\n" + object, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-
-                @Override
-                public void onFailure(Exception e) {
-                    Snackbar.make(view, "onFailure\n" + e, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            }).execute();
-        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -71,6 +54,27 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        EditText editText = findViewById(R.id.editText);
+        editText.setKeyListener(null);
+
+        fab.setOnClickListener(view -> {
+            Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+
+            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener() {
+                @Override
+                public void onResponse(List object) {
+                    editText.setText(object.toString());
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    editText.setText(e.getMessage());
+                }
+            }).execute();
+        });
+
     }
 
     @Override
