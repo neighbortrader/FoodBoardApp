@@ -6,13 +6,15 @@ import android.util.Log;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class OfferHandler extends AsyncRequest<Offer> {
 
@@ -107,14 +109,24 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
                 try {
                     Response response = client.newCall(request).execute();
-                    ResponseBody responseBody = response.body();
 
                     Log.d(TAG, "Response: " + response);
-                    Log.d(TAG, "Responsebody: " + response.body().string());
 
                     ArrayList<Offer> resultList = new ArrayList<>();
 
-                    return null;
+                    String jsonData = response.body().string();
+                    JSONArray jsonArray = new JSONArray(jsonData);
+
+                    ArrayList<Offer> receivedOffers = new ArrayList<>();
+
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
+                    }
+
+                    return receivedOffers;
                 } catch (Exception e) {
                     exception = e;
                     Log.e(TAG, "Exception while waiting for Result", e);

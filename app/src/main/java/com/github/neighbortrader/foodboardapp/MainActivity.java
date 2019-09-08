@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.requests.OfferHandler;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.github.neighbortrader.foodboardapp.requests.RequestTyps;
@@ -55,22 +57,30 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        EditText editText = findViewById(R.id.editText);
-        editText.setKeyListener(null);
+        TextView textView = findViewById(R.id.textView2);
+        textView.setKeyListener(null);
 
         fab.setOnClickListener(view -> {
             Snackbar.make(view, "GetAllOffersRequest", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
-            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener() {
+            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
+
+
                 @Override
-                public void onResponse(List object) {
-                    editText.setText(object.toString());
+                public void onResponse(List<Offer> receivedOffers) {
+                    StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+
+                    for (Offer offer : receivedOffers) {
+                        editTextWithAllReceivedOffers.append(offer.getDescription()).append("\n").append(offer.getPrice().getFormattedPrice());
+                    }
+
+                    textView.setText(editTextWithAllReceivedOffers.toString());
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    editText.setText(e.getMessage());
+                    textView.setText(e.getMessage());
                 }
             }).execute();
         });

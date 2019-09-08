@@ -25,6 +25,10 @@ public class User implements ToNameValueMap {
 
     @Getter
     @Setter
+    private String userId;
+
+    @Getter
+    @Setter
     private String email;
 
     @Getter
