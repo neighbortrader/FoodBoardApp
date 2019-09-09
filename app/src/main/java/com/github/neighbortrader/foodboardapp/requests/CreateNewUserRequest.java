@@ -46,6 +46,11 @@ public class CreateNewUserRequest extends AsyncRequest<Void> {
                 Response response = client.newCall(request).execute();
 
                 Log.d(TAG, "Response: " + response);
+
+                if (response.code() != 200) {
+                    throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
+                }
+
             } catch (Exception e) {
                 exception = e;
             }

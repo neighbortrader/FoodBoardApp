@@ -35,7 +35,6 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
     @Override
     abstract protected List<T> doInBackground(Void... params);
 
-
     @Override
     protected void onPostExecute(List<T> result) {
         if (callBack != null) {

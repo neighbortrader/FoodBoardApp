@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "Create new Offer (with dummy data) Request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
+            Offer offerToPost =  null;
+
             OfferHandler.builder(RequestTyps.CREATE_NEW_OFFER, getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
                 public void onResponse(List<Offer> receivedOffers) {
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(Exception e) {
                     textView.setText(e.getMessage());
                 }
-            }).execute();
+            }, offerToPost).execute();
         });
 
         fabGetCatagories.setOnClickListener(view -> {

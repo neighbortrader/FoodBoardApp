@@ -46,6 +46,9 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
 
     @Override
     protected List<Grocery> doInBackground(Void... params) {
+        Log.d(TAG, "doInBackground()");
+
+
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()
@@ -58,6 +61,11 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
             Response response = client.newCall(request).execute();
 
             Log.d(TAG, "Response: " + response);
+            Log.d(TAG, response.body().string());
+
+            if (response.code() != 200) {
+                throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
+            }
 
             String jsonData = response.body().string();
             JSONArray jsonArray = new JSONArray(jsonData);

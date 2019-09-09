@@ -79,8 +79,8 @@ public class OfferHandler extends AsyncRequest<Offer> {
                         Response response = client.newCall(request).execute();
                         Log.d(TAG, "Response: " + response);
 
-                        if (response.code() != 200){
-                            throw new Exception(String.format("Received http-statuscode %s", response.code()));
+                        if (response.code() != 200) {
+                            throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                         }
 
                     } catch (Exception e) {
@@ -106,6 +106,11 @@ public class OfferHandler extends AsyncRequest<Offer> {
                     Response response = client.newCall(request).execute();
 
                     Log.d(TAG, "Response: " + response);
+                    Log.d(TAG, response.body().string());
+
+                    if (response.code() != 200) {
+                        throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
+                    }
 
                     String jsonData = response.body().string();
                     JSONArray jsonArray = new JSONArray(jsonData);
@@ -114,7 +119,6 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-
                         receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
                     }
 

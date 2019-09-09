@@ -5,10 +5,13 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Objects;
 
 import lombok.Getter;
 
-public class Grocery {
+public class Grocery implements ToNameValueMap{
     public static String TAG = Grocery.class.getSimpleName();
 
     private static ArrayList<Grocery> currentGroceries = new ArrayList<>();
@@ -18,7 +21,8 @@ public class Grocery {
     }
 
     public static void updateCurrentGroceries(Grocery grocery) {
-        Grocery.currentGroceries.add(grocery);
+        if (!currentGroceries.contains(grocery))
+            Grocery.currentGroceries.add(grocery);
     }
 
     public static void updateCurrentGroceries(ArrayList<Grocery> currentGroceries) {
@@ -35,7 +39,24 @@ public class Grocery {
     }
 
     public static Grocery buildGrocery(String groceryName) {
-        return new Grocery(groceryName);
+        Grocery newGrocerie = new Grocery(groceryName);
+
+        Grocery.updateCurrentGroceries(newGrocerie);
+
+        return newGrocerie;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grocery grocery = (Grocery) o;
+        return Objects.equals(groceryName, grocery.groceryName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(groceryName);
     }
 
     public static Grocery createOfferFromJSON(JSONObject jsonObject) {
@@ -50,5 +71,14 @@ public class Grocery {
         }
 
         return null;
+    }
+
+    @Override
+    public Map<String, String> toNameValueMap() {
+        Map<String, String> nameValueMap = new Hashtable<>();
+
+        nameValueMap.put("grocerie", groceryName);
+
+        return nameValueMap;
     }
 }

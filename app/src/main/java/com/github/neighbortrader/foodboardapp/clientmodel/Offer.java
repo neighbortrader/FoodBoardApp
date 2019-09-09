@@ -30,7 +30,7 @@ public class Offer implements ToNameValueMap {
 
     @Getter
     @Setter
-    private String groceryCategory;
+    private Grocery groceryCategory;
 
     @Getter
     @Setter
@@ -55,7 +55,7 @@ public class Offer implements ToNameValueMap {
                 '}';
     }
 
-    public Offer(Price price, String groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
+    public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
         this.price = price;
         this.groceryCategory = groceryCategory;
         this.description = description;
@@ -69,7 +69,7 @@ public class Offer implements ToNameValueMap {
         Map<String, String> nameValueMap = new Hashtable<>();
 
         nameValueMap.putAll(price.toNameValueMap());
-        nameValueMap.put("groceryCategory", groceryCategory);
+        nameValueMap.put("groceryCategory", groceryCategory.toString());
         nameValueMap.put("description", description);
 
         // TODO: check those strings
@@ -91,7 +91,7 @@ public class Offer implements ToNameValueMap {
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
-            return new Offer(price, groceryCategory, description, purchaseDate, expireDate);
+            return new Offer(price, Grocery.buildGrocery(groceryCategory), description, purchaseDate, expireDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
