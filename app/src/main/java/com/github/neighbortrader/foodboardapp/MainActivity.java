@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -92,6 +93,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             }).execute();
         });
+
+        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
+            @Override
+            public void onResponse(List<Void> receivedCategory) {
+                Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast toast = Toast.makeText(getApplicationContext(), String.format("Error while updating grocery category (%s)", e.getMessage()), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onProgress(String progressUpdate) {
+            }
+        }).execute();
     }
 
     @Override
@@ -112,20 +131,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart()");
-
-        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
-            @Override
-            public void onResponse(List<Void> receivedOffers) {
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-            }
-
-            @Override
-            public void onProgress(String progressUpdate) {
-            }
-        }).execute();
     }
 
     @Override
