@@ -34,6 +34,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "";
         }
         localhostDebug {
             signingConfig debug.signingConfig
@@ -42,6 +43,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "";
         }
         debug {
             signingConfig debug.signingConfig
@@ -50,6 +52,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "";
         }
         dummyDebug {
             signingConfig debug.signingConfig
@@ -58,6 +61,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", ""
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "";
         }
     }
     compileOptions {

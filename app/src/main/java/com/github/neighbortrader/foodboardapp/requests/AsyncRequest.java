@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
 import okhttp3.FormBody;
 
 public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
@@ -15,6 +17,14 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
     private OnEventListener<T> callBack;
     private Context context;
     public Exception exception;
+
+    @Setter
+    @Getter
+    protected String url;
+
+    @Setter
+    @Getter
+    protected RequestTyps requestTyps;
 
 
     protected AsyncRequest(Context context, OnEventListener callback) {

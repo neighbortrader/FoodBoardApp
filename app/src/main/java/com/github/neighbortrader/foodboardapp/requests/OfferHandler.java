@@ -20,20 +20,10 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
     public final static String TAG = OfferHandler.class.getSimpleName();
 
-    private RequestTyps requestTyps;
     private Offer offerToCreate;
-    private String url;
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public void setOfferToCreate(Offer offerToCreate) {
         this.offerToCreate = offerToCreate;
-    }
-
-    public void setRequestTyps(RequestTyps requestTyps) {
-        this.requestTyps = requestTyps;
     }
 
     protected OfferHandler(Context context, OnEventListener callback) {
@@ -48,13 +38,13 @@ public class OfferHandler extends AsyncRequest<Offer> {
                 offerHandler = new OfferHandler(context, callback);
                 offerHandler.setRequestTyps(RequestTyps.CREATE_NEW_OFFER);
                 offerHandler.setOfferToCreate(offers[0]);
-                offerHandler.setUrl(Constant.BASE_URL + Constant.ENDPOINT_CREATE_NEW_OFFER);
+                offerHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_OFFER);
                 break;
 
             case GET_ALL_OFFERS:
                 offerHandler = new OfferHandler(context, callback);
                 offerHandler.setRequestTyps(RequestTyps.GET_ALL_OFFERS);
-                offerHandler.setUrl(Constant.BASE_URL + Constant.ENDPOINT_GET_ALL_OFFERS);
+                offerHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_OFFERS);
                 break;
 
             default:
@@ -112,13 +102,10 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
                     Log.d(TAG, "Response: " + response);
 
-                    ArrayList<Offer> resultList = new ArrayList<>();
-
                     String jsonData = response.body().string();
                     JSONArray jsonArray = new JSONArray(jsonData);
 
                     ArrayList<Offer> receivedOffers = new ArrayList<>();
-
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);

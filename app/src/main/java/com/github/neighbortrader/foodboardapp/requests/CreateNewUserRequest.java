@@ -16,7 +16,7 @@ public class CreateNewUserRequest extends AsyncRequest<Void> {
     public final static String TAG = CreateNewUserRequest.class.getSimpleName();
 
     private User userToCreate;
-    private final String url = Constant.BASE_URL + Constant.ENDPOINT_CREATE_NEW_USER;
+    private final String url = Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_USER;
 
     public CreateNewUserRequest(Context context, OnEventListener callback) {
         super(context, callback);

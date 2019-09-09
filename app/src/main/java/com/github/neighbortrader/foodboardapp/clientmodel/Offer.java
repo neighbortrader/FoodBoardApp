@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -84,8 +85,11 @@ public class Offer implements ToNameValueMap {
             Price price = new Price(jsonObject.getDouble("price"));
             String groceryCategory = jsonObject.getString("groceries");
             String description = jsonObject.getString("description");
-            LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"));
-            LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"));
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-DDThh:mm:ss");
+
+            LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
+            LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
             return new Offer(price, groceryCategory, description, purchaseDate, expireDate);
         } catch (JSONException e) {

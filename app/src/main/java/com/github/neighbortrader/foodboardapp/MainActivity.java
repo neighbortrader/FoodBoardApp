@@ -3,7 +3,6 @@ package com.github.neighbortrader.foodboardapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -65,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
                     .setAction("Action", null).show();
 
             OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
-
-
                 @Override
                 public void onResponse(List<Offer> receivedOffers) {
                     StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
@@ -84,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }).execute();
         });
-
     }
 
     @Override
