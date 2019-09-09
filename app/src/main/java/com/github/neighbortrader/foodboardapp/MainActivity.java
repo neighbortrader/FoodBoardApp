@@ -14,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.requests.GroceryCategoryHandler;
 import com.github.neighbortrader.foodboardapp.requests.OfferHandler;
@@ -43,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fabGetOffers = findViewById(R.id.fab_GET_ALL_OFFERS);
-        FloatingActionButton fabCreateOffer = findViewById(R.id.fa_CREATE_NEW_OFFERS);
-        FloatingActionButton fabGetCatagories = findViewById(R.id.fab_GET_ALL_CATS);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -66,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "Get all Offers request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
+            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+
             OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
                 public void onResponse(List<Offer> receivedOffers) {
@@ -80,60 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    textView.setText(e.getMessage());
-                }
-
-                @Override
-                public void onProgress(String progressUpdate) {
-
-                }
-            }).execute();
-        });
-
-        fabCreateOffer.setOnClickListener(view -> {
-            Snackbar.make(view, "Create new Offer (with dummy data) Request", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
-
-            Offer offerToPost =  null;
-
-            OfferHandler.builder(RequestTyps.CREATE_NEW_OFFER, getApplicationContext(), new OnEventListener<Offer>() {
-                @Override
-                public void onResponse(List<Offer> receivedOffers) {
-
-                }
-
-                @Override
-                public void onFailure(Exception e) {
-                    textView.setText(e.getMessage());
-                }
-
-                @Override
-                public void onProgress(String progressUpdate) {
-
-                }
-            }, offerToPost).execute();
-        });
-
-        fabGetCatagories.setOnClickListener(view -> {
-            Snackbar.make(view, "Get all categories request", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
-
-            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
-
-            GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Grocery>() {
-
-                @Override
-                public void onResponse(List<Grocery> responseList) {
-                    for (Grocery grocery: responseList) {
-                        editTextWithAllReceivedOffers.append(grocery.getGroceryName() + "\n");
-                    }
-
-                    textView.setText(editTextWithAllReceivedOffers.toString());
-                }
-
-
-                @Override
-                public void onFailure(Exception e) {
                     editTextWithAllReceivedOffers.append(e.getMessage());
                     textView.setText(editTextWithAllReceivedOffers.toString());
                 }
@@ -143,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     editTextWithAllReceivedOffers.append(progressUpdate + "\n");
                     textView.setText(editTextWithAllReceivedOffers.toString());
                 }
-
             }).execute();
         });
     }
@@ -166,6 +110,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart()");
+
+        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
+            @Override
+            public void onResponse(List<Void> receivedOffers) {
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+            }
+
+            @Override
+            public void onProgress(String progressUpdate) {
+            }
+        }).execute();
     }
 
     @Override

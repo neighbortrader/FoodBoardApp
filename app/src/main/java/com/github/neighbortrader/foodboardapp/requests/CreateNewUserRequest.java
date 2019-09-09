@@ -42,9 +42,11 @@ public class CreateNewUserRequest extends AsyncRequest<Void> {
 
             Log.d(TAG, "Request: " + request);
 
+            publishProgress(request.toString());
+
             try {
                 Response response = client.newCall(request).execute();
-
+                publishProgress(response.toString());
                 Log.d(TAG, "Response: " + response);
 
                 if (response.code() != 200) {

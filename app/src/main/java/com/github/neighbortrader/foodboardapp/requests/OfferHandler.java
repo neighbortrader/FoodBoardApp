@@ -60,7 +60,6 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
         switch (requestTyps) {
             case CREATE_NEW_OFFER:
-
                 User user = User.getCurrentUserInstance();
 
                 if (offerToCreate != null && user != null) {
@@ -73,6 +72,8 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
                     Request request = builder.build();
 
+                    publishProgress(request.toString());
+
                     Log.d(TAG, "Request: " + request);
 
                     try {
@@ -82,11 +83,9 @@ public class OfferHandler extends AsyncRequest<Offer> {
                         if (response.code() != 200) {
                             throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                         }
-
                     } catch (Exception e) {
                         exception = e;
                     }
-
                 } else {
                     exception = new NullPointerException("No offer to post has been set. Is a the user logged in and did you call setOfferToPost()?");
                 }
@@ -102,14 +101,18 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
                 Log.d(TAG, "Request: " + request);
 
+                publishProgress(request.toString());
+
                 try {
                     Response response = client.newCall(request).execute();
 
                     Log.d(TAG, "Response: " + response);
                     Log.d(TAG, response.body().string());
 
+                    publishProgress(response.toString());
+
                     if (response.code() != 200) {
-                        throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
+                        throw new Exception(String.format("Received http-statuscode: %s\n%s", response.code(), response.body().string()));
                     }
 
                     String jsonData = response.body().string();

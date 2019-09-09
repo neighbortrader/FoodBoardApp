@@ -34,7 +34,7 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
             case GET_ALL_CATEGORIES:
                 categoryHandler = new GroceryCategoryHandler(context, callback);
                 categoryHandler.setRequestTyps(RequestTyps.CREATE_NEW_OFFER);
-                categoryHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_OFFER);
+                categoryHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_CATEGORIES);
                 break;
 
             default:
@@ -47,14 +47,12 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
     @Override
     protected List<Grocery> doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
-
-
+        
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-
 
         publishProgress(request.toString());
 
@@ -64,9 +62,8 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
             Response response = client.newCall(request).execute();
 
             Log.d(TAG, "Response: " + response);
-            Log.d(TAG, response.body().string());
 
-            publishProgress(request.toString());
+            publishProgress(response.toString());
 
             if (response.code() != 200) {
                 throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
@@ -79,8 +76,7 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                receivedCategories.add(Grocery.createOfferFromJSON(jsonObject));
+                receivedCategories.add(Grocery.createGroceryFromJSON(jsonObject));
             }
 
             Grocery.updateCurrentGroceries(receivedCategories);

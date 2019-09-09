@@ -34,7 +34,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_ALL_CATEGORIES", "";
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
         localhostDebug {
             signingConfig debug.signingConfig
@@ -43,7 +43,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_ALL_CATEGORIES", "";
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
         debug {
             signingConfig debug.signingConfig
@@ -52,7 +52,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_ALL_CATEGORIES", "";
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
         dummyDebug {
             signingConfig debug.signingConfig
@@ -61,7 +61,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", ""
             resValue "string", "CREATE_NEW_USER", ""
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_ALL_CATEGORIES", "";
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
     }
     compileOptions {

@@ -83,7 +83,7 @@ public class Offer implements ToNameValueMap {
     public static Offer createOfferFromJSON(JSONObject jsonObject) {
         try {
             Price price = new Price(jsonObject.getDouble("price"));
-            String groceryCategory = jsonObject.getString("groceries");
+            int grocerieId = jsonObject.getInt("grocerieId");
             String description = jsonObject.getString("description");
 
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-DDThh:mm:ss");
@@ -91,7 +91,7 @@ public class Offer implements ToNameValueMap {
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
-            return new Offer(price, Grocery.buildGrocery(groceryCategory), description, purchaseDate, expireDate);
+            return new Offer(price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
