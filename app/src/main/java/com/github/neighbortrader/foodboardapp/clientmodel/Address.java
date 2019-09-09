@@ -1,18 +1,19 @@
 package com.github.neighbortrader.foodboardapp.clientmodel;
 
-import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
 
-public class Address {
+public class Address implements ToNameValueMap {
     @Getter
     @Setter
     private String street;
 
     @Getter
     @Setter
-    private String streetnumber;
+    private String streetNumber;
 
     @Getter
     @Setter
@@ -26,9 +27,9 @@ public class Address {
     @Setter
     private String country;
 
-    public Address(String street, String streetnumber, String zipCode, String city, String country) {
+    public Address(String street, String streetNumber, String zipCode, String city, String country) {
         this.street = street;
-        this.streetnumber = streetnumber;
+        this.streetNumber = streetNumber;
         this.zipCode = zipCode;
         this.city = city;
         this.country = country;
@@ -38,10 +39,23 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "street='" + street + '\'' +
-                ", streetnumber='" + streetnumber + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 '}';
+    }
+
+    @Override
+    public Map<String, String> toNameValueMap() {
+        Map<String, String> nameValueMap = new Hashtable<>();
+
+        nameValueMap.put("street", street);
+        nameValueMap.put("streetNumber", streetNumber);
+        nameValueMap.put("zipCode", zipCode);
+        nameValueMap.put("city", city);
+        nameValueMap.put("country", country);
+
+        return nameValueMap;
     }
 }

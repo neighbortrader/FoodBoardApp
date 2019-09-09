@@ -19,10 +19,10 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.github.neighbortrader.foodboardapp"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,26 +30,38 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            resValue "string", "BASE_URL", "https://localhost:44355/api/"
+            resValue "string", "BASE_URL", "https://10.0.2.2:44355/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
+            resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
         localhostDebug {
             signingConfig debug.signingConfig
 
-            resValue "string", "BASE_URL", "https://localhost:44355/api/"
+            resValue "string", "BASE_URL", "https://10.0.2.2:44355/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
+            resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
         debug {
             signingConfig debug.signingConfig
 
-            resValue "string", "BASE_URL", ""
-            resValue "string", "GET_ALL_OFFERS_URL", ""
+            resValue "string", "BASE_URL", "http://10.0.2.2:44355/api/"
+            resValue "string", "GET_ALL_OFFERS_URL", "Offer"
+            resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
         dummyDebug {
             signingConfig debug.signingConfig
 
             resValue "string", "BASE_URL", "http://dummy.restapiexample.com/api/v1/employees"
             resValue "string", "GET_ALL_OFFERS_URL", ""
+            resValue "string", "CREATE_NEW_USER", ""
+            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
     }
     compileOptions {
@@ -68,7 +80,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     // okHttp
