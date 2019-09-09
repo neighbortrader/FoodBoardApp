@@ -33,7 +33,7 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
         switch (requestTyps) {
             case GET_ALL_CATEGORIES:
                 categoryHandler = new GroceryCategoryHandler(context, callback);
-                categoryHandler.setRequestTyps(RequestTyps.CREATE_NEW_OFFER);
+                categoryHandler.setRequestTyps(RequestTyps.POST_NEW_OFFER);
                 categoryHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_CATEGORIES);
                 break;
 

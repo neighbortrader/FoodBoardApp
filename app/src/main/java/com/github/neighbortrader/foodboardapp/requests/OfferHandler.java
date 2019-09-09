@@ -3,6 +3,8 @@ package com.github.neighbortrader.foodboardapp.requests;
 import android.content.Context;
 import android.util.Log;
 
+import com.auth0.android.jwt.JWT;
+import com.github.neighbortrader.foodboardapp.MyApplication;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
@@ -30,9 +32,9 @@ public class OfferHandler extends AsyncRequest<Offer> {
         OfferHandler offerHandler = null;
 
         switch (requestTyps) {
-            case CREATE_NEW_OFFER:
+            case POST_NEW_OFFER:
                 offerHandler = new OfferHandler(context, callback);
-                offerHandler.setRequestTyps(RequestTyps.CREATE_NEW_OFFER);
+                offerHandler.setRequestTyps(RequestTyps.POST_NEW_OFFER);
                 offerHandler.setOfferToCreate(offers[0]);
                 offerHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_OFFER);
                 break;
@@ -59,24 +61,46 @@ public class OfferHandler extends AsyncRequest<Offer> {
         Log.d(TAG, "doInBackground()");
 
         switch (requestTyps) {
-            case CREATE_NEW_OFFER:
+            case POST_NEW_OFFER:
                 User user = User.getCurrentUserInstance();
+                JWT jwtToken = user.getJwtToken();
 
-                if (offerToCreate != null && user != null) {
-
-                    OkHttpClient client = new OkHttpClient();
-
-                    Request.Builder builder = new Request.Builder();
-                    builder = builder.url(url);
-                    builder = builder.post(nameValueMapToFormbody(offerToCreate.toNameValueMap()));
-
-                    Request request = builder.build();
-
-                    publishProgress(request.toString());
-
-                    Log.d(TAG, "Request: " + request);
-
+                if (offerToCreate != null && user != null && jwtToken != null) {
                     try {
+                        if (jwtToken.isExpired(10)) {
+                            Log.w(TAG, "jwtToken is expired");
+
+                            UserHandler.builder(RequestTyps.GET_JWT_TOKEN, MyApplication.getAppContext(), new OnEventListener<JWT>() {
+                                @Override
+                                public void onResponse(List<JWT> object) {
+                                    Log.d(TAG, "Successfully received new Token");
+                                    user.setJwtToken(object.get(0));
+                                }
+
+                                @Override
+                                public void onFailure(Exception e) {
+                                    throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));
+                                }
+
+                                @Override
+                                public void onProgress(String progressUpdate) {
+
+                                }
+                            });
+                        }
+
+                        OkHttpClient client = new OkHttpClient();
+
+                        Request.Builder builder = new Request.Builder();
+                        builder = builder.url(url);
+                        builder = builder.post(nameValueMapToFormbody(offerToCreate.toNameValueMap()));
+
+                        Request request = builder.build();
+
+                        publishProgress(request.toString());
+
+                        Log.d(TAG, "Request: " + request);
+
                         Response response = client.newCall(request).execute();
                         Log.d(TAG, "Response: " + response);
 
@@ -87,7 +111,7 @@ public class OfferHandler extends AsyncRequest<Offer> {
                         exception = e;
                     }
                 } else {
-                    exception = new NullPointerException("No offer to post has been set. Is a the user logged in and did you call setOfferToPost()?");
+                    exception = new NullPointerException("Could not post new offer");
                 }
 
                 return null;
