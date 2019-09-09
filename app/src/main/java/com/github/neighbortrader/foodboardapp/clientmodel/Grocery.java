@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import lombok.Getter;
 
-public class Grocery implements ToNameValueMap{
+public class Grocery implements ToNameValueMap {
     public static String TAG = Grocery.class.getSimpleName();
 
     private static ArrayList<Grocery> currentGroceries = new ArrayList<>();
@@ -37,23 +37,22 @@ public class Grocery implements ToNameValueMap{
     @Getter
     private String groceryName;
 
-    public Grocery(int groceryId, String groceryName) {
+    protected Grocery(int groceryId, String groceryName) {
         this.groceryId = groceryId;
         this.groceryName = groceryName;
     }
 
     public static Grocery buildGrocery(int groceryId, String groceryName) {
-        Grocery newGrocerie = new Grocery(groceryId, groceryName);
-        return newGrocerie;
+        return new Grocery(groceryId, groceryName);
     }
 
-    public static Grocery findGrocery(int groceryId){
-        for (Grocery grocery : Grocery.currentGroceries){
+    public static Grocery findGrocery(int groceryId) {
+        for (Grocery grocery : Grocery.currentGroceries) {
             if (grocery.getGroceryId() == groceryId)
                 return grocery;
         }
 
-        return null;
+        return new Grocery(-1, "Unknown grocery");
     }
 
     @Override
@@ -72,7 +71,7 @@ public class Grocery implements ToNameValueMap{
 
     public static Grocery createGroceryFromJSON(JSONObject jsonObject) {
         try {
-           return Grocery.buildGrocery(jsonObject.getInt("id"), jsonObject.getString("name"));
+            return Grocery.buildGrocery(jsonObject.getInt("id"), jsonObject.getString("name"));
         } catch (Exception e) {
             Log.e(TAG, "Unknown Error while trying to create Offer", e);
         }

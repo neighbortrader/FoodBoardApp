@@ -107,7 +107,6 @@ public class OfferHandler extends AsyncRequest<Offer> {
                     Response response = client.newCall(request).execute();
 
                     Log.d(TAG, "Response: " + response);
-                    Log.d(TAG, response.body().string());
 
                     publishProgress(response.toString());
 

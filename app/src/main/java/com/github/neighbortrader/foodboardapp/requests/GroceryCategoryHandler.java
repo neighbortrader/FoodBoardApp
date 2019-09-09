@@ -47,7 +47,7 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
     @Override
     protected List<Grocery> doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
-        
+
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()

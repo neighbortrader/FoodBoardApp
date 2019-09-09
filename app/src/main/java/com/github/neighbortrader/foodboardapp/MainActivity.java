@@ -68,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
             OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
                 public void onResponse(List<Offer> receivedOffers) {
-                    StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
-
                     for (Offer offer : receivedOffers) {
-                        editTextWithAllReceivedOffers.append(offer.getDescription()).append("\n").append(offer.getPrice().getFormattedPrice());
+                        editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
+                                .append("Preis: " + offer.getPrice().getFormattedPrice())
+                                .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
+                                .append("\nAblaufdatum: " + offer.getExpireDate())
+                                .append("\nKaufdatum: " + offer.getPurchaseDate());
                     }
 
                     textView.setText(editTextWithAllReceivedOffers.toString());

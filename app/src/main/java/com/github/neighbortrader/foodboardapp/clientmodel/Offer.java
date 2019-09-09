@@ -57,6 +57,9 @@ public class Offer implements ToNameValueMap {
 
     public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
         this.price = price;
+
+        if (groceryCategory == null)
+            throw new IllegalStateException("Unknown Grocery");
         this.groceryCategory = groceryCategory;
         this.description = description;
         this.purchaseDate = purchaseDate;
@@ -86,7 +89,7 @@ public class Offer implements ToNameValueMap {
             int grocerieId = jsonObject.getInt("grocerieId");
             String description = jsonObject.getString("description");
 
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-DDThh:mm:ss");
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
