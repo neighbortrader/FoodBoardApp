@@ -55,6 +55,9 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
                 .url(url)
                 .build();
 
+
+        publishProgress(request.toString());
+
         Log.d(TAG, "Request: " + request);
 
         try {
@@ -62,6 +65,8 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
 
             Log.d(TAG, "Response: " + response);
             Log.d(TAG, response.body().string());
+
+            publishProgress(request.toString());
 
             if (response.code() != 200) {
                 throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));

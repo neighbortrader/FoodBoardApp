@@ -82,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(Exception e) {
                     textView.setText(e.getMessage());
                 }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+
+                }
             }).execute();
         });
 
@@ -101,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(Exception e) {
                     textView.setText(e.getMessage());
                 }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+
+                }
             }, offerToPost).execute();
         });
 
@@ -108,11 +118,12 @@ public class MainActivity extends AppCompatActivity {
             Snackbar.make(view, "Get all categories request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
+            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+
             GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Grocery>() {
+
                 @Override
                 public void onResponse(List<Grocery> responseList) {
-                    StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
-
                     for (Grocery grocery: responseList) {
                         editTextWithAllReceivedOffers.append(grocery.getGroceryName() + "\n");
                     }
@@ -123,8 +134,16 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
-                    textView.setText(e.getMessage());
+                    editTextWithAllReceivedOffers.append(e.getMessage());
+                    textView.setText(editTextWithAllReceivedOffers.toString());
                 }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+                    editTextWithAllReceivedOffers.append(progressUpdate + "\n");
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+
             }).execute();
         });
     }

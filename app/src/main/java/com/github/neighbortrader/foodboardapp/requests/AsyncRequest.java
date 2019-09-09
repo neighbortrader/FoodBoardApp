@@ -2,6 +2,7 @@ package com.github.neighbortrader.foodboardapp.requests;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.text.Normalizer;
 import java.util.HashMap;
@@ -12,7 +13,9 @@ import lombok.Getter;
 import lombok.Setter;
 import okhttp3.FormBody;
 
-public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
+public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
+
+    public static  final String TAG = AsyncRequest.class.getSimpleName();
 
     private OnEventListener<T> callBack;
     private Context context;
@@ -45,6 +48,14 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, Void, List<T>> {
             }
         }
     }
+
+    @Override
+    protected void onProgressUpdate(String... values) {
+        Log.d(TAG, "onProgressUpdate()");
+        callBack.onProgress(values[0]);
+    }
+
+
 
     protected FormBody nameValueMapToFormbody(Map<String, String> nameValueMap){
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
