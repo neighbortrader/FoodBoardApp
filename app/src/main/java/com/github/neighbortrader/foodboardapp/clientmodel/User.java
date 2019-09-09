@@ -20,6 +20,10 @@ public class User implements ToNameValueMap {
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
 
     private static User userInstance;
+
+    @Getter
+    @Setter
+    private String username;
     @Getter
     @Setter
     private String password;
@@ -48,7 +52,8 @@ public class User implements ToNameValueMap {
         return User.userInstance;
     }
 
-    public User(String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
+    public User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
+        this.username = username;
         this.password = password;
         this.userId = userId;
         this.email = email;
@@ -61,8 +66,9 @@ public class User implements ToNameValueMap {
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
 
+        nameValueMap.put("username", username);
         nameValueMap.put("password", password);
-        nameValueMap.put("email", password);
+        nameValueMap.put("email", email);
 
         nameValueMap.putAll(address.toNameValueMap());
 

@@ -23,16 +23,11 @@ public class Address implements ToNameValueMap {
     @Setter
     private String city;
 
-    @Getter
-    @Setter
-    private String country;
-
-    public Address(String street, String streetNumber, String zipCode, String city, String country) {
+    public Address(String street, String streetNumber, String zipCode, String city) {
         this.street = street;
         this.streetNumber = streetNumber;
         this.zipCode = zipCode;
         this.city = city;
-        this.country = country;
     }
 
     @Override
@@ -42,7 +37,6 @@ public class Address implements ToNameValueMap {
                 ", streetNumber='" + streetNumber + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
                 '}';
     }
 
@@ -50,11 +44,10 @@ public class Address implements ToNameValueMap {
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
 
+        nameValueMap.put("zipNumber", zipCode);
+        nameValueMap.put("place", city);
         nameValueMap.put("street", street);
-        nameValueMap.put("streetNumber", streetNumber);
-        nameValueMap.put("zipCode", zipCode);
-        nameValueMap.put("city", city);
-        nameValueMap.put("country", country);
+        nameValueMap.put("addressNumber", streetNumber);
 
         return nameValueMap;
     }

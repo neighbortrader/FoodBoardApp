@@ -63,30 +63,21 @@ public class OfferHandler extends AsyncRequest<Offer> {
         switch (requestTyps) {
             case POST_NEW_OFFER:
                 User user = User.getCurrentUserInstance();
-                JWT jwtToken = user.getJwtToken();
 
-                if (offerToCreate != null && user != null && jwtToken != null) {
+                if (offerToCreate != null && user != null) {
                     try {
+                        JWT jwtToken = user.getJwtToken();
+
                         if (jwtToken.isExpired(10)) {
-                            Log.w(TAG, "jwtToken is expired");
+                            Log.w(TAG, "jwtToken is expired, trying to fetch a new one");
 
-                            UserHandler.builder(RequestTyps.GET_JWT_TOKEN, MyApplication.getAppContext(), new OnEventListener<JWT>() {
-                                @Override
-                                public void onResponse(List<JWT> object) {
-                                    Log.d(TAG, "Successfully received new Token");
-                                    user.setJwtToken(object.get(0));
-                                }
+                            jwtToken = UserHandler.getJWTRequest();
 
-                                @Override
-                                public void onFailure(Exception e) {
-                                    throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));
-                                }
-
-                                @Override
-                                public void onProgress(String progressUpdate) {
-
-                                }
-                            });
+                            if (jwtToken == null) {
+                                throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));
+                            } else {
+                                Log.d(TAG, "Successfully received new Token");
+                            }
                         }
 
                         OkHttpClient client = new OkHttpClient();
