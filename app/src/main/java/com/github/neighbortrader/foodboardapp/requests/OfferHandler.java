@@ -78,6 +78,11 @@ public class OfferHandler extends AsyncRequest<Offer> {
                     try {
                         Response response = client.newCall(request).execute();
                         Log.d(TAG, "Response: " + response);
+
+                        if (response.code() != 200){
+                            throw new Exception(String.format("Received http-statuscode %s", response.code()));
+                        }
+
                     } catch (Exception e) {
                         exception = e;
                     }

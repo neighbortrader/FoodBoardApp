@@ -44,10 +44,6 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
         return categoryHandler;
     }
 
-    public static void insertNewGroceryCategories(){
-
-    }
-
     @Override
     protected List<Grocery> doInBackground(Void... params) {
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
@@ -66,15 +62,17 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
             String jsonData = response.body().string();
             JSONArray jsonArray = new JSONArray(jsonData);
 
-            ArrayList<Offer> receivedOffers = new ArrayList<>();
+            ArrayList<Grocery> receivedCategories = new ArrayList<>();
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
+                receivedCategories.add(Grocery.createOfferFromJSON(jsonObject));
             }
 
-            return receivedOffers;
+            Grocery.updateCurrentGroceries(receivedCategories);
+
+            return receivedCategories;
         } catch (Exception e) {
             exception = e;
             Log.e(TAG, "Exception while waiting for Result", e);

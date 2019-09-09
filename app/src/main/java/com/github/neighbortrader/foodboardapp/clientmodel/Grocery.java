@@ -2,10 +2,8 @@ package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import android.util.Log;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import lombok.Getter;
@@ -40,13 +38,13 @@ public class Grocery {
         return new Grocery(groceryName);
     }
 
-    public static Offer createOfferFromJSON(JSONObject jsonObject) {
+    public static Grocery createOfferFromJSON(JSONObject jsonObject) {
         try {
-            //TODO: wait for Endpoint
+            //TODO: wait for Endpoint implementation
             //Grocery groceryName = Grocery.buildGrocery(jsonObject.getString(""))
 
 
-            return new Offer(price, groceryCategory, description, purchaseDate, expireDate);
+            //return
         } catch (Exception e) {
             Log.e(TAG, "Unknown Error while trying to create Offer", e);
         }
