@@ -14,9 +14,8 @@ import okhttp3.Response;
 public class CreateNewUserRequest extends AsyncRequest<Void> {
 
     public final static String TAG = CreateNewUserRequest.class.getSimpleName();
-
-    private User userToCreate;
     private final String url = Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_USER;
+    private User userToCreate;
 
     public CreateNewUserRequest(Context context, OnEventListener callback) {
         super(context, callback);

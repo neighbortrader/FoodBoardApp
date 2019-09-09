@@ -9,17 +9,14 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Price implements ToNameValueMap{
+public class Price implements ToNameValueMap {
+    NumberFormat currencyFormatter;
+    Locale currentLocal;
     @Getter
     private Currency currency;
-
     @Getter
     @Setter
     private double value;
-
-    NumberFormat currencyFormatter;
-
-    Locale currentLocal;
 
     public Price(double value) {
         this.value = value;

@@ -13,7 +13,7 @@ public class Address implements ToNameValueMap {
 
     @Getter
     @Setter
-    private String streetnumber;
+    private String streetNumber;
 
     @Getter
     @Setter
@@ -27,9 +27,9 @@ public class Address implements ToNameValueMap {
     @Setter
     private String country;
 
-    public Address(String street, String streetnumber, String zipCode, String city, String country) {
+    public Address(String street, String streetNumber, String zipCode, String city, String country) {
         this.street = street;
-        this.streetnumber = streetnumber;
+        this.streetNumber = streetNumber;
         this.zipCode = zipCode;
         this.city = city;
         this.country = country;
@@ -39,7 +39,7 @@ public class Address implements ToNameValueMap {
     public String toString() {
         return "Address{" +
                 "street='" + street + '\'' +
-                ", streetnumber='" + streetnumber + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
@@ -51,7 +51,7 @@ public class Address implements ToNameValueMap {
         Map<String, String> nameValueMap = new Hashtable<>();
 
         nameValueMap.put("street", street);
-        nameValueMap.put("streetnumber", streetnumber);
+        nameValueMap.put("streetNumber", streetNumber);
         nameValueMap.put("zipCode", zipCode);
         nameValueMap.put("city", city);
         nameValueMap.put("country", country);

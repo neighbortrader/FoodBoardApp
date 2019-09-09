@@ -22,10 +22,6 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
     private Offer offerToCreate;
 
-    public void setOfferToCreate(Offer offerToCreate) {
-        this.offerToCreate = offerToCreate;
-    }
-
     protected OfferHandler(Context context, OnEventListener callback) {
         super(context, callback);
     }
@@ -52,6 +48,10 @@ public class OfferHandler extends AsyncRequest<Offer> {
         }
 
         return offerHandler;
+    }
+
+    public void setOfferToCreate(Offer offerToCreate) {
+        this.offerToCreate = offerToCreate;
     }
 
     @Override

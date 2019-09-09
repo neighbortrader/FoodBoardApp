@@ -10,34 +10,29 @@ import lombok.Setter;
 public class User implements ToNameValueMap {
 
     private static User userInstance;
+    @Getter
+    @Setter
+    private String password;
+    @Getter
+    @Setter
+    private String userId;
+    @Getter
+    @Setter
+    private String email;
+    @Getter
+    @Setter
+    private Address address;
+    @Getter
+    @Setter
+    private ArrayList<Offer> offerList;
 
-    private static void createUserInstance(User userInstance){
+    private static void createUserInstance(User userInstance) {
         User.userInstance = userInstance;
     }
 
     public static User getCurrentUserInstance() {
         return User.userInstance;
     }
-
-    @Getter
-    @Setter
-    private String password;
-
-    @Getter
-    @Setter
-    private String userId;
-
-    @Getter
-    @Setter
-    private String email;
-
-    @Getter
-    @Setter
-    private Address address;
-
-    @Getter
-    @Setter
-    private ArrayList<Offer> offerList;
 
     @Override
     public Map<String, String> toNameValueMap() {

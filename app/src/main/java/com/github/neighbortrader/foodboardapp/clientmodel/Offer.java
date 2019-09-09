@@ -5,8 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.github.neighbortrader.foodboardapp.clientmodel.Price;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,42 +42,16 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime expireDate;
 
-    @Override
-    public String toString() {
-        return "Offer{" +
-                "price=" + price +
-                ", groceryCategory='" + groceryCategory + '\'' +
-                ", description='" + description + '\'' +
-                ", purchaseDate=" + purchaseDate +
-                ", expireDate=" + expireDate +
-                '}';
-    }
-
     public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
         this.price = price;
 
         if (groceryCategory == null)
             throw new IllegalStateException("Unknown Grocery");
+
         this.groceryCategory = groceryCategory;
         this.description = description;
         this.purchaseDate = purchaseDate;
         this.expireDate = expireDate;
-    }
-
-
-    @Override
-    public Map<String, String> toNameValueMap() {
-        Map<String, String> nameValueMap = new Hashtable<>();
-
-        nameValueMap.putAll(price.toNameValueMap());
-        nameValueMap.put("groceryCategory", groceryCategory.toString());
-        nameValueMap.put("description", description);
-
-        // TODO: check those strings
-        nameValueMap.put("purchaseDate", purchaseDate.toString());
-        nameValueMap.put("expireDate", expireDate.toString());
-
-        return nameValueMap;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -105,5 +77,31 @@ public class Offer implements ToNameValueMap {
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Offer{" +
+                "price=" + price +
+                ", groceryCategory='" + groceryCategory + '\'' +
+                ", description='" + description + '\'' +
+                ", purchaseDate=" + purchaseDate +
+                ", expireDate=" + expireDate +
+                '}';
+    }
+
+    @Override
+    public Map<String, String> toNameValueMap() {
+        Map<String, String> nameValueMap = new Hashtable<>();
+
+        nameValueMap.putAll(price.toNameValueMap());
+        nameValueMap.put("groceryCategory", groceryCategory.toString());
+        nameValueMap.put("description", description);
+
+        // TODO: check those strings
+        nameValueMap.put("purchaseDate", purchaseDate.toString());
+        nameValueMap.put("expireDate", expireDate.toString());
+
+        return nameValueMap;
     }
 }

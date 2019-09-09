@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.text.Normalizer;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,19 +13,16 @@ import okhttp3.FormBody;
 
 public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
 
-    public static  final String TAG = AsyncRequest.class.getSimpleName();
-
-    private OnEventListener<T> callBack;
-    private Context context;
+    public static final String TAG = AsyncRequest.class.getSimpleName();
     public Exception exception;
-
     @Setter
     @Getter
     protected String url;
-
     @Setter
     @Getter
     protected RequestTyps requestTyps;
+    private OnEventListener<T> callBack;
+    private Context context;
 
 
     protected AsyncRequest(Context context, OnEventListener callback) {
@@ -56,15 +51,14 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
     }
 
 
-
-    protected FormBody nameValueMapToFormbody(Map<String, String> nameValueMap){
+    protected FormBody nameValueMapToFormbody(Map<String, String> nameValueMap) {
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
 
-        nameValueMap.forEach((k, v) ->{
+        nameValueMap.forEach((k, v) -> {
             formBodyBuilder.add(k, v);
         });
 
-        return  formBodyBuilder.build();
+        return formBodyBuilder.build();
     }
 
 }
