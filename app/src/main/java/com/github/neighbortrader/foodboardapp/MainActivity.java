@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setKeyListener(null);
 
         fabGetOffers.setOnClickListener(view -> {
-            Snackbar.make(view, "Get all Offers request", Snackbar.LENGTH_SHORT)
+            Snackbar.make(view, "Create new user request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
             StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }).execute();
             */
 
-            User userToSend = new User("moritz", "Moritz_6", null,
+            User userToSend = new User("mor414itz", "Moritz_6___3", null,
                     "lindner@1.com", new Address("Gensinger Str", "86",
                     "10315", "Berlin"), null, null);
 

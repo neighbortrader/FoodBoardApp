@@ -4,15 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
-import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +21,11 @@ public class UserHandler extends AsyncRequest<User> {
     @Getter
     private static ArrayList<String> groceriesCategories;
 
-    private JWT receivedJWToken;
+    @Getter
+    private JWT latestReceivedJWToken;
 
     @Setter
     private User userToCreate;
-
-    public JWT getReceivedJWToken() {
-        return receivedJWToken;
-    }
 
     protected UserHandler(Context context, OnEventListener callback, RequestTyps requestTyp) {
         super(context, callback);
@@ -73,9 +63,9 @@ public class UserHandler extends AsyncRequest<User> {
         switch (requestTyps) {
             case GET_JWT_TOKEN:
                 try {
-                    receivedJWToken = getJWTRequest();
+                    latestReceivedJWToken = getJWTRequest();
                     return null;    // Always null (should think about jwtHandler)
-                }  catch (Exception e) {
+                } catch (Exception e) {
                     exception = e;
                 }
                 break;
@@ -92,11 +82,10 @@ public class UserHandler extends AsyncRequest<User> {
         if (userToCreate != null) {
             OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
-            Request.Builder builder = new Request.Builder();
-            builder = builder.url(url);
-            builder = builder.post(nameValueMapToFormbody(userToCreate.toNameValueMap()));
-
-            Request request = builder.build();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(nameValueMapToRequestBody(userToCreate.toNameValueMap()))
+                    .build();
 
             Log.d(TAG, "Request: " + request);
 
@@ -110,6 +99,8 @@ public class UserHandler extends AsyncRequest<User> {
                 if (response.code() != 200) {
                     throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                 }
+
+                publishProgress("successful");
 
             } catch (Exception e) {
                 exception = e;

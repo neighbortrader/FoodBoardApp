@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.MyApplication;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
@@ -84,7 +83,7 @@ public class OfferHandler extends AsyncRequest<Offer> {
 
                         Request.Builder builder = new Request.Builder();
                         builder = builder.url(url);
-                        builder = builder.post(nameValueMapToFormbody(offerToCreate.toNameValueMap()));
+                        builder = builder.post(nameValueMapToRequestBody(offerToCreate.toNameValueMap()));
 
                         Request request = builder.build();
 
