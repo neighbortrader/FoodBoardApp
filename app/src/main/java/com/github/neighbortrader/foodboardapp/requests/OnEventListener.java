@@ -8,7 +8,7 @@ public interface OnEventListener<T> {
      *
      * @param object
      */
-    void onResponse(List<T> object);
+    void onResponse(T object);
 
     void onFailure(Exception e);
 

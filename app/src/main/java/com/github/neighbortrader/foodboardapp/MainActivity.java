@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
             StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
 
 
-            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
+            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<OfferHandler>() {
                 @Override
-                public void onResponse(List<Offer> receivedOffers) {
-                    for (Offer offer : receivedOffers) {
+                public void onResponse(OfferHandler offerHandler) {
+                    for (Offer offer : offerHandler.getOffers()) {
                         editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
                                 .append("Preis: " + offer.getPrice().getFormattedPrice())
                                 .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
@@ -154,9 +154,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniAppDataAndUser() {
-        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
+        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<GroceryCategoryHandler>() {
             @Override
-            public void onResponse(List<Void> receivedCategory) {
+            public void onResponse(GroceryCategoryHandler groceryCategoryHandler) {
                 Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -179,9 +179,9 @@ public class MainActivity extends AppCompatActivity {
 
             User randomUserToCreate = User.generateRandomUser();
 
-            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
+            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<UserHandler>() {
                 @Override
-                public void onResponse(List<Void> object) {
+                public void onResponse(UserHandler userHandler) {
                     User.createCurrentUserInstance(randomUserToCreate);
                     Log.d(TAG, "successfully added current user instance");
                 }

@@ -14,7 +14,7 @@ import lombok.Setter;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
+public abstract class AsyncRequest<T> extends AsyncTask<Void, String, T> {
 
     public static final String TAG = AsyncRequest.class.getSimpleName();
     public Exception exception;
@@ -42,10 +42,10 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
     }
 
     @Override
-    abstract protected List<T> doInBackground(Void... params);
+    abstract protected T doInBackground(Void... params);
 
     @Override
-    protected void onPostExecute(List<T> result) {
+    protected void onPostExecute(T result) {
         if (callBack != null) {
             if (exception == null) {
                 callBack.onResponse(result);
