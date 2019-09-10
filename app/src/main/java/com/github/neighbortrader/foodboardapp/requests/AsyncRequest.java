@@ -52,7 +52,7 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
         callBack.onProgress(values[0]);
     }
 
-    protected RequestBody nameValueMapToRequestBody(Map<String, String> nameValueMap) {
+    protected static RequestBody nameValueMapToRequestBody(Map<String, String> nameValueMap) {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         JsonObject body = new JsonObject();
 

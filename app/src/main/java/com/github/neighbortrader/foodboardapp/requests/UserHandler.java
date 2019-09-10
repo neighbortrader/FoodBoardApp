@@ -7,7 +7,9 @@ import com.auth0.android.jwt.JWT;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +34,6 @@ public class UserHandler extends AsyncRequest<User> {
         this.requestTyps = requestTyp;
     }
 
-    // TODO: implement
     public static UserHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, User... user) {
 
         UserHandler userHandler = null;
@@ -48,7 +49,6 @@ public class UserHandler extends AsyncRequest<User> {
                 userHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_USER);
                 if (user.length > 0)
                     userHandler.setUserToCreate(user[0]);
-
                 break;
             default:
                 return null;
@@ -63,8 +63,9 @@ public class UserHandler extends AsyncRequest<User> {
         switch (requestTyps) {
             case GET_JWT_TOKEN:
                 try {
-                    latestReceivedJWToken = getJWTRequest();
-                    return null;    // Always null (should think about jwtHandler)
+                    latestReceivedJWToken = getJWTRequest(userToCreate);
+                    userToCreate.setJwtToken(latestReceivedJWToken);
+                    return null;
                 } catch (Exception e) {
                     exception = e;
                 }
@@ -100,7 +101,9 @@ public class UserHandler extends AsyncRequest<User> {
                     throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                 }
 
-                publishProgress("successful");
+                publishProgress("trying to get JWT-Token");
+
+                latestReceivedJWToken = getJWTRequest(userToCreate);
 
             } catch (Exception e) {
                 exception = e;
@@ -113,13 +116,18 @@ public class UserHandler extends AsyncRequest<User> {
     }
 
 
-    public static JWT getJWTRequest() throws Exception {
+    public static JWT getJWTRequest(User userToGetJWTToken) throws Exception {
+        Log.d(TAG, "getJWTRequest()");
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
+
+        Map<String, String> nameValueMap = new HashMap<>();
+        nameValueMap.put("username", userToGetJWTToken.getUsername());
+        nameValueMap.put("password", userToGetJWTToken.getPassword());
 
         Request request = new Request.Builder()
                 .url(Urls.BASE_URL + Urls.ENDPOINT_GET_JWT_TOKEN)
+                .post(nameValueMapToRequestBody(nameValueMap))
                 .build();
-
 
         Log.d(TAG, "Request: " + request);
 
@@ -129,7 +137,18 @@ public class UserHandler extends AsyncRequest<User> {
             throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
         }
 
-        //TODO: implement jwt reading
-        return null;
+        String responseBody = response.body().string();
+
+        if (responseBody.isEmpty()){
+            throw new Exception("received empty token. Password and or Username is invalid");
+        }
+
+        JWT jwtToken = new JWT(responseBody);
+
+        if (jwtToken.isExpired(0)){
+            throw new Exception("received JWT-Token is expired");
+        }
+
+        return jwtToken;
     }
 }

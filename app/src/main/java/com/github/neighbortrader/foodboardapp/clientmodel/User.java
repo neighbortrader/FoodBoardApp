@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -62,6 +63,16 @@ public class User implements ToNameValueMap {
         this.jwtToken = jwtToken;
     }
 
+    public static User generateRandomUser(){
+        String username = UUID.randomUUID().toString();
+        String password = "adm!n9Asswor!d";
+        String userId = null;
+        String email = "test@testemail.com";
+        Address address = new Address("Teststareße", "12a", "10315", "Berlin");
+
+        return new User(username, password, userId, email, address, null, null);
+    }
+
     @Override
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
@@ -75,6 +86,7 @@ public class User implements ToNameValueMap {
         return nameValueMap;
     }
 
+    // TODO test this function
     public static void saveToSharedPreferences(User user) {
         Gson gson = new Gson();
         String userToSaveAsJsonString = gson.toJson(user);
@@ -86,6 +98,7 @@ public class User implements ToNameValueMap {
         editor.commit();
     }
 
+    // TODO test this function
     public static User loadFromSharedPreferences() {
         SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
 

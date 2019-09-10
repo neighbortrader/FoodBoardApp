@@ -98,7 +98,6 @@ public class Offer implements ToNameValueMap {
         nameValueMap.put("groceryCategory", groceryCategory.toString());
         nameValueMap.put("description", description);
 
-        // TODO: check those strings
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
 

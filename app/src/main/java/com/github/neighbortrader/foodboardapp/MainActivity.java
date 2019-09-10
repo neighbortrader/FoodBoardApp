@@ -96,14 +96,11 @@ public class MainActivity extends AppCompatActivity {
             }).execute();
             */
 
-            User userToSend = new User("mor414itz", "Moritz_6___3", null,
-                    "lindner@1.com", new Address("Gensinger Str", "86",
-                    "10315", "Berlin"), null, null);
 
             UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
                 @Override
                 public void onResponse(List<Void> object) {
-                    textView.append("successfully posted user");
+                    textView.append("successfully posted user, and received JWT-Token");
                 }
 
                 @Override
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     editTextWithAllReceivedOffers.append(progressUpdate + "\n");
                     textView.setText(editTextWithAllReceivedOffers.toString());
                 }
-            }, userToSend).execute();
+            }, User.generateRandomUser()).execute();
 
         });
 

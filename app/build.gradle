@@ -34,7 +34,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_JWT_TOKEN", ""
+            resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
@@ -45,7 +45,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_JWT_TOKEN", ""
+            resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
@@ -56,7 +56,7 @@ android {
             resValue "string", "GET_ALL_OFFERS_URL", ""
             resValue "string", "CREATE_NEW_USER", "User"
             resValue "string", "CREATE_NEW_OFFER", ""
-            resValue "string", "GET_JWT_TOKEN", ""
+            resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
         }
