@@ -57,6 +57,42 @@ public class UserHandler extends AsyncRequest<User> {
         return userHandler;
     }
 
+    public static JWT getJWTRequest(User userToGetJWTToken) throws Exception {
+        Log.d(TAG, "getJWTRequest()");
+        OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
+
+        Map<String, String> nameValueMap = new HashMap<>();
+        nameValueMap.put("username", userToGetJWTToken.getUsername());
+        nameValueMap.put("password", userToGetJWTToken.getPassword());
+
+        Request request = new Request.Builder()
+                .url(Urls.BASE_URL + Urls.ENDPOINT_GET_JWT_TOKEN)
+                .post(nameValueMapToRequestBody(nameValueMap))
+                .build();
+
+        Log.d(TAG, "Request: " + request);
+
+        Response response = client.newCall(request).execute();
+
+        if (response.code() != 200) {
+            throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
+        }
+
+        String responseBody = response.body().string();
+
+        if (responseBody.isEmpty()) {
+            throw new Exception("received empty token. Password and or Username is invalid");
+        }
+
+        JWT jwtToken = new JWT(responseBody);
+
+        if (jwtToken.isExpired(0)) {
+            throw new Exception("received JWT-Token is expired");
+        }
+
+        return jwtToken;
+    }
+
     @Override
     protected List<User> doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
@@ -113,42 +149,5 @@ public class UserHandler extends AsyncRequest<User> {
         }
 
         return null;
-    }
-
-
-    public static JWT getJWTRequest(User userToGetJWTToken) throws Exception {
-        Log.d(TAG, "getJWTRequest()");
-        OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
-
-        Map<String, String> nameValueMap = new HashMap<>();
-        nameValueMap.put("username", userToGetJWTToken.getUsername());
-        nameValueMap.put("password", userToGetJWTToken.getPassword());
-
-        Request request = new Request.Builder()
-                .url(Urls.BASE_URL + Urls.ENDPOINT_GET_JWT_TOKEN)
-                .post(nameValueMapToRequestBody(nameValueMap))
-                .build();
-
-        Log.d(TAG, "Request: " + request);
-
-        Response response = client.newCall(request).execute();
-
-        if (response.code() != 200) {
-            throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
-        }
-
-        String responseBody = response.body().string();
-
-        if (responseBody.isEmpty()){
-            throw new Exception("received empty token. Password and or Username is invalid");
-        }
-
-        JWT jwtToken = new JWT(responseBody);
-
-        if (jwtToken.isExpired(0)){
-            throw new Exception("received JWT-Token is expired");
-        }
-
-        return jwtToken;
     }
 }

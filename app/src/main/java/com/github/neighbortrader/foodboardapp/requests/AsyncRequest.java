@@ -32,6 +32,15 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
         this.context = context;
     }
 
+    protected static RequestBody nameValueMapToRequestBody(Map<String, String> nameValueMap) {
+        MediaType JSON = MediaType.get("application/json; charset=utf-8");
+        JsonObject body = new JsonObject();
+
+        nameValueMap.forEach(body::addProperty);
+
+        return RequestBody.create(body.toString(), JSON);
+    }
+
     @Override
     abstract protected List<T> doInBackground(Void... params);
 
@@ -50,15 +59,6 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
     protected void onProgressUpdate(String... values) {
         Log.d(TAG, "onProgressUpdate()");
         callBack.onProgress(values[0]);
-    }
-
-    protected static RequestBody nameValueMapToRequestBody(Map<String, String> nameValueMap) {
-        MediaType JSON = MediaType.get("application/json; charset=utf-8");
-        JsonObject body = new JsonObject();
-
-        nameValueMap.forEach(body::addProperty);
-
-        return RequestBody.create(body.toString(), JSON);
     }
 
 }

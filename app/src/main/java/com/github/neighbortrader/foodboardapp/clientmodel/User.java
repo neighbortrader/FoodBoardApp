@@ -45,14 +45,6 @@ public class User implements ToNameValueMap {
     @Setter
     private JWT jwtToken;
 
-    private static void createUserInstance(User userInstance) {
-        User.userInstance = userInstance;
-    }
-
-    public static User getCurrentUserInstance() {
-        return User.userInstance;
-    }
-
     public User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
         this.username = username;
         this.password = password;
@@ -63,7 +55,15 @@ public class User implements ToNameValueMap {
         this.jwtToken = jwtToken;
     }
 
-    public static User generateRandomUser(){
+    private static void createUserInstance(User userInstance) {
+        User.userInstance = userInstance;
+    }
+
+    public static User getCurrentUserInstance() {
+        return User.userInstance;
+    }
+
+    public static User generateRandomUser() {
         String username = UUID.randomUUID().toString();
         String password = "adm!n9Asswor!d";
         String userId = null;
@@ -71,19 +71,6 @@ public class User implements ToNameValueMap {
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
         return new User(username, password, userId, email, address, null, null);
-    }
-
-    @Override
-    public Map<String, String> toNameValueMap() {
-        Map<String, String> nameValueMap = new Hashtable<>();
-
-        nameValueMap.put("username", username);
-        nameValueMap.put("password", password);
-        nameValueMap.put("email", email);
-
-        nameValueMap.putAll(address.toNameValueMap());
-
-        return nameValueMap;
     }
 
     // TODO test this function
@@ -107,6 +94,19 @@ public class User implements ToNameValueMap {
         Gson gson = new Gson();
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
-        return  user;
+        return user;
+    }
+
+    @Override
+    public Map<String, String> toNameValueMap() {
+        Map<String, String> nameValueMap = new Hashtable<>();
+
+        nameValueMap.put("username", username);
+        nameValueMap.put("password", password);
+        nameValueMap.put("email", email);
+
+        nameValueMap.putAll(address.toNameValueMap());
+
+        return nameValueMap;
     }
 }

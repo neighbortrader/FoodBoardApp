@@ -15,7 +15,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Address;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.requests.GroceryCategoryHandler;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
@@ -95,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }).execute();
             */
-
 
             UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
                 @Override
