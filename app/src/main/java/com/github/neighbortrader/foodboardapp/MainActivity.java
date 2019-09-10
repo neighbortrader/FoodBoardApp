@@ -15,8 +15,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.requests.GroceryCategoryHandler;
+import com.github.neighbortrader.foodboardapp.requests.OfferHandler;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.github.neighbortrader.foodboardapp.requests.RequestTyps;
 import com.github.neighbortrader.foodboardapp.requests.UserHandler;
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
             StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
 
-            /*
+
             OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
                 public void onResponse(List<Offer> receivedOffers) {
@@ -89,30 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onProgress(String progressUpdate) {
-                    editTextWithAllReceivedOffers.append(progressUpdate + "\n");
+                    editTextWithAllReceivedOffers.append(progressUpdate + "\n\n");
                     textView.setText(editTextWithAllReceivedOffers.toString());
                 }
             }).execute();
-            */
-
-            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
-                @Override
-                public void onResponse(List<Void> object) {
-                    textView.append("successfully posted user, and received JWT-Token");
-                }
-
-                @Override
-                public void onFailure(Exception e) {
-                    editTextWithAllReceivedOffers.append(e.getMessage());
-                    textView.setText(editTextWithAllReceivedOffers.toString());
-                }
-
-                @Override
-                public void onProgress(String progressUpdate) {
-                    editTextWithAllReceivedOffers.append(progressUpdate + "\n");
-                    textView.setText(editTextWithAllReceivedOffers.toString());
-                }
-            }, User.generateRandomUser()).execute();
         });
 
         iniAppDataAndUser();
