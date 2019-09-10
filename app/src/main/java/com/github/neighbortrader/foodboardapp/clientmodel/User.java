@@ -75,21 +75,19 @@ public class User implements ToNameValueMap {
         return new User(username, password, userId, email, address, null, null);
     }
 
-    public void deleteToken(){
-        this.setJwtToken(null);
-    }
-
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveToSharedPreferences()");
 
-        Gson gson = new Gson();
-        String userToSaveAsJsonString = gson.toJson(user);
+        if (user != null) {
+            Gson gson = new Gson();
+            String userToSaveAsJsonString = gson.toJson(user);
 
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
-        editor.commit();
+            editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
+            editor.commit();
+        }
     }
 
     public static User loadFromSharedPreferences() {
@@ -103,6 +101,10 @@ public class User implements ToNameValueMap {
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
         return user;
+    }
+
+    public void deleteToken() {
+        this.setJwtToken(null);
     }
 
     @Override

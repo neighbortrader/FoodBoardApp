@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onDestroy()");
     }
 
-    private void iniAppDataAndUser(){
+    private void iniAppDataAndUser() {
         GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
             @Override
             public void onResponse(List<Void> receivedCategory) {
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         User loadedUser = User.loadFromSharedPreferences();
 
-        if (loadedUser == null){
+        if (loadedUser == null) {
             Log.d(TAG, "no user found, trying to create random user");
 
             User randomUserToCreate = User.generateRandomUser();
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onProgress(String progressUpdate) {
                 }
             }, randomUserToCreate).execute();
-        }else{
+        } else {
             Log.d(TAG, "found user and added current user instance");
             User.saveToSharedPreferences(loadedUser);
         }
