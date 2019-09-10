@@ -75,6 +75,10 @@ public class User implements ToNameValueMap {
         return new User(username, password, userId, email, address, null, null);
     }
 
+    public void deleteToken(){
+        this.setJwtToken(null);
+    }
+
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveToSharedPreferences()");
 

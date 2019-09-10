@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        User.getCurrentUserInstance().deleteToken();
         User.saveToSharedPreferences(User.getCurrentUserInstance());
 
         super.onDestroy();
