@@ -113,26 +113,9 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText(editTextWithAllReceivedOffers.toString());
                 }
             }, User.generateRandomUser()).execute();
-
         });
 
-        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
-            @Override
-            public void onResponse(List<Void> receivedCategory) {
-                Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
-                toast.show();
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Toast toast = Toast.makeText(getApplicationContext(), String.format("Error while updating grocery category (%s)", e.getMessage()), Toast.LENGTH_LONG);
-                toast.show();
-            }
-
-            @Override
-            public void onProgress(String progressUpdate) {
-            }
-        }).execute();
+        iniAppDataAndUser();
     }
 
     @Override
@@ -181,7 +164,59 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        User.saveToSharedPreferences(User.getCurrentUserInstance());
+
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
     }
+
+    private void iniAppDataAndUser(){
+        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
+            @Override
+            public void onResponse(List<Void> receivedCategory) {
+                Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast toast = Toast.makeText(getApplicationContext(), String.format("Error while updating grocery category (%s)", e.getMessage()), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onProgress(String progressUpdate) {
+            }
+        }).execute();
+
+        User loadedUser = User.loadFromSharedPreferences();
+
+        if (loadedUser == null){
+            Log.d(TAG, "no user found, trying to create random user");
+
+            User randomUserToCreate = User.generateRandomUser();
+
+            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
+                @Override
+                public void onResponse(List<Void> object) {
+                    User.createCurrentUserInstance(randomUserToCreate);
+                    Log.d(TAG, "successfully added current user instance");
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.e(TAG, "Exception while trying to create random user during startup", e);
+                }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+                }
+            }, randomUserToCreate).execute();
+        }else{
+            Log.d(TAG, "found user and added current user instance");
+            User.saveToSharedPreferences(loadedUser);
+        }
+    }
+
+
 }

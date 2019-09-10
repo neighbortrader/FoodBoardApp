@@ -1,6 +1,7 @@
 package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
 import com.github.neighbortrader.foodboardapp.MyApplication;
@@ -17,6 +18,7 @@ import lombok.Setter;
 import static android.content.Context.MODE_PRIVATE;
 
 public class User implements ToNameValueMap {
+    public static final String TAG = User.class.getSimpleName();
 
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
 
@@ -55,7 +57,7 @@ public class User implements ToNameValueMap {
         this.jwtToken = jwtToken;
     }
 
-    private static void createUserInstance(User userInstance) {
+    public static void createCurrentUserInstance(User userInstance) {
         User.userInstance = userInstance;
     }
 
@@ -73,8 +75,9 @@ public class User implements ToNameValueMap {
         return new User(username, password, userId, email, address, null, null);
     }
 
-    // TODO test this function
     public static void saveToSharedPreferences(User user) {
+        Log.d(TAG, "saveToSharedPreferences()");
+
         Gson gson = new Gson();
         String userToSaveAsJsonString = gson.toJson(user);
 
@@ -85,8 +88,9 @@ public class User implements ToNameValueMap {
         editor.commit();
     }
 
-    // TODO test this function
     public static User loadFromSharedPreferences() {
+        Log.d(TAG, "loadFromSharedPreferences()");
+
         SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
 
         String userToSaveAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
