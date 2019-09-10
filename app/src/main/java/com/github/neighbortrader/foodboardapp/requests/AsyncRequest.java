@@ -27,6 +27,10 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, T> {
     private OnEventListener<T> callBack;
     private Context context;
 
+    @Getter
+    @Setter
+    protected int lastHttpStatuscode;
+
     protected AsyncRequest(Context context, OnEventListener callback) {
         callBack = callback;
         this.context = context;

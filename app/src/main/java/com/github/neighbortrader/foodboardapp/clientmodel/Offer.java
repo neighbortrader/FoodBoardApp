@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Random;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +43,8 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime expireDate;
 
-    public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
+    public Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
+        this.user = user;
         this.price = price;
 
         if (groceryCategory == null)
@@ -66,7 +68,7 @@ public class Offer implements ToNameValueMap {
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
-            return new Offer(price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
+            return new Offer(User.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
@@ -79,11 +81,33 @@ public class Offer implements ToNameValueMap {
         return null;
     }
 
+    public static Offer createRandomOffer() {
+        User user = User.getCurrentUserInstance();
+
+        Random r = new Random();
+
+        double randomValue = 0 + (20) * r.nextDouble();
+        Price price = new Price(randomValue);
+
+        int randomInt = r.nextInt(Grocery.getCurrentGroceries().size()) + 1;
+        Grocery grocery = Grocery.findGrocery(randomInt);
+
+        String description = "Testbeschreibung";
+        LocalDateTime purchaseDate = LocalDateTime.now();
+        LocalDateTime exexpireDate = purchaseDate.plusDays(r.nextInt(20))
+                .plusHours(r.nextInt(24))
+                .plusMinutes(r.nextInt(60))
+                .plusSeconds(r.nextInt(60));
+
+        return new Offer(user, price, grocery, description, purchaseDate, exexpireDate);
+    }
+
     @Override
     public String toString() {
         return "Offer{" +
-                "price=" + price +
-                ", groceryCategory='" + groceryCategory + '\'' +
+                "user=" + user +
+                ", price=" + price +
+                ", groceryCategory=" + groceryCategory +
                 ", description='" + description + '\'' +
                 ", purchaseDate=" + purchaseDate +
                 ", expireDate=" + expireDate +
@@ -94,12 +118,11 @@ public class Offer implements ToNameValueMap {
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
 
-        nameValueMap.putAll(price.toNameValueMap());
-        nameValueMap.put("groceryCategory", groceryCategory.toString());
         nameValueMap.put("description", description);
-
+        nameValueMap.put("price", Double.toString(price.getValue()));
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
+        nameValueMap.put("grocerieId", Integer.toString(groceryCategory.getGroceryId()));
 
         return nameValueMap;
     }

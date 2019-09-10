@@ -36,7 +36,7 @@ android {
             resValue "string", "BASE_URL", "http://10.0.2.2:44355/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
-            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "CREATE_NEW_OFFER", "Offer"
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
@@ -47,7 +47,7 @@ android {
             resValue "string", "BASE_URL", "http://10.0.2.2:44355/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
-            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "CREATE_NEW_OFFER", "Offer"
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
@@ -58,7 +58,7 @@ android {
             resValue "string", "BASE_URL", "http://dummy.restapiexample.com/api/v1/employees"
             resValue "string", "GET_ALL_OFFERS_URL", ""
             resValue "string", "CREATE_NEW_USER", "User"
-            resValue "string", "CREATE_NEW_OFFER", ""
+            resValue "string", "CREATE_NEW_OFFER", "Offer"
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";

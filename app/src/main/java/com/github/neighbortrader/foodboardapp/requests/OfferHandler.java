@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +22,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
 
     public final static String TAG = OfferHandler.class.getSimpleName();
 
+    @Getter
     private Offer offerToPost;
 
     @Getter
@@ -67,22 +67,28 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
 
         switch (requestTyps) {
             case POST_NEW_OFFER:
-                postOffer(offerToPost);
+                postOfferRequest(offerToPost);
                 break;
 
             case GET_ALL_OFFERS:
-                setReceivedOffers(getOffers());
+                setReceivedOffers(getOffersRequest());
                 break;
         }
         return this;
     }
 
-    public void postOffer(Offer offerToPost){
+    public void postOfferRequest(Offer offerToPost){
         User user = User.getCurrentUserInstance();
 
         if (offerToPost != null && user != null) {
             try {
                 JWT jwtToken = user.getJwtToken();
+
+                if (jwtToken == null) {
+                    Log.w(TAG, "no jwtToken found, trying to fetch one");
+                    jwtToken = UserHandler.getJWTRequest(user);
+                    user.setJwtToken(jwtToken);
+                }
 
                 if (jwtToken.isExpired(0)) {
                     Log.w(TAG, "jwtToken is expired, trying to fetch a new one");
@@ -93,6 +99,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                         throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));
                     } else {
                         Log.d(TAG, "Successfully received new Token");
+                        user.setJwtToken(jwtToken);
                     }
                 }
 
@@ -100,7 +107,8 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
 
                 Request.Builder builder = new Request.Builder();
                 builder = builder.url(url);
-                builder = builder.post(nameValueMapToRequestBody(offerToPost.toNameValueMap()));
+                builder = builder.post(nameValueMapToRequestBody(offerToPost.toNameValueMap()))
+                        .header("Authorization", String.format("bearer %s", jwtToken.toString()));
 
                 Request request = builder.build();
 
@@ -111,10 +119,13 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                 Response response = client.newCall(request).execute();
                 Log.d(TAG, "Response: " + response);
 
-                if (response.code() != 200) {
+                setLastHttpStatuscode(response.code() );
+
+                if (getLastHttpStatuscode() != 200) {
                     throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                 }
 
+                user.addOffer(offerToPost);
 
             } catch (Exception e) {
                 exception = e;
@@ -124,7 +135,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
         }
     }
 
-    public ArrayList<Offer> getOffers(){
+    public ArrayList<Offer> getOffersRequest(){
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()

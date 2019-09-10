@@ -1,6 +1,7 @@
 package com.github.neighbortrader.foodboardapp;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
@@ -26,8 +27,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fabGetOffers = findViewById(R.id.fab_GET_ALL_OFFERS);
+        FloatingActionButton fabGetOffers = findViewById(R.id.fab_POST_NEW_OFFER);
+        FloatingActionButton fabPostOffers = findViewById(R.id.fab_GET_ALL_OFFERS);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -61,23 +61,69 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView2);
         textView.setKeyListener(null);
+        textView.setMovementMethod(new ScrollingMovementMethod());
+
+        fabPostOffers.setOnClickListener(view -> {
+            Snackbar.make(view, "Create new random offer", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+
+            textView.scrollTo(0, 0);
+
+            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+
+            OfferHandler.builder(RequestTyps.POST_NEW_OFFER, getApplicationContext(), new OnEventListener<OfferHandler>() {
+                @Override
+                public void onResponse(OfferHandler offerHandler) {
+
+                    Offer offer = offerHandler.getOfferToPost();
+
+                    editTextWithAllReceivedOffers.append("Successfully added Offer\n\n");
+
+                    editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
+                            .append("Preis: " + offer.getPrice().getFormattedPrice())
+                            .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
+                            .append("\nAblaufdatum: " + offer.getExpireDate())
+                            .append("\nKaufdatum: " + offer.getPurchaseDate()).append("\n\n");
+
+
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    editTextWithAllReceivedOffers.append(e.getMessage());
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+                    editTextWithAllReceivedOffers.append(progressUpdate + "\n\n");
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+            }, Offer.createRandomOffer()).execute();
+        });
 
         fabGetOffers.setOnClickListener(view -> {
             Snackbar.make(view, "Get all offers request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
-            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+            textView.scrollTo(0, 0);
 
+            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
 
             OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<OfferHandler>() {
                 @Override
                 public void onResponse(OfferHandler offerHandler) {
-                    for (Offer offer : offerHandler.getOffers()) {
-                        editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
-                                .append("Preis: " + offer.getPrice().getFormattedPrice())
-                                .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
-                                .append("\nAblaufdatum: " + offer.getExpireDate())
-                                .append("\nKaufdatum: " + offer.getPurchaseDate());
+                    if (!offerHandler.getReceivedOffers().isEmpty()) {
+                        for (Offer offer : offerHandler.getReceivedOffers()) {
+                            editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
+                                    .append("Preis: " + offer.getPrice().getFormattedPrice())
+                                    .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
+                                    .append("\nAblaufdatum: " + offer.getExpireDate())
+                                    .append("\nKaufdatum: " + offer.getPurchaseDate()).append("\n\n");
+                        }
+                    } else {
+                        editTextWithAllReceivedOffers.append("No offers are online\n\n");
                     }
 
                     textView.setText(editTextWithAllReceivedOffers.toString());
@@ -175,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         User loadedUser = User.loadFromSharedPreferences();
 
         if (loadedUser == null) {
-            Log.d(TAG, "no user found, trying to create random user");
+            Log.d(TAG, "no user found, trying to register a random user");
 
             User randomUserToCreate = User.generateRandomUser();
 
@@ -197,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
             }, randomUserToCreate).execute();
         } else {
             Log.d(TAG, "found user and added current user instance");
-            User.saveToSharedPreferences(loadedUser);
+            User.createCurrentUserInstance(loadedUser);
         }
     }
 

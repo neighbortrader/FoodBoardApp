@@ -39,7 +39,6 @@ public class User implements ToNameValueMap {
     @Getter
     @Setter
     private Address address;
-    @Getter
     @Setter
     private ArrayList<Offer> offerList;
 
@@ -48,6 +47,7 @@ public class User implements ToNameValueMap {
     private JWT jwtToken;
 
     public User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
+        offerList = new ArrayList<>();
         this.username = username;
         this.password = password;
         this.userId = userId;
@@ -101,6 +101,10 @@ public class User implements ToNameValueMap {
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
         return user;
+    }
+
+    public boolean addOffer(Offer offerToAd){
+        return this.offerList.add(offerToAd);
     }
 
     public void deleteToken() {
