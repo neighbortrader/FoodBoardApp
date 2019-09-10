@@ -4,12 +4,15 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
-import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
 
@@ -24,10 +27,18 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
     private OnEventListener<T> callBack;
     private Context context;
 
-
     protected AsyncRequest(Context context, OnEventListener callback) {
         callBack = callback;
         this.context = context;
+    }
+
+    protected static RequestBody nameValueMapToRequestBody(Map<String, String> nameValueMap) {
+        MediaType JSON = MediaType.get("application/json; charset=utf-8");
+        JsonObject body = new JsonObject();
+
+        nameValueMap.forEach(body::addProperty);
+
+        return RequestBody.create(body.toString(), JSON);
     }
 
     @Override
@@ -48,17 +59,6 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, List<T>> {
     protected void onProgressUpdate(String... values) {
         Log.d(TAG, "onProgressUpdate()");
         callBack.onProgress(values[0]);
-    }
-
-
-    protected FormBody nameValueMapToFormbody(Map<String, String> nameValueMap) {
-        FormBody.Builder formBodyBuilder = new FormBody.Builder();
-
-        nameValueMap.forEach((k, v) -> {
-            formBodyBuilder.add(k, v);
-        });
-
-        return formBodyBuilder.build();
     }
 
 }

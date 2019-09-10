@@ -14,6 +14,5 @@ public class Urls extends Application {
     public final static String ENDPOINT_CREATE_NEW_USER = context.getResources().getString(R.string.CREATE_NEW_USER);
     public final static String ENDPOINT_CREATE_NEW_OFFER = context.getResources().getString(R.string.CREATE_NEW_OFFER);
     public final static String ENDPOINT_GET_ALL_CATEGORIES = context.getResources().getString(R.string.GET_ALL_CATEGORIES);
-
-
+    public final static String ENDPOINT_GET_JWT_TOKEN = context.getResources().getString(R.string.GET_JWT_TOKEN);
 }

@@ -16,10 +16,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.requests.GroceryCategoryHandler;
 import com.github.neighbortrader.foodboardapp.requests.OfferHandler;
 import com.github.neighbortrader.foodboardapp.requests.OnEventListener;
 import com.github.neighbortrader.foodboardapp.requests.RequestTyps;
+import com.github.neighbortrader.foodboardapp.requests.UserHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -61,10 +63,11 @@ public class MainActivity extends AppCompatActivity {
         textView.setKeyListener(null);
 
         fabGetOffers.setOnClickListener(view -> {
-            Snackbar.make(view, "Get all Offers request", Snackbar.LENGTH_SHORT)
+            Snackbar.make(view, "Get all offers request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
             StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+
 
             OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
                 @Override
@@ -88,29 +91,13 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onProgress(String progressUpdate) {
-                    editTextWithAllReceivedOffers.append(progressUpdate + "\n");
+                    editTextWithAllReceivedOffers.append(progressUpdate + "\n\n");
                     textView.setText(editTextWithAllReceivedOffers.toString());
                 }
             }).execute();
         });
 
-        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
-            @Override
-            public void onResponse(List<Void> receivedCategory) {
-                Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
-                toast.show();
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Toast toast = Toast.makeText(getApplicationContext(), String.format("Error while updating grocery category (%s)", e.getMessage()), Toast.LENGTH_LONG);
-                toast.show();
-            }
-
-            @Override
-            public void onProgress(String progressUpdate) {
-            }
-        }).execute();
+        iniAppDataAndUser();
     }
 
     @Override
@@ -159,7 +146,60 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        User.getCurrentUserInstance().deleteToken();
+        User.saveToSharedPreferences(User.getCurrentUserInstance());
+
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
     }
+
+    private void iniAppDataAndUser() {
+        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
+            @Override
+            public void onResponse(List<Void> receivedCategory) {
+                Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast toast = Toast.makeText(getApplicationContext(), String.format("Error while updating grocery category (%s)", e.getMessage()), Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            @Override
+            public void onProgress(String progressUpdate) {
+            }
+        }).execute();
+
+        User loadedUser = User.loadFromSharedPreferences();
+
+        if (loadedUser == null) {
+            Log.d(TAG, "no user found, trying to create random user");
+
+            User randomUserToCreate = User.generateRandomUser();
+
+            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
+                @Override
+                public void onResponse(List<Void> object) {
+                    User.createCurrentUserInstance(randomUserToCreate);
+                    Log.d(TAG, "successfully added current user instance");
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.e(TAG, "Exception while trying to create random user during startup", e);
+                }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+                }
+            }, randomUserToCreate).execute();
+        } else {
+            Log.d(TAG, "found user and added current user instance");
+            User.saveToSharedPreferences(loadedUser);
+        }
+    }
+
+
 }
