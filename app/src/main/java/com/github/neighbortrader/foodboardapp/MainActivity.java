@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         textView.setKeyListener(null);
 
         fabGetOffers.setOnClickListener(view -> {
-            Snackbar.make(view, "Create new user request", Snackbar.LENGTH_SHORT)
+            Snackbar.make(view, "Get all offers request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
             StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
