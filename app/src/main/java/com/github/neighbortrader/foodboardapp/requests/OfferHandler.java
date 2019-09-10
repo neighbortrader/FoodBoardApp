@@ -68,7 +68,7 @@ public class OfferHandler extends AsyncRequest<Offer> {
                     try {
                         JWT jwtToken = user.getJwtToken();
 
-                        if (jwtToken.isExpired(10)) {
+                        if (jwtToken.isExpired(0)) {
                             Log.w(TAG, "jwtToken is expired, trying to fetch a new one");
 
                             jwtToken = UserHandler.getJWTRequest();
