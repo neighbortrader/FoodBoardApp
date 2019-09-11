@@ -88,7 +88,7 @@ public class User implements ToNameValueMap {
         if (user != null) {
             Gson gson = new Gson();
             // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits
-            //String userToSaveAsJsonString = gson.toJson(user);
+            String userToSaveAsJsonString = null; //gson.toJson(user);
 
             SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
