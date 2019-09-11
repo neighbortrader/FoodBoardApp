@@ -22,6 +22,7 @@ public class User implements ToNameValueMap {
 
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
 
+    private static boolean currentSessionHasUser = false;
     private static User userInstance;
 
     @Getter
@@ -32,14 +33,10 @@ public class User implements ToNameValueMap {
     private String password;
     @Getter
     @Setter
-    private String userId;
-    @Getter
-    @Setter
     private String email;
     @Getter
     @Setter
     private Address address;
-    @Getter
     @Setter
     private ArrayList<Offer> offerList;
 
@@ -48,9 +45,9 @@ public class User implements ToNameValueMap {
     private JWT jwtToken;
 
     public User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
+        offerList = new ArrayList<>();
         this.username = username;
         this.password = password;
-        this.userId = userId;
         this.email = email;
         this.address = address;
         this.offerList = offerList;
@@ -59,6 +56,12 @@ public class User implements ToNameValueMap {
 
     public static void createCurrentUserInstance(User userInstance) {
         User.userInstance = userInstance;
+
+        if (userInstance == null) {
+            currentSessionHasUser = false;
+        } else {
+            currentSessionHasUser = true;
+        }
     }
 
     public static User getCurrentUserInstance() {
@@ -80,7 +83,8 @@ public class User implements ToNameValueMap {
 
         if (user != null) {
             Gson gson = new Gson();
-            String userToSaveAsJsonString = gson.toJson(user);
+            // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits #23
+            String userToSaveAsJsonString = null; //gson.toJson(user);
 
             SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -101,6 +105,10 @@ public class User implements ToNameValueMap {
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
         return user;
+    }
+
+    public boolean addOffer(Offer offerToAd) {
+        return this.offerList.add(offerToAd);
     }
 
     public void deleteToken() {

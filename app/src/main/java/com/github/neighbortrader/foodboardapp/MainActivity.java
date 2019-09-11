@@ -1,6 +1,7 @@
 package com.github.neighbortrader.foodboardapp;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
@@ -26,8 +27,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fabGetOffers = findViewById(R.id.fab_GET_ALL_OFFERS);
+        FloatingActionButton fabGetOffers = findViewById(R.id.fab_POST_NEW_OFFER);
+        FloatingActionButton fabPostOffers = findViewById(R.id.fab_GET_ALL_OFFERS);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -61,23 +61,69 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textView2);
         textView.setKeyListener(null);
+        textView.setMovementMethod(new ScrollingMovementMethod());
+
+        fabPostOffers.setOnClickListener(view -> {
+            Snackbar.make(view, "Create new random offer", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+
+            textView.scrollTo(0, 0);
+
+            StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
+
+            OfferHandler.builder(RequestTyps.POST_NEW_OFFER, getApplicationContext(), new OnEventListener<OfferHandler>() {
+                @Override
+                public void onResponse(OfferHandler offerHandler) {
+
+                    Offer offer = offerHandler.getOfferToPost();
+
+                    editTextWithAllReceivedOffers.append("Successfully added Offer\n\n");
+
+                    editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
+                            .append("Preis: " + offer.getPrice().getFormattedPrice())
+                            .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
+                            .append("\nAblaufdatum: " + offer.getExpireDate())
+                            .append("\nKaufdatum: " + offer.getPurchaseDate()).append("\n\n");
+
+
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    editTextWithAllReceivedOffers.append(e.getMessage());
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+
+                @Override
+                public void onProgress(String progressUpdate) {
+                    editTextWithAllReceivedOffers.append(progressUpdate + "\n\n");
+                    textView.setText(editTextWithAllReceivedOffers.toString());
+                }
+            }, Offer.createRandomOffer()).execute();
+        });
 
         fabGetOffers.setOnClickListener(view -> {
             Snackbar.make(view, "Get all offers request", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
 
+            textView.scrollTo(0, 0);
+
             StringBuffer editTextWithAllReceivedOffers = new StringBuffer();
 
-
-            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<Offer>() {
+            OfferHandler.builder(RequestTyps.GET_ALL_OFFERS, getApplicationContext(), new OnEventListener<OfferHandler>() {
                 @Override
-                public void onResponse(List<Offer> receivedOffers) {
-                    for (Offer offer : receivedOffers) {
-                        editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
-                                .append("Preis: " + offer.getPrice().getFormattedPrice())
-                                .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
-                                .append("\nAblaufdatum: " + offer.getExpireDate())
-                                .append("\nKaufdatum: " + offer.getPurchaseDate());
+                public void onResponse(OfferHandler offerHandler) {
+                    if (!offerHandler.getReceivedOffers().isEmpty()) {
+                        for (Offer offer : offerHandler.getReceivedOffers()) {
+                            editTextWithAllReceivedOffers.append("Beschreibung: " + offer.getDescription()).append("\n")
+                                    .append("Preis: " + offer.getPrice().getFormattedPrice())
+                                    .append("\nKategorie: " + offer.getGroceryCategory().getGroceryName())
+                                    .append("\nAblaufdatum: " + offer.getExpireDate())
+                                    .append("\nKaufdatum: " + offer.getPurchaseDate()).append("\n\n");
+                        }
+                    } else {
+                        editTextWithAllReceivedOffers.append("No offers are online\n\n");
                     }
 
                     textView.setText(editTextWithAllReceivedOffers.toString());
@@ -154,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniAppDataAndUser() {
-        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<Void>() {
+        GroceryCategoryHandler.builder(RequestTyps.GET_ALL_CATEGORIES, getApplicationContext(), new OnEventListener<GroceryCategoryHandler>() {
             @Override
-            public void onResponse(List<Void> receivedCategory) {
+            public void onResponse(GroceryCategoryHandler groceryCategoryHandler) {
                 Toast toast = Toast.makeText(getApplicationContext(), String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
                 toast.show();
             }
@@ -175,15 +221,19 @@ public class MainActivity extends AppCompatActivity {
         User loadedUser = User.loadFromSharedPreferences();
 
         if (loadedUser == null) {
-            Log.d(TAG, "no user found, trying to create random user");
+            Log.d(TAG, "no user found, trying to register a random user");
+            Toast toast = Toast.makeText(getApplicationContext(), String.format("no user found, trying to register a random user"), Toast.LENGTH_LONG);
+            toast.show();
 
             User randomUserToCreate = User.generateRandomUser();
 
-            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<Void>() {
+            UserHandler.builder(RequestTyps.POST_NEW_USER, getApplicationContext(), new OnEventListener<UserHandler>() {
                 @Override
-                public void onResponse(List<Void> object) {
+                public void onResponse(UserHandler userHandler) {
                     User.createCurrentUserInstance(randomUserToCreate);
-                    Log.d(TAG, "successfully added current user instance");
+                    Toast toast = Toast.makeText(getApplicationContext(), String.format("successfully registered user an added to current user instance"), Toast.LENGTH_LONG);
+                    toast.show();
+                    Log.d(TAG, "successfully registered user an added to current user instance");
                 }
 
                 @Override
@@ -196,8 +246,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, randomUserToCreate).execute();
         } else {
-            Log.d(TAG, "found user and added current user instance");
-            User.saveToSharedPreferences(loadedUser);
+            Log.d(TAG, "found user and added to current user instance");
+            Toast toast = Toast.makeText(getApplicationContext(), String.format("found user and added to current user instance"), Toast.LENGTH_LONG);
+            toast.show();
+            User.createCurrentUserInstance(loadedUser);
         }
     }
 
