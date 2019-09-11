@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class UserHandler extends AsyncRequest<User> {
+public class UserHandler extends AsyncRequest<UserHandler> {
     public static String TAG = UserHandler.class.getSimpleName();
 
     @Getter
@@ -94,7 +94,7 @@ public class UserHandler extends AsyncRequest<User> {
     }
 
     @Override
-    protected List<User> doInBackground(Void... params) {
+    protected UserHandler doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
         switch (requestTyps) {
             case GET_JWT_TOKEN:

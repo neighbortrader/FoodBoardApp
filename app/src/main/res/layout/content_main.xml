@@ -23,8 +23,9 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="410dp"
-        android:layout_height="671dp"
+        android:layout_width="459dp"
+        android:layout_height="799dp"
+        android:scrollbars="vertical"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
         app:layout_constraintStart_toStartOf="parent"

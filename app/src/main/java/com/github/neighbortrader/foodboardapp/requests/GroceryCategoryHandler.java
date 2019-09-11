@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
+public class GroceryCategoryHandler extends AsyncRequest<GroceryCategoryHandler> {
     public static String TAG = GroceryCategoryHandler.class.getSimpleName();
 
     @Getter
@@ -45,7 +45,7 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
     }
 
     @Override
-    protected List<Grocery> doInBackground(Void... params) {
+    protected GroceryCategoryHandler doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
 
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
@@ -81,7 +81,7 @@ public class GroceryCategoryHandler extends AsyncRequest<Grocery> {
 
             Grocery.updateCurrentGroceries(receivedCategories);
 
-            return receivedCategories;
+            return this;
         } catch (Exception e) {
             exception = e;
             Log.e(TAG, "Exception while waiting for Result", e);
