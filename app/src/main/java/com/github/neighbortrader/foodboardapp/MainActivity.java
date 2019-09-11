@@ -222,6 +222,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (loadedUser == null) {
             Log.d(TAG, "no user found, trying to register a random user");
+            Toast toast = Toast.makeText(getApplicationContext(), String.format("no user found, trying to register a random user"), Toast.LENGTH_LONG);
+            toast.show();
 
             User randomUserToCreate = User.generateRandomUser();
 
@@ -229,7 +231,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(UserHandler userHandler) {
                     User.createCurrentUserInstance(randomUserToCreate);
-                    Log.d(TAG, "successfully added current user instance");
+                    Toast toast = Toast.makeText(getApplicationContext(), String.format("successfully registered user an added to current user instance"), Toast.LENGTH_LONG);
+                    toast.show();
+                    Log.d(TAG, "successfully registered user an added to current user instance");
                 }
 
                 @Override
@@ -242,7 +246,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, randomUserToCreate).execute();
         } else {
-            Log.d(TAG, "found user and added current user instance");
+            Log.d(TAG, "found user and added to current user instance");
+            Toast toast = Toast.makeText(getApplicationContext(), String.format("found user and added to current user instance"), Toast.LENGTH_LONG);
+            toast.show();
             User.createCurrentUserInstance(loadedUser);
         }
     }

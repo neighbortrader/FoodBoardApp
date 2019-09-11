@@ -22,6 +22,7 @@ public class User implements ToNameValueMap {
 
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
 
+    private static boolean currentSessionHasUser = false;
     private static User userInstance;
 
     @Getter
@@ -59,6 +60,12 @@ public class User implements ToNameValueMap {
 
     public static void createCurrentUserInstance(User userInstance) {
         User.userInstance = userInstance;
+
+        if (userInstance == null) {
+            currentSessionHasUser = false;
+        } else {
+            currentSessionHasUser = true;
+        }
     }
 
     public static User getCurrentUserInstance() {
@@ -103,7 +110,7 @@ public class User implements ToNameValueMap {
         return user;
     }
 
-    public boolean addOffer(Offer offerToAd){
+    public boolean addOffer(Offer offerToAd) {
         return this.offerList.add(offerToAd);
     }
 

@@ -14,6 +14,8 @@ import lombok.Getter;
 public class Grocery implements ToNameValueMap {
     public static String TAG = Grocery.class.getSimpleName();
 
+    @Getter
+    private static boolean currentSessionHasGroceries = false;
     private static ArrayList<Grocery> currentGroceries = new ArrayList<>();
 
     @Getter
@@ -29,6 +31,12 @@ public class Grocery implements ToNameValueMap {
     public static void updateCurrentGroceries(Grocery grocery) {
         if (!currentGroceries.contains(grocery))
             Grocery.currentGroceries.add(grocery);
+
+        if (currentGroceries.isEmpty()) {
+            currentSessionHasGroceries = false;
+        } else {
+            currentSessionHasGroceries = true;
+        }
     }
 
     public static ArrayList<Grocery> getCurrentGroceries() {
