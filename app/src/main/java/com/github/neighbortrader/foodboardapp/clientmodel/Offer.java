@@ -43,8 +43,12 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime expireDate;
 
-    public Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
-        this.user = user;
+    @Getter
+    @Setter
+    private LocalDateTime creationDate;
+
+    public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate, LocalDateTime creationDate) {
+
         this.price = price;
 
         if (groceryCategory == null)
@@ -54,6 +58,7 @@ public class Offer implements ToNameValueMap {
         this.description = description;
         this.purchaseDate = purchaseDate;
         this.expireDate = expireDate;
+        this.creationDate = null;       // creationDate gets set during request
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -115,6 +120,7 @@ public class Offer implements ToNameValueMap {
                 ", description='" + description + '\'' +
                 ", purchaseDate=" + purchaseDate +
                 ", expireDate=" + expireDate +
+                ", creationDate=" + creationDate +
                 '}';
     }
 
@@ -126,6 +132,7 @@ public class Offer implements ToNameValueMap {
         nameValueMap.put("price", Double.toString(price.getValue()));
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
+        nameValueMap.put("CreationDate", creationDate.toString());
         nameValueMap.put("grocerieId", Integer.toString(groceryCategory.getGroceryId()));
 
         return nameValueMap;
