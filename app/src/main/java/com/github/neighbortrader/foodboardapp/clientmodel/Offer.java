@@ -42,7 +42,11 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime expireDate;
 
-    public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
+    @Getter
+    @Setter
+    private LocalDateTime creationDate;
+
+    public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate, LocalDateTime creationDate) {
         this.price = price;
 
         if (groceryCategory == null)
@@ -52,6 +56,7 @@ public class Offer implements ToNameValueMap {
         this.description = description;
         this.purchaseDate = purchaseDate;
         this.expireDate = expireDate;
+        this.creationDate = null;       // creationDate gets set during request
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -66,7 +71,7 @@ public class Offer implements ToNameValueMap {
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
-            return new Offer(price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
+            return new Offer(price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate, LocalDateTime.now());
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
@@ -82,11 +87,13 @@ public class Offer implements ToNameValueMap {
     @Override
     public String toString() {
         return "Offer{" +
-                "price=" + price +
-                ", groceryCategory='" + groceryCategory + '\'' +
+                "user=" + user +
+                ", price=" + price +
+                ", groceryCategory=" + groceryCategory +
                 ", description='" + description + '\'' +
                 ", purchaseDate=" + purchaseDate +
                 ", expireDate=" + expireDate +
+                ", creationDate=" + creationDate +
                 '}';
     }
 
@@ -100,6 +107,7 @@ public class Offer implements ToNameValueMap {
 
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
+        nameValueMap.put("CreationDate", creationDate.toString());
 
         return nameValueMap;
     }

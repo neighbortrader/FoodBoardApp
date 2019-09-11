@@ -10,6 +10,7 @@ import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,8 @@ public class OfferHandler extends AsyncRequest<Offer> {
                                 Log.d(TAG, "Successfully received new Token");
                             }
                         }
+
+                        offerToCreate.setCreationDate(LocalDateTime.now());
 
                         OkHttpClient client = new OkHttpClient();
 
