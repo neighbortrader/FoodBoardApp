@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/startRow"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="45dp">
+
+        <Button
+            android:id="@+id/Karte"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="0dp"
+            android:text="@string/map" />
+
+        <TextView
+            android:id="@+id/foodboardMain"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+
+            android:foregroundGravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/text" />
+
+        <Button
+            android:id="@+id/Filter"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:text="@string/filter" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/midRow"
+        app:layout_constraintTop_toBottomOf="@id/startRow"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_width="417dp"
+        android:layout_height="515dp"
+        android:orientation="horizontal">
+
+
+        <ListView
+            android:id="@+id/offers"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/endRow"
+        app:layout_constrainedHeight="false"
+        app:layout_constrainedWidth="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="fill_horizontal"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/generateOffer"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="generate Offer" />
+
+</LinearLayout>>
