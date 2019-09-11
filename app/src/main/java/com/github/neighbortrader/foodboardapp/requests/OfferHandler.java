@@ -94,8 +94,6 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                 if (jwtToken.isExpired(0)) {
                     Log.w(TAG, "jwtToken is expired, trying to fetch a new one");
 
-                    OkHttpClient client = new OkHttpClient();
-
                     jwtToken = UserHandler.getJWTRequest(user);
 
                     if (jwtToken == null) {
@@ -105,8 +103,8 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                         user.setJwtToken(jwtToken);
                     }
                 }
-              
-                offerToCreate.setCreationDate(LocalDateTime.now());
+
+                offerToPost.setCreationDate(LocalDateTime.now());
 
                 OkHttpClient client = new OkHttpClient();
 

@@ -47,8 +47,8 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime creationDate;
 
-    public Offer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate, LocalDateTime creationDate) {
-
+    private Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDatea) {
+        this.user = user;
         this.price = price;
 
         if (groceryCategory == null)
