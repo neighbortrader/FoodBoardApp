@@ -77,7 +77,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
         return this;
     }
 
-    public void postOfferRequest(Offer offerToPost){
+    public void postOfferRequest(Offer offerToPost) {
         User user = User.getCurrentUserInstance();
 
         if (offerToPost != null && user != null) {
@@ -119,7 +119,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                 Response response = client.newCall(request).execute();
                 Log.d(TAG, "Response: " + response);
 
-                setLastHttpStatuscode(response.code() );
+                setLastHttpStatuscode(response.code());
 
                 if (getLastHttpStatuscode() != 200) {
                     throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
@@ -135,7 +135,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
         }
     }
 
-    public ArrayList<Offer> getOffersRequest(){
+    public ArrayList<Offer> getOffersRequest() {
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()

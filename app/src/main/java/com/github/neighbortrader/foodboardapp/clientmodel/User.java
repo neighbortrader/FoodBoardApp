@@ -33,9 +33,6 @@ public class User implements ToNameValueMap {
     private String password;
     @Getter
     @Setter
-    private String userId;
-    @Getter
-    @Setter
     private String email;
     @Getter
     @Setter
@@ -51,7 +48,6 @@ public class User implements ToNameValueMap {
         offerList = new ArrayList<>();
         this.username = username;
         this.password = password;
-        this.userId = userId;
         this.email = email;
         this.address = address;
         this.offerList = offerList;
@@ -87,7 +83,7 @@ public class User implements ToNameValueMap {
 
         if (user != null) {
             Gson gson = new Gson();
-            // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits
+            // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits #23
             String userToSaveAsJsonString = null; //gson.toJson(user);
 
             SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
