@@ -17,16 +17,15 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserReques
 public class AllOffersModel extends ViewModel {
     public String TAG = AllOffersModel.class.getSimpleName();
 
-    AllOffersController allOffersController;
-
-
+    private AllOffersController allOffersController;
     private Context context = ContextHandler.getAppContext();
 
     public AllOffersModel(AllOffersController allOffersController) {
         this.allOffersController = allOffersController;
     }
 
-    public void iniAppDataAndUser() {
+    // TODO: doesn't really belong here
+    public void initialize() {
         updateGroceryCategories();
         loadUserAndUserData();
     }
@@ -110,6 +109,4 @@ public class AllOffersModel extends ViewModel {
             User.createCurrentUserInstance(loadedUser);
         }
     }
-
-
 }

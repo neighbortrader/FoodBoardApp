@@ -8,11 +8,8 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferReque
 
 public class AllOffersController {
 
-    public static String TAG = AllOffersController.class.getSimpleName();
-
     AllOffersModel allOffersModel;
     AllOffersActivity allOffersActivity;
-
     Context context;
 
     private boolean waitingForResponse = false;
@@ -22,7 +19,7 @@ public class AllOffersController {
         this.allOffersActivity = allOffersActivity;
         context = ContextHandler.getAppContext();
 
-        allOffersModel.iniAppDataAndUser();
+        allOffersModel.initialize();
     }
 
     public void invokeOfferUpdate() {
@@ -57,12 +54,7 @@ public class AllOffersController {
         toast.show();
     }
 
-
     public void destroy() {
         allOffersModel.destroy();
-    }
-
-    public AllOffersModel getAllOffersModel() {
-        return allOffersModel;
     }
 }
