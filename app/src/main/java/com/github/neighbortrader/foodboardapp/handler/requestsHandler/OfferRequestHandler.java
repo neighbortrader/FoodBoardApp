@@ -6,6 +6,7 @@ import android.util.Log;
 import com.auth0.android.jwt.JWT;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,7 +83,7 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     }
 
     public boolean postOfferRequest(Offer offerToPost) {
-        User user = User.getCurrentUserInstance();
+        User user = UserHandler.getCurrentUserInstance();
 
         if (offerToPost != null && user != null) {
             try {

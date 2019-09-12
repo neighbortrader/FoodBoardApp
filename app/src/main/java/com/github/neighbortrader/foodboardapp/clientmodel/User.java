@@ -20,11 +20,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class User implements ToNameValueMap {
     public static final String TAG = User.class.getSimpleName();
 
-    private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
-
-    private static boolean currentSessionHasUser = false;
-    private static User userInstance;
-
     @Getter
     @Setter
     private String username;
@@ -50,57 +45,8 @@ public class User implements ToNameValueMap {
         this.jwtToken = jwtToken;
     }
 
-    public static void createCurrentUserInstance(User userInstance) {
-        User.userInstance = userInstance;
-
-        currentSessionHasUser = userInstance != null;
-    }
-
-    public static User getCurrentUserInstance() {
-        return User.userInstance;
-    }
-
-    public static User generateRandomUser() {
-        String username = UUID.randomUUID().toString();
-        String password = "adm!n9Asswor!d";
-        String userId = null;
-        String email = "test@testemail.com";
-        Address address = new Address("Teststareße", "12a", "10315", "Berlin");
-
-        return new User(username, password, userId, email, address, null);
-    }
-
-    public static void saveToSharedPreferences(User user) {
-        Log.d(TAG, "saveToSharedPreferences()");
-
-        if (user != null) {
-            Gson gson = GsonHandler.getGsonInstance();
-            // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits #23
-            String userToSaveAsJsonString = null; //gson.toJson(user);
-
-            SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-            editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
-            editor.commit();
-        }
-    }
-
-    public static User loadFromSharedPreferences() {
-        Log.d(TAG, "loadFromSharedPreferences()");
-
-        SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
-
-        String userToSaveAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
-
-        Gson gson = GsonHandler.getGsonInstance();
-        User user = gson.fromJson(userToSaveAsJsonString, User.class);
-
-        return user;
-    }
-
-    public void deleteToken() {
-        this.setJwtToken(null);
+    public static User userBuilder(String username, String password, String userId, String email, Address address, JWT jwtToken){
+        return new User(username, password, userId, email, address, jwtToken);
     }
 
     @Override

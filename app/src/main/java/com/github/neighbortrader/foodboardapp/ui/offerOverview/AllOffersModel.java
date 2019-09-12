@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.lifecycle.ViewModel;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
@@ -31,9 +32,11 @@ public class AllOffersModel extends ViewModel {
     }
 
     public void destroy() {
-        if (User.getCurrentUserInstance() != null) {
-            User.getCurrentUserInstance().deleteToken();
-            User.saveToSharedPreferences(User.getCurrentUserInstance());
+        User currentUser = UserHandler.getCurrentUserInstance();
+
+        if (currentUser != null) {
+            UserHandler.deleteToken(currentUser);
+            UserHandler.saveToSharedPreferences(currentUser);
         }
     }
 
@@ -75,19 +78,19 @@ public class AllOffersModel extends ViewModel {
     }
 
     private void loadUserAndUserData() {
-        User loadedUser = User.loadFromSharedPreferences();
+        User loadedUser = UserHandler.loadFromSharedPreferences();
 
         if (loadedUser == null) {
             Log.d(TAG, "no user found, trying to register a random user");
             Toast toast = Toast.makeText(context, String.format("no user found, trying to register a random user"), Toast.LENGTH_LONG);
             toast.show();
 
-            User randomUserToCreate = User.generateRandomUser();
+            User randomUserToCreate = UserHandler.generateRandomUser();
 
             UserRequestHandler.builder(RequestTyps.POST_NEW_USER, context, new OnRequestEventListener<UserRequestHandler>() {
                 @Override
                 public void onResponse(UserRequestHandler userRequestController) {
-                    User.createCurrentUserInstance(randomUserToCreate);
+                    UserHandler.setCurrentUserInstance(randomUserToCreate);
                     Toast toast = Toast.makeText(context, String.format("successfully registered user an added to current user instance"), Toast.LENGTH_LONG);
                     toast.show();
                     Log.d(TAG, "successfully registered user an added to current user instance");
@@ -106,7 +109,7 @@ public class AllOffersModel extends ViewModel {
             Log.d(TAG, "found user and added to current user instance");
             Toast toast = Toast.makeText(context, String.format("found user and added to current user instance"), Toast.LENGTH_LONG);
             toast.show();
-            User.createCurrentUserInstance(loadedUser);
+            UserHandler.setCurrentUserInstance(loadedUser);
         }
     }
 }
