@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.Model.clientmodel;
+package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import java.util.Hashtable;
 import java.util.Map;

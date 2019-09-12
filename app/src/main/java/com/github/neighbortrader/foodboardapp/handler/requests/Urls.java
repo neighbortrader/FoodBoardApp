@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.controller.requests;
+package com.github.neighbortrader.foodboardapp.handler.requests;
 
 import android.app.Application;
 import android.content.Context;

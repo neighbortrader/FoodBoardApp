@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.Model.clientmodel;
+package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import android.content.SharedPreferences;
 import android.util.Log;

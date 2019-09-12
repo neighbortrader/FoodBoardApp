@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.view;
+package com.github.neighbortrader.foodboardapp.ui.view;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -6,10 +6,10 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.Model.viewmodel.AllOffersModel;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.ui.model.AllOffersModel;
 import com.github.neighbortrader.foodboardapp.R;
-import com.github.neighbortrader.foodboardapp.controller.view.AllOffersController;
+import com.github.neighbortrader.foodboardapp.ui.controller.AllOffersController;
 
 import io.fabric.sdk.android.Fabric;
 

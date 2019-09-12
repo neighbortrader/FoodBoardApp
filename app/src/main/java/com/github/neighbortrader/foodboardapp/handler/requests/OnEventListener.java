@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.controller.requests;
+package com.github.neighbortrader.foodboardapp.handler.requests;
 
 public interface OnEventListener<T> {
     /**

@@ -1,10 +1,10 @@
-package com.github.neighbortrader.foodboardapp.controller.requests;
+package com.github.neighbortrader.foodboardapp.handler.requests;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.Grocery;
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,22 +16,22 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GroceryRequestController extends AsyncRequestController<GroceryRequestController> {
-    public static String TAG = GroceryRequestController.class.getSimpleName();
+public class GroceryRequestHandler extends AsyncRequestHandler<GroceryRequestHandler> {
+    public static String TAG = GroceryRequestHandler.class.getSimpleName();
 
     @Getter
     private static ArrayList<String> groceriesCategories;
 
-    protected GroceryRequestController(Context context, OnEventListener callback) {
+    protected GroceryRequestHandler(Context context, OnEventListener callback) {
         super(context, callback);
     }
 
-    public static GroceryRequestController builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
-        GroceryRequestController categoryHandler = null;
+    public static GroceryRequestHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
+        GroceryRequestHandler categoryHandler = null;
 
         switch (requestTyps) {
             case GET_ALL_CATEGORIES:
-                categoryHandler = new GroceryRequestController(context, callback);
+                categoryHandler = new GroceryRequestHandler(context, callback);
                 categoryHandler.setRequestTyps(RequestTyps.POST_NEW_OFFER);
                 categoryHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_CATEGORIES);
                 break;
@@ -44,7 +44,7 @@ public class GroceryRequestController extends AsyncRequestController<GroceryRequ
     }
 
     @Override
-    protected GroceryRequestController doInBackground(Void... params) {
+    protected GroceryRequestHandler doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
 
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();

@@ -1,11 +1,11 @@
-package com.github.neighbortrader.foodboardapp.controller.requests;
+package com.github.neighbortrader.foodboardapp.handler.requests;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,9 +19,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class OfferRequestController extends AsyncRequestController<OfferRequestController> {
+public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler> {
 
-    public final static String TAG = OfferRequestController.class.getSimpleName();
+    public final static String TAG = OfferRequestHandler.class.getSimpleName();
 
     @Getter
     private Offer offerToPost;
@@ -30,23 +30,23 @@ public class OfferRequestController extends AsyncRequestController<OfferRequestC
     @Setter
     private ArrayList<Offer> receivedOffers;
 
-    protected OfferRequestController(Context context, OnEventListener callback) {
+    protected OfferRequestHandler(Context context, OnEventListener callback) {
         super(context, callback);
     }
 
-    public static OfferRequestController builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
-        OfferRequestController offerRequestController = null;
+    public static OfferRequestHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
+        OfferRequestHandler offerRequestController = null;
 
         switch (requestTyps) {
             case POST_NEW_OFFER:
-                offerRequestController = new OfferRequestController(context, callback);
+                offerRequestController = new OfferRequestHandler(context, callback);
                 offerRequestController.setRequestTyps(RequestTyps.POST_NEW_OFFER);
                 offerRequestController.setOfferToPost(offers[0]);
                 offerRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_OFFER);
                 break;
 
             case GET_ALL_OFFERS:
-                offerRequestController = new OfferRequestController(context, callback);
+                offerRequestController = new OfferRequestHandler(context, callback);
                 offerRequestController.setRequestTyps(RequestTyps.GET_ALL_OFFERS);
                 offerRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_OFFERS);
                 break;
@@ -63,7 +63,7 @@ public class OfferRequestController extends AsyncRequestController<OfferRequestC
     }
 
     @Override
-    protected OfferRequestController doInBackground(Void... params) {
+    protected OfferRequestHandler doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
 
         switch (requestTyps) {
@@ -87,14 +87,14 @@ public class OfferRequestController extends AsyncRequestController<OfferRequestC
 
                 if (jwtToken == null) {
                     Log.w(TAG, "no jwtToken found, trying to fetch one");
-                    jwtToken = UserRequestController.getJWTRequest(user);
+                    jwtToken = UserRequestHandler.getJWTRequest(user);
                     user.setJwtToken(jwtToken);
                 }
 
                 if (jwtToken.isExpired(0)) {
                     Log.w(TAG, "jwtToken is expired, trying to fetch a new one");
 
-                    jwtToken = UserRequestController.getJWTRequest(user);
+                    jwtToken = UserRequestHandler.getJWTRequest(user);
 
                     if (jwtToken == null) {
                         throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));

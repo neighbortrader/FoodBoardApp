@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.Model.clientmodel;
+package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import java.text.NumberFormat;
 import java.util.Currency;

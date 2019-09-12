@@ -1,10 +1,10 @@
-package com.github.neighbortrader.foodboardapp.controller.requests;
+package com.github.neighbortrader.foodboardapp.handler.requests;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class UserRequestController extends AsyncRequestController<UserRequestController> {
-    public static String TAG = UserRequestController.class.getSimpleName();
+public class UserRequestHandler extends AsyncRequestHandler<UserRequestHandler> {
+    public static String TAG = UserRequestHandler.class.getSimpleName();
 
     @Getter
     private static ArrayList<String> groceriesCategories;
@@ -28,23 +28,23 @@ public class UserRequestController extends AsyncRequestController<UserRequestCon
     @Setter
     private User userToCreate;
 
-    protected UserRequestController(Context context, OnEventListener callback, RequestTyps requestTyp) {
+    protected UserRequestHandler(Context context, OnEventListener callback, RequestTyps requestTyp) {
         super(context, callback);
         this.requestTyps = requestTyp;
     }
 
-    public static UserRequestController builder(RequestTyps requestTyps, Context context, OnEventListener callback, User... user) {
+    public static UserRequestHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, User... user) {
 
-        UserRequestController userRequestController = null;
+        UserRequestHandler userRequestController = null;
 
         switch (requestTyps) {
             case GET_JWT_TOKEN:
-                userRequestController = new UserRequestController(context, callback, RequestTyps.GET_JWT_TOKEN);
+                userRequestController = new UserRequestHandler(context, callback, RequestTyps.GET_JWT_TOKEN);
                 userRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_JWT_TOKEN);
                 break;
 
             case POST_NEW_USER:
-                userRequestController = new UserRequestController(context, callback, RequestTyps.POST_NEW_USER);
+                userRequestController = new UserRequestHandler(context, callback, RequestTyps.POST_NEW_USER);
                 userRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_USER);
                 if (user.length > 0)
                     userRequestController.setUserToCreate(user[0]);
@@ -93,7 +93,7 @@ public class UserRequestController extends AsyncRequestController<UserRequestCon
     }
 
     @Override
-    protected UserRequestController doInBackground(Void... params) {
+    protected UserRequestHandler doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
         switch (requestTyps) {
             case GET_JWT_TOKEN:

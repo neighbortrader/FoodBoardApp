@@ -1,10 +1,10 @@
-package com.github.neighbortrader.foodboardapp.controller.view;
+package com.github.neighbortrader.foodboardapp.ui.controller;
 
 import android.content.Context;
 
-import com.github.neighbortrader.foodboardapp.Model.viewmodel.AllOffersModel;
+import com.github.neighbortrader.foodboardapp.ui.model.AllOffersModel;
 import com.github.neighbortrader.foodboardapp.etc.MyApplication;
-import com.github.neighbortrader.foodboardapp.view.AllOffersActivity;
+import com.github.neighbortrader.foodboardapp.ui.view.AllOffersActivity;
 
 public class AllOffersController {
 
