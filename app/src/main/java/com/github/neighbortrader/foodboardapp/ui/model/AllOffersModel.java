@@ -13,7 +13,7 @@ import com.github.neighbortrader.foodboardapp.handler.requests.OnRequestEventLis
 import com.github.neighbortrader.foodboardapp.handler.requests.RequestTyps;
 import com.github.neighbortrader.foodboardapp.handler.requests.UserRequestHandler;
 import com.github.neighbortrader.foodboardapp.ui.controller.AllOffersController;
-import com.github.neighbortrader.foodboardapp.etc.MyApplication;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class AllOffersModel extends ViewModel {
     @Getter
     private ArrayList<Offer> currentOffers;
 
-    private Context context = MyApplication.getAppContext();
+    private Context context = ContextHandler.getAppContext();
 
     public AllOffersModel(AllOffersController allOffersController) {
         this.allOffersController = allOffersController;

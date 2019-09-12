@@ -3,11 +3,11 @@ package com.github.neighbortrader.foodboardapp.handler.requests;
 import android.app.Application;
 import android.content.Context;
 
-import com.github.neighbortrader.foodboardapp.etc.MyApplication;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.R;
 
 public class Urls extends Application {
-    private static Context context = MyApplication.getAppContext();
+    private static Context context = ContextHandler.getAppContext();
 
     public final static String BASE_URL = context.getResources().getString(R.string.BASE_URL);
     public final static String ENDPOINT_GET_ALL_OFFERS = context.getResources().getString(R.string.GET_ALL_OFFERS_URL);

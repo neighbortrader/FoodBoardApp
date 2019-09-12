@@ -3,7 +3,7 @@ package com.github.neighbortrader.foodboardapp.ui.controller;
 import android.content.Context;
 
 import com.github.neighbortrader.foodboardapp.ui.model.AllOffersModel;
-import com.github.neighbortrader.foodboardapp.etc.MyApplication;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.ui.view.AllOffersActivity;
 
 public class AllOffersController {
@@ -18,7 +18,7 @@ public class AllOffersController {
     public AllOffersController(AllOffersActivity allOffersActivity) {
         this.allOffersModel = new AllOffersModel(this);
         this.allOffersActivity = allOffersActivity;
-        context = MyApplication.getAppContext();
+        context = ContextHandler.getAppContext();
 
         allOffersModel.iniAppDataAndUser();
     }

@@ -4,7 +4,8 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.etc.MyApplication;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
+import com.github.neighbortrader.foodboardapp.handler.gsonHandler.GsonHandler;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -82,11 +83,11 @@ public class User implements ToNameValueMap {
         Log.d(TAG, "saveToSharedPreferences()");
 
         if (user != null) {
-            Gson gson = new Gson();
+            Gson gson = GsonHandler.getGsonInstance();
             // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits #23
             String userToSaveAsJsonString = null; //gson.toJson(user);
 
-            SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
+            SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
@@ -97,11 +98,11 @@ public class User implements ToNameValueMap {
     public static User loadFromSharedPreferences() {
         Log.d(TAG, "loadFromSharedPreferences()");
 
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
 
         String userToSaveAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
 
-        Gson gson = new Gson();
+        Gson gson = GsonHandler.getGsonInstance();
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
         return user;
