@@ -38,18 +38,17 @@ public class AllOffersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
+
+        Fabric.with(this, new Crashlytics());
+
         super.onCreate(savedInstanceState);
 
         allOffersModel = new AllOffersModel(this);
         allOffersController = new AllOffersController(allOffersModel,this);
 
-        Fabric.with(this, new Crashlytics());
+        allOffersController.iniAppDataAndUser();
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        allOffersController.iniAppDataAndUser();
     }
 
     @Override
@@ -92,6 +91,5 @@ public class AllOffersActivity extends AppCompatActivity {
 
     public void updateUi(){
         Log.d(TAG, "updateUi()");
-
     }
 }

@@ -44,7 +44,7 @@ public class User implements ToNameValueMap {
     @Setter
     private JWT jwtToken;
 
-    public User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
+    private User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
         offerList = new ArrayList<>();
         this.username = username;
         this.password = password;

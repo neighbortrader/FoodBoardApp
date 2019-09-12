@@ -27,12 +27,19 @@ public class AllOffersController {
         context = MyApplication.getAppContext();
     }
 
-    public void destroyAllOffers(){
-        User.getCurrentUserInstance().deleteToken();
-        User.saveToSharedPreferences(User.getCurrentUserInstance());
+    public void destroyAllOffers() {
+        if (User.getCurrentUserInstance() != null) {
+            User.getCurrentUserInstance().deleteToken();
+            User.saveToSharedPreferences(User.getCurrentUserInstance());
+        }
     }
 
     public void iniAppDataAndUser() {
+        updateGroceryCategories();
+        loadUserAndUserData();
+    }
+
+    private void updateGroceryCategories(){
         GroceryRequestController.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnEventListener<GroceryRequestController>() {
             @Override
             public void onResponse(GroceryRequestController groceryRequestController) {
@@ -50,7 +57,9 @@ public class AllOffersController {
             public void onProgress(String progressUpdate) {
             }
         }).execute();
+    }
 
+    private void loadUserAndUserData(){
         User loadedUser = User.loadFromSharedPreferences();
 
         if (loadedUser == null) {
