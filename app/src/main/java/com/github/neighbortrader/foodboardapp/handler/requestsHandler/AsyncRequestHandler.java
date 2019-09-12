@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.handler.requests;
+package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -13,7 +13,7 @@ import lombok.Setter;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public abstract class AsyncRequestHandler<T> extends AsyncTask<Void, String, T> {
+public abstract class AsyncRequestHandler <T extends AsyncRequestHandler> extends AsyncTask<Void, String, T> {
 
     public static final String TAG = AsyncRequestHandler.class.getSimpleName();
     public Exception exception;
@@ -23,7 +23,7 @@ public abstract class AsyncRequestHandler<T> extends AsyncTask<Void, String, T> 
     @Setter
     @Getter
     protected RequestTyps requestTyps;
-    private OnRequestEventListener<T> callBack;
+    private OnRequestEventListener callBack;
     private Context context;
 
     @Getter

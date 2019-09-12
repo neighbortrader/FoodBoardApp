@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.handler.requests;
+package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 
 import android.content.Context;
 import android.util.Log;
@@ -29,6 +29,9 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     @Getter
     @Setter
     private ArrayList<Offer> receivedOffers;
+
+    @Getter
+    private boolean wasSuccessfull;
 
     protected OfferRequestHandler(Context context, OnRequestEventListener callback) {
         super(context, callback);
@@ -68,17 +71,17 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
 
         switch (requestTyps) {
             case POST_NEW_OFFER:
-                postOfferRequest(offerToPost);
+                wasSuccessfull = postOfferRequest(offerToPost);
                 break;
 
             case GET_ALL_OFFERS:
-                setReceivedOffers(getOffersRequest());
+                wasSuccessfull= getOffersRequest();
                 break;
         }
         return this;
     }
 
-    public void postOfferRequest(Offer offerToPost) {
+    public boolean postOfferRequest(Offer offerToPost) {
         User user = User.getCurrentUserInstance();
 
         if (offerToPost != null && user != null) {
@@ -128,7 +131,7 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                     throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                 }
 
-                user.addOffer(offerToPost);
+                return true;
 
             } catch (Exception e) {
                 exception = e;
@@ -136,9 +139,10 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
         } else {
             exception = new NullPointerException("Could not post new offer");
         }
+        return false;
     }
 
-    public ArrayList<Offer> getOffersRequest() {
+    public boolean getOffersRequest() {
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()
@@ -170,12 +174,12 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                 receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
             }
 
-            return receivedOffers;
+            return true;
         } catch (Exception e) {
             exception = e;
             Log.e(TAG, "Exception while waiting for Result", e);
         }
 
-        return null;
+        return false;
     }
 }

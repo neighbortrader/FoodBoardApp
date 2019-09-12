@@ -38,20 +38,16 @@ public class User implements ToNameValueMap {
     @Getter
     @Setter
     private Address address;
-    @Setter
-    private ArrayList<Offer> offerList;
 
     @Getter
     @Setter
     private JWT jwtToken;
 
-    private User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
-        offerList = new ArrayList<>();
+    private User(String username, String password, String userId, String email, Address address, JWT jwtToken) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.address = address;
-        this.offerList = offerList;
         this.jwtToken = jwtToken;
     }
 
@@ -76,7 +72,7 @@ public class User implements ToNameValueMap {
         String email = "test@testemail.com";
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
-        return new User(username, password, userId, email, address, null, null);
+        return new User(username, password, userId, email, address, null);
     }
 
     public static void saveToSharedPreferences(User user) {
@@ -106,10 +102,6 @@ public class User implements ToNameValueMap {
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
         return user;
-    }
-
-    public boolean addOffer(Offer offerToAd) {
-        return this.offerList.add(offerToAd);
     }
 
     public void deleteToken() {

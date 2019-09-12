@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.handler.requests;
+package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 
 public interface OnRequestEventListener<T> {
     /**
@@ -6,7 +6,7 @@ public interface OnRequestEventListener<T> {
      *
      * @param object
      */
-    void onResponse(T object);
+    void  onResponse(T object);
 
     void onFailure(Exception e);
 

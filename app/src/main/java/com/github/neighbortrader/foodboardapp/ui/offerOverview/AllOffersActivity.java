@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.ui.view;
+package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.ui.model.AllOffersModel;
 import com.github.neighbortrader.foodboardapp.R;
-import com.github.neighbortrader.foodboardapp.ui.controller.AllOffersController;
+
+import java.util.ArrayList;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -17,8 +17,8 @@ public class AllOffersActivity extends AppCompatActivity {
 
     public static String TAG = AllOffersActivity.class.getSimpleName();
 
-    AllOffersController allOffersController;
-    AllOffersModel allOffersModel;
+    AllOffersController controller;
+    AllOffersModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,12 @@ public class AllOffersActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        allOffersController = new AllOffersController(this);
-        allOffersModel = allOffersController.getAllOffersModel();
+        controller = new AllOffersController(this);
+        model = controller.getAllOffersModel();
 
         setContentView(R.layout.activity_main);
+
+        controller.invokeOfferUpdate();
     }
 
     @Override
@@ -69,14 +71,15 @@ public class AllOffersActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
 
-        allOffersController.destroy();
+        controller.destroy();
     }
 
-    public void updateUi(){
+    public void updateUi(ArrayList<Offer> offerArrayList){
         Log.d(TAG, "updateUi()");
 
-        for (Offer offer : allOffersModel.getCurrentOffers()){
+        for (Offer offer : offerArrayList){
 
         }
     }
+
 }
