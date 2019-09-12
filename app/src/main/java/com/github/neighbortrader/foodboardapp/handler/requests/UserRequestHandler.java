@@ -28,12 +28,12 @@ public class UserRequestHandler extends AsyncRequestHandler<UserRequestHandler> 
     @Setter
     private User userToCreate;
 
-    protected UserRequestHandler(Context context, OnEventListener callback, RequestTyps requestTyp) {
+    protected UserRequestHandler(Context context, OnRequestEventListener callback, RequestTyps requestTyp) {
         super(context, callback);
         this.requestTyps = requestTyp;
     }
 
-    public static UserRequestHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, User... user) {
+    public static UserRequestHandler builder(RequestTyps requestTyps, Context context, OnRequestEventListener callback, User... user) {
 
         UserRequestHandler userRequestController = null;
 

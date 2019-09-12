@@ -30,11 +30,11 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     @Setter
     private ArrayList<Offer> receivedOffers;
 
-    protected OfferRequestHandler(Context context, OnEventListener callback) {
+    protected OfferRequestHandler(Context context, OnRequestEventListener callback) {
         super(context, callback);
     }
 
-    public static OfferRequestHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
+    public static OfferRequestHandler builder(RequestTyps requestTyps, Context context, OnRequestEventListener callback, Offer... offers) {
         OfferRequestHandler offerRequestController = null;
 
         switch (requestTyps) {

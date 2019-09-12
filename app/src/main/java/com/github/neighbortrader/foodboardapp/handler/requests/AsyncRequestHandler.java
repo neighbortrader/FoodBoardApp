@@ -23,14 +23,14 @@ public abstract class AsyncRequestHandler<T> extends AsyncTask<Void, String, T> 
     @Setter
     @Getter
     protected RequestTyps requestTyps;
-    private OnEventListener<T> callBack;
+    private OnRequestEventListener<T> callBack;
     private Context context;
 
     @Getter
     @Setter
     protected int lastHttpStatuscode;
 
-    protected AsyncRequestHandler(Context context, OnEventListener callback) {
+    protected AsyncRequestHandler(Context context, OnRequestEventListener callback) {
         callBack = callback;
         this.context = context;
     }

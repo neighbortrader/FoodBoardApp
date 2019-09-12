@@ -22,11 +22,11 @@ public class GroceryRequestHandler extends AsyncRequestHandler<GroceryRequestHan
     @Getter
     private static ArrayList<String> groceriesCategories;
 
-    protected GroceryRequestHandler(Context context, OnEventListener callback) {
+    protected GroceryRequestHandler(Context context, OnRequestEventListener callback) {
         super(context, callback);
     }
 
-    public static GroceryRequestHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
+    public static GroceryRequestHandler builder(RequestTyps requestTyps, Context context, OnRequestEventListener callback, Offer... offers) {
         GroceryRequestHandler categoryHandler = null;
 
         switch (requestTyps) {

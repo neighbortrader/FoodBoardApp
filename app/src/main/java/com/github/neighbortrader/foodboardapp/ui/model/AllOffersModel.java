@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.requests.GroceryRequestHandler;
-import com.github.neighbortrader.foodboardapp.handler.requests.OnEventListener;
+import com.github.neighbortrader.foodboardapp.handler.requests.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requests.RequestTyps;
 import com.github.neighbortrader.foodboardapp.handler.requests.UserRequestHandler;
 import com.github.neighbortrader.foodboardapp.ui.controller.AllOffersController;
@@ -57,7 +57,7 @@ public class AllOffersModel extends ViewModel {
     }
 
     private void updateGroceryCategories(){
-        GroceryRequestHandler.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnEventListener<GroceryRequestHandler>() {
+        GroceryRequestHandler.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnRequestEventListener<GroceryRequestHandler>() {
             @Override
             public void onResponse(GroceryRequestHandler groceryRequestController) {
                 Toast toast = Toast.makeText(context, String.format("Successfully update grocery category"), Toast.LENGTH_LONG);
@@ -86,7 +86,7 @@ public class AllOffersModel extends ViewModel {
 
             User randomUserToCreate = User.generateRandomUser();
 
-            UserRequestHandler.builder(RequestTyps.POST_NEW_USER, context, new OnEventListener<UserRequestHandler>() {
+            UserRequestHandler.builder(RequestTyps.POST_NEW_USER, context, new OnRequestEventListener<UserRequestHandler>() {
                 @Override
                 public void onResponse(UserRequestHandler userRequestController) {
                     User.createCurrentUserInstance(randomUserToCreate);
