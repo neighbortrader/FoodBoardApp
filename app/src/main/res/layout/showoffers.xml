@@ -42,7 +42,7 @@
     <LinearLayout
         android:id="@+id/midRow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="610dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/startRow"
         tools:layout_editor_absoluteX="0dp">
@@ -53,14 +53,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/generateNewOffer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                tools:srcCompat="@tools:sample/avatars" />
         </ListView>
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/generateNewOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </LinearLayout>>
