@@ -1,30 +1,15 @@
 package com.github.neighbortrader.foodboardapp.view;
 
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.Menu;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.neighbortrader.foodboardapp.Model.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.Model.viewmodel.AllOffersModel;
 import com.github.neighbortrader.foodboardapp.R;
-import com.github.neighbortrader.foodboardapp.Model.clientmodel.User;
-import com.github.neighbortrader.foodboardapp.controller.requests.GroceryRequestController;
-import com.github.neighbortrader.foodboardapp.controller.requests.OnEventListener;
-import com.github.neighbortrader.foodboardapp.controller.requests.RequestTyps;
-import com.github.neighbortrader.foodboardapp.controller.requests.UserRequestController;
 import com.github.neighbortrader.foodboardapp.controller.view.AllOffersController;
-import com.google.android.material.navigation.NavigationView;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -32,8 +17,8 @@ public class AllOffersActivity extends AppCompatActivity {
 
     public static String TAG = AllOffersActivity.class.getSimpleName();
 
-    AllOffersModel allOffersModel;
     AllOffersController allOffersController;
+    AllOffersModel allOffersModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +28,8 @@ public class AllOffersActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        allOffersModel = new AllOffersModel(this);
-        allOffersController = new AllOffersController(allOffersModel,this);
-
-        allOffersController.iniAppDataAndUser();
+        allOffersController = new AllOffersController(this);
+        allOffersModel = allOffersController.getAllOffersModel();
 
         setContentView(R.layout.activity_main);
     }
@@ -86,10 +69,14 @@ public class AllOffersActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
 
-        allOffersController.destroyAllOffers();
+        allOffersController.destroy();
     }
 
     public void updateUi(){
         Log.d(TAG, "updateUi()");
+
+        for (Offer offer : allOffersModel.getCurrentOffers()){
+
+        }
     }
 }
