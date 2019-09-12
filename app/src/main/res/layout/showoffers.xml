@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -39,37 +41,26 @@
 
     <LinearLayout
         android:id="@+id/midRow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/startRow"
-        tools:layout_editor_absoluteX="0dp"
-        android:layout_width="417dp"
-        android:layout_height="515dp"
-        android:orientation="horizontal">
+        tools:layout_editor_absoluteX="0dp">
 
 
         <ListView
             android:id="@+id/offers"
-            android:layout_width="wrap_content"
-            android:layout_height="400dp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/generateNewOffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                tools:srcCompat="@tools:sample/avatars" />
+        </ListView>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/endRow"
-        app:layout_constrainedHeight="false"
-        app:layout_constrainedWidth="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:foregroundGravity="fill_horizontal"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/generateOffer"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="generate Offer" />
 
 </LinearLayout>>

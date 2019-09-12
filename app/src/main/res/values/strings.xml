@@ -14,4 +14,6 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="als_gast">als Gast</string>
+    <string name="ein_angebot_erstellen">Ein Angebot erstellen</string>
+    <string name="beschreibung">Beschreibung</string>
 </resources>

@@ -10,13 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Ein Angebot erstellen" />
+        android:text="ein_angebot_erstellen" />
 
     <ImageView
         android:id="@+id/foodboardImage"
         android:layout_width="match_parent"
         android:layout_height="218dp"
-        android:contentDescription="@string/todo"
+        android:contentDescription="@string/offerImage"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Beschreibung" />
+        android:text="@string/beschreibung" />
 
     <EditText
         android:id="@+id/editText"
@@ -32,7 +32,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="z.B. frischer Salat"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/oderText"
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="z.B. 00,00€" />
 
     <TextView
         android:id="@+id/textView3"
@@ -59,15 +60,7 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:layout_height="38dp" />
 
     <TextView
         android:id="@+id/gastDescription"
@@ -82,6 +75,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="DD.MM.YYYY" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Angebot erstellen" />
 
 </LinearLayout>
