@@ -42,7 +42,7 @@
     <LinearLayout
         android:id="@+id/midRow"
         android:layout_width="match_parent"
-        android:layout_height="610dp"
+        android:layout_height="450dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/startRow"
         tools:layout_editor_absoluteX="0dp">
