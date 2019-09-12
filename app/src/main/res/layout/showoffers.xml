@@ -15,16 +15,16 @@
 
         <Button
             android:id="@+id/Karte"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
 
             android:layout_marginStart="0dp"
             android:text="@string/map" />
 
         <TextView
             android:id="@+id/foodboardMain"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
 
             android:foregroundGravity="center_horizontal"
             android:gravity="center"
@@ -32,7 +32,7 @@
 
         <Button
             android:id="@+id/Filter"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
             android:text="@string/filter" />
