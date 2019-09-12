@@ -6,8 +6,8 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 
 import java.util.ArrayList;
 
@@ -74,10 +74,10 @@ public class AllOffersActivity extends AppCompatActivity {
         controller.destroy();
     }
 
-    public void updateUi(ArrayList<Offer> offerArrayList){
+    public void updateUi(ArrayList<Offer> offerArrayList) {
         Log.d(TAG, "updateUi()");
 
-        for (Offer offer : offerArrayList){
+        for (Offer offer : offerArrayList) {
 
         }
     }

@@ -13,7 +13,7 @@ import lombok.Setter;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public abstract class AsyncRequestHandler <T extends AsyncRequestHandler> extends AsyncTask<Void, String, T> {
+public abstract class AsyncRequestHandler<T extends AsyncRequestHandler> extends AsyncTask<Void, String, T> {
 
     public static final String TAG = AsyncRequestHandler.class.getSimpleName();
     public Exception exception;
@@ -23,12 +23,11 @@ public abstract class AsyncRequestHandler <T extends AsyncRequestHandler> extend
     @Setter
     @Getter
     protected RequestTyps requestTyps;
-    private OnRequestEventListener callBack;
-    private Context context;
-
     @Getter
     @Setter
     protected int lastHttpStatuscode;
+    private OnRequestEventListener callBack;
+    private Context context;
 
     protected AsyncRequestHandler(Context context, OnRequestEventListener callback) {
         callBack = callback;

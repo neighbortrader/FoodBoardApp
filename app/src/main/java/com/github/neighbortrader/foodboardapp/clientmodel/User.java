@@ -8,7 +8,6 @@ import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHand
 import com.github.neighbortrader.foodboardapp.handler.gsonHandler.GsonHandler;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.UUID;
@@ -54,11 +53,7 @@ public class User implements ToNameValueMap {
     public static void createCurrentUserInstance(User userInstance) {
         User.userInstance = userInstance;
 
-        if (userInstance == null) {
-            currentSessionHasUser = false;
-        } else {
-            currentSessionHasUser = true;
-        }
+        currentSessionHasUser = userInstance != null;
     }
 
     public static User getCurrentUserInstance() {

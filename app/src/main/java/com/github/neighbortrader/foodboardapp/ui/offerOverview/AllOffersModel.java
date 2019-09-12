@@ -7,12 +7,12 @@ import android.widget.Toast;
 import androidx.lifecycle.ViewModel;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserRequestHandler;
-import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
 public class AllOffersModel extends ViewModel {
     public String TAG = AllOffersModel.class.getSimpleName();
@@ -31,14 +31,14 @@ public class AllOffersModel extends ViewModel {
         loadUserAndUserData();
     }
 
-    public void destroy(){
+    public void destroy() {
         if (User.getCurrentUserInstance() != null) {
             User.getCurrentUserInstance().deleteToken();
             User.saveToSharedPreferences(User.getCurrentUserInstance());
         }
     }
 
-    private void updateGroceryCategories(){
+    private void updateGroceryCategories() {
         GroceryRequestHandler.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnRequestEventListener<GroceryRequestHandler>() {
             @Override
             public void onResponse(GroceryRequestHandler groceryRequestController) {
@@ -56,7 +56,7 @@ public class AllOffersModel extends ViewModel {
         }).execute();
     }
 
-    public void updateOffers(){
+    public void updateOffers() {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
             public void onResponse(OfferRequestHandler object) {
@@ -75,7 +75,7 @@ public class AllOffersModel extends ViewModel {
         }).execute();
     }
 
-    private void loadUserAndUserData(){
+    private void loadUserAndUserData() {
         User loadedUser = User.loadFromSharedPreferences();
 
         if (loadedUser == null) {

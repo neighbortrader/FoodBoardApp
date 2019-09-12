@@ -6,7 +6,7 @@ public interface OnRequestEventListener<T> {
      *
      * @param object
      */
-    void  onResponse(T object);
+    void onResponse(T object);
 
     void onFailure(Exception e);
 

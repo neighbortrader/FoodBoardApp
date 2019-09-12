@@ -32,11 +32,7 @@ public class Grocery implements ToNameValueMap {
         if (!currentGroceries.contains(grocery))
             Grocery.currentGroceries.add(grocery);
 
-        if (currentGroceries.isEmpty()) {
-            currentSessionHasGroceries = false;
-        } else {
-            currentSessionHasGroceries = true;
-        }
+        currentSessionHasGroceries = !currentGroceries.isEmpty();
     }
 
     public static ArrayList<Grocery> getCurrentGroceries() {

@@ -35,7 +35,7 @@ public class AllOffersController {
     }
 
     public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
-        if (offerRequestHandler.isWasSuccessfull()) {
+        if (offerRequestHandler.isWasSuccessful()) {
             allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
         } else {
             errorToast(new Exception("Unknown error occurred"));
@@ -44,12 +44,12 @@ public class AllOffersController {
         waitingForResponse = false;
     }
 
-    public void invokeUiUpdate(Exception e){
+    public void invokeUiUpdate(Exception e) {
         errorToast(e);
         waitingForResponse = false;
     }
 
-    public void errorToast(Exception e){
+    public void errorToast(Exception e) {
         CharSequence text = e.getMessage();
         int duration = Toast.LENGTH_SHORT;
 

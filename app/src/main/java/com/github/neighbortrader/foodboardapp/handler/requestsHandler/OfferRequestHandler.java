@@ -31,7 +31,7 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     private ArrayList<Offer> receivedOffers;
 
     @Getter
-    private boolean wasSuccessfull;
+    private boolean wasSuccessful;
 
     protected OfferRequestHandler(Context context, OnRequestEventListener callback) {
         super(context, callback);
@@ -71,11 +71,11 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
 
         switch (requestTyps) {
             case POST_NEW_OFFER:
-                wasSuccessfull = postOfferRequest(offerToPost);
+                wasSuccessful = postOfferRequest(offerToPost);
                 break;
 
             case GET_ALL_OFFERS:
-                wasSuccessfull= getOffersRequest();
+                wasSuccessful = getOffersRequest();
                 break;
         }
         return this;

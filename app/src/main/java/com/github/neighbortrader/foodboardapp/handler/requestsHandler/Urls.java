@@ -3,8 +3,8 @@ package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 import android.app.Application;
 import android.content.Context;
 
-import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
 public class Urls extends Application {
     private static Context context = ContextHandler.getAppContext();

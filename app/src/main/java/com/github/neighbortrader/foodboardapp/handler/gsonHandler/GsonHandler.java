@@ -5,10 +5,10 @@ import com.google.gson.Gson;
 public class GsonHandler {
     private static Gson gson;
 
-    public static Gson getGsonInstance(){
-        if (gson == null){
+    public static Gson getGsonInstance() {
+        if (gson == null) {
             return new Gson();
-        }else{
+        } else {
             return gson;
         }
     }
