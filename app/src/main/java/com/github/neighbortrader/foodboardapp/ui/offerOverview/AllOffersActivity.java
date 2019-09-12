@@ -18,7 +18,6 @@ public class AllOffersActivity extends AppCompatActivity {
     public static String TAG = AllOffersActivity.class.getSimpleName();
 
     AllOffersController controller;
-    AllOffersModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class AllOffersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         controller = new AllOffersController(this);
-        model = controller.getAllOffersModel();
 
         setContentView(R.layout.activity_main);
 
