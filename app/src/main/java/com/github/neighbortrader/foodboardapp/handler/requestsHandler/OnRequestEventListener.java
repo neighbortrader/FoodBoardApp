@@ -1,8 +1,6 @@
-package com.github.neighbortrader.foodboardapp.requests;
+package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 
-import java.util.List;
-
-public interface OnEventListener<T> {
+public interface OnRequestEventListener<T> {
     /**
      * onResponse either gives null or a List of the desired generic with 1 or more objects.
      *

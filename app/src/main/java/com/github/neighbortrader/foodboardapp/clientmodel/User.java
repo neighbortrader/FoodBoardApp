@@ -4,10 +4,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.MyApplication;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
+import com.github.neighbortrader.foodboardapp.handler.gsonHandler.GsonHandler;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.UUID;
@@ -37,31 +37,23 @@ public class User implements ToNameValueMap {
     @Getter
     @Setter
     private Address address;
-    @Setter
-    private ArrayList<Offer> offerList;
 
     @Getter
     @Setter
     private JWT jwtToken;
 
-    public User(String username, String password, String userId, String email, Address address, ArrayList<Offer> offerList, JWT jwtToken) {
-        offerList = new ArrayList<>();
+    private User(String username, String password, String userId, String email, Address address, JWT jwtToken) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.address = address;
-        this.offerList = offerList;
         this.jwtToken = jwtToken;
     }
 
     public static void createCurrentUserInstance(User userInstance) {
         User.userInstance = userInstance;
 
-        if (userInstance == null) {
-            currentSessionHasUser = false;
-        } else {
-            currentSessionHasUser = true;
-        }
+        currentSessionHasUser = userInstance != null;
     }
 
     public static User getCurrentUserInstance() {
@@ -75,18 +67,18 @@ public class User implements ToNameValueMap {
         String email = "test@testemail.com";
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
-        return new User(username, password, userId, email, address, null, null);
+        return new User(username, password, userId, email, address, null);
     }
 
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveToSharedPreferences()");
 
         if (user != null) {
-            Gson gson = new Gson();
+            Gson gson = GsonHandler.getGsonInstance();
             // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits #23
             String userToSaveAsJsonString = null; //gson.toJson(user);
 
-            SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
+            SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
@@ -97,18 +89,14 @@ public class User implements ToNameValueMap {
     public static User loadFromSharedPreferences() {
         Log.d(TAG, "loadFromSharedPreferences()");
 
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
 
         String userToSaveAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
 
-        Gson gson = new Gson();
+        Gson gson = GsonHandler.getGsonInstance();
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
 
         return user;
-    }
-
-    public boolean addOffer(Offer offerToAd) {
-        return this.offerList.add(offerToAd);
     }
 
     public void deleteToken() {

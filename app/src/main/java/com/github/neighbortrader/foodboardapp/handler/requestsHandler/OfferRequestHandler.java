@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.requests;
+package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,9 +19,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class OfferHandler extends AsyncRequest<OfferHandler> {
+public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler> {
 
-    public final static String TAG = OfferHandler.class.getSimpleName();
+    public final static String TAG = OfferRequestHandler.class.getSimpleName();
 
     @Getter
     private Offer offerToPost;
@@ -30,32 +30,35 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
     @Setter
     private ArrayList<Offer> receivedOffers;
 
-    protected OfferHandler(Context context, OnEventListener callback) {
+    @Getter
+    private boolean wasSuccessful;
+
+    protected OfferRequestHandler(Context context, OnRequestEventListener callback) {
         super(context, callback);
     }
 
-    public static OfferHandler builder(RequestTyps requestTyps, Context context, OnEventListener callback, Offer... offers) {
-        OfferHandler offerHandler = null;
+    public static OfferRequestHandler builder(RequestTyps requestTyps, Context context, OnRequestEventListener callback, Offer... offers) {
+        OfferRequestHandler offerRequestController = null;
 
         switch (requestTyps) {
             case POST_NEW_OFFER:
-                offerHandler = new OfferHandler(context, callback);
-                offerHandler.setRequestTyps(RequestTyps.POST_NEW_OFFER);
-                offerHandler.setOfferToPost(offers[0]);
-                offerHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_OFFER);
+                offerRequestController = new OfferRequestHandler(context, callback);
+                offerRequestController.setRequestTyps(RequestTyps.POST_NEW_OFFER);
+                offerRequestController.setOfferToPost(offers[0]);
+                offerRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_OFFER);
                 break;
 
             case GET_ALL_OFFERS:
-                offerHandler = new OfferHandler(context, callback);
-                offerHandler.setRequestTyps(RequestTyps.GET_ALL_OFFERS);
-                offerHandler.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_OFFERS);
+                offerRequestController = new OfferRequestHandler(context, callback);
+                offerRequestController.setRequestTyps(RequestTyps.GET_ALL_OFFERS);
+                offerRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_GET_ALL_OFFERS);
                 break;
 
             default:
                 return null;
         }
 
-        return offerHandler;
+        return offerRequestController;
     }
 
     public void setOfferToPost(Offer offerToPost) {
@@ -63,22 +66,22 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
     }
 
     @Override
-    protected OfferHandler doInBackground(Void... params) {
+    protected OfferRequestHandler doInBackground(Void... params) {
         Log.d(TAG, "doInBackground()");
 
         switch (requestTyps) {
             case POST_NEW_OFFER:
-                postOfferRequest(offerToPost);
+                wasSuccessful = postOfferRequest(offerToPost);
                 break;
 
             case GET_ALL_OFFERS:
-                setReceivedOffers(getOffersRequest());
+                wasSuccessful = getOffersRequest();
                 break;
         }
         return this;
     }
 
-    public void postOfferRequest(Offer offerToPost) {
+    public boolean postOfferRequest(Offer offerToPost) {
         User user = User.getCurrentUserInstance();
 
         if (offerToPost != null && user != null) {
@@ -87,14 +90,14 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
 
                 if (jwtToken == null) {
                     Log.w(TAG, "no jwtToken found, trying to fetch one");
-                    jwtToken = UserHandler.getJWTRequest(user);
+                    jwtToken = UserRequestHandler.getJWTRequest(user);
                     user.setJwtToken(jwtToken);
                 }
 
                 if (jwtToken.isExpired(0)) {
                     Log.w(TAG, "jwtToken is expired, trying to fetch a new one");
 
-                    jwtToken = UserHandler.getJWTRequest(user);
+                    jwtToken = UserRequestHandler.getJWTRequest(user);
 
                     if (jwtToken == null) {
                         throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));
@@ -128,7 +131,7 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                     throw new Exception(String.format("Received http-statuscode %s\n%s", response.code(), response.body().string()));
                 }
 
-                user.addOffer(offerToPost);
+                return true;
 
             } catch (Exception e) {
                 exception = e;
@@ -136,9 +139,10 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
         } else {
             exception = new NullPointerException("Could not post new offer");
         }
+        return false;
     }
 
-    public ArrayList<Offer> getOffersRequest() {
+    public boolean getOffersRequest() {
         OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
         Request request = new Request.Builder()
@@ -170,12 +174,12 @@ public class OfferHandler extends AsyncRequest<OfferHandler> {
                 receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
             }
 
-            return receivedOffers;
+            return true;
         } catch (Exception e) {
             exception = e;
             Log.e(TAG, "Exception while waiting for Result", e);
         }
 
-        return null;
+        return false;
     }
 }

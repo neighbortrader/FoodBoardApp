@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.requests;
+package com.github.neighbortrader.foodboardapp.handler.requestsHandler;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.google.gson.JsonObject;
 
-import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
@@ -14,9 +13,9 @@ import lombok.Setter;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public abstract class AsyncRequest<T> extends AsyncTask<Void, String, T> {
+public abstract class AsyncRequestHandler<T extends AsyncRequestHandler> extends AsyncTask<Void, String, T> {
 
-    public static final String TAG = AsyncRequest.class.getSimpleName();
+    public static final String TAG = AsyncRequestHandler.class.getSimpleName();
     public Exception exception;
     @Setter
     @Getter
@@ -24,14 +23,13 @@ public abstract class AsyncRequest<T> extends AsyncTask<Void, String, T> {
     @Setter
     @Getter
     protected RequestTyps requestTyps;
-    private OnEventListener<T> callBack;
-    private Context context;
-
     @Getter
     @Setter
     protected int lastHttpStatuscode;
+    private OnRequestEventListener callBack;
+    private Context context;
 
-    protected AsyncRequest(Context context, OnEventListener callback) {
+    protected AsyncRequestHandler(Context context, OnRequestEventListener callback) {
         callBack = callback;
         this.context = context;
     }

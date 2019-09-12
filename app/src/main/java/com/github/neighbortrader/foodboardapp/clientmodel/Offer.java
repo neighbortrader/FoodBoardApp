@@ -94,7 +94,7 @@ public class Offer implements ToNameValueMap {
         double randomValue = 0 + (20) * r.nextDouble();
         Price price = new Price(randomValue);
 
-        if (!Grocery.isCurrentSessionHasGroceries()){
+        if (Grocery.amountOfCurrentGroceries() == 0) {
             return null;
         }
 
