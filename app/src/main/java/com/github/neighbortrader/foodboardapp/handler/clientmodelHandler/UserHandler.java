@@ -37,11 +37,10 @@ public class UserHandler {
     public static User generateRandomUser() {
         String username = UUID.randomUUID().toString();
         String password = "adm!n9Asswor!d";
-        String userId = null;
         String email = "test@testemail.com";
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
-        return User.userBuilder(username, password, userId, email, address, null);
+        return User.userBuilder(username, password, email, address);
     }
 
     public static void saveToSharedPreferences(User user) {

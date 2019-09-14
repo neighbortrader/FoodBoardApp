@@ -37,7 +37,7 @@ public class AllOffersModel extends ViewModel {
         User currentUser = UserHandler.getCurrentUserInstance();
 
         if (currentUser != null) {
-            TokenHandler.removeTokenFromUser(currentUser);
+            TokenHandler.removeToken();
             UserHandler.saveToSharedPreferences(currentUser);
         }
     }

@@ -33,20 +33,15 @@ public class User implements ToNameValueMap {
     @Setter
     private Address address;
 
-    @Getter
-    @Setter
-    private JWT jwtToken;
-
-    private User(String username, String password, String userId, String email, Address address, JWT jwtToken) {
+    private User(String username, String password, String email, Address address) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.address = address;
-        this.jwtToken = jwtToken;
     }
 
-    public static User userBuilder(String username, String password, String userId, String email, Address address, JWT jwtToken){
-        return new User(username, password, userId, email, address, jwtToken);
+    public static User userBuilder(String username, String password, String email, Address address){
+        return new User(username, password, email, address);
     }
 
     @Override
