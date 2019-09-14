@@ -59,8 +59,8 @@ public class UserHandler {
         }
     }
 
-    public static User loadFromSharedPreferences() {
-        Log.d(TAG, "loadFromSharedPreferences()");
+    public static User loadUserFromSharedPreferences() {
+        Log.d(TAG, "loadUserFromSharedPreferences()");
 
         SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
 
@@ -73,7 +73,7 @@ public class UserHandler {
     }
 
     public static void loadUserAndUserData() {
-        User loadedUser = UserHandler.loadFromSharedPreferences();
+        User loadedUser = UserHandler.loadUserFromSharedPreferences();
         Context context = ContextHandler.getAppContext();
 
         if (loadedUser == null) {
