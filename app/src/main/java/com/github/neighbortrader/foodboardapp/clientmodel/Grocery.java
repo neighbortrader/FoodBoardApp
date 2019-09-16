@@ -31,6 +31,10 @@ public class Grocery implements ToNameValueMap {
             Grocery.currentGroceries.add(grocery);
     }
 
+    public static int amountOfCurrentGroceries(){
+        return currentGroceries.size();
+    }
+
     public static ArrayList<Grocery> getCurrentGroceries() {
         return currentGroceries;
     }
