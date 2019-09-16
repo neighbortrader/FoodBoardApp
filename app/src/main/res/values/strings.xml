@@ -50,6 +50,7 @@
     <string name="benutzer">Benutzername</string>
     <string name="benutzerText">Benutzername-Inhalt</string>
     <string name="email">E-Mail-Adresse</string>
+    <string name="emailText">E-Mail-Text</string>
     <string name="passwort">Passwort</string>
     <string name="passwortText">Passswort-Inhalt</string>
 
