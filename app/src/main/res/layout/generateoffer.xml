@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/ueberschrift"
-        app:layout_constraintBottom_toTopOf="@id/foodboardImage"
+        app:layout_constraintBottom_toTopOf="@id/offerImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/foodboardImage"
+        android:id="@+id/offerImage"
         android:layout_width="match_parent"
         android:layout_height="218dp"
         android:contentDescription="@string/offerImage"
@@ -39,7 +39,7 @@
         android:gravity="center_horizontal"
         android:text="@string/beschreibung"
         app:layout_constraintBottom_toTopOf="@id/editTextBeschreibung"
-        app:layout_constraintTop_toBottomOf="@id/foodboardImage" />
+        app:layout_constraintTop_toBottomOf="@id/offerImage" />
 
     <EditText
         android:id="@+id/editTextBeschreibung"
