@@ -69,12 +69,9 @@ public class AllOffersActivity extends AppCompatActivity {
 
         pullToRefreshLayout = findViewById(R.id.pullToRefresh);
         pullToRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        controller.invokeOfferUpdate();
-                        setRefreshing(true);
-                    }
+                () -> {
+                    controller.invokeOfferUpdate();
+                    setRefreshing(true);
                 }
         );
     }
