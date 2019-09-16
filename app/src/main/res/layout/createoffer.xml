@@ -5,23 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/gobackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/ueberschrift"
+    <Button
+        android:id="@+id/createOffer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/ueberschrift"
-        app:layout_constraintBottom_toTopOf="@id/offerImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/createOffer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextmhd" />
+
+    <EditText
+        android:id="@+id/editTextBeschreibung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:text="@string/editTextBeschreibung"
+        app:layout_constraintBottom_toTopOf="@id/preis"
+        app:layout_constraintTop_toBottomOf="@id/beschreibung" />
+
+    <EditText
+        android:id="@+id/editTextPreis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/editTextPreis"
+        app:layout_constraintBottom_toTopOf="@id/foodCategory"
+        app:layout_constraintTop_toBottomOf="@id/preis" />
+
+    <EditText
+        android:id="@+id/editTextmhd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/editTextmhd"
+        app:layout_constraintBottom_toTopOf="@id/createOffer"
+        app:layout_constraintTop_toBottomOf="@id/mhd" />
 
     <ImageView
         android:id="@+id/offerImage"
@@ -32,6 +47,22 @@
         app:layout_constraintTop_toBottomOf="@id/ueberschrift"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <Spinner
+        android:id="@+id/foodCategorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        app:layout_constraintBottom_toTopOf="@id/mhd"
+        app:layout_constraintTop_toBottomOf="@id/foodCategory" />
+
+    <TextView
+        android:id="@+id/ueberschrift"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/ueberschrift"
+        app:layout_constraintBottom_toTopOf="@id/offerImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/beschreibung"
         android:layout_width="match_parent"
@@ -40,15 +71,6 @@
         android:text="@string/beschreibung"
         app:layout_constraintBottom_toTopOf="@id/editTextBeschreibung"
         app:layout_constraintTop_toBottomOf="@id/offerImage" />
-
-    <EditText
-        android:id="@+id/editTextBeschreibung"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/editTextBeschreibung"
-        app:layout_constraintBottom_toTopOf="@id/preis"
-        app:layout_constraintTop_toBottomOf="@id/beschreibung"
-        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/preis"
@@ -59,14 +81,6 @@
         app:layout_constraintBottom_toTopOf="@id/editTextPreis"
         app:layout_constraintTop_toBottomOf="@id/editTextBeschreibung" />
 
-    <EditText
-        android:id="@+id/editTextPreis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/editTextPreis"
-        app:layout_constraintBottom_toTopOf="@id/foodCategory"
-        app:layout_constraintTop_toBottomOf="@id/preis" />
-
     <TextView
         android:id="@+id/foodCategory"
         android:layout_width="match_parent"
@@ -76,13 +90,6 @@
         app:layout_constraintBottom_toTopOf="@id/foodCategorySpinner"
         app:layout_constraintTop_toBottomOf="@id/editTextPreis" />
 
-    <Spinner
-        android:id="@+id/foodCategorySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        app:layout_constraintBottom_toTopOf="@id/mhd"
-        app:layout_constraintTop_toBottomOf="@id/foodCategory" />
-
     <TextView
         android:id="@+id/mhd"
         android:layout_width="match_parent"
@@ -91,22 +98,4 @@
         android:text="@string/mhd"
         app:layout_constraintBottom_toTopOf="@id/editTextmhd"
         app:layout_constraintTop_toBottomOf="@id/foodCategorySpinner" />
-
-    <EditText
-        android:id="@+id/editTextmhd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/editTextmhd"
-        app:layout_constraintBottom_toTopOf="@id/createOffer"
-        app:layout_constraintTop_toBottomOf="@id/mhd" />
-
-    <Button
-        android:id="@+id/createOffer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/createOffer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextmhd" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

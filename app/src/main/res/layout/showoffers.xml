@@ -55,7 +55,7 @@
             android:choiceMode="singleChoice"
             android:clickable="true"
             android:divider="@android:color/holo_green_light"
-            android:dividerHeight="5dp"></ListView>
+            android:dividerHeight="5dp"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

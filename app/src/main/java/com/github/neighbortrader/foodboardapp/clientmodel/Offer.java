@@ -49,7 +49,7 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime creationDate;
 
-    private Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
+    private Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate, LocalDateTime creationDate) {
         this.user = user;
         this.price = price;
 
@@ -60,7 +60,7 @@ public class Offer implements ToNameValueMap {
         this.description = description;
         this.purchaseDate = purchaseDate;
         this.expireDate = expireDate;
-        this.creationDate = null;       // creationDate gets set during request
+        this.creationDate = creationDate;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -74,8 +74,9 @@ public class Offer implements ToNameValueMap {
 
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
+            LocalDateTime creationDate = LocalDateTime.parse(jsonObject.getString("creationDate"), dateTimeFormatter);
 
-            return new Offer(UserHandler.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
+            return new Offer(UserHandler.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate, creationDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
@@ -110,7 +111,7 @@ public class Offer implements ToNameValueMap {
                 .plusMinutes(r.nextInt(60))
                 .plusSeconds(r.nextInt(60));
 
-        return new Offer(user, price, grocery, description, purchaseDate, expireDate);
+        return new Offer(user, price, grocery, description, purchaseDate, expireDate, null);
     }
 
     @Override

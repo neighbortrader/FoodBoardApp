@@ -121,12 +121,11 @@ public class AllOffersActivity extends AppCompatActivity {
 
             StringBuffer offerAsDisplayString = new StringBuffer();
 
-            offerAsDisplayString.append(offer.getDescription().substring(0, 10))
-                    .append(offer.getPrice().getFormattedPrice())
-                    .append(offer.getPrice().getCurrency())
-                    .append(offer.getCreationDate());
+            offerAsDisplayString.append(offer.getDescription().substring(0, 16))
+                    .append(" " + offer.getPrice().getFormattedPrice())
+                    .append(" " + offer.getGroceryCategory().getGroceryName());
 
-            listAdapter.add(offer.getDescription());
+            listAdapter.add(offerAsDisplayString.toString());
         }
 
 
