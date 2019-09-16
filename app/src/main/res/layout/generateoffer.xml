@@ -1,86 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/gobackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/ueberschrift"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="ein_angebot_erstellen" />
+        android:text="@string/ueberschrift"
+        app:layout_constraintBottom_toTopOf="@id/foodboardImage"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/foodboardImage"
         android:layout_width="match_parent"
         android:layout_height="218dp"
         android:contentDescription="@string/offerImage"
+        app:layout_constraintBottom_toTopOf="@id/beschreibung"
+        app:layout_constraintTop_toBottomOf="@id/ueberschrift"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/einfuehrungText"
+        android:id="@+id/beschreibung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/beschreibung" />
+        android:text="@string/beschreibung"
+        app:layout_constraintBottom_toTopOf="@id/editTextBeschreibung"
+        app:layout_constraintTop_toBottomOf="@id/foodboardImage" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextBeschreibung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="z.B. frischer Salat"
-        android:autofillHints="" />
+        android:text="@string/editTextBeschreibung"
+        app:layout_constraintBottom_toTopOf="@id/preis"
+        app:layout_constraintTop_toBottomOf="@id/beschreibung"
+        android:importantForAutofill="no" />
 
     <TextView
-        android:id="@+id/oderText"
+        android:id="@+id/preis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Preis" />
+        android:text="@string/preis"
+        app:layout_constraintBottom_toTopOf="@id/editTextPreis"
+        app:layout_constraintTop_toBottomOf="@id/editTextBeschreibung" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTextPreis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="z.B. 00,00€" />
+        android:text="@string/editTextPreis"
+        app:layout_constraintBottom_toTopOf="@id/foodCategory"
+        app:layout_constraintTop_toBottomOf="@id/preis" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/foodCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Lebensmittel-Kategorie" />
+        android:text="@string/foodCategory"
+        app:layout_constraintBottom_toTopOf="@id/foodCategorySpinner"
+        app:layout_constraintTop_toBottomOf="@id/editTextPreis" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/foodCategorySpinner"
         android:layout_width="match_parent"
-        android:layout_height="38dp" />
+        android:layout_height="38dp"
+        app:layout_constraintBottom_toTopOf="@id/mhd"
+        app:layout_constraintTop_toBottomOf="@id/foodCategory" />
 
     <TextView
-        android:id="@+id/gastDescription"
+        android:id="@+id/mhd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Mindeshaltbarkeitsdatum" />
+        android:text="@string/mhd"
+        app:layout_constraintBottom_toTopOf="@id/editTextmhd"
+        app:layout_constraintTop_toBottomOf="@id/foodCategorySpinner" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editTextmhd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="DD.MM.YYYY" />
+        android:text="@string/editTextmhd"
+        app:layout_constraintBottom_toTopOf="@id/createOffer"
+        app:layout_constraintTop_toBottomOf="@id/mhd" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/createOffer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Angebot erstellen" />
+        android:text="@string/createOffer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextmhd" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,66 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/map"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/map"
+            app:layout_constraintBottom_toTopOf="@id/offers"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/foodboardMain"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/foodboardMain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/foodboardMain"
+        app:layout_constraintBottom_toTopOf="@id/offers"
+        app:layout_constraintLeft_toRightOf="@id/map"
+        app:layout_constraintRight_toLeftOf="@id/filter"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/filter"
+        app:layout_constraintBottom_toTopOf="@id/offers"
+        app:layout_constraintLeft_toRightOf="@id/foodboardMain"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/offers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/startRow"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="45dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/map">
 
-        <Button
-            android:id="@+id/Karte"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:layout_marginStart="0dp"
-            android:text="@string/map" />
-
-        <TextView
-            android:id="@+id/foodboardMain"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:foregroundGravity="center_horizontal"
-            android:gravity="center"
-            android:text="@string/text" />
-
-        <Button
-            android:id="@+id/Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:text="@string/filter" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/midRow"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/startRow"
-        tools:layout_editor_absoluteX="0dp">
-
-
-        <ListView
-            android:id="@+id/offers"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-    </LinearLayout>
+    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/generateNewOffer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-</LinearLayout>>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

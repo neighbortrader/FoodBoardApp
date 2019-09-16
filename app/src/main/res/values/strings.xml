@@ -13,7 +13,36 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="als_gast">als Gast</string>
-    <string name="ein_angebot_erstellen">Ein Angebot erstellen</string>
+
+    <string name="ueberschrift">Ein Angebot erstellen</string>
     <string name="beschreibung">Beschreibung</string>
+    <string name="editTextBeschreibung">z.B. frischer Salat</string>
+    <string name="preis">Preis</string>
+    <string name="editTextPreis">z.B. 0,00€</string>
+    <string name="foodCategory">Lebensmittelkategorie</string>
+    <string name="mhd">Mindeshaltbarkeitsdatum</string>
+    <string name="editTextmhd">DD.MM.YYYY</string>
+    <string name="createOffer">Angebot hochladen</string>
+
+    <string name="foodboardMain">FoodBoard</string>
+    <string name="map">Karte</string>
+    <string name="filter">Filter</string>
+    
+    <string name="ueberschriftDetails">Angebots-Details</string>
+    <string name="beschreibungDetails">Beschreibung</string>
+    <string name="beschreibungDetailsText">Beschreibung-Inhalt</string>
+    <string name="preisDetails">Preis</string>
+    <string name="preisDetailsText">Preis-Inhalt</string>
+    <string name="foodCategoryDetails">Lebensmittelkategorie</string>
+    <string name="foodCategoryDetailsText">Lebensmittelkategorie-Inhalt</string>
+    <string name="mhdDetails">Mindesthaltbarkeitsdatum</string>
+    <string name="mhdDetailsText">MHD-Inhalt</string>
+    <string name="UserDetails">User-Informationen</string>
+    <string name="UserDetailsText">User-Infos-Inhalt</string>
+    <string name="dateDetails">Erstell-/Kaufdatum</string>
+    <string name="dateDetailsText">Ertell-/Kaufdatum-Inhalt</string>
+
+    <string name="radioButton">Angemeldet bleiben</string>
+
+
 </resources>

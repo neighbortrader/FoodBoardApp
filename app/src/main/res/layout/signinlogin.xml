@@ -20,7 +20,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/einfuehrungText"
+        android:id="@+id/beschreibung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -33,7 +33,7 @@
         android:text="@string/anmeldenText" />
 
     <TextView
-        android:id="@+id/oderText"
+        android:id="@+id/preis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -46,7 +46,7 @@
         android:text="@string/registrieren" />
 
     <TextView
-        android:id="@+id/gastDescription"
+        android:id="@+id/mhd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
