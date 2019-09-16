@@ -2,6 +2,7 @@ package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
 
+import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.errorHandler.ErrorHandler;
@@ -41,7 +42,7 @@ public class AllOffersController {
     }
 
     public void invokeUiUpdate(Exception e) {
-        ErrorHandler.buildErrorHandler(e).errorToast();
+        ErrorHandler.buildErrorHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.unableToUpdate));
         waitingForResponse = false;
         allOffersActivity.setRefreshing(false);
     }

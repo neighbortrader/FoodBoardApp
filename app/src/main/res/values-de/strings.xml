@@ -14,4 +14,5 @@
     <string name="foodCategoryDetails">Lebensmittelkategorie</string>
     <string name="foodCategoryDetailsText">Lebensmittelkategorie-Inhalt</string>
     <string name="image_of_product">Produkbild</string>
+    <string name="unableToUpdate">Die Angebote konnten nicht aktualisiert werden.</string>
 </resources>

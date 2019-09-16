@@ -54,4 +54,5 @@
     <string name="emailText">E-Mail-Text</string>
     <string name="passwort">Passwort</string>
     <string name="passwortText">Passswort-Inhalt</string>
+    <string name="unableToUpdate">Unable to update Offers</string>
 </resources>

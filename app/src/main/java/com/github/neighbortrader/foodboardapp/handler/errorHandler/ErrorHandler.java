@@ -20,4 +20,9 @@ public class ErrorHandler {
         Toast errorToast=Toast.makeText(ContextHandler.getAppContext(),e.getMessage(),Toast.LENGTH_SHORT);
         errorToast.show();
     }
+
+    public void errorToastWithCostumeMassage(String message){
+        Toast errorToast=Toast.makeText(ContextHandler.getAppContext(),message,Toast.LENGTH_SHORT);
+        errorToast.show();
+    }
 }
