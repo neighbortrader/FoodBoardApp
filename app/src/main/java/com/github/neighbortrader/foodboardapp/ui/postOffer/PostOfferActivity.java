@@ -14,7 +14,6 @@ import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
-import com.github.neighbortrader.foodboardapp.ui.offerOverview.AllOffersController;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -22,17 +21,14 @@ import java.util.Calendar;
 public class PostOfferActivity extends Activity {
 
     public static String TAG = PostOfferActivity.class.getSimpleName();
-
-    PostOfferController controller;
-
+    final Calendar calender = Calendar.getInstance();
     public Button postOfferBtn;
     public Spinner categorySpinner;
     public EditText description;
     public EditText priceEditText;
     public EditText expireDate;
-
+    PostOfferController controller;
     DatePickerDialog picker;
-    final Calendar calender = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +80,8 @@ public class PostOfferActivity extends Activity {
         String offerDescription = description.getText().toString();
         Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
         Grocery grocery = Grocery.findGrocery(categorySpinner.getSelectedItem().toString());
-        String date = expireDate.getText().toString();
         LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
 
-        // TODO: add buy date to ui and this call
         return Offer.createOffer(price, grocery, offerDescription, expireLocalDateTime, expireLocalDateTime);
     }
 

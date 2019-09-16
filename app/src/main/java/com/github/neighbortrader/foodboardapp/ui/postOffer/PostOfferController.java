@@ -20,7 +20,7 @@ public class PostOfferController {
         model.postOffer(offer);
     }
 
-    public void invokeFinish(){
+    public void invokeFinish() {
         postOfferActivity.finish();
     }
 }

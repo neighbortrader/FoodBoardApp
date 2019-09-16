@@ -36,12 +36,11 @@ public class AllOffersActivity extends AppCompatActivity {
     Button filterButton;
     @BindView(R.id.offersListView)
     ListView offersListView;
-    private ArrayAdapter<String> listAdapter;
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
-
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefreshLayout;
+    private ArrayAdapter<String> listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -21,32 +21,36 @@ import java.util.Random;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Offer implements ToNameValueMap, Parcelable  {
-    public static String TAG = Offer.class.getSimpleName();
+public class Offer implements ToNameValueMap, Parcelable {
+    public static final Creator<Offer> CREATOR = new Creator<Offer>() {
+        @Override
+        public Offer createFromParcel(Parcel in) {
+            return new Offer(in);
+        }
 
+        @Override
+        public Offer[] newArray(int size) {
+            return new Offer[size];
+        }
+    };
+    public static String TAG = Offer.class.getSimpleName();
     @Getter
     @Setter
     private User user;
-
     @Getter
     private Price price;
-
     @Getter
     @Setter
     private Grocery groceryCategory;
-
     @Getter
     @Setter
     private String description;
-
     @Getter
     @Setter
     private LocalDateTime purchaseDate;
-
     @Getter
     @Setter
     private LocalDateTime expireDate;
-
     @Getter
     @Setter
     private LocalDateTime creationDate;
@@ -65,25 +69,13 @@ public class Offer implements ToNameValueMap, Parcelable  {
         this.creationDate = creationDate;
     }
 
-    public static Offer createOffer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate){
-        return new Offer(UserHandler.getCurrentUserInstance(), price, groceryCategory, description, purchaseDate, expireDate, null);
-    }
-
     protected Offer(Parcel in) {
         description = in.readString();
     }
 
-    public static final Creator<Offer> CREATOR = new Creator<Offer>() {
-        @Override
-        public Offer createFromParcel(Parcel in) {
-            return new Offer(in);
-        }
-
-        @Override
-        public Offer[] newArray(int size) {
-            return new Offer[size];
-        }
-    };
+    public static Offer createOffer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
+        return new Offer(UserHandler.getCurrentUserInstance(), price, groceryCategory, description, purchaseDate, expireDate, null);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static Offer createOfferFromJSON(JSONObject jsonObject) {

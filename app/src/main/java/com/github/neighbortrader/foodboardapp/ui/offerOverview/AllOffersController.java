@@ -5,8 +5,8 @@ import android.content.Context;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 
 import java.util.ArrayList;
 
@@ -35,11 +35,11 @@ public class AllOffersController {
         }
     }
 
-    public ArrayList<Offer> getCurrentOffers(){
+    public ArrayList<Offer> getCurrentOffers() {
         return model.getCurrentOffers();
     }
 
-    public void invokeUiUpdate(OfferRequestHandler offerRequestHandler){
+    public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
         allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
         waitingForResponse = false;
         allOffersActivity.setRefreshing(false);
