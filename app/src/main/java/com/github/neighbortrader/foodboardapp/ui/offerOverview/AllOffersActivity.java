@@ -1,8 +1,6 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
-import android.app.Application;
 import android.content.Intent;
-import android.media.MediaDrm;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,14 +9,11 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
 import com.github.neighbortrader.foodboardapp.ui.postOffer.PostOfferActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -43,6 +38,9 @@ public class AllOffersActivity extends AppCompatActivity {
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
 
+    @BindView(R.id.pullToRefresh)
+    SwipeRefreshLayout pullToRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -55,18 +53,12 @@ public class AllOffersActivity extends AppCompatActivity {
 
         setContentView(R.layout.showoffers);
 
-        //controller.invokeOfferUpdate();
-
         createNewOfferFloatingActionButton = findViewById(R.id.createNewOfferFAB);
         createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
                 Intent startPostOfferIntent = new Intent(AllOffersActivity.this, PostOfferActivity.class);
                 AllOffersActivity.this.startActivity(startPostOfferIntent);
-                 */
-
-                controller.invokeOfferUpdate();
             }
         });
 
@@ -75,6 +67,16 @@ public class AllOffersActivity extends AppCompatActivity {
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
         offersListView.setAdapter(listAdapter);
 
+        pullToRefreshLayout = findViewById(R.id.pullToRefresh);
+        pullToRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        controller.invokeOfferUpdate();
+                        setRefreshing(true);
+                    }
+                }
+        );
     }
 
     @Override
@@ -123,5 +125,11 @@ public class AllOffersActivity extends AppCompatActivity {
         }
 
         listAdapter.notifyDataSetChanged();
+
+
+    }
+
+    public void setRefreshing(boolean value){
+        pullToRefreshLayout.setRefreshing(value);
     }
 }

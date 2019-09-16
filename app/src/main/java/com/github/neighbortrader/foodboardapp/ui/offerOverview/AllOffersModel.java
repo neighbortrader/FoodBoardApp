@@ -1,8 +1,6 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModel;
 
@@ -15,7 +13,6 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryReq
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import java.util.ArrayList;
@@ -73,7 +70,8 @@ public class AllOffersModel extends ViewModel {
             @Override
             public void onResponse(OfferRequestHandler object) {
                 currentOffers.addAll(object.getReceivedOffers());
-                allOffersController.invokeUiUpdate(object);            }
+                allOffersController.invokeUiUpdate(object);
+            }
 
             @Override
             public void onFailure(Exception e) {

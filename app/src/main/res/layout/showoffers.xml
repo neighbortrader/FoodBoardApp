@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/filterButton"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/filter"
         app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
         app:layout_constraintLeft_toRightOf="@id/foodboardMain"
@@ -38,10 +38,10 @@
         app:layout_constraintRight_toLeftOf="@id/filterButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -55,7 +55,7 @@
             android:clickable="true"
             android:divider="@android:color/holo_green_light"
             android:dividerHeight="5dp"></ListView>
-    </androidx.core.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createNewOfferFAB"

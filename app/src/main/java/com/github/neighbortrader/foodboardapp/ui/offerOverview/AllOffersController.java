@@ -37,11 +37,13 @@ public class AllOffersController {
     public void invokeUiUpdate(OfferRequestHandler offerRequestHandler){
         allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
         waitingForResponse = false;
+        allOffersActivity.setRefreshing(false);
     }
 
     public void invokeUiUpdate(Exception e) {
         ErrorHandler.buildErrorHandler(e).errorToast();
         waitingForResponse = false;
+        allOffersActivity.setRefreshing(false);
     }
 
     public void destroy() {
