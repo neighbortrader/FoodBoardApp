@@ -43,6 +43,17 @@
     <string name="dateDetailsText">Ertell-/Kaufdatum-Inhalt</string>
 
     <string name="radioButton">Angemeldet bleiben</string>
+    <string name="image_of_product">image of product</string>
+    <string name="ueberschriftAnmeldung">Anmelden</string>
+    <string name="signup">Jetzt anmelden</string>
+    <string name="signupnow">Noch kein Konto? Hier registrieren!</string>
+    <string name="benutzer">Benutzername</string>
+    <string name="benutzerText">Benutzername-Inhalt</string>
+    <string name="email">E-Mail-Adresse</string>
+    <string name="passwort">Passwort</string>
+    <string name="passwortText">Passswort-Inhalt</string>
+
+
 
 
 </resources>
