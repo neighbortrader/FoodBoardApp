@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.auth0.android.jwt.JWT;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,7 +100,7 @@ public class UserRequestHandler extends AsyncRequestHandler<UserRequestHandler> 
             case GET_JWT_TOKEN:
                 try {
                     latestReceivedJWToken = getJWTRequest(userToCreate);
-                    userToCreate.setJwtToken(latestReceivedJWToken);
+                    TokenHandler.setJwtToken((latestReceivedJWToken));
                     return null;
                 } catch (Exception e) {
                     exception = e;

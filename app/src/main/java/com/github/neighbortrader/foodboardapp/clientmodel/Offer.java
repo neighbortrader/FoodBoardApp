@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,7 +75,7 @@ public class Offer implements ToNameValueMap {
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
-            return new Offer(User.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
+            return new Offer(UserHandler.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
@@ -87,7 +89,7 @@ public class Offer implements ToNameValueMap {
     }
 
     public static Offer createRandomOffer() {
-        User user = User.getCurrentUserInstance();
+        User user = UserHandler.getCurrentUserInstance();
 
         Random r = new Random();
 

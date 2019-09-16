@@ -6,6 +6,8 @@ import android.util.Log;
 import com.auth0.android.jwt.JWT;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
+import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,16 +84,16 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     }
 
     public boolean postOfferRequest(Offer offerToPost) {
-        User user = User.getCurrentUserInstance();
+        User user = UserHandler.getCurrentUserInstance();
 
         if (offerToPost != null && user != null) {
             try {
-                JWT jwtToken = user.getJwtToken();
+                JWT jwtToken = TokenHandler.getJwtToken();
 
                 if (jwtToken == null) {
                     Log.w(TAG, "no jwtToken found, trying to fetch one");
                     jwtToken = UserRequestHandler.getJWTRequest(user);
-                    user.setJwtToken(jwtToken);
+                    TokenHandler.setJwtToken(jwtToken);
                 }
 
                 if (jwtToken.isExpired(0)) {
@@ -103,7 +105,7 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                         throw new IllegalStateException(String.format("Could not post offer. JWT-Token was expired and it was not possible to fetch a new one"));
                     } else {
                         Log.d(TAG, "Successfully received new Token");
-                        user.setJwtToken(jwtToken);
+                        TokenHandler.setJwtToken(jwtToken);
                     }
                 }
 
