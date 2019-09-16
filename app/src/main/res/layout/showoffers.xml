@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/map"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:text="@string/map"
-            app:layout_constraintBottom_toTopOf="@id/offers"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/foodboardMain"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/foodboardMain"
+    <Button
+        android:id="@+id/mapButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
-        android:foregroundGravity="center_horizontal"
-        android:gravity="center"
-        android:text="@string/foodboardMain"
-        app:layout_constraintBottom_toTopOf="@id/offers"
-        app:layout_constraintLeft_toRightOf="@id/map"
-        app:layout_constraintRight_toLeftOf="@id/filter"
+        android:text="@string/map"
+        app:layout_constraintBottom_toTopOf="@id/offersListView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/foodboardMain"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/filter"
+        android:id="@+id/filterButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/filter"
-        app:layout_constraintBottom_toTopOf="@id/offers"
+        app:layout_constraintBottom_toTopOf="@id/offersListView"
         app:layout_constraintLeft_toRightOf="@id/foodboardMain"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/offers"
+        android:id="@+id/offersListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/map">
+        app:layout_constraintTop_toBottomOf="@id/mapButton"></ListView>
 
-    </ListView>
+    <TextView
+        android:id="@+id/foodboardMain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/foodboardMain"
+        app:layout_constraintBottom_toTopOf="@id/offersListView"
+        app:layout_constraintLeft_toRightOf="@id/mapButton"
+        app:layout_constraintRight_toLeftOf="@id/filterButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/generateNewOffer"
+        android:id="@+id/createNewOfferFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
