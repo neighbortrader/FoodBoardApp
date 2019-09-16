@@ -1,9 +1,12 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
+import android.app.Application;
 import android.content.Intent;
+import android.media.MediaDrm;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -12,14 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
+import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
+import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
+import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
 import com.github.neighbortrader.foodboardapp.ui.postOffer.PostOfferActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import io.fabric.sdk.android.Fabric;
 
 public class AllOffersActivity extends AppCompatActivity {
@@ -34,6 +39,7 @@ public class AllOffersActivity extends AppCompatActivity {
     Button filterButton;
     @BindView(R.id.offersListView)
     ListView offersListView;
+    private ArrayAdapter<String> listAdapter;
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
 
@@ -49,16 +55,26 @@ public class AllOffersActivity extends AppCompatActivity {
 
         setContentView(R.layout.showoffers);
 
-        controller.invokeOfferUpdate();
+        //controller.invokeOfferUpdate();
 
         createNewOfferFloatingActionButton = findViewById(R.id.createNewOfferFAB);
         createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Intent startPostOfferIntent = new Intent(AllOffersActivity.this, PostOfferActivity.class);
                 AllOffersActivity.this.startActivity(startPostOfferIntent);
+                 */
+
+                controller.invokeOfferUpdate();
             }
         });
+
+        offersListView = findViewById(R.id.offersListView);
+
+        listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
+        offersListView.setAdapter(listAdapter);
+
     }
 
     @Override
@@ -102,9 +118,10 @@ public class AllOffersActivity extends AppCompatActivity {
     public void updateUi(ArrayList<Offer> offerArrayList) {
         Log.d(TAG, "updateUi()");
 
-        for (Offer offer : offerArrayList) {
-            offersListView.add
+        for (Offer offer : offerArrayList){
+            listAdapter.add(offer.getDescription());
         }
-    }
 
+        listAdapter.notifyDataSetChanged();
+    }
 }

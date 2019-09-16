@@ -3,7 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/map"
-        app:layout_constraintBottom_toTopOf="@id/offersListView"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/foodboardMain"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,21 +19,12 @@
     <Button
         android:id="@+id/filterButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/filter"
-        app:layout_constraintBottom_toTopOf="@id/offersListView"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
         app:layout_constraintLeft_toRightOf="@id/foodboardMain"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/offersListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapButton"></ListView>
 
     <TextView
         android:id="@+id/foodboardMain"
@@ -42,19 +33,48 @@
         android:foregroundGravity="center_horizontal"
         android:gravity="center"
         android:text="@string/foodboardMain"
-        app:layout_constraintBottom_toTopOf="@id/offersListView"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
         app:layout_constraintLeft_toRightOf="@id/mapButton"
         app:layout_constraintRight_toLeftOf="@id/filterButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mapButton">
+
+        <ListView
+            android:id="@+id/offersListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:choiceMode="singleChoice"
+            android:clickable="true"
+            android:divider="@android:color/holo_green_light"
+            android:dividerHeight="5dp"></ListView>
+    </androidx.core.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createNewOfferFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/createNewOfferFAB2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

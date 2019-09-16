@@ -49,7 +49,7 @@ public class Offer implements ToNameValueMap {
     @Setter
     private LocalDateTime creationDate;
 
-    private Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDatea) {
+    private Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate) {
         this.user = user;
         this.price = price;
 
@@ -105,12 +105,12 @@ public class Offer implements ToNameValueMap {
 
         String description = "Testbeschreibung";
         LocalDateTime purchaseDate = LocalDateTime.now();
-        LocalDateTime exexpireDate = purchaseDate.plusDays(r.nextInt(20))
+        LocalDateTime expireDate = purchaseDate.plusDays(r.nextInt(20))
                 .plusHours(r.nextInt(24))
                 .plusMinutes(r.nextInt(60))
                 .plusSeconds(r.nextInt(60));
 
-        return new Offer(user, price, grocery, description, purchaseDate, exexpireDate);
+        return new Offer(user, price, grocery, description, purchaseDate, expireDate);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.lifecycle.ViewModel;
 
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
@@ -17,11 +18,18 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyp
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
+import java.util.ArrayList;
+
+import lombok.Getter;
+
 public class AllOffersModel extends ViewModel {
     public String TAG = AllOffersModel.class.getSimpleName();
 
     private AllOffersController allOffersController;
     private Context context = ContextHandler.getAppContext();
+
+    @Getter
+    private ArrayList<Offer> currentOffers = new ArrayList<>();
 
     public AllOffersModel(AllOffersController allOffersController) {
         this.allOffersController = allOffersController;
@@ -64,8 +72,8 @@ public class AllOffersModel extends ViewModel {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
             public void onResponse(OfferRequestHandler object) {
-                allOffersController.invokeUiUpdate(object);
-            }
+                currentOffers.addAll(object.getReceivedOffers());
+                allOffersController.invokeUiUpdate(object);            }
 
             @Override
             public void onFailure(Exception e) {

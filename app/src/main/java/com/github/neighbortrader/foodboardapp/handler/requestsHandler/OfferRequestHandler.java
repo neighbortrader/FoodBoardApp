@@ -176,6 +176,8 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                 receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
             }
 
+            setReceivedOffers(receivedOffers);
+
             return true;
         } catch (Exception e) {
             exception = e;
