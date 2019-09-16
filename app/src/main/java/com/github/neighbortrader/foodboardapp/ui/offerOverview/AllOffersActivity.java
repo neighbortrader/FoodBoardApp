@@ -18,6 +18,8 @@ import com.github.neighbortrader.foodboardapp.ui.postOffer.PostOfferActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import butterknife.BindView;
 import io.fabric.sdk.android.Fabric;
@@ -117,11 +119,24 @@ public class AllOffersActivity extends AppCompatActivity {
     public void updateUi(ArrayList<Offer> offerArrayList) {
         Log.d(TAG, "updateUi()");
 
-        for (Offer offer : offerArrayList){
+        Collections.sort(offerArrayList, new Comparator<Offer>() {
+            @Override
+            public int compare(Offer offer, Offer t1) {
+                return offer.getCreationDate().compareTo(t1.getCreationDate()) * -1;
+            }
+        });
 
+        listAdapter.clear();
+
+        for (Offer offer : offerArrayList) {
             StringBuffer offerAsDisplayString = new StringBuffer();
 
-            offerAsDisplayString.append(offer.getDescription().substring(0, 16))
+            int endIndex = 16;
+
+            if (offer.getDescription().length() < 16)
+                endIndex = offer.getDescription().length();
+
+            offerAsDisplayString.append(offer.getDescription().substring(endIndex))
                     .append(" " + offer.getPrice().getFormattedPrice())
                     .append(" " + offer.getGroceryCategory().getGroceryName());
 
@@ -130,7 +145,7 @@ public class AllOffersActivity extends AppCompatActivity {
         listAdapter.notifyDataSetChanged();
     }
 
-    public void setRefreshing(boolean value){
+    public void setRefreshing(boolean value) {
         pullToRefreshLayout.setRefreshing(value);
     }
 }

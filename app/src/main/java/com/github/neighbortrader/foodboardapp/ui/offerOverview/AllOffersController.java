@@ -5,7 +5,7 @@ import android.content.Context;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.errorHandler.ErrorHandler;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 
 import java.util.ArrayList;
@@ -35,6 +35,10 @@ public class AllOffersController {
         }
     }
 
+    public ArrayList<Offer> getCurrentOffers(){
+        return model.getCurrentOffers();
+    }
+
     public void invokeUiUpdate(OfferRequestHandler offerRequestHandler){
         allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
         waitingForResponse = false;
@@ -42,7 +46,7 @@ public class AllOffersController {
     }
 
     public void invokeUiUpdate(Exception e) {
-        ErrorHandler.buildErrorHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.unableToUpdate));
+        ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.unableToUpdate));
         waitingForResponse = false;
         allOffersActivity.setRefreshing(false);
     }

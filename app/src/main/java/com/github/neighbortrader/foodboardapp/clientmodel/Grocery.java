@@ -58,6 +58,15 @@ public class Grocery implements ToNameValueMap {
         return new Grocery(-1, "Unknown grocery");
     }
 
+    public static Grocery findGrocery(String groceryName) {
+        for (Grocery grocery : Grocery.currentGroceries) {
+            if (grocery.getGroceryName() == groceryName)
+                return grocery;
+        }
+
+        return new Grocery(-1, "Unknown grocery");
+    }
+
     public static Grocery createGroceryFromJSON(JSONObject jsonObject) {
         try {
             return Grocery.buildGrocery(jsonObject.getInt("id"), jsonObject.getString("name"));
@@ -90,5 +99,10 @@ public class Grocery implements ToNameValueMap {
         nameValueMap.put("name", groceryName);
 
         return nameValueMap;
+    }
+
+    @Override
+    public String toString() {
+        return groceryName;
     }
 }

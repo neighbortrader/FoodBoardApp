@@ -1,19 +1,28 @@
-package com.github.neighbortrader.foodboardapp.handler.errorHandler;
+package com.github.neighbortrader.foodboardapp.handler.toastHandler;
 
 import android.widget.Toast;
 
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
-public class ErrorHandler {
+public class ToastHandler {
 
     private Exception e;
 
-    private ErrorHandler(Exception e) {
+    private ToastHandler(Exception e) {
         this.e = e;
     }
 
-    public static ErrorHandler buildErrorHandler(Exception e){
-        return new ErrorHandler(e);
+    public static ToastHandler buildErrorToastHandler(Exception e){
+        return new ToastHandler(e);
+    }
+
+    public static ToastHandler buildToastHandler(){
+        return new ToastHandler(null);
+    }
+
+    public void makeToast(String message){
+        Toast toast=Toast.makeText(ContextHandler.getAppContext(),message,Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void errorToast(){

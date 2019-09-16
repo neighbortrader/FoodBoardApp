@@ -15,4 +15,6 @@
     <string name="foodCategoryDetailsText">Lebensmittelkategorie-Inhalt</string>
     <string name="image_of_product">Produkbild</string>
     <string name="unableToUpdate">Die Angebote konnten nicht aktualisiert werden.</string>
+    <string name="SuccessfullPostedOffer">Dein Angebot wurde erfolgreich erstellt</string>
+    <string name="UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
 </resources>

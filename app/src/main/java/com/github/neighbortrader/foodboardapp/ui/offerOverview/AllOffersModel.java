@@ -8,7 +8,7 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.errorHandler.ErrorHandler;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
@@ -56,7 +56,7 @@ public class AllOffersModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-                ErrorHandler.buildErrorHandler(e).errorToast();
+                ToastHandler.buildErrorToastHandler(e).errorToast();
             }
 
             @Override

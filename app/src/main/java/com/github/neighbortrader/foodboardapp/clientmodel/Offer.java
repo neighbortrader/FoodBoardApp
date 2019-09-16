@@ -1,6 +1,8 @@
 package com.github.neighbortrader.foodboardapp.clientmodel;
 
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -19,7 +21,7 @@ import java.util.Random;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Offer implements ToNameValueMap {
+public class Offer implements ToNameValueMap, Parcelable  {
     public static String TAG = Offer.class.getSimpleName();
 
     @Getter
@@ -62,6 +64,26 @@ public class Offer implements ToNameValueMap {
         this.expireDate = expireDate;
         this.creationDate = creationDate;
     }
+
+    public static Offer createOffer(Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate){
+        return new Offer(UserHandler.getCurrentUserInstance(), price, groceryCategory, description, purchaseDate, expireDate, null);
+    }
+
+    protected Offer(Parcel in) {
+        description = in.readString();
+    }
+
+    public static final Creator<Offer> CREATOR = new Creator<Offer>() {
+        @Override
+        public Offer createFromParcel(Parcel in) {
+            return new Offer(in);
+        }
+
+        @Override
+        public Offer[] newArray(int size) {
+            return new Offer[size];
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static Offer createOfferFromJSON(JSONObject jsonObject) {
@@ -118,7 +140,7 @@ public class Offer implements ToNameValueMap {
     public String toString() {
         return "Offer{" +
                 "user=" + user +
-                ", price=" + price +
+                ", priceEditText=" + price +
                 ", groceryCategory=" + groceryCategory +
                 ", description='" + description + '\'' +
                 ", purchaseDate=" + purchaseDate +
@@ -132,12 +154,22 @@ public class Offer implements ToNameValueMap {
         Map<String, String> nameValueMap = new Hashtable<>();
 
         nameValueMap.put("description", description);
-        nameValueMap.put("price", Double.toString(price.getValue()));
+        nameValueMap.put("priceEditText", Double.toString(price.getValue()));
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
         nameValueMap.put("CreationDate", creationDate.toString());
         nameValueMap.put("grocerieId", Integer.toString(groceryCategory.getGroceryId()));
 
         return nameValueMap;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(description);
     }
 }
