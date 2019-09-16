@@ -18,7 +18,6 @@ public class ErrorHandler {
 
     public void errorToast(){
         Toast errorToast=Toast.makeText(ContextHandler.getAppContext(),e.getMessage(),Toast.LENGTH_SHORT);
-        errorToast.setMargin(50,50);
         errorToast.show();
     }
 }

@@ -127,9 +127,6 @@ public class AllOffersActivity extends AppCompatActivity {
 
             listAdapter.add(offerAsDisplayString.toString());
         }
-
-
-
         listAdapter.notifyDataSetChanged();
     }
 
