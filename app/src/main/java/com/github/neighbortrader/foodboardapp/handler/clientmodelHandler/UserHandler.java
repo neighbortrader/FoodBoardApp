@@ -44,7 +44,7 @@ public class UserHandler {
     }
 
     public static void saveToSharedPreferences(User user) {
-        Log.d(TAG, "saveToSharedPreferences()");
+        Log.d(TAG, "saveCurrentGroceriesToSharedPreferences()");
 
         if (user != null) {
             Gson gson = GsonHandler.getGsonInstance();
@@ -60,7 +60,7 @@ public class UserHandler {
     }
 
     public static User loadUserFromSharedPreferences() {
-        Log.d(TAG, "loadUserFromSharedPreferences()");
+        Log.d(TAG, "loadGroceriesFromSharedPreferences()");
 
         SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
 

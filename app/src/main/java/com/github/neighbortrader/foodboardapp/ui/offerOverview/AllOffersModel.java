@@ -1,12 +1,11 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModel;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.errorHandler.ErrorHandler;
@@ -14,7 +13,6 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryReq
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 public class AllOffersModel extends ViewModel {
@@ -39,6 +37,7 @@ public class AllOffersModel extends ViewModel {
         if (currentUser != null) {
             TokenHandler.removeToken();
             UserHandler.saveToSharedPreferences(currentUser);
+            GroceryHandler.saveCurrentGroceriesToSharedPreferences();
         }
     }
 
@@ -52,6 +51,7 @@ public class AllOffersModel extends ViewModel {
             @Override
             public void onFailure(Exception e) {
                 ErrorHandler.buildErrorHandler(e).errorToast();
+                GroceryHandler.loadGroceriesFromSharedPreferences();
             }
 
             @Override
@@ -64,7 +64,7 @@ public class AllOffersModel extends ViewModel {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
             public void onResponse(OfferRequestHandler object) {
-                allOffersController.invokeUiUpdate(object);
+                //allOffersController.invokeUiUpdate(object);
             }
 
             @Override

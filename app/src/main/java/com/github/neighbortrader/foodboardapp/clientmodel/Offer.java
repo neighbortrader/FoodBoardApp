@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 
 import org.json.JSONException;
@@ -75,7 +76,7 @@ public class Offer implements ToNameValueMap {
             LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
 
-            return new Offer(UserHandler.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate);
+            return new Offer(UserHandler.getCurrentUserInstance(), price, GroceryHandler.findGrocery(grocerieId), description, purchaseDate, expireDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {
@@ -96,12 +97,12 @@ public class Offer implements ToNameValueMap {
         double randomValue = 0 + (20) * r.nextDouble();
         Price price = new Price(randomValue);
 
-        if (Grocery.amountOfCurrentGroceries() == 0) {
+        if (GroceryHandler.amountOfCurrentGroceries() == 0) {
             return null;
         }
 
-        int randomInt = r.nextInt(Grocery.getCurrentGroceries().size()) + 1;
-        Grocery grocery = Grocery.findGrocery(randomInt);
+        int randomInt = r.nextInt(GroceryHandler.getCurrentGroceries().size()) + 1;
+        Grocery grocery = GroceryHandler.findGrocery(randomInt);
 
         String description = "Testbeschreibung";
         LocalDateTime purchaseDate = LocalDateTime.now();

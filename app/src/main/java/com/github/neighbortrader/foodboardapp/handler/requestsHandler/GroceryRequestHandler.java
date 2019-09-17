@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -75,10 +76,10 @@ public class GroceryRequestHandler extends AsyncRequestHandler<GroceryRequestHan
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                receivedCategories.add(Grocery.createGroceryFromJSON(jsonObject));
+                receivedCategories.add(GroceryHandler.createGroceryFromJSON(jsonObject));
             }
 
-            Grocery.updateCurrentGroceries(receivedCategories);
+            GroceryHandler.updateCurrentGroceries(receivedCategories);
 
             return this;
         } catch (Exception e) {
