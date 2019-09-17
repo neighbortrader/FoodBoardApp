@@ -26,9 +26,8 @@ public class PostOfferController {
     }
 
     public void invokeFinish() {
-        //postOfferActivity.startStopProgressBar(false);
         postOfferActivity.finishProgressBar();
-       // postOfferActivity.finish();
+        postOfferActivity.finish();
     }
 
 

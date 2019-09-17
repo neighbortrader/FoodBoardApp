@@ -67,9 +67,9 @@ public class AllOffersModel extends ViewModel {
     public void updateOffers() {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
-            public void onResponse(OfferRequestHandler object) {
-                currentOffers.addAll(object.getReceivedOffers());
-                allOffersController.invokeUiUpdate(object);
+            public void onResponse(OfferRequestHandler offerRequestHandler) {
+                currentOffers.addAll(offerRequestHandler.getReceivedOffers());
+                allOffersController.invokeUiUpdate(offerRequestHandler);
             }
 
             @Override

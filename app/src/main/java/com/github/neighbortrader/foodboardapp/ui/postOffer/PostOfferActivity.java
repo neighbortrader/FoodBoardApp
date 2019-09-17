@@ -2,12 +2,16 @@ package com.github.neighbortrader.foodboardapp.ui.postOffer;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -16,6 +20,7 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 
@@ -28,6 +33,7 @@ public class PostOfferActivity extends Activity {
     public EditText description;
     public EditText priceEditText;
     public EditText expireDate;
+    public ImageView offerImage;
     PostOfferController controller;
     DatePickerDialog picker;
 
@@ -46,6 +52,7 @@ public class PostOfferActivity extends Activity {
         description = findViewById(R.id.createOffer_EdTxt_Description);
         priceEditText = findViewById(R.id.editTextPreis);
         expireDate = findViewById(R.id.editTextmhd);
+        offerImage = findViewById(R.id.offerImage);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
                 android.R.layout.simple_spinner_item, Grocery.getCurrentGroceries());
@@ -73,20 +80,21 @@ public class PostOfferActivity extends Activity {
         });
     }
 
-    public void startStopProgressBar(boolean value){
-        if (value){
+    public void startStopProgressBar(boolean value) {
+        if (value) {
             ProgressBar progressBar = findViewById(R.id.progressBar);
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setIndeterminate(true);
-        }else {
+        } else {
             ProgressBar progressBar = findViewById(R.id.progressBar);
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(false);
         }
     }
 
-    public void finishProgressBar(){
+    public void finishProgressBar() {
         ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setIndeterminate(false);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setProgress(100, true);
     }

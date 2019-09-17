@@ -135,7 +135,7 @@ public class AllOffersActivity extends AppCompatActivity {
             if (offer.getDescription().length() < 16)
                 endIndex = offer.getDescription().length();
 
-            offerAsDisplayString.append(offer.getDescription().substring(endIndex))
+            offerAsDisplayString.append(offer.getDescription().substring(0, endIndex))
                     .append(" " + offer.getPrice().getFormattedPrice())
                     .append(" " + offer.getGroceryCategory().getGroceryName());
 

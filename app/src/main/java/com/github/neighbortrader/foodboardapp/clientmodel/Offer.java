@@ -146,7 +146,7 @@ public class Offer implements ToNameValueMap, Parcelable {
         Map<String, String> nameValueMap = new Hashtable<>();
 
         nameValueMap.put("description", description);
-        nameValueMap.put("priceEditText", Double.toString(price.getValue()));
+        nameValueMap.put("price", Double.toString(price.getValue()));
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
         nameValueMap.put("CreationDate", creationDate.toString());
