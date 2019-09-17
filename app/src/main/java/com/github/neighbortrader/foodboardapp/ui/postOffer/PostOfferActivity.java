@@ -19,6 +19,7 @@ import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -55,7 +56,7 @@ public class PostOfferActivity extends Activity {
         offerImage = findViewById(R.id.offerImage);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
-                android.R.layout.simple_spinner_item, Grocery.getCurrentGroceries());
+                android.R.layout.simple_spinner_item, GroceryHandler.getCurrentGroceries());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         categorySpinner.setAdapter(adapter);
@@ -102,7 +103,7 @@ public class PostOfferActivity extends Activity {
     public Offer createOfferFromUserInput() {
         String offerDescription = description.getText().toString();
         Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
-        Grocery grocery = Grocery.findGrocery(categorySpinner.getSelectedItem().toString());
+        Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
         LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
 
         return Offer.createOffer(price, grocery, offerDescription, expireLocalDateTime, expireLocalDateTime);

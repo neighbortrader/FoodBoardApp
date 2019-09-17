@@ -91,11 +91,7 @@ public class Offer implements ToNameValueMap, Parcelable {
             LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
             LocalDateTime creationDate = LocalDateTime.parse(jsonObject.getString("creationDate"), dateTimeFormatter);
 
-<<<<<<< HEAD
-            return new Offer(UserHandler.getCurrentUserInstance(), price, GroceryHandler.findGrocery(grocerieId), description, purchaseDate, expireDate);
-=======
-            return new Offer(UserHandler.getCurrentUserInstance(), price, Grocery.findGrocery(grocerieId), description, purchaseDate, expireDate, creationDate);
->>>>>>> feature/generateOffer
+            return new Offer(UserHandler.getCurrentUserInstance(), price, GroceryHandler.findGrocery(grocerieId), description, purchaseDate, expireDate, creationDate);
         } catch (JSONException e) {
             Log.e(TAG, "JSONException while trying to create Offer", e);
         } catch (RuntimeException e) {

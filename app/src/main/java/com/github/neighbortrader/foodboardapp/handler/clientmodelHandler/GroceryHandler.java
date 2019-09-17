@@ -55,6 +55,15 @@ public class GroceryHandler {
         return new Grocery(-1, "Unknown grocery");
     }
 
+    public static Grocery findGrocery(String groceryName) {
+        for (Grocery grocery : GroceryHandler.currentGroceries) {
+            if (grocery.getGroceryName() == groceryName)
+                return grocery;
+        }
+
+        return new Grocery(-1, "Unknown grocery");
+    }
+
     public static Grocery createGroceryFromJSON(JSONObject jsonObject) {
         try {
             return GroceryHandler.buildGrocery(jsonObject.getInt("id"), jsonObject.getString("name"));
