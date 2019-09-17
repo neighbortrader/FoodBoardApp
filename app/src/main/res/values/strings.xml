@@ -19,7 +19,7 @@
     <string name="postOffer_description">Beschreibung</string>
     <string name="postOffer_editTextDescription_description">z.B. frischer Salat</string>
     <string name="postOffer_price">Preis</string>
-    <string name="postOffer_editTextPrice_description">5.00</string>
+    <string name="postOffer_editTextPrice_description">5.00€</string>
     <string name="postOffer_foodCategory">Lebensmittelkategorie</string>
     <string name="postOffer_expirationDate">Mindeshaltbarkeitsdatum</string>
     <string name="postOffer_editTextexpirationDate_Description">DD.MM.YYYY</string>

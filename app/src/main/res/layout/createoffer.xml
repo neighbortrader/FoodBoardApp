@@ -14,11 +14,11 @@
         app:layout_constraintTop_toBottomOf="@id/editTextmhd" />
 
     <EditText
-        android:id="@+id/editTextBeschreibung"
+        android:id="@+id/createOffer_EdTxt_Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
-        android:text="@string/postOffer_editTextDescription_description"
+        android:hint="@string/postOffer_editTextDescription_description"
         app:layout_constraintBottom_toTopOf="@id/preis"
         app:layout_constraintTop_toBottomOf="@id/beschreibung" />
 
@@ -26,7 +26,8 @@
         android:id="@+id/editTextPreis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/postOffer_editTextPrice_description"
+        android:hint="@string/postOffer_editTextPrice_description"
+        android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@id/foodCategory"
         app:layout_constraintTop_toBottomOf="@id/preis" />
 
@@ -37,7 +38,7 @@
         android:inputType="none"
         android:focusable="false"
         android:cursorVisible="false"
-        android:text="@string/postOffer_editTextexpirationDate_Description"
+        android:hint="@string/postOffer_editTextexpirationDate_Description"
         app:layout_constraintBottom_toTopOf="@id/createOffer"
         app:layout_constraintTop_toBottomOf="@id/mhd" />
 
@@ -72,7 +73,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/postOffer_description"
-        app:layout_constraintBottom_toTopOf="@id/editTextBeschreibung"
+        app:layout_constraintBottom_toTopOf="@id/createOffer_EdTxt_Description"
         app:layout_constraintTop_toBottomOf="@id/offerImage" />
 
     <TextView
@@ -82,7 +83,7 @@
         android:gravity="center_horizontal"
         android:text="@string/postOffer_price"
         app:layout_constraintBottom_toTopOf="@id/editTextPreis"
-        app:layout_constraintTop_toBottomOf="@id/editTextBeschreibung" />
+        app:layout_constraintTop_toBottomOf="@id/createOffer_EdTxt_Description" />
 
     <TextView
         android:id="@+id/foodCategory"

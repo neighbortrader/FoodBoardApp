@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +40,7 @@ public class PostOfferActivity extends Activity {
 
         postOfferBtn = findViewById(R.id.createOffer);
         categorySpinner = findViewById(R.id.foodCategorySpinner);
-        description = findViewById(R.id.editTextBeschreibung);
+        description = findViewById(R.id.createOffer_EdTxt_Description);
         priceEditText = findViewById(R.id.editTextPreis);
         expireDate = findViewById(R.id.editTextmhd);
 
@@ -55,28 +54,23 @@ public class PostOfferActivity extends Activity {
 
         categorySpinner.setAdapter(adapter);
 
-        postOfferBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Offer offer = createOfferFromView(v);
-                controller.invokePostOffer(offer);
-            }
+        postOfferBtn.setOnClickListener(v -> {
+            Offer offer = createOfferFromUserInput();
+            controller.invokePostOffer(offer);
         });
 
-        expireDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int day = calender.get(Calendar.DAY_OF_MONTH);
-                int month = calender.get(Calendar.MONTH);
-                int year = calender.get(Calendar.YEAR);
+        expireDate.setOnClickListener(v -> {
+            int day = calender.get(Calendar.DAY_OF_MONTH);
+            int month = calender.get(Calendar.MONTH);
+            int year = calender.get(Calendar.YEAR);
 
-                picker = new DatePickerDialog(PostOfferActivity.this,
-                        (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
-                picker.show();
-            }
+            picker = new DatePickerDialog(PostOfferActivity.this,
+                    (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
+            picker.show();
         });
     }
 
-    public Offer createOfferFromView(View v) {
+    public Offer createOfferFromUserInput() {
         String offerDescription = description.getText().toString();
         Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
         Grocery grocery = Grocery.findGrocery(categorySpinner.getSelectedItem().toString());
