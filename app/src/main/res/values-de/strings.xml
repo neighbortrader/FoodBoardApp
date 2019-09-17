@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="UserDetails">User-Informationen</string>
+    <string name="UserDetailsText">User-Infos-Inhalt</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="benutzer">Benutzername</string>
+    <string name="benutzerText">Benutzername-Inhalt</string>
+    <string name="beschreibungDetails">Beschreibung</string>
+    <string name="beschreibungDetailsText">Beschreibung-Inhalt</string>
+    <string name="dateDetails">Erstell-/Kaufdatum</string>
+    <string name="dateDetailsText">Ertell-/Kaufdatum-Inhalt</string>
+    <string name="email">Ertell-/Kaufdatum-Inhalt</string>
+    <string name="emailText">E-Mail-Text</string>
+    <string name="foodCategoryDetails">Lebensmittelkategorie</string>
+    <string name="foodCategoryDetailsText">Lebensmittelkategorie-Inhalt</string>
+    <string name="image_of_product">Produkbild</string>
+    <string name="unableToUpdate">Die Angebote konnten nicht aktualisiert werden.</string>
+    <string name="SuccessfullPostedOffer">Dein Angebot wurde erfolgreich erstellt</string>
+    <string name="UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
+</resources>

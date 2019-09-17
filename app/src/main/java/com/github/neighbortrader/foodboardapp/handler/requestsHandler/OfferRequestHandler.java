@@ -80,6 +80,7 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                 wasSuccessful = getOffersRequest();
                 break;
         }
+
         return this;
     }
 
@@ -175,6 +176,8 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 receivedOffers.add(Offer.createOfferFromJSON(jsonObject));
             }
+
+            this.setReceivedOffers(receivedOffers);
 
             return true;
         } catch (Exception e) {

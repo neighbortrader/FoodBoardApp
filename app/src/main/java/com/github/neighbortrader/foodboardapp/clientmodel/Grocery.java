@@ -42,4 +42,9 @@ public class Grocery implements ToNameValueMap {
 
         return nameValueMap;
     }
+
+    @Override
+    public String toString() {
+        return groceryName;
+    }
 }

@@ -21,17 +21,15 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserHandler {
 
     public static final String TAG = UserHandler.class.getSimpleName();
-
-    private static User userInstance;
-
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
-
-    public static void setCurrentUserInstance(User userInstance) {
-        UserHandler.userInstance = userInstance;
-    }
+    private static User userInstance;
 
     public static User getCurrentUserInstance() {
         return UserHandler.userInstance;
+    }
+
+    public static void setCurrentUserInstance(User userInstance) {
+        UserHandler.userInstance = userInstance;
     }
 
     public static User generateRandomUser() {
@@ -48,7 +46,7 @@ public class UserHandler {
 
         if (user != null) {
             Gson gson = GsonHandler.getGsonInstance();
-            // FIXME Caused by: java.lang.IllegalArgumentException: class java.text.DecimalFormat declares multiple JSON fields named maximumFractionDigits #23
+
             String userToSaveAsJsonString = null; //gson.toJson(user);
 
             SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);

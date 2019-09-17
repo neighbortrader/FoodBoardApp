@@ -4,16 +4,23 @@ import android.content.Context;
 
 import androidx.lifecycle.ViewModel;
 
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.errorHandler.ErrorHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
+
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
+
+import java.util.ArrayList;
+
+import lombok.Getter;
 
 public class AllOffersModel extends ViewModel {
     public String TAG = AllOffersModel.class.getSimpleName();
@@ -21,11 +28,13 @@ public class AllOffersModel extends ViewModel {
     private AllOffersController allOffersController;
     private Context context = ContextHandler.getAppContext();
 
+    @Getter
+    private ArrayList<Offer> currentOffers = new ArrayList<>();
+
     public AllOffersModel(AllOffersController allOffersController) {
         this.allOffersController = allOffersController;
     }
 
-    // TODO: doesn't really belong here
     public void initialize() {
         updateGroceryCategories();
         UserHandler.loadUserAndUserData();
@@ -50,8 +59,7 @@ public class AllOffersModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-                ErrorHandler.buildErrorHandler(e).errorToast();
-                GroceryHandler.loadGroceriesFromSharedPreferences();
+                ToastHandler.buildErrorToastHandler(e).errorToast();
             }
 
             @Override
@@ -63,8 +71,10 @@ public class AllOffersModel extends ViewModel {
     public void updateOffers() {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
-            public void onResponse(OfferRequestHandler object) {
-                //allOffersController.invokeUiUpdate(object);
+
+            public void onResponse(OfferRequestHandler offerRequestHandler) {
+                currentOffers.addAll(offerRequestHandler.getReceivedOffers());
+                allOffersController.invokeUiUpdate(offerRequestHandler);
             }
 
             @Override

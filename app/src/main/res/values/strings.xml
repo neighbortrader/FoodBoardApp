@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FoodBoard</string>
+    <string name="app_name" translatable="false">FoodBoard alpa</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -13,4 +13,48 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="postOffer_headline">Ein Angebot erstellen</string>
+    <string name="postOffer_Image">imageOfProduct</string>
+    <string name="postOffer_description">Beschreibung</string>
+    <string name="postOffer_editTextDescription_description">z.B. frischer Salat</string>
+    <string name="postOffer_price">Preis</string>
+    <string name="postOffer_editTextPrice_description">5.00€</string>
+    <string name="postOffer_foodCategory">Lebensmittelkategorie</string>
+    <string name="postOffer_expirationDate">Mindeshaltbarkeitsdatum</string>
+    <string name="postOffer_editTextexpirationDate_Description">DD.MM.YYYY</string>
+    <string name="postOffer_createOfferButton_Text">Angebot hochladen</string>
+
+    <string name="offerOverview_headline">FoodBoard alpha</string>
+    <string name="offerOverview_map">Karte</string>
+    <string name="offerOverview_filter">Filter</string>
+    
+    <string name="ueberschriftDetails">Angebots-Details</string>
+    <string name="beschreibungDetails">Description</string>
+    <string name="beschreibungDetailsText">Description-Content</string>
+    <string name="preisDetails">Preis</string>
+    <string name="preisDetailsText">Preis-Inhalt</string>
+    <string name="foodCategoryDetails">Lebensmittelkategorie</string>
+    <string name="foodCategoryDetailsText">Lebensmittelkategorie-Inhalt</string>
+    <string name="mhdDetails">Mindesthaltbarkeitsdatum</string>
+    <string name="mhdDetailsText">MHD-Inhalt</string>
+    <string name="UserDetails">User-Information</string>
+    <string name="UserDetailsText">User-Information-Content</string>
+    <string name="dateDetails">Erstell-/Kaufdatum</string>
+    <string name="dateDetailsText">Ertell-/Kaufdatum-Inhalt</string>
+
+    <string name="radioButton">Angemeldet bleiben</string>
+    <string name="image_of_product">image of product</string>
+    <string name="ueberschriftAnmeldung">Anmelden</string>
+    <string name="signup">Jetzt anmelden</string>
+    <string name="signupnow">Noch kein Konto? Hier registrieren!</string>
+    <string name="benutzer">Username</string>
+    <string name="benutzerText">User-Content</string>
+    <string name="email">E-Mail-Adresse</string>
+    <string name="emailText">E-Mail-Text</string>
+    <string name="passwort">Passwort</string>
+    <string name="passwortText">Passswort-Inhalt</string>
+    <string name="unableToUpdate">Unable to update Offers</string>
+    <string name="SuccessfullPostedOffer">Successfully posted your new offer</string>
+    <string name="UnsuccessfullPostedOffer">Couldnt upload your offer</string>
 </resources>
