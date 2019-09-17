@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.github.neighbortrader.foodboardapp.R;
@@ -34,9 +36,10 @@ public class PostOfferActivity extends Activity {
         Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
 
-        controller = new PostOfferController(this);
-
         setContentView(R.layout.createoffer);
+
+        controller = new PostOfferController(this);
+        startStopProgressBar(false);
 
         postOfferBtn = findViewById(R.id.createOffer);
         categorySpinner = findViewById(R.id.foodCategorySpinner);
@@ -68,6 +71,24 @@ public class PostOfferActivity extends Activity {
                     (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
             picker.show();
         });
+    }
+
+    public void startStopProgressBar(boolean value){
+        if (value){
+            ProgressBar progressBar = findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setIndeterminate(true);
+        }else {
+            ProgressBar progressBar = findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(false);
+        }
+    }
+
+    public void finishProgressBar(){
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setProgress(100, true);
     }
 
     public Offer createOfferFromUserInput() {

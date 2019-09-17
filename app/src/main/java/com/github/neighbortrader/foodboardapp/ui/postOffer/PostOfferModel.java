@@ -27,6 +27,7 @@ public class PostOfferModel {
             @Override
             public void onFailure(Exception e) {
                 ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.UnsuccessfullPostedOffer));
+                controller.onError();
             }
 
             @Override

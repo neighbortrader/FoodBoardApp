@@ -18,9 +18,18 @@ public class PostOfferController {
 
     public void invokePostOffer(Offer offer) {
         model.postOffer(offer);
+        postOfferActivity.startStopProgressBar(true);
+    }
+
+    public void onError(){
+        postOfferActivity.startStopProgressBar(false);
     }
 
     public void invokeFinish() {
-        postOfferActivity.finish();
+        //postOfferActivity.startStopProgressBar(false);
+        postOfferActivity.finishProgressBar();
+       // postOfferActivity.finish();
     }
+
+
 }
