@@ -26,7 +26,6 @@
                 android:clickable="true"
                 android:divider="@color/colorPrimary"
                 android:dividerHeight="5dp">
-
             </ListView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -49,7 +48,6 @@
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             app:toolbarId="@+id/toolbar">
 
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/AppTheme"
@@ -66,6 +64,11 @@
                     android:text="@string/app_name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher_foreground" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
