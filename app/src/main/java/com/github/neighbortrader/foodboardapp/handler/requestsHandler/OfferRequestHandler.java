@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,9 +30,17 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     @Getter
     private Offer offerToPost;
 
-    @Getter
     @Setter
     private ArrayList<Offer> receivedOffers;
+
+    public ArrayList<Offer> getReceivedOffers() {
+        sortOfferstOffers();
+        return receivedOffers;
+    }
+
+    private void sortOfferstOffers(){
+        Collections.sort(receivedOffers, (offer, t1) -> offer.getCreationDate().compareTo(t1.getCreationDate()) * -1);
+    }
 
     @Getter
     private boolean wasSuccessful;

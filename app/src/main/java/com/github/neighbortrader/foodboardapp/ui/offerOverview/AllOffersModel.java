@@ -19,6 +19,8 @@ import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import lombok.Getter;
 
@@ -28,12 +30,16 @@ public class AllOffersModel extends ViewModel {
     private AllOffersController allOffersController;
     private Context context = ContextHandler.getAppContext();
 
-    @Getter
     private ArrayList<Offer> currentOffers = new ArrayList<>();
 
     public AllOffersModel(AllOffersController allOffersController) {
         this.allOffersController = allOffersController;
     }
+
+    public ArrayList<Offer> getCurrentOffers() {
+        return currentOffers;
+    }
+
 
     public void initialize() {
         updateGroceryCategories();
@@ -71,7 +77,6 @@ public class AllOffersModel extends ViewModel {
     public void updateOffers() {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
-
             public void onResponse(OfferRequestHandler offerRequestHandler) {
                 currentOffers.addAll(offerRequestHandler.getReceivedOffers());
                 allOffersController.invokeUiUpdate(offerRequestHandler);

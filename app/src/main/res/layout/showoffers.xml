@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <Button
         android:id="@+id/mapButton"
@@ -33,6 +34,7 @@
         android:foregroundGravity="center_horizontal"
         android:gravity="center"
         android:text="@string/offerOverview_headline"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
         app:layout_constraintLeft_toRightOf="@id/mapButton"
         app:layout_constraintRight_toLeftOf="@id/filterButton"
@@ -48,14 +50,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mapButton">
 
-        <ListView
-            android:id="@+id/offersListView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:choiceMode="singleChoice"
-            android:clickable="true"
-            android:divider="@android:color/holo_green_light"
-            android:dividerHeight="5dp"/>
+            android:layout_height="match_parent" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -64,9 +63,11 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_black_24dp"
         android:clickable="true"
+        android:src="@drawable/ic_add_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

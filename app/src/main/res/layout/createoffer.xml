@@ -83,6 +83,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:text="@string/postOffer_headline"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@id/offerImage"
         app:layout_constraintTop_toTopOf="parent" />
 
