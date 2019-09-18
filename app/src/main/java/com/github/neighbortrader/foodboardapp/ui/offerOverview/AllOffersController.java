@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class AllOffersController {
 
-    AllOffersModel model;
-    AllOffersActivity allOffersActivity;
+    private AllOffersModel model;
+    private AllOffersActivity allOffersActivity;
     Context context;
 
     private boolean waitingForResponse = false;

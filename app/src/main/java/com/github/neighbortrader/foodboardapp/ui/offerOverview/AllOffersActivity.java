@@ -28,7 +28,7 @@ public class AllOffersActivity extends AppCompatActivity {
 
     public static String TAG = AllOffersActivity.class.getSimpleName();
 
-    AllOffersController controller;
+    private AllOffersController controller;
 
     @BindView(R.id.mapButton)
     Button mapButton;

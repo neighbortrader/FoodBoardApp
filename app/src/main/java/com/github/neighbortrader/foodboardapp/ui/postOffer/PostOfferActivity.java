@@ -35,8 +35,10 @@ public class PostOfferActivity extends Activity {
     public EditText priceEditText;
     public EditText expireDate;
     public ImageView offerImage;
-    PostOfferController controller;
-    DatePickerDialog picker;
+    private DatePickerDialog picker;
+
+    private PostOfferController controller;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

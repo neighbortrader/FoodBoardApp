@@ -6,8 +6,8 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
 public class PostOfferController {
-    PostOfferModel model;
-    PostOfferActivity postOfferActivity;
+    private PostOfferModel model;
+    private PostOfferActivity postOfferActivity;
     Context context;
 
     public PostOfferController(PostOfferActivity postOfferActivity) {
