@@ -21,6 +21,14 @@
             android:textColor="@android:color/white"
             android:textSize="16dp" />
 
+        <ImageView
+            android:id="@+id/offerImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtGroceryCategoryAndCreationDate"
+            android:src="@drawable/ic_free_breakfast_black_24dp"/>
+
+
         <TextView
             android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
