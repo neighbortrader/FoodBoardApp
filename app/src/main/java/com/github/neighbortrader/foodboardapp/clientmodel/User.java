@@ -1,21 +1,10 @@
 package com.github.neighbortrader.foodboardapp.clientmodel;
 
-import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.auth0.android.jwt.JWT;
-import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.gsonHandler.GsonHandler;
-import com.google.gson.Gson;
-
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class User implements ToNameValueMap {
     public static final String TAG = User.class.getSimpleName();
@@ -40,7 +29,7 @@ public class User implements ToNameValueMap {
         this.address = address;
     }
 
-    public static User userBuilder(String username, String password, String email, Address address){
+    public static User userBuilder(String username, String password, String email, Address address) {
         return new User(username, password, email, address);
     }
 

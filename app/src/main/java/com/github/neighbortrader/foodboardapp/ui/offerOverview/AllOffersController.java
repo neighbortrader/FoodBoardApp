@@ -2,24 +2,28 @@ package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
 
+import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.errorHandler.ErrorHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+
+import java.util.ArrayList;
 
 public class AllOffersController {
 
-    AllOffersModel allOffersModel;
-    AllOffersActivity allOffersActivity;
+    private AllOffersModel model;
+    private AllOffersActivity allOffersActivity;
     Context context;
 
     private boolean waitingForResponse = false;
 
     public AllOffersController(AllOffersActivity allOffersActivity) {
-        this.allOffersModel = new AllOffersModel(this);
+        this.model = new AllOffersModel(this);
         this.allOffersActivity = allOffersActivity;
         context = ContextHandler.getAppContext();
 
-        allOffersModel.initialize();
+        model.initialize();
     }
 
     public void invokeOfferUpdate() {
@@ -27,20 +31,27 @@ public class AllOffersController {
             return;
         } else {
             waitingForResponse = true;
-            allOffersModel.updateOffers();
+            model.updateOffers();
         }
+    }
+
+    public ArrayList<Offer> getCurrentOffers() {
+        return model.getCurrentOffers();
     }
 
     public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
         allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
         waitingForResponse = false;
+        allOffersActivity.setRefreshing(false);
     }
 
     public void invokeUiUpdate(Exception e) {
-        ErrorHandler.buildErrorHandler(e).errorToast();
+        ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.unableToUpdate));
+        waitingForResponse = false;
+        allOffersActivity.setRefreshing(false);
     }
 
     public void destroy() {
-        allOffersModel.destroy();
+        model.destroy();
     }
 }
