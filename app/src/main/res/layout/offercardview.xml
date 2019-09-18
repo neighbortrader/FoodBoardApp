@@ -19,7 +19,7 @@
             android:layout_height="80dp"
             android:layout_below="@+id/txtGroceryCategoryAndCreationDate"
             android:layout_marginTop="5dp"
-            android:src="@drawable/ic_free_breakfast_black_24dp" />
+            android:src="@drawable/ic_free_breakfast_black_24dp"/>
 
         <TextView
             android:id="@+id/txtGroceryCategoryAndCreationDate"
@@ -48,7 +48,7 @@
             android:layout_below="@id/txtDescription"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:textSize="15sp" />
 
