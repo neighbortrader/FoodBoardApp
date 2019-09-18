@@ -85,11 +85,10 @@ public class Offer implements ToNameValueMap, Parcelable {
             int grocerieId = jsonObject.getInt("grocerieId");
             String description = jsonObject.getString("description");
 
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-            LocalDateTime purchaseDate = LocalDateTime.parse(jsonObject.getString("purchaseDate"), dateTimeFormatter);
-            LocalDateTime expireDate = LocalDateTime.parse(jsonObject.getString("expireDate"), dateTimeFormatter);
-            LocalDateTime creationDate = LocalDateTime.parse(jsonObject.getString("creationDate"), dateTimeFormatter);
+            LocalDateTime purchaseDate = jsonStringToLocalDateTime(jsonObject, "purchaseDate");
+            LocalDateTime expireDate = jsonStringToLocalDateTime(jsonObject, "expireDate");
+            LocalDateTime creationDate = jsonStringToLocalDateTime(jsonObject, "creationDate");
 
             return new Offer(UserHandler.getCurrentUserInstance(), price, GroceryHandler.findGrocery(grocerieId), description, purchaseDate, expireDate, creationDate);
         } catch (JSONException e) {
@@ -99,6 +98,18 @@ public class Offer implements ToNameValueMap, Parcelable {
         } catch
         (Exception e) {
             Log.e(TAG, "Unknown Error while trying to create Offer", e);
+        }
+
+        return null;
+    }
+
+    private static LocalDateTime jsonStringToLocalDateTime(JSONObject jsonObject, String name) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        try {
+            return LocalDateTime.parse(jsonObject.getString(name), dateTimeFormatter);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         return null;
