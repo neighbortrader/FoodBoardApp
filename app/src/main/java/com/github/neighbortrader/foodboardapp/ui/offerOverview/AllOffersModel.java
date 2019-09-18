@@ -75,6 +75,8 @@ public class AllOffersModel extends ViewModel {
             public void onResponse(OfferRequestHandler offerRequestHandler) {
                 currentOffers.addAll(offerRequestHandler.getReceivedOffers());
                 allOffersController.invokeUiUpdate(offerRequestHandler);
+
+                ToastHandler.buildToastHandler().makeToast("Angebote erfolgreich aktualisiert");
             }
 
             @Override

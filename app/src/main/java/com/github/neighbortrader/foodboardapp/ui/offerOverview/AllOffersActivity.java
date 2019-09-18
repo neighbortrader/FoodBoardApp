@@ -1,11 +1,8 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +11,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.ui.postOffer.PostOfferActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,8 +29,6 @@ public class AllOffersActivity extends AppCompatActivity {
 
     @BindView(R.id.offersListView)
     ListView offersListView;
-    @BindView(R.id.createNewOfferFAB)
-    FloatingActionButton createNewOfferFloatingActionButton;
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefreshLayout;
     private ArrayAdapter<String> listAdapter;
@@ -50,21 +45,13 @@ public class AllOffersActivity extends AppCompatActivity {
 
         setContentView(R.layout.showoffers);
 
-        createNewOfferFloatingActionButton = findViewById(R.id.createNewOfferFAB);
-        createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startPostOfferIntent = new Intent(AllOffersActivity.this, PostOfferActivity.class);
-                AllOffersActivity.this.startActivity(startPostOfferIntent);
-            }
-        });
-
         offersListView = findViewById(R.id.offersListView);
 
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
         offersListView.setAdapter(listAdapter);
 
         pullToRefreshLayout = findViewById(R.id.pullToRefresh);
+        pullToRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
                     controller.invokeOfferUpdate();
@@ -124,18 +111,14 @@ public class AllOffersActivity extends AppCompatActivity {
         listAdapter.clear();
 
         for (Offer offer : offerArrayList) {
-            StringBuffer offerAsDisplayString = new StringBuffer();
-
-            int endIndex = 16;
-
-            if (offer.getDescription().length() < 16)
-                endIndex = offer.getDescription().length();
-
-            offerAsDisplayString.append(offer.getDescription().substring(0, endIndex))
-                    .append(" " + offer.getPrice().getFormattedPrice())
-                    .append(" " + offer.getGroceryCategory().getGroceryName());
-
-            listAdapter.add(offerAsDisplayString.toString());
+            String offerString = String.format("%s (%s)\n\n%s\n\n%s",
+                    offer.getGroceryCategory().getGroceryName(),
+                    offer.getCreationDate()
+                            .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,
+                                    FormatStyle.SHORT)),
+                    offer.getDescription(),
+                    offer.getPrice().getFormattedPrice());
+            listAdapter.add(offerString);
         }
         listAdapter.notifyDataSetChanged();
     }
