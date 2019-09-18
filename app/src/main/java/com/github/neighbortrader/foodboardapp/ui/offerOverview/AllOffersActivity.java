@@ -30,10 +30,6 @@ public class AllOffersActivity extends AppCompatActivity {
 
     private AllOffersController controller;
 
-    @BindView(R.id.mapButton)
-    Button mapButton;
-    @BindView(R.id.filterButton)
-    Button filterButton;
     @BindView(R.id.offersListView)
     ListView offersListView;
     @BindView(R.id.createNewOfferFAB)
