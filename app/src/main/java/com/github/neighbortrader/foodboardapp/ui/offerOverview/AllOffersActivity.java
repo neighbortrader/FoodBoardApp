@@ -33,10 +33,6 @@ public class AllOffersActivity extends AppCompatActivity {
 
     private AllOffersController controller;
 
-    @BindView(R.id.mapButton)
-    Button mapButton;
-    @BindView(R.id.filterButton)
-    Button filterButton;
     @BindView(R.id.recyclerView)
     RecyclerView offerRecyclerView;
     @BindView(R.id.createNewOfferFAB)
