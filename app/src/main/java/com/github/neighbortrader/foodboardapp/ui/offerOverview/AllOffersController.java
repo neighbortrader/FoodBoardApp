@@ -51,6 +51,10 @@ public class AllOffersController {
         allOffersActivity.setRefreshing(false);
     }
 
+    public void invokeGroceryUpdate(){
+        model.updateGroceryCategories();
+    }
+
     public void destroy() {
         model.destroy();
     }

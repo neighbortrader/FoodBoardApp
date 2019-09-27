@@ -2,15 +2,23 @@ package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -50,10 +58,38 @@ public class AllOffersActivity extends AppCompatActivity {
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
         offersListView.setAdapter(listAdapter);
 
+        ImageView imageView = findViewById(R.id.logoImageView);
+
+        imageView.setOnClickListener(view -> {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
+            dialogBuilder.setView(dialogView);
+
+            final EditText edt = dialogView.findViewById(R.id.edit1);
+
+            edt.setOnClickListener(view1 -> {
+                edt.setText("http://");
+                edt.setSelection(7);
+            });
+
+            dialogBuilder.setTitle("IP-Adresse");
+            dialogBuilder.setMessage("IP-Adresse und Port des Servers eingeben");
+            dialogBuilder.setPositiveButton("Okay", (dialog, whichButton) -> {
+                Urls.BASE_URL = edt.getText().toString() +"/api/";
+            });
+            dialogBuilder.setNegativeButton("Abbrechen", (dialog, whichButton) -> {
+
+            });
+            AlertDialog b = dialogBuilder.create();
+            b.show();
+        });
+
         pullToRefreshLayout = findViewById(R.id.pullToRefresh);
         pullToRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
+                    controller.invokeGroceryUpdate();
                     controller.invokeOfferUpdate();
                     setRefreshing(true);
                 }

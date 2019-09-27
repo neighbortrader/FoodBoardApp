@@ -50,7 +50,7 @@ public class AllOffersModel extends ViewModel {
         }
     }
 
-    private void updateGroceryCategories() {
+    public void updateGroceryCategories() {
         GroceryRequestHandler.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnRequestEventListener<GroceryRequestHandler>() {
             @Override
             public void onResponse(GroceryRequestHandler groceryRequestController) {
