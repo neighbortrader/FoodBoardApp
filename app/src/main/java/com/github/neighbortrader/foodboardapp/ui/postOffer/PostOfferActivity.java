@@ -80,8 +80,7 @@ public class PostOfferActivity extends Activity {
             int month = calender.get(Calendar.MONTH);
             int year = calender.get(Calendar.YEAR);
 
-            DatePickerDialog picker;
-            picker = new DatePickerDialog(PostOfferActivity.this,
+            DatePickerDialog picker = new DatePickerDialog(PostOfferActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
             picker.show();
         });
