@@ -35,7 +35,8 @@ public class UserHandler {
     public static User generateRandomUser() {
         String username = UUID.randomUUID().toString();
         String password = "adm!n9Asswor!d";
-        String email = username + "@dmx.com";
+        String email = String.format("%s@testmail.com", username);
+
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
         return User.userBuilder(username, password, email, address);
@@ -47,7 +48,7 @@ public class UserHandler {
         if (user != null) {
             Gson gson = GsonHandler.getGsonInstance();
 
-            String userToSaveAsJsonString = null; //gson.toJson(user);
+            String userToSaveAsJsonString = gson.toJson(user);
 
             SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
