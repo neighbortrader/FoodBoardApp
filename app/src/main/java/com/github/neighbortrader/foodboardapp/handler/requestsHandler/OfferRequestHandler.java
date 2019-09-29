@@ -110,8 +110,6 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
                     }
                 }
 
-                offerToPost.setCreationDate(LocalDateTime.now());
-
                 OkHttpClient client = new OkHttpClient();
 
                 Request.Builder builder = new Request.Builder();
