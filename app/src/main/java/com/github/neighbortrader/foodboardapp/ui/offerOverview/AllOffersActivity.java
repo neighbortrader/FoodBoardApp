@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 public class AllOffersActivity extends AppCompatActivity {
@@ -52,8 +53,7 @@ public class AllOffersActivity extends AppCompatActivity {
         controller = new AllOffersController(this);
 
         setContentView(R.layout.showoffers);
-
-        offersListView = findViewById(R.id.offersListView);
+        ButterKnife.bind(this);
 
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
         offersListView.setAdapter(listAdapter);
@@ -85,8 +85,8 @@ public class AllOffersActivity extends AppCompatActivity {
             b.show();
         });
 
-        pullToRefreshLayout = findViewById(R.id.pullToRefresh);
         pullToRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
+
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
                     controller.invokeGroceryUpdate();

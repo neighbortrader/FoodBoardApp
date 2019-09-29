@@ -53,7 +53,6 @@ public class Offer implements ToNameValueMap, Parcelable {
     @Setter
     private LocalDateTime expireDate;
     @Getter
-    @Setter
     private LocalDateTime creationDate;
 
     private Offer(User user, Price price, Grocery groceryCategory, String description, LocalDateTime purchaseDate, LocalDateTime expireDate, LocalDateTime creationDate) {
@@ -161,7 +160,6 @@ public class Offer implements ToNameValueMap, Parcelable {
         nameValueMap.put("price", Double.toString(price.getValue()));
         nameValueMap.put("purchaseDate", purchaseDate.toString());
         nameValueMap.put("expireDate", expireDate.toString());
-        nameValueMap.put("CreationDate", creationDate.toString());
         nameValueMap.put("grocerieId", Integer.toString(groceryCategory.getGroceryId()));
 
         return nameValueMap;

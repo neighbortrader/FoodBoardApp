@@ -2,16 +2,12 @@ package com.github.neighbortrader.foodboardapp.ui.postOffer;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -21,21 +17,37 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import lombok.Getter;
 
 public class PostOfferActivity extends Activity {
 
     public static String TAG = PostOfferActivity.class.getSimpleName();
     final Calendar calender = Calendar.getInstance();
+
+    @BindView(R.id.createOffer)
     public Button postOfferBtn;
+
+    @BindView(R.id.foodCategorySpinner)
     public Spinner categorySpinner;
+
+    @BindView(R.id.createOffer_EdTxt_Description)
     public EditText description;
+
+    @BindView(R.id.editTextPreis)
     public EditText priceEditText;
+
+    @BindView(R.id.editTextmhd)
     public EditText expireDate;
-    public ImageView offerImage;
-    private DatePickerDialog picker;
+
+    @BindView(R.id.progressBar)
+    public ProgressBar progressBar;
+
+    public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
 
     private PostOfferController controller;
 
@@ -46,16 +58,10 @@ public class PostOfferActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.createoffer);
+        ButterKnife.bind(this);
 
         controller = new PostOfferController(this);
-        startStopProgressBar(false);
-
-        postOfferBtn = findViewById(R.id.createOffer);
-        categorySpinner = findViewById(R.id.foodCategorySpinner);
-        description = findViewById(R.id.createOffer_EdTxt_Description);
-        priceEditText = findViewById(R.id.editTextPreis);
-        expireDate = findViewById(R.id.editTextmhd);
-        offerImage = findViewById(R.id.offerImage);
+        setProgressbarState(progressBarStates.NOT_LOADING);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
                 android.R.layout.simple_spinner_item, GroceryHandler.getCurrentGroceries());
@@ -77,29 +83,27 @@ public class PostOfferActivity extends Activity {
             int month = calender.get(Calendar.MONTH);
             int year = calender.get(Calendar.YEAR);
 
-            picker = new DatePickerDialog(PostOfferActivity.this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(PostOfferActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
-            picker.show();
+            datePickerDialog.show();
         });
     }
 
-    public void startStopProgressBar(boolean value) {
-        if (value) {
-            ProgressBar progressBar = findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.VISIBLE);
+    public void setProgressbarState(progressBarStates state) {
+        if (state == progressBarStates.LOADING) {
             progressBar.setIndeterminate(true);
-        } else {
-            ProgressBar progressBar = findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.VISIBLE);
+        } else if (state == progressBarStates.NOT_LOADING){
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(false);
+        } else if (state == progressBarStates.FINISHED){
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(100, true);
+        }else if (state == progressBarStates.EROOR){
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(true);
         }
-    }
-
-    public void finishProgressBar() {
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setIndeterminate(false);
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(100, true);
     }
 
     public Offer createOfferFromUserInput() {
@@ -146,6 +150,4 @@ public class PostOfferActivity extends Activity {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
     }
-
-
 }
