@@ -22,6 +22,7 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lombok.Getter;
 
 public class PostOfferActivity extends Activity {
 
@@ -46,6 +47,8 @@ public class PostOfferActivity extends Activity {
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
 
+    public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
+
     private PostOfferController controller;
 
 
@@ -58,7 +61,7 @@ public class PostOfferActivity extends Activity {
         ButterKnife.bind(this);
 
         controller = new PostOfferController(this);
-        startStopProgressBar(false);
+        setProgressbarState(progressBarStates.NOT_LOADING);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
                 android.R.layout.simple_spinner_item, GroceryHandler.getCurrentGroceries());
@@ -80,26 +83,27 @@ public class PostOfferActivity extends Activity {
             int month = calender.get(Calendar.MONTH);
             int year = calender.get(Calendar.YEAR);
 
-            DatePickerDialog picker = new DatePickerDialog(PostOfferActivity.this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(PostOfferActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
-            picker.show();
+            datePickerDialog.show();
         });
     }
 
-    public void startStopProgressBar(boolean value) {
-        if (value) {
-            progressBar.setVisibility(View.VISIBLE);
+    public void setProgressbarState(progressBarStates state) {
+        if (state == progressBarStates.LOADING) {
             progressBar.setIndeterminate(true);
-        } else {
+            progressBar.setVisibility(View.VISIBLE);
+        } else if (state == progressBarStates.NOT_LOADING){
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(false);
+        } else if (state == progressBarStates.FINISHED){
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(100, true);
+        }else if (state == progressBarStates.EROOR){
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(true);
         }
-    }
-
-    public void finishProgressBar() {
-        progressBar.setIndeterminate(false);
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(100, true);
     }
 
     public Offer createOfferFromUserInput() {

@@ -18,15 +18,15 @@ public class PostOfferController {
 
     public void invokePostOffer(Offer offer) {
         model.postOffer(offer);
-        postOfferActivity.startStopProgressBar(true);
+        postOfferActivity.setProgressbarState(PostOfferActivity.progressBarStates.LOADING);
     }
 
     public void onError(){
-        postOfferActivity.startStopProgressBar(false);
+        postOfferActivity.setProgressbarState(PostOfferActivity.progressBarStates.EROOR);
     }
 
     public void invokeFinish() {
-        postOfferActivity.finishProgressBar();
+        postOfferActivity.setProgressbarState(PostOfferActivity.progressBarStates.FINISHED);
         postOfferActivity.finish();
     }
 
