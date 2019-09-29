@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -14,11 +13,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp">
 
-        <!-- Scrollable view here -->
-
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/showOfferToolbar"
+            android:background="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="bottom|center"
             app:layout_collapseMode="pin" />
@@ -27,24 +29,8 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleGravity="top"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-                <com.google.android.material.navigation.NavigationView
-                    android:id="@+id/navigation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start|left"
-                    app:headerLayout="@layout/navigationheader"
-                    app:menu="@menu/activity_main_drawer" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -71,6 +57,3 @@
         android:clickable="true"
         android:src="@drawable/ic_add_black_24dp" />
 </RelativeLayout>
-
-
-
