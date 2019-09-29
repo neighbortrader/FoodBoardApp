@@ -15,21 +15,26 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/showOfferToolbar"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="bottom|center"
-            app:layout_collapseMode="pin" />
+            app:layout_collapseMode="pin">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </com.google.android.material.appbar.AppBarLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="false"
+                android:elevation="6dp"
+                android:gravity="left"
+                android:text="@string/app_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorWhite"
+                android:textSize="28sp" />
+        </androidx.appcompat.widget.Toolbar>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
