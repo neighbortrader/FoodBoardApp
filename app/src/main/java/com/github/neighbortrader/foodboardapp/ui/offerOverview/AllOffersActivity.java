@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
 public class AllOffersActivity extends AppCompatActivity {
@@ -53,8 +54,8 @@ public class AllOffersActivity extends AppCompatActivity {
         controller = new AllOffersController(this);
 
         setContentView(R.layout.showoffers);
+        ButterKnife.bind(this);
 
-        createNewOfferFloatingActionButton = findViewById(R.id.createNewOfferFAB);
         createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,12 +64,9 @@ public class AllOffersActivity extends AppCompatActivity {
             }
         });
 
-        offersListView = findViewById(R.id.offersListView);
-
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
         offersListView.setAdapter(listAdapter);
 
-        pullToRefreshLayout = findViewById(R.id.pullToRefresh);
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
                     controller.invokeOfferUpdate();
