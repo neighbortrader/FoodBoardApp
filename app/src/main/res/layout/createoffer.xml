@@ -5,21 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="@string/postOffer_headline"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:indeterminate="true"
+        android:elevation="4dp"
         android:max="100"
         android:minWidth="200dp"
-        android:minHeight="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/ueberschrift"
-        app:layout_constraintEnd_toEndOf="@+id/ueberschrift"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/offerImage"/>
 
     <Button
         android:id="@+id/createOffer"
@@ -67,7 +74,7 @@
         android:contentDescription="@string/postOffer_Image"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@id/beschreibung"
-        app:layout_constraintTop_toBottomOf="@id/ueberschrift"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Spinner
@@ -76,16 +83,6 @@
         android:layout_height="38dp"
         app:layout_constraintBottom_toTopOf="@id/mhd"
         app:layout_constraintTop_toBottomOf="@id/foodCategory" />
-
-    <TextView
-        android:id="@+id/ueberschrift"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:text="@string/postOffer_headline"
-        app:layout_constraintBottom_toTopOf="@id/offerImage"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/beschreibung"

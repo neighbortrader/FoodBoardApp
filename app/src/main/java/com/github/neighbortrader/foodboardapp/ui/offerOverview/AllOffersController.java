@@ -34,12 +34,15 @@ public class AllOffersController {
 
     public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
         allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
-        allOffersActivity.setRefreshing(false);
+        setProgressBarRefreshing(false);
     }
 
-    public void invokeUiUpdate(Exception e) {
-        ToastHandler.buildErrorToastHandler(e).errorToast();
-        allOffersActivity.setRefreshing(false);
+    public void invokeUiUpdate(Exception e, String message) {
+        ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(message);
+    }
+
+    public void setProgressBarRefreshing(boolean isRefresing){
+        allOffersActivity.setRefreshing(isRefresing);
     }
 
     public void destroy() {

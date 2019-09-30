@@ -6,37 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/mapButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/offerOverview_map"
-        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/foodboardMain"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/filterButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/offerOverview_filter"
-        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
-        app:layout_constraintLeft_toRightOf="@id/foodboardMain"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/foodboardMain"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:foregroundGravity="center_horizontal"
-        android:gravity="center"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
-        app:layout_constraintLeft_toRightOf="@id/mapButton"
-        app:layout_constraintRight_toLeftOf="@id/filterButton"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
@@ -46,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapButton">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <ListView
             android:id="@+id/offersListView"

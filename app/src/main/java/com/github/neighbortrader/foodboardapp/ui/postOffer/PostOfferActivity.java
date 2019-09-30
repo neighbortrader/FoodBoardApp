@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
@@ -25,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import lombok.Getter;
 
-public class PostOfferActivity extends Activity {
+public class PostOfferActivity extends AppCompatActivity {
 
     public static String TAG = PostOfferActivity.class.getSimpleName();
     final Calendar calender = Calendar.getInstance();
@@ -47,6 +50,9 @@ public class PostOfferActivity extends Activity {
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @BindView(R.id.offerImage)
     public ImageView offerImage;
@@ -75,6 +81,8 @@ public class PostOfferActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         categorySpinner.setAdapter(adapter);
+
+        setSupportActionBar(toolbar);
 
         postOfferBtn.setOnClickListener(v -> {
             Offer offer = createOfferFromUserInput();
