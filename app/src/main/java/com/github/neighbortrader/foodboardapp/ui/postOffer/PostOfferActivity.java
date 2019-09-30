@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -47,10 +48,12 @@ public class PostOfferActivity extends Activity {
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
 
+    @BindView(R.id.offerImage)
+    public ImageView offerImage;
+
     public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
 
     private PostOfferController controller;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,8 @@ public class PostOfferActivity extends Activity {
             Offer offer = createOfferFromUserInput();
             controller.invokePostOffer(offer);
         });
+
+        offerImage.setImageResource(R.drawable.food_placeholder);
 
         expireDate.setOnClickListener(v -> {
             int day = calender.get(Calendar.DAY_OF_MONTH);

@@ -36,7 +36,7 @@
         android:importantForAutofill="no"
         android:inputType="text"
         android:maxLines="1"
-        android:hint="@string/postOffer_editTextDescription_description"
+        android:hint="@string/postOffer_editTextDescription_hint"
         app:layout_constraintBottom_toTopOf="@id/preis"
         app:layout_constraintTop_toBottomOf="@id/beschreibung" />
 
@@ -44,7 +44,7 @@
         android:id="@+id/editTextPreis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/postOffer_editTextPrice_description"
+        android:hint="@string/postOffer_editTextPrice_hint"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@id/foodCategory"
         app:layout_constraintTop_toBottomOf="@id/preis" />
@@ -56,7 +56,7 @@
         android:inputType="none"
         android:focusable="false"
         android:cursorVisible="false"
-        android:hint="@string/postOffer_editTextexpirationDate_Description"
+        android:hint="@string/postOffer_expireDate_hint"
         app:layout_constraintBottom_toTopOf="@id/createOffer"
         app:layout_constraintTop_toBottomOf="@id/mhd" />
 
@@ -65,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="218dp"
         android:contentDescription="@string/postOffer_Image"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@id/beschreibung"
         app:layout_constraintTop_toBottomOf="@id/ueberschrift"
         tools:srcCompat="@tools:sample/avatars" />
@@ -118,7 +119,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/postOffer_expirationDate"
+        android:text="@string/general_dateformat"
         app:layout_constraintBottom_toTopOf="@id/editTextmhd"
         app:layout_constraintTop_toBottomOf="@id/foodCategorySpinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

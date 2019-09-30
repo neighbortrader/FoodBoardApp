@@ -102,8 +102,6 @@ public class UserHandler {
             }, randomUserToCreate).execute();
         } else {
             Log.d(TAG, "found user and added to current user instance");
-            Toast toast = Toast.makeText(context, String.format("found user and added to current user instance"), Toast.LENGTH_LONG);
-            toast.show();
             UserHandler.setCurrentUserInstance(loadedUser);
         }
     }
