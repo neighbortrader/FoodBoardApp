@@ -1,6 +1,6 @@
 package com.github.neighbortrader.foodboardapp.ui.offerDetail;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class OfferDetailActivity extends Activity {
+public class OfferDetailActivity extends AppCompatActivity {
 }

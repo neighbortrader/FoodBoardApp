@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="UserDetails">User-Informationen</string>
-    <string name="UserDetailsText">User-Infos-Inhalt</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="benutzer">Benutzername</string>
-    <string name="benutzerText">Benutzername-Inhalt</string>
-    <string name="beschreibungDetails">Beschreibung</string>
-    <string name="beschreibungDetailsText">Beschreibung-Inhalt</string>
-    <string name="dateDetails">Erstell-/Kaufdatum</string>
-    <string name="dateDetailsText">Ertell-/Kaufdatum-Inhalt</string>
-    <string name="email">Ertell-/Kaufdatum-Inhalt</string>
-    <string name="emailText">E-Mail-Text</string>
-    <string name="foodCategoryDetails">Lebensmittelkategorie</string>
-    <string name="foodCategoryDetailsText">Lebensmittelkategorie-Inhalt</string>
-    <string name="image_of_product">Produkbild</string>
-    <string name="unableToUpdate">Die Angebote konnten nicht aktualisiert werden.</string>
-    <string name="SuccessfullPostedOffer">Dein Angebot wurde erfolgreich erstellt</string>
-    <string name="UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
+    <string name="general_user">Benutzername</string>
+    <string name="postOffer_SuccessfullPostedOffer">Dein Angebot wurde erfolgreich erstellt</string>
+    <string name="postOffer_UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
+    <string name="postOffer_headline">Ein Angebot erstellen</string>
+    <string name="postOffer_foodCategory">Lebensmittelkategorie</string>
+    <string name="general_dateformat">DD.MM.YYYY</string>
+    <string name="postOffer_expireDate_hint">Mindeshaltbarkeitsdatum</string>
+    <string name="postOffer_editTextDescription_hint">frischer Salat</string>
+    <string name="postOffer_createOfferButton_Text">Angebot hochladen</string>
+    <string name="postOffer_Image">Bild</string>
+    <string name="general_passwort">Passwort</string>
+    <string name="offerOverview_map">Karte</string>
+    <string name="offerOverview_filter">Filter</string>
+    <string name="general_price">Preis</string>
+    <string name="general_unableToUpdateOffers">Angebote konnten nicht aktualisiert werden</string>
+    <string name="offerDetailview_catagory">Lebensmittelkategorie</string>
+    <string name="offerDetailview_creationDate">Erstelldatum</string>
+    <string name="general_description">Beschreibung</string>
+    <string name="offerDetailview_expireDate">Mindesthaltbarkeitsdatum</string>
+    <string name="offerDetailview_headline">"Detailansicht "</string>
+    <string name="offerDetailview_userInformation">Benutzerinformationen</string>
+    <string name="general_unableToUpdaterGroceries">Kategorien konnten nicht aktualisiert werden</string>
 </resources>

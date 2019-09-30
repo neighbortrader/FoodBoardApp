@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.crashlytics.android.Crashlytics;
@@ -31,10 +32,6 @@ public class AllOffersActivity extends AppCompatActivity {
 
     private AllOffersController controller;
 
-    @BindView(R.id.mapButton)
-    Button mapButton;
-    @BindView(R.id.filterButton)
-    Button filterButton;
     @BindView(R.id.offersListView)
     ListView offersListView;
     @BindView(R.id.createNewOfferFAB)
@@ -42,6 +39,8 @@ public class AllOffersActivity extends AppCompatActivity {
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefreshLayout;
     private ArrayAdapter<String> listAdapter;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +54,8 @@ public class AllOffersActivity extends AppCompatActivity {
 
         setContentView(R.layout.showoffers);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
 
         createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

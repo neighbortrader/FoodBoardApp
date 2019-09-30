@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
@@ -60,7 +61,7 @@ public class AllOffersModel extends ViewModel {
             @Override
             public void onFailure(Exception e) {
                 Log.d(TAG, "onFailure() in updateGroceryCategories()");
-                allOffersController.invokeUiUpdate(e);
+                allOffersController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdaterGroceries));
             }
 
             @Override
@@ -82,7 +83,8 @@ public class AllOffersModel extends ViewModel {
             @Override
             public void onFailure(Exception e) {
                 Log.d(TAG, "onFailure() in updateOffers()");
-                allOffersController.invokeUiUpdate(e);
+                allOffersController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdateOffers));
+                allOffersController.setProgressBarRefreshing(false);
             }
 
             @Override
