@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:foregroundGravity="center_horizontal"
         android:gravity="center"
-        android:text="@string/offerOverview_headline"
+        android:text="@string/app_name"
         app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
         app:layout_constraintLeft_toRightOf="@id/mapButton"
         app:layout_constraintRight_toLeftOf="@id/filterButton"

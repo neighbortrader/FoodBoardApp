@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/postOffer_description"
+        android:text="@string/general_description"
         app:layout_constraintBottom_toTopOf="@id/createOffer_EdTxt_Description"
         app:layout_constraintTop_toBottomOf="@id/offerImage" />
 
@@ -100,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/postOffer_price"
+        android:text="@string/general_price"
         app:layout_constraintBottom_toTopOf="@id/editTextPreis"
         app:layout_constraintTop_toBottomOf="@id/createOffer_EdTxt_Description" />
 
