@@ -56,12 +56,9 @@ public class AllOffersActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startPostOfferIntent = new Intent(AllOffersActivity.this, CreateOfferActivity.class);
-                AllOffersActivity.this.startActivity(startPostOfferIntent);
-            }
+        createNewOfferFloatingActionButton.setOnClickListener(view -> {
+            Intent startPostOfferIntent = new Intent(AllOffersActivity.this, CreateOfferActivity.class);
+            AllOffersActivity.this.startActivity(startPostOfferIntent);
         });
 
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);

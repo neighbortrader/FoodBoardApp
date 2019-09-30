@@ -46,6 +46,9 @@ public class CreateOfferActivity extends AppCompatActivity {
     @BindView(R.id.editTextmhd)
     public EditText expireDate;
 
+    @BindView(R.id.editTextpurchaseDate)
+    public EditText purchaseDate;
+
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
 
@@ -89,15 +92,19 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         offerImage.setImageResource(R.drawable.food_placeholder);
 
-        expireDate.setOnClickListener(v -> {
-            int day = calender.get(Calendar.DAY_OF_MONTH);
-            int month = calender.get(Calendar.MONTH);
-            int year = calender.get(Calendar.YEAR);
+        expireDate.setOnClickListener(v -> createAndShowDatePickerDialog(expireDate));
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
-                    (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
-            datePickerDialog.show();
-        });
+        purchaseDate.setOnClickListener(v -> createAndShowDatePickerDialog(purchaseDate));
+    }
+
+    private void createAndShowDatePickerDialog(EditText editText){
+        int day = calender.get(Calendar.DAY_OF_MONTH);
+        int month = calender.get(Calendar.MONTH);
+        int year = calender.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
+                (view, year1, monthOfYear, dayOfMonth) -> editText.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
+        datePickerDialog.show();
     }
 
     public void setProgressbarState(progressBarStates state) {
@@ -122,8 +129,9 @@ public class CreateOfferActivity extends AppCompatActivity {
         Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
         Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
         LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
+        LocalDateTime purchaseLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
 
-        return Offer.createOffer(price, grocery, offerDescription, expireLocalDateTime, expireLocalDateTime);
+        return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
     }
 
     @Override
