@@ -6,8 +6,8 @@
     <string name="postOffer_UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
     <string name="postOffer_headline">Ein Angebot erstellen</string>
     <string name="postOffer_foodCategory">Lebensmittelkategorie</string>
-    <string name="general_dateformat">Mindeshaltbarkeitsdatum</string>
-    <string name="postOffer_expireDate_hint">DD.MM.YYYY</string>
+    <string name="general_dateformat">DD.MM.YYYY</string>
+    <string name="postOffer_expireDate_hint">Mindeshaltbarkeitsdatum</string>
     <string name="postOffer_editTextDescription_hint">frischer Salat</string>
     <string name="postOffer_createOfferButton_Text">Angebot hochladen</string>
     <string name="postOffer_Image">Bild</string>

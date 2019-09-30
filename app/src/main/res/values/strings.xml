@@ -7,8 +7,8 @@
     <string name="postOffer_editTextDescription_hint">fresh salad</string>
     <string name="postOffer_editTextPrice_hint" translatable="false">5€</string>
     <string name="postOffer_foodCategory">Groceriecatagories</string>
-    <string name="general_dateformat">Expiredate</string>
-    <string name="postOffer_expireDate_hint">YYYY.MM.DD</string>
+    <string name="general_dateformat">YYYY.MM.DD</string>
+    <string name="postOffer_expireDate_hint">Expiredate</string>
     <string name="postOffer_createOfferButton_Text">post offer</string>
     <string name="postOffer_SuccessfullPostedOffer">Successfully posted your new offer</string>
     <string name="postOffer_UnsuccessfullPostedOffer">Could not upload your offer</string>
