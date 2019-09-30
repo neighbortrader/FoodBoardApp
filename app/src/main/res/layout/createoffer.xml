@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/foodboardTheme">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,8 +13,8 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:title="@string/postOffer_headline"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:theme="@style/foodboardTheme"
+        app:popupTheme="@style/foodboardTheme"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

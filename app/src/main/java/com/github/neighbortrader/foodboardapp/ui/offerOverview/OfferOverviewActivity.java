@@ -79,7 +79,7 @@ public class OfferOverviewActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(controller.getCurrentOffers());
         offerRecyclerView.setAdapter(adapter);
 
-        pullToRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
+        pullToRefreshLayout.setColorSchemeResources(R.color.primaryColor, R.color.primaryDarkColor, R.color.secondaryDarkColor);
 
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
