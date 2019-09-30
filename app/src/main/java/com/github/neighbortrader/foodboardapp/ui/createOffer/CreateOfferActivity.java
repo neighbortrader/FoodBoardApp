@@ -1,6 +1,5 @@
-package com.github.neighbortrader.foodboardapp.ui.postOffer;
+package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,11 +25,10 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lombok.Getter;
 
-public class PostOfferActivity extends AppCompatActivity {
+public class CreateOfferActivity extends AppCompatActivity {
 
-    public static String TAG = PostOfferActivity.class.getSimpleName();
+    public static String TAG = CreateOfferActivity.class.getSimpleName();
     final Calendar calender = Calendar.getInstance();
 
     @BindView(R.id.createOffer)
@@ -59,7 +57,7 @@ public class PostOfferActivity extends AppCompatActivity {
 
     public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
 
-    private PostOfferController controller;
+    private CreateOfferController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,7 @@ public class PostOfferActivity extends AppCompatActivity {
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
 
-        controller = new PostOfferController(this);
+        controller = new CreateOfferController(this);
         setProgressbarState(progressBarStates.NOT_LOADING);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
@@ -96,7 +94,7 @@ public class PostOfferActivity extends AppCompatActivity {
             int month = calender.get(Calendar.MONTH);
             int year = calender.get(Calendar.YEAR);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(PostOfferActivity.this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
             datePickerDialog.show();
         });
