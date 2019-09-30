@@ -1,6 +1,7 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -13,9 +14,6 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryReq
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
-
-import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
-
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class AllOffersModel extends ViewModel {
     }
 
     public void initialize() {
-        updateGroceryCategories();
+        GroceryHandler.loadGroceriesFromSharedPreferences();
         UserHandler.loadUserAndUserData();
     }
 
@@ -50,7 +48,9 @@ public class AllOffersModel extends ViewModel {
         }
     }
 
-    private void updateGroceryCategories() {
+    public void updateGroceryCategories() {
+        Log.d(TAG, "updateGroceryCategories()");
+
         GroceryRequestHandler.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnRequestEventListener<GroceryRequestHandler>() {
             @Override
             public void onResponse(GroceryRequestHandler groceryRequestController) {
@@ -59,7 +59,8 @@ public class AllOffersModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-                ToastHandler.buildErrorToastHandler(e).errorToast();
+                Log.d(TAG, "onFailure() in updateGroceryCategories()");
+                allOffersController.invokeUiUpdate(e);
             }
 
             @Override
@@ -69,9 +70,10 @@ public class AllOffersModel extends ViewModel {
     }
 
     public void updateOffers() {
+        Log.d(TAG, "updateOffers()");
+
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
-
             public void onResponse(OfferRequestHandler offerRequestHandler) {
                 currentOffers.addAll(offerRequestHandler.getReceivedOffers());
                 allOffersController.invokeUiUpdate(offerRequestHandler);
@@ -79,6 +81,7 @@ public class AllOffersModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
+                Log.d(TAG, "onFailure() in updateOffers()");
                 allOffersController.invokeUiUpdate(e);
             }
 
