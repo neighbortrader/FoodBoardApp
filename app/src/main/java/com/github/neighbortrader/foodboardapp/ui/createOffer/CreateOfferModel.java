@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.ui.postOffer;
+package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
@@ -8,11 +8,11 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestE
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 
-public class PostOfferModel {
+public class CreateOfferModel {
 
-    public PostOfferController controller;
+    public CreateOfferController controller;
 
-    public PostOfferModel(PostOfferController controller) {
+    public CreateOfferModel(CreateOfferController controller) {
         this.controller = controller;
     }
 

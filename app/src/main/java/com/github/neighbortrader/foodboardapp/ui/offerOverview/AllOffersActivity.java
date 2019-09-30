@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
-import com.github.neighbortrader.foodboardapp.ui.postOffer.PostOfferActivity;
+import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -57,12 +56,9 @@ public class AllOffersActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startPostOfferIntent = new Intent(AllOffersActivity.this, PostOfferActivity.class);
-                AllOffersActivity.this.startActivity(startPostOfferIntent);
-            }
+        createNewOfferFloatingActionButton.setOnClickListener(view -> {
+            Intent startPostOfferIntent = new Intent(AllOffersActivity.this, CreateOfferActivity.class);
+            AllOffersActivity.this.startActivity(startPostOfferIntent);
         });
 
         listAdapter = new ArrayAdapter<>(this, R.layout.simpelrow);
