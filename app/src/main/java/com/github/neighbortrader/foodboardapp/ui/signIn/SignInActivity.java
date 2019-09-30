@@ -1,6 +1,6 @@
 package com.github.neighbortrader.foodboardapp.ui.signIn;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class SignInActivity extends Activity {
+public class SignInActivity extends AppCompatActivity {
 }

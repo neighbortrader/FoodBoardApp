@@ -3,39 +3,42 @@ package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
+
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.ui.postOffer.PostOfferActivity;
+
+
+import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
-public class AllOffersActivity extends AppCompatActivity {
+public class OfferOverviewActivity extends AppCompatActivity {
 
-    public static String TAG = AllOffersActivity.class.getSimpleName();
+    public static String TAG = OfferOverviewActivity.class.getSimpleName();
 
-    private AllOffersController controller;
+    private OfferOverviewController controller;
 
     @BindView(R.id.recyclerView)
     RecyclerView offerRecyclerView;
+
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
     @BindView(R.id.pullToRefresh)
@@ -43,6 +46,10 @@ public class AllOffersActivity extends AppCompatActivity {
 
     private LinearLayoutManager linearLayoutManager;
     private RecyclerViewAdapter adapter;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +59,16 @@ public class AllOffersActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        controller = new AllOffersController(this);
+        controller = new OfferOverviewController(this);
 
         setContentView(R.layout.showoffers);
         ButterKnife.bind(this);
 
-        createNewOfferFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startPostOfferIntent = new Intent(AllOffersActivity.this, PostOfferActivity.class);
-                AllOffersActivity.this.startActivity(startPostOfferIntent);
-            }
+        setSupportActionBar(toolbar);
+
+        createNewOfferFloatingActionButton.setOnClickListener(view -> {
+            Intent startPostOfferIntent = new Intent(OfferOverviewActivity.this, CreateOfferActivity.class);
+            OfferOverviewActivity.this.startActivity(startPostOfferIntent);
         });
 
         offerRecyclerView = findViewById(R.id.recyclerView);
@@ -77,8 +83,8 @@ public class AllOffersActivity extends AppCompatActivity {
 
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
-                    controller.invokeOfferUpdate();
-                    setRefreshing(true);
+                    pullToRefreshLayout.setRefreshing(true);
+                    controller.invokeUpdate();
                 }
         );
     }

@@ -1,9 +1,11 @@
 package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
@@ -13,27 +15,20 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.GroceryReq
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestEventListener;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
-
-import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
-
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
-import lombok.Getter;
+public class OfferOverviewModel extends ViewModel {
+    public String TAG = OfferOverviewModel.class.getSimpleName();
 
-public class AllOffersModel extends ViewModel {
-    public String TAG = AllOffersModel.class.getSimpleName();
-
-    private AllOffersController allOffersController;
+    private OfferOverviewController offerOverviewController;
     private Context context = ContextHandler.getAppContext();
 
     private ArrayList<Offer> currentOffers = new ArrayList<>();
 
-    public AllOffersModel(AllOffersController allOffersController) {
-        this.allOffersController = allOffersController;
+    public OfferOverviewModel(OfferOverviewController offerOverviewController) {
+        this.offerOverviewController = offerOverviewController;
     }
 
     public ArrayList<Offer> getCurrentOffers() {
@@ -42,7 +37,7 @@ public class AllOffersModel extends ViewModel {
 
 
     public void initialize() {
-        updateGroceryCategories();
+        GroceryHandler.loadGroceriesFromSharedPreferences();
         UserHandler.loadUserAndUserData();
     }
 
@@ -56,7 +51,9 @@ public class AllOffersModel extends ViewModel {
         }
     }
 
-    private void updateGroceryCategories() {
+    public void updateGroceryCategories() {
+        Log.d(TAG, "updateGroceryCategories()");
+
         GroceryRequestHandler.builder(RequestTyps.GET_ALL_CATEGORIES, context, new OnRequestEventListener<GroceryRequestHandler>() {
             @Override
             public void onResponse(GroceryRequestHandler groceryRequestController) {
@@ -65,7 +62,8 @@ public class AllOffersModel extends ViewModel {
 
             @Override
             public void onFailure(Exception e) {
-                ToastHandler.buildErrorToastHandler(e).errorToast();
+                Log.d(TAG, "onFailure() in updateGroceryCategories()");
+                offerOverviewController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdaterGroceries));
             }
 
             @Override
@@ -75,16 +73,20 @@ public class AllOffersModel extends ViewModel {
     }
 
     public void updateOffers() {
+        Log.d(TAG, "updateOffers()");
+
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
             public void onResponse(OfferRequestHandler offerRequestHandler) {
                 currentOffers.addAll(offerRequestHandler.getReceivedOffers());
-                allOffersController.invokeUiUpdate(offerRequestHandler);
+                offerOverviewController.invokeUiUpdate(offerRequestHandler);
             }
 
             @Override
             public void onFailure(Exception e) {
-                allOffersController.invokeUiUpdate(e);
+                Log.d(TAG, "onFailure() in updateOffers()");
+                offerOverviewController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdateOffers));
+                offerOverviewController.setProgressBarRefreshing(false);
             }
 
             @Override
