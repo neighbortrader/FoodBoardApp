@@ -69,7 +69,7 @@ public class AllOffersActivity extends AppCompatActivity {
 
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
-                    controller.invokeOfferUpdate();
+                    controller.invokeUpdate();
                     setRefreshing(true);
                 }
         );

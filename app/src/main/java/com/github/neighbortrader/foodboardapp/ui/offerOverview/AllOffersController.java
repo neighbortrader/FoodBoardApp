@@ -2,7 +2,6 @@ package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 
 import android.content.Context;
 
-import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
@@ -16,8 +15,6 @@ public class AllOffersController {
     private AllOffersActivity allOffersActivity;
     Context context;
 
-    private boolean waitingForResponse = false;
-
     public AllOffersController(AllOffersActivity allOffersActivity) {
         this.model = new AllOffersModel(this);
         this.allOffersActivity = allOffersActivity;
@@ -26,13 +23,9 @@ public class AllOffersController {
         model.initialize();
     }
 
-    public void invokeOfferUpdate() {
-        if (waitingForResponse) {
-            return;
-        } else {
-            waitingForResponse = true;
-            model.updateOffers();
-        }
+    public void invokeUpdate() {
+        model.updateGroceryCategories();
+        model.updateOffers();
     }
 
     public ArrayList<Offer> getCurrentOffers() {
@@ -41,13 +34,11 @@ public class AllOffersController {
 
     public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
         allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
-        waitingForResponse = false;
         allOffersActivity.setRefreshing(false);
     }
 
     public void invokeUiUpdate(Exception e) {
-        ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.unableToUpdate));
-        waitingForResponse = false;
+        ToastHandler.buildErrorToastHandler(e).errorToast();
         allOffersActivity.setRefreshing(false);
     }
 
