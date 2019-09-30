@@ -1,6 +1,5 @@
-package com.github.neighbortrader.foodboardapp.ui.postOffer;
+package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,8 +7,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
@@ -22,11 +25,10 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lombok.Getter;
 
-public class PostOfferActivity extends Activity {
+public class CreateOfferActivity extends AppCompatActivity {
 
-    public static String TAG = PostOfferActivity.class.getSimpleName();
+    public static String TAG = CreateOfferActivity.class.getSimpleName();
     final Calendar calender = Calendar.getInstance();
 
     @BindView(R.id.createOffer)
@@ -44,13 +46,21 @@ public class PostOfferActivity extends Activity {
     @BindView(R.id.editTextmhd)
     public EditText expireDate;
 
+    @BindView(R.id.editTextpurchaseDate)
+    public EditText purchaseDate;
+
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.offerImage)
+    public ImageView offerImage;
+
     public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
 
-    private PostOfferController controller;
-
+    private CreateOfferController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +70,7 @@ public class PostOfferActivity extends Activity {
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
 
-        controller = new PostOfferController(this);
+        controller = new CreateOfferController(this);
         setProgressbarState(progressBarStates.NOT_LOADING);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
@@ -73,20 +83,28 @@ public class PostOfferActivity extends Activity {
 
         categorySpinner.setAdapter(adapter);
 
+        setSupportActionBar(toolbar);
+
         postOfferBtn.setOnClickListener(v -> {
             Offer offer = createOfferFromUserInput();
             controller.invokePostOffer(offer);
         });
 
-        expireDate.setOnClickListener(v -> {
-            int day = calender.get(Calendar.DAY_OF_MONTH);
-            int month = calender.get(Calendar.MONTH);
-            int year = calender.get(Calendar.YEAR);
+        offerImage.setImageResource(R.drawable.food_placeholder);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(PostOfferActivity.this,
-                    (view, year1, monthOfYear, dayOfMonth) -> expireDate.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
-            datePickerDialog.show();
-        });
+        expireDate.setOnClickListener(v -> createAndShowDatePickerDialog(expireDate));
+
+        purchaseDate.setOnClickListener(v -> createAndShowDatePickerDialog(purchaseDate));
+    }
+
+    private void createAndShowDatePickerDialog(EditText editText){
+        int day = calender.get(Calendar.DAY_OF_MONTH);
+        int month = calender.get(Calendar.MONTH);
+        int year = calender.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
+                (view, year1, monthOfYear, dayOfMonth) -> editText.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
+        datePickerDialog.show();
     }
 
     public void setProgressbarState(progressBarStates state) {
@@ -111,8 +129,9 @@ public class PostOfferActivity extends Activity {
         Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
         Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
         LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
+        LocalDateTime purchaseLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
 
-        return Offer.createOffer(price, grocery, offerDescription, expireLocalDateTime, expireLocalDateTime);
+        return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
     }
 
     @Override

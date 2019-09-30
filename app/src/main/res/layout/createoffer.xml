@@ -3,7 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/foodboardTheme">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="@string/postOffer_headline"
+        android:theme="@style/foodboardTheme"
+        app:popupTheme="@style/foodboardTheme"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -11,15 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:indeterminate="true"
+        android:elevation="4dp"
         android:max="100"
         android:minWidth="200dp"
-        android:minHeight="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/ueberschrift"
-        app:layout_constraintEnd_toEndOf="@+id/ueberschrift"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/offerImage"/>
 
     <Button
         android:id="@+id/createOffer"
@@ -27,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="@string/postOffer_createOfferButton_Text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextmhd" />
+        app:layout_constraintTop_toBottomOf="@id/editTextpurchaseDate" />
 
     <EditText
         android:id="@+id/createOffer_EdTxt_Description"
@@ -36,7 +44,7 @@
         android:importantForAutofill="no"
         android:inputType="text"
         android:maxLines="1"
-        android:hint="@string/postOffer_editTextDescription_description"
+        android:hint="@string/postOffer_editTextDescription_hint"
         app:layout_constraintBottom_toTopOf="@id/preis"
         app:layout_constraintTop_toBottomOf="@id/beschreibung" />
 
@@ -44,7 +52,7 @@
         android:id="@+id/editTextPreis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/postOffer_editTextPrice_description"
+        android:hint="@string/postOffer_editTextPrice_hint"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@id/foodCategory"
         app:layout_constraintTop_toBottomOf="@id/preis" />
@@ -53,11 +61,11 @@
         android:id="@+id/editTextmhd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:focusable="false"
         android:cursorVisible="false"
-        android:hint="@string/postOffer_editTextexpirationDate_Description"
-        app:layout_constraintBottom_toTopOf="@id/createOffer"
+        android:focusable="false"
+        android:hint="@string/general_dateformat"
+        android:inputType="none"
+        app:layout_constraintBottom_toTopOf="@id/purchaseDate"
         app:layout_constraintTop_toBottomOf="@id/mhd" />
 
     <ImageView
@@ -65,8 +73,9 @@
         android:layout_width="match_parent"
         android:layout_height="218dp"
         android:contentDescription="@string/postOffer_Image"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@id/beschreibung"
-        app:layout_constraintTop_toBottomOf="@id/ueberschrift"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Spinner
@@ -77,22 +86,11 @@
         app:layout_constraintTop_toBottomOf="@id/foodCategory" />
 
     <TextView
-        android:id="@+id/ueberschrift"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:text="@string/postOffer_headline"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@id/offerImage"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/beschreibung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/postOffer_description"
+        android:text="@string/general_description"
         app:layout_constraintBottom_toTopOf="@id/createOffer_EdTxt_Description"
         app:layout_constraintTop_toBottomOf="@id/offerImage" />
 
@@ -101,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/postOffer_price"
+        android:text="@string/general_price"
         app:layout_constraintBottom_toTopOf="@id/editTextPreis"
         app:layout_constraintTop_toBottomOf="@id/createOffer_EdTxt_Description" />
 
@@ -119,7 +117,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/postOffer_expirationDate"
+        android:text="@string/postOffer_expireDate"
         app:layout_constraintBottom_toTopOf="@id/editTextmhd"
         app:layout_constraintTop_toBottomOf="@id/foodCategorySpinner" />
+
+
+    <EditText
+        android:id="@+id/editTextpurchaseDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:inputType="none"
+        android:hint="@string/general_dateformat"
+        app:layout_constraintBottom_toTopOf="@id/createOffer"
+        app:layout_constraintTop_toBottomOf="@id/purchaseDate" />
+
+    <TextView
+        android:id="@+id/purchaseDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/postOffer_purchaseDate"
+        app:layout_constraintBottom_toTopOf="@id/editTextpurchaseDate"
+        app:layout_constraintTop_toBottomOf="@id/editTextmhd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

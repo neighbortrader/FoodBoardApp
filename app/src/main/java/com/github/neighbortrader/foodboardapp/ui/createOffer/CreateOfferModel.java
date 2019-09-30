@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.ui.postOffer;
+package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
@@ -8,11 +8,11 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OnRequestE
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 
-public class PostOfferModel {
+public class CreateOfferModel {
 
-    public PostOfferController controller;
+    public CreateOfferController controller;
 
-    public PostOfferModel(PostOfferController controller) {
+    public CreateOfferModel(CreateOfferController controller) {
         this.controller = controller;
     }
 
@@ -20,13 +20,13 @@ public class PostOfferModel {
         OfferRequestHandler.builder(RequestTyps.POST_NEW_OFFER, ContextHandler.getAppContext(), new OnRequestEventListener() {
             @Override
             public void onResponse(Object object) {
-                ToastHandler.buildToastHandler().makeToast(ContextHandler.getAppContext().getResources().getString(R.string.SuccessfullPostedOffer));
+                ToastHandler.buildToastHandler().makeToast(ContextHandler.getAppContext().getResources().getString(R.string.postOffer_SuccessfullPostedOffer));
                 controller.invokeFinish();
             }
 
             @Override
             public void onFailure(Exception e) {
-                ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.UnsuccessfullPostedOffer));
+                ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(ContextHandler.getAppContext().getResources().getString(R.string.postOffer_UnsuccessfullPostedOffer));
                 controller.onError();
             }
 
