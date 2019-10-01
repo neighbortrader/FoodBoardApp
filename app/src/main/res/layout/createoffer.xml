@@ -12,11 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:indeterminate="true"
         android:elevation="8dp"
+        android:indeterminate="true"
         android:max="100"
         app:layout_constraintBottom_toTopOf="@id/offerImage"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/offerImage"
@@ -73,16 +75,24 @@
         android:id="@+id/layout_Category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         app:layout_constraintBottom_toTopOf="@id/layout_Price"
         app:layout_constraintTop_toBottomOf="@id/layout_ExpireDate"
-        android:hint="@string/postOffer_Catagory">
+        android:layout_marginTop="@dimen/component_label_horizontal_margin"
+        android:layout_marginBottom="@dimen/component_label_horizontal_margin"
+        android:hint="@string/postOffer_Catagory"
+        android:editable="false"
+        android:inputType="">
 
         <AutoCompleteTextView
             android:id="@+id/filled_exposed_dropdown_ctagory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="false"/>
+            android:layout_marginTop="@dimen/component_label_horizontal_margin"
+            android:layout_marginBottom="@dimen/component_label_horizontal_margin"
+            android:focusableInTouchMode="false"
+            android:importantForAutofill="no" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +100,6 @@
         android:id="@+id/layout_ExpireDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cursorVisible="false"
         android:hint="@string/postOffer_ExpireDateHint"
         app:errorEnabled="true"
         android:inputType="none"
@@ -103,8 +112,9 @@
             android:id="@+id/editText_expireDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
             android:focusableInTouchMode="false"
+            android:focusable="false"
+            android:importantForAutofill="no"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,6 +144,7 @@
         android:id="@+id/createOffer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/component_label_horizontal_margin"
         android:text="@string/postOffer_createOfferButton_Text"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         app:layout_constraintTop_toBottomOf="@id/layout_PurchaseDate"

@@ -20,6 +20,7 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -56,6 +57,8 @@ public class CreateOfferActivity extends AppCompatActivity {
 
     private CreateOfferController controller;
 
+    public AutoCompleteTextView catagoryChooser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -84,12 +87,14 @@ public class CreateOfferActivity extends AppCompatActivity {
                 R.layout.dropdown_menu_popup_item,
                 GroceryHandler.getCurrentGroceries());
 
-        AutoCompleteTextView catagoryChooser = findViewById(R.id.filled_exposed_dropdown_ctagory);
+        catagoryChooser = findViewById(R.id.filled_exposed_dropdown_ctagory);
         catagoryChooser.setAdapter(adapter);
 
         postOfferBtn.setOnClickListener(v -> {
             Offer offer = createOfferFromUserInput();
-            controller.invokePostOffer(offer);
+
+            if (offer != null)
+                controller.invokePostOffer(offer);
         });
 
         offerImage.setImageResource(R.drawable.food_placeholder);
@@ -154,13 +159,19 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public Offer createOfferFromUserInput() {
-        String offerDescription = description.getText().toString();
-        Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
-        //Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
-        LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
-        LocalDateTime purchaseLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
+        try {
+            String offerDescription = description.getText().toString();
+            Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
+            Grocery grocery = GroceryHandler.findGrocery(catagoryChooser.getText().toString());
+            LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
+            LocalDateTime purchaseLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
 
-        return Offer.createOffer(price, null, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
+            return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
+        }catch (Exception e){
+            ToastHandler.buildErrorToastHandler(e).makeToast("Deppenleerzeichenmark");
+        }
+
+        return null;
     }
 
     @Override
