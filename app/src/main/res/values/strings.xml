@@ -17,7 +17,7 @@
 
     <string name="offerOverview_map">Map</string>
     <string name="offerOverview_filter">Filter</string>
-    
+
     <string name="offerDetailview_headline">Offerdetail</string>
     <string name="offerDetailview_catagory">Grocerycatagory</string>
     <string name="offerDetailview_expireDate">Expiredate</string>
