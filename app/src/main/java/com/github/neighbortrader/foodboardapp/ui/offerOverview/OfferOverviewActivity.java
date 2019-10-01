@@ -61,7 +61,6 @@ public class OfferOverviewActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.settings:
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -86,9 +85,10 @@ public class OfferOverviewActivity extends AppCompatActivity {
                 });
                 AlertDialog b = dialogBuilder.create();
                 b.show();
-                return true;
                 return super.onOptionsItemSelected(item);
         }
+
+        return true;
     }
 
 
