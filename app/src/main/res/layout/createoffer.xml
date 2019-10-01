@@ -23,7 +23,6 @@
         android:indeterminate="true"
         android:max="100"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/offerImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +42,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/general_description"
         app:errorEnabled="true"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
         app:layout_constraintBottom_toTopOf="@id/layout_Price"
         app:layout_constraintTop_toBottomOf="@id/offerImage"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -53,8 +54,7 @@
             android:id="@+id/description_EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:inputType="text" />
+            android:importantForAutofill="no" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

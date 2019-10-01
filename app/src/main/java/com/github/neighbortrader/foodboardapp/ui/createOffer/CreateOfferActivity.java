@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -68,7 +69,7 @@ public class CreateOfferActivity extends AppCompatActivity {
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setTitle(getString(R.string.postOffer_headline)); // set the top title
+        getSupportActionBar().setTitle(getString(R.string.postOffer_headline));
 
         TextInputLayout descriptionInputLayout = findViewById(R.id.layout_Description);
         description = findViewById(R.id.description_EditText);

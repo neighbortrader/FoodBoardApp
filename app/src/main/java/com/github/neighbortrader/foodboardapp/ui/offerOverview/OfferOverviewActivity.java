@@ -71,14 +71,14 @@ public class OfferOverviewActivity extends AppCompatActivity {
                 final EditText edt = dialogView.findViewById(R.id.edit1);
 
                 edt.setOnClickListener(view1 -> {
-                    edt.setText("http://");
+                    edt.setText(Urls.BASE_URL);
                     edt.setSelection(7);
                 });
 
                 dialogBuilder.setTitle("IP-Adresse");
                 dialogBuilder.setMessage("IP-Adresse und Port des Servers eingeben");
                 dialogBuilder.setPositiveButton("Okay", (dialog, whichButton) -> {
-                    Urls.BASE_URL = edt.getText().toString() +"/api/";
+                    Urls.BASE_URL = edt.getText().toString();
                 });
                 dialogBuilder.setNegativeButton("Abbrechen", (dialog, whichButton) -> {
 
