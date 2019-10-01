@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="22dp"
             android:gravity="center_vertical"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="@color/color_secondary"/>
 
         <TextView
             android:id="@+id/txtDescription"
@@ -35,6 +36,7 @@
             android:layout_below="@id/txtGroceryCategoryAndCreationDate"
             android:layout_toEndOf="@+id/offerImage"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:textSize="14sp" />
