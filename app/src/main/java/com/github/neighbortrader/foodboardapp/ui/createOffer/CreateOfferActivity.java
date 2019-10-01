@@ -2,6 +2,8 @@ package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,6 +21,8 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -37,8 +41,7 @@ public class CreateOfferActivity extends AppCompatActivity {
     @BindView(R.id.foodCategorySpinner)
     public Spinner categorySpinner;
 
-    @BindView(R.id.createOffer_EdTxt_Description)
-    public EditText description;
+    public TextInputEditText description;
 
     @BindView(R.id.editTextPreis)
     public EditText priceEditText;
@@ -69,6 +72,11 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
+
+
+        TextInputLayout descriptionInputLayout = findViewById(R.id.createOffer_Layout_Description);
+        description = new TextInputEditText(descriptionInputLayout.getContext());
+        descriptionInputLayout.setError("ERROR");
 
         controller = new CreateOfferController(this);
         setProgressbarState(progressBarStates.NOT_LOADING);
