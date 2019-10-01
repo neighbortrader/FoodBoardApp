@@ -102,7 +102,7 @@ public class OfferOverviewActivity extends AppCompatActivity {
 
         controller = new OfferOverviewController(this);
 
-        setContentView(R.layout.showoffers);
+        setContentView(R.layout.offeroverview);
         ButterKnife.bind(this);
 
 
@@ -119,7 +119,7 @@ public class OfferOverviewActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(controller.getCurrentOffers());
         offerRecyclerView.setAdapter(adapter);
 
-        pullToRefreshLayout.setColorSchemeResources(R.color.color_primary, R.color.color_primary_variant, R.color.color_secondary_variant);
+        pullToRefreshLayout.setColorSchemeResources(R.color.color_primary, R.color.color_secondary_variant, R.color.color_on_secondary);
 
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
