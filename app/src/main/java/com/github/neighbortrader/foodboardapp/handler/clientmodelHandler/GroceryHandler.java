@@ -57,7 +57,7 @@ public class GroceryHandler {
 
     public static Grocery findGrocery(String groceryName) {
         for (Grocery grocery : GroceryHandler.currentGroceries) {
-            if (grocery.getGroceryName() == groceryName)
+            if (grocery.getGroceryName().equals(groceryName))
                 return grocery;
         }
 

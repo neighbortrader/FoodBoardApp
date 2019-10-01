@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.createOffer.CreateOfferActivity">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp">
+    android:layout_margin="6dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:elevation="8dp"
+        android:layout_alignParentStart="true"
+        android:elevation="10dp"
         android:indeterminate="true"
         android:max="100"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/offerImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -40,8 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/offerImage"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:counterEnabled="true"
-        app:counterMaxLength="255"
-        >
+        app:counterMaxLength="255">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description_EditText"
@@ -59,8 +65,7 @@
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/layout_Category"
         app:layout_constraintTop_toBottomOf="@id/layout_Description"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_price"
@@ -105,8 +110,7 @@
         android:inputType="none"
         app:layout_constraintTop_toBottomOf="@id/layout_Category"
         app:layout_constraintBottom_toTopOf="@id/layout_PurchaseDate"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_expireDate"
@@ -128,8 +132,7 @@
         android:inputType="none"
         app:layout_constraintTop_toBottomOf="@id/layout_ExpireDate"
         app:layout_constraintBottom_toTopOf="@id/createOffer"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_purchaseDate"
@@ -150,3 +153,4 @@
         app:layout_constraintTop_toBottomOf="@id/layout_PurchaseDate"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

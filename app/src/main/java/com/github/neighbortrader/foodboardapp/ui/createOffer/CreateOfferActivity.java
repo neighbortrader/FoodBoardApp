@@ -68,8 +68,7 @@ public class CreateOfferActivity extends AppCompatActivity {
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
 
-        ActionBar actionBar = getSupportActionBar(); // or getActionBar();
-        getSupportActionBar().setTitle("Create Offer"); // set the top title
+        getSupportActionBar().setTitle(getString(R.string.postOffer_headline)); // set the top title
 
         TextInputLayout descriptionInputLayout = findViewById(R.id.layout_Description);
         description = findViewById(R.id.description_EditText);
@@ -132,7 +131,6 @@ public class CreateOfferActivity extends AppCompatActivity {
             purchaseDate.requestFocus();
             createAndShowDatePickerDialog(purchaseDate);
         });
-
     }
 
     private void createAndShowDatePickerDialog(EditText editText) {
