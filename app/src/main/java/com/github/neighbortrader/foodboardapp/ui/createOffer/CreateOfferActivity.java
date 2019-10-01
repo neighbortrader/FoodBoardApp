@@ -168,6 +168,29 @@ public class CreateOfferActivity extends AppCompatActivity {
             purchaseDate.requestFocus();
             createAndShowDatePickerDialog(purchaseDate);
         });
+
+        purchaseDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                LocalDate purchaseDateTime = LocalDate.parse(editable,DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)) );
+
+                if (purchaseDateTime.isAfter(LocalDate.now())){
+                    purchaseInputLayout.setError(getString(R.string.postOffer_DateError));
+                }else{
+                    purchaseInputLayout.setError(null);
+                }
+            }
+        });
     }
 
     private void createAndShowDatePickerDialog(EditText editText) {
