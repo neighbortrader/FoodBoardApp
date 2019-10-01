@@ -3,9 +3,13 @@ package com.github.neighbortrader.foodboardapp.ui.offerOverview;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +26,7 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
 
+import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -59,7 +64,28 @@ public class OfferOverviewActivity extends AppCompatActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.settings:
-                composeMessage();
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
+                dialogBuilder.setView(dialogView);
+
+                final EditText edt = dialogView.findViewById(R.id.edit1);
+
+                edt.setOnClickListener(view1 -> {
+                    edt.setText("http://");
+                    edt.setSelection(7);
+                });
+
+                dialogBuilder.setTitle("IP-Adresse");
+                dialogBuilder.setMessage("IP-Adresse und Port des Servers eingeben");
+                dialogBuilder.setPositiveButton("Okay", (dialog, whichButton) -> {
+                    Urls.BASE_URL = edt.getText().toString() +"/api/";
+                });
+                dialogBuilder.setNegativeButton("Abbrechen", (dialog, whichButton) -> {
+
+                });
+                AlertDialog b = dialogBuilder.create();
+                b.show();
                 return true;
                 return super.onOptionsItemSelected(item);
         }
