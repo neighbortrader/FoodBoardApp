@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.neighbortrader.foodboardapp.R;
@@ -66,6 +67,9 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
+
+        ActionBar actionBar = getSupportActionBar(); // or getActionBar();
+        getSupportActionBar().setTitle("Create Offer"); // set the top title
 
         TextInputLayout descriptionInputLayout = findViewById(R.id.layout_Description);
         description = findViewById(R.id.description_EditText);
