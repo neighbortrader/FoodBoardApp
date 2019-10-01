@@ -27,6 +27,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -104,8 +105,10 @@ public class CreateOfferActivity extends AppCompatActivity {
         postOfferBtn.setOnClickListener(v -> {
             Offer offer = createOfferFromUserInput();
 
-            if (offer != null)
+            if (offer != null) {
+
                 controller.invokePostOffer(offer);
+            }
         });
 
         offerImage.setImageResource(R.drawable.food_placeholder);
@@ -276,8 +279,8 @@ public class CreateOfferActivity extends AppCompatActivity {
             String offerDescription = description.getText().toString();
             Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
             Grocery grocery = GroceryHandler.findGrocery(catagoryChooser.getText().toString());
-            LocalDateTime expireLocalDateTime = LocalDateTime.parse(expireDate.getText());
-            LocalDateTime purchaseLocalDateTime = LocalDateTime.parse(purchaseDate.getText());
+            LocalDateTime expireLocalDateTime = LocalDateTime.of(LocalDate.parse(expireDate.getText(),DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0,0));
+            LocalDateTime purchaseLocalDateTime = LocalDateTime.of(LocalDate.parse(purchaseDate.getText(),DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0,0));
             return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
         }catch (Exception e){
             ToastHandler.buildErrorToastHandler(e).makeToast("Deppenleerzeichenmark");
