@@ -177,7 +177,8 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
                 (view, year1, monthOfYear, dayOfMonth) -> {
-                    LocalDateTime selectedLocalDateTime = LocalDateTime.of(year1, monthOfYear, dayOfMonth + 1, 0, 0);
+                    monthOfYear += 1;
+                    LocalDateTime selectedLocalDateTime = LocalDateTime.of(year1, monthOfYear, dayOfMonth, 0, 0);
 
                     editText.setText(selectedLocalDateTime.format(DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))));
                 }, year, month, day);
