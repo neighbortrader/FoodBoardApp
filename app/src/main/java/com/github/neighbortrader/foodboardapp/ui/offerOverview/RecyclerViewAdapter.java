@@ -38,6 +38,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Setter
     private ArrayList<Offer> offerList;
 
+    public void clearOfferList(){
+        offerList.clear();
+    }
+
     public RecyclerViewAdapter(ArrayList<Offer> offerList) {
         this.offerList = offerList;
     }

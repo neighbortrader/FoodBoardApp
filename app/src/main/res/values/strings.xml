@@ -31,4 +31,5 @@
     <string name="general_user">Username</string>
     <string name="general_unableToUpdaterGroceries">Unable to update Groceries</string>
     <string name="postOffer_purchaseDate">Purchase Date</string>
+    <string name="postOffer_Catagory">Catagory</string>
 </resources>

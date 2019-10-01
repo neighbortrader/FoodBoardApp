@@ -7,20 +7,19 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -39,9 +38,6 @@ public class CreateOfferActivity extends AppCompatActivity {
     @BindView(R.id.createOffer)
     public MaterialButton postOfferBtn;
 
-    @BindView(R.id.foodCategorySpinner)
-    public Spinner categorySpinner;
-
     public TextInputEditText description;
 
     public TextInputEditText priceEditText;
@@ -52,7 +48,6 @@ public class CreateOfferActivity extends AppCompatActivity {
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
-
 
     @BindView(R.id.offerImage)
     public ImageView offerImage;
@@ -73,7 +68,7 @@ public class CreateOfferActivity extends AppCompatActivity {
         description = findViewById(R.id.description_EditText);
 
         TextInputLayout priceInputLayout = findViewById(R.id.layout_Price);
-        priceEditText = new TextInputEditText(priceInputLayout.getContext());
+        priceEditText = findViewById(R.id.editText_price);
 
         TextInputLayout expireInputLayout = findViewById(R.id.layout_ExpireDate);
         expireDate = findViewById(R.id.editText_expireDate);
@@ -84,13 +79,13 @@ public class CreateOfferActivity extends AppCompatActivity {
         controller = new CreateOfferController(this);
         setProgressbarState(progressBarStates.NOT_LOADING);
 
-        ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
-                android.R.layout.simple_spinner_item, GroceryHandler.getCurrentGroceries());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Grocery> adapter = new ArrayAdapter<>(
+                ContextHandler.getAppContext(),
+                R.layout.dropdown_menu_popup_item,
+                GroceryHandler.getCurrentGroceries());
 
-        categorySpinner.setAdapter(adapter);
-
+        AutoCompleteTextView catagoryChooser = findViewById(R.id.filled_exposed_dropdown_ctagory);
+        catagoryChooser.setAdapter(adapter);
 
         postOfferBtn.setOnClickListener(v -> {
             Offer offer = createOfferFromUserInput();
@@ -161,11 +156,11 @@ public class CreateOfferActivity extends AppCompatActivity {
     public Offer createOfferFromUserInput() {
         String offerDescription = description.getText().toString();
         Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
-        Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
+        //Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
         LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
         LocalDateTime purchaseLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
 
-        return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
+        return Offer.createOffer(price, null, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
     }
 
     @Override

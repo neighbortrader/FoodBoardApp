@@ -78,8 +78,8 @@ public class OfferOverviewModel extends ViewModel {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
             public void onResponse(OfferRequestHandler offerRequestHandler) {
-                currentOffers.addAll(offerRequestHandler.getReceivedOffers());
-                offerOverviewController.invokeUiUpdate(offerRequestHandler);
+                currentOffers = offerRequestHandler.getReceivedOffers();
+                offerOverviewController.invokeUiUpdate();
             }
 
             @Override

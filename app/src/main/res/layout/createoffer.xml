@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="8dp">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -12,9 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:indeterminate="true"
-        android:elevation="4dp"
+        android:elevation="8dp"
         android:max="100"
-        android:minWidth="200dp"
         app:layout_constraintBottom_toTopOf="@id/offerImage"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -55,25 +55,36 @@
         android:layout_height="wrap_content"
         android:hint="@string/postOffer_editTextPrice_hint"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/foodCategorySpinner"
+        app:layout_constraintBottom_toTopOf="@id/layout_Category"
         app:layout_constraintTop_toBottomOf="@id/layout_Description"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/foodCategorySpinner"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:id="@+id/layout_Category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:inputType="none"
         app:layout_constraintBottom_toTopOf="@id/layout_Price"
-        app:layout_constraintTop_toBottomOf="@id/layout_ExpireDate" />
+        app:layout_constraintTop_toBottomOf="@id/layout_ExpireDate"
+        android:hint="@string/postOffer_Catagory">
+
+        <AutoCompleteTextView
+            android:id="@+id/filled_exposed_dropdown_ctagory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_ExpireDate"
@@ -83,7 +94,7 @@
         android:hint="@string/postOffer_ExpireDateHint"
         app:errorEnabled="true"
         android:inputType="none"
-        app:layout_constraintTop_toBottomOf="@id/foodCategorySpinner"
+        app:layout_constraintTop_toBottomOf="@id/layout_Category"
         app:layout_constraintBottom_toTopOf="@id/layout_PurchaseDate"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >

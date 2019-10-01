@@ -32,8 +32,8 @@ public class OfferOverviewController {
         return model.getCurrentOffers();
     }
 
-    public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
-        offerOverviewActivity.updateUi(offerRequestHandler.getReceivedOffers());
+    public void invokeUiUpdate() {
+        offerOverviewActivity.updateUi(model.getCurrentOffers());
         setProgressBarRefreshing(false);
     }
 

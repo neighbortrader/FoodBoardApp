@@ -124,6 +124,7 @@ public class OfferOverviewActivity extends AppCompatActivity {
 
     public void updateUi(ArrayList<Offer> offerArrayList) {
         Log.d(TAG, "updateUi()");
+        adapter.clearOfferList();
         adapter.setOfferList(offerArrayList);
         adapter.notifyDataSetChanged();
     }
