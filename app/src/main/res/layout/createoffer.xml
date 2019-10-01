@@ -84,9 +84,10 @@
         android:focusableInTouchMode="false"
         app:layout_constraintBottom_toTopOf="@id/layout_Price"
         app:layout_constraintTop_toBottomOf="@id/layout_ExpireDate"
+        app:errorEnabled="true"
         android:layout_marginTop="@dimen/component_label_horizontal_margin"
         android:layout_marginBottom="@dimen/component_label_horizontal_margin"
-        android:hint="@string/postOffer_Catagory"
+        android:hint="@string/postOffer_Category"
         android:editable="false"
         android:inputType="">
 

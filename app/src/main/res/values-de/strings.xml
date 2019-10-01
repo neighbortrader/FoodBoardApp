@@ -6,7 +6,7 @@
     <string name="postOffer_UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
     <string name="postOffer_headline">Ein Angebot erstellen</string>
     <string name="postOffer_foodCategory">Lebensmittelkategorie</string>
-    <string name="general_dateformat">DD.MM.YYYY</string>
+    <string name="general_dateformat">dd-MM-yyyy</string>
     <string name="postOffer_expireDate">Mindeshaltbarkeitsdatum</string>
     <string name="postOffer_editTextDescription_hint">frischer Salat</string>
     <string name="postOffer_createOfferButton_Text">Angebot hochladen</string>
@@ -27,5 +27,9 @@
     <string name="postOffer_editTextPrice_hint">Preis</string>
     <string name="postOffer_ExpireDateHint">Verfallsdatum</string>
     <string name="postOffer_PurchaseDateHint">Kaufdatum</string>
-    <string name="postOffer_Catagory">Kategorie</string>
+    <string name="postOffer_Category">Kategorie</string>
+    <string name="general_toLongText">Die maximale Textlänge ist %1$d</string>
+    <string name="general_canBeEmpty">Das Feld %1$s darf nicht leer sein</string>
+    <string name="postOffer_categoryIsNeeded">Bitte wählen Sie eine Kategorie aus</string>
+    <string name="postOffer_DateError">Dieses Datum ist nicht erlaubt</string>
 </resources>
