@@ -47,10 +47,6 @@ public class OfferOverviewActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private RecyclerViewAdapter adapter;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -64,7 +60,6 @@ public class OfferOverviewActivity extends AppCompatActivity {
         setContentView(R.layout.showoffers);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
             Intent startPostOfferIntent = new Intent(OfferOverviewActivity.this, CreateOfferActivity.class);

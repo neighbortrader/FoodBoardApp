@@ -25,9 +25,8 @@
             android:id="@+id/txtGroceryCategoryAndCreationDate"
             android:layout_width="match_parent"
             android:layout_height="22dp"
-            android:background="@color/secondaryDarkColor"
+            android:background="@color/primaryLightColor"
             android:gravity="center_vertical"
-            android:textColor="@color/primaryTextColor"
             android:textSize="16sp" />
 
         <TextView

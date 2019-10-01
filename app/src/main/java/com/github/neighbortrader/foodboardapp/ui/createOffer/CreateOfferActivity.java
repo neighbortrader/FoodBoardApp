@@ -21,6 +21,7 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -36,32 +37,27 @@ public class CreateOfferActivity extends AppCompatActivity {
     final Calendar calender = Calendar.getInstance();
 
     @BindView(R.id.createOffer)
-    public Button postOfferBtn;
+    public MaterialButton postOfferBtn;
 
     @BindView(R.id.foodCategorySpinner)
     public Spinner categorySpinner;
 
     public TextInputEditText description;
 
-    @BindView(R.id.editTextPreis)
-    public EditText priceEditText;
+    public TextInputEditText priceEditText;
 
-    @BindView(R.id.editTextmhd)
-    public EditText expireDate;
+    public TextInputEditText expireDate;
 
-    @BindView(R.id.editTextpurchaseDate)
-    public EditText purchaseDate;
+    public TextInputEditText purchaseDate;
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     @BindView(R.id.offerImage)
     public ImageView offerImage;
 
-    public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, EROOR}
 
     private CreateOfferController controller;
 
@@ -73,10 +69,17 @@ public class CreateOfferActivity extends AppCompatActivity {
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
 
+        TextInputLayout descriptionInputLayout = findViewById(R.id.layout_Description);
+        description = findViewById(R.id.description_EditText);
 
-        TextInputLayout descriptionInputLayout = findViewById(R.id.createOffer_Layout_Description);
-        description = new TextInputEditText(descriptionInputLayout.getContext());
-        descriptionInputLayout.setError("ERROR");
+        TextInputLayout priceInputLayout = findViewById(R.id.layout_Price);
+        priceEditText = new TextInputEditText(priceInputLayout.getContext());
+
+        TextInputLayout expireInputLayout = findViewById(R.id.layout_ExpireDate);
+        expireDate = findViewById(R.id.editText_expireDate);
+
+        TextInputLayout purchaseInputLayout = findViewById(R.id.layout_PurchaseDate);
+        purchaseDate = findViewById(R.id.editText_purchaseDate);
 
         controller = new CreateOfferController(this);
         setProgressbarState(progressBarStates.NOT_LOADING);
@@ -84,14 +87,10 @@ public class CreateOfferActivity extends AppCompatActivity {
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
                 android.R.layout.simple_spinner_item, GroceryHandler.getCurrentGroceries());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        categorySpinner.setAdapter(adapter);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         categorySpinner.setAdapter(adapter);
 
-        setSupportActionBar(toolbar);
 
         postOfferBtn.setOnClickListener(v -> {
             Offer offer = createOfferFromUserInput();
@@ -100,12 +99,39 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         offerImage.setImageResource(R.drawable.food_placeholder);
 
-        expireDate.setOnClickListener(v -> createAndShowDatePickerDialog(expireDate));
+        description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        purchaseDate.setOnClickListener(v -> createAndShowDatePickerDialog(purchaseDate));
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > descriptionInputLayout.getCounterMaxLength())
+                    descriptionInputLayout.setError("Max character length is " + descriptionInputLayout.getCounterMaxLength());
+                else
+                    descriptionInputLayout.setError(null);
+            }
+        });
+
+        expireDate.setOnClickListener(view -> {
+            expireDate.requestFocus();
+            createAndShowDatePickerDialog(expireDate);
+        });
+
+        purchaseDate.setOnClickListener(view -> {
+            purchaseDate.requestFocus();
+            createAndShowDatePickerDialog(purchaseDate);
+        });
+
     }
 
-    private void createAndShowDatePickerDialog(EditText editText){
+    private void createAndShowDatePickerDialog(EditText editText) {
         int day = calender.get(Calendar.DAY_OF_MONTH);
         int month = calender.get(Calendar.MONTH);
         int year = calender.get(Calendar.YEAR);
@@ -119,14 +145,14 @@ public class CreateOfferActivity extends AppCompatActivity {
         if (state == progressBarStates.LOADING) {
             progressBar.setIndeterminate(true);
             progressBar.setVisibility(View.VISIBLE);
-        } else if (state == progressBarStates.NOT_LOADING){
+        } else if (state == progressBarStates.NOT_LOADING) {
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(false);
-        } else if (state == progressBarStates.FINISHED){
+        } else if (state == progressBarStates.FINISHED) {
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.VISIBLE);
             progressBar.setProgress(100, true);
-        }else if (state == progressBarStates.EROOR){
+        } else if (state == progressBarStates.EROOR) {
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(true);
         }

@@ -24,4 +24,7 @@
     <string name="offerDetailview_userInformation">Benutzerinformationen</string>
     <string name="general_unableToUpdaterGroceries">Kategorien konnten nicht aktualisiert werden</string>
     <string name="postOffer_purchaseDate">Kaufdatum</string>
+    <string name="postOffer_editTextPrice_hint">Preis</string>
+    <string name="postOffer_ExpireDateHint">Verfallsdatum</string>
+    <string name="postOffer_PurchaseDateHint">Kaufdatum</string>
 </resources>
