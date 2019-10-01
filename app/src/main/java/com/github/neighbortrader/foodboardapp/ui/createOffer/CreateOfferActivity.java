@@ -43,8 +43,10 @@ public class CreateOfferActivity extends AppCompatActivity {
     public MaterialButton postOfferBtn;
 
     public TextInputEditText description;
+    TextInputLayout descriptionInputLayout;
 
     public TextInputEditText priceEditText;
+    TextInputLayout priceInputLayout;
 
     public TextInputEditText expireDate;
 
@@ -76,10 +78,10 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         TextInputLayout catagoryLayout = findViewById(R.id.layout_Category);
 
-        TextInputLayout descriptionInputLayout = findViewById(R.id.layout_Description);
+        descriptionInputLayout = findViewById(R.id.layout_Description);
         description = findViewById(R.id.description_EditText);
 
-        TextInputLayout priceInputLayout = findViewById(R.id.layout_Price);
+        priceInputLayout = findViewById(R.id.layout_Price);
         priceEditText = findViewById(R.id.editText_price);
 
         TextInputLayout expireInputLayout = findViewById(R.id.layout_ExpireDate);
@@ -108,28 +110,54 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         offerImage.setImageResource(R.drawable.food_placeholder);
 
-        priceEditText.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus) {
+        priceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            } else {
-                if (priceEditText.length() <= 0) {
-                    priceInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_price)));
-                } else {
-                    priceInputLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                checkPriceInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        priceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    checkPriceInput();
                 }
             }
         });
 
-        description.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus) {
+        description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            } else {
-                if (description.length() > descriptionInputLayout.getCounterMaxLength())
-                    descriptionInputLayout.setError(String.format(getString(R.string.general_toLongText), descriptionInputLayout.getCounterMaxLength()));
-                else if (description.length() <= 0) {
-                    descriptionInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_description)));
-                } else {
-                    descriptionInputLayout.setError(null);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                checkDescriptionInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        description.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    checkDescriptionInput();
                 }
             }
         });
@@ -222,6 +250,24 @@ public class CreateOfferActivity extends AppCompatActivity {
         } else if (state == progressBarStates.EROOR) {
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(true);
+        }
+    }
+
+    public void checkDescriptionInput(){
+        if (description.length() > descriptionInputLayout.getCounterMaxLength())
+            descriptionInputLayout.setError(String.format(getString(R.string.general_toLongText), descriptionInputLayout.getCounterMaxLength()));
+        else if (description.length() <= 0) {
+            descriptionInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_description)));
+        } else {
+            descriptionInputLayout.setError(null);
+        }
+    }
+
+    public void checkPriceInput(){
+        if (priceEditText.length() <= 0) {
+            priceInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_price)));
+        } else {
+            priceInputLayout.setError(null);
         }
     }
 
