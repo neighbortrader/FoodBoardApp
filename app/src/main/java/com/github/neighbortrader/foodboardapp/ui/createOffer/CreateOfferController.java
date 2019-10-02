@@ -22,7 +22,7 @@ public class CreateOfferController {
     }
 
     public void onError(){
-        createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.EROOR);
+        createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.ERROR);
     }
 
     public void invokeFinish() {

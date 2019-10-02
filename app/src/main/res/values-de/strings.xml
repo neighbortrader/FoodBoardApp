@@ -32,4 +32,5 @@
     <string name="general_canBeEmpty">Das Feld %1$s darf nicht leer sein</string>
     <string name="postOffer_categoryIsNeeded">Bitte wählen Sie eine Kategorie aus</string>
     <string name="postOffer_DateError">Dieses Datum ist nicht erlaubt</string>
+    <string name="postOffer_checkInputMessage">Bitte überprüfen Sie ihre Eingaben</string>
 </resources>

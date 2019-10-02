@@ -37,38 +37,38 @@ import butterknife.ButterKnife;
 public class CreateOfferActivity extends AppCompatActivity {
 
     public static String TAG = CreateOfferActivity.class.getSimpleName();
+
     final Calendar calender = Calendar.getInstance();
     DateTimeFormatter dateTimeFormatter;
 
-    @BindView(R.id.createOffer)
-    public MaterialButton postOfferBtn;
-
-    public TextInputEditText description;
-    TextInputLayout descriptionInputLayout;
-
-    public TextInputEditText priceEditText;
-    TextInputLayout priceInputLayout;
-
-    public TextInputEditText expireDate;
-
-    public TextInputEditText purchaseDate;
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
-
     @BindView(R.id.offerImage)
     public ImageView offerImage;
-
-    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, EROOR}
+    @BindView(R.id.createOffer)
+    public MaterialButton postOfferButton;
+    public TextInputEditText descriptionEditText;
+    public TextInputLayout descriptionInputLayout;
+    public TextInputEditText priceEditText;
+    public TextInputLayout priceInputLayout;
+    public AutoCompleteTextView categoryChooser;
+    public TextInputLayout categoryLayout;
+    public TextInputEditText expireDateEditText;
+    public TextInputLayout expireDateInputLayout;
+    public TextInputEditText purchaseDateEditText;
+    public TextInputLayout purchaseDateInputLayout;
 
     private CreateOfferController controller;
-
-    public AutoCompleteTextView catagoryChooser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
+
         super.onCreate(savedInstanceState);
+
+        controller = new CreateOfferController(this);
 
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
@@ -77,21 +77,8 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         dateTimeFormatter = DateTimeFormatter.ofPattern(getString(R.string.general_dateformat));
 
-        TextInputLayout catagoryLayout = findViewById(R.id.layout_Category);
+        findViews();
 
-        descriptionInputLayout = findViewById(R.id.layout_Description);
-        description = findViewById(R.id.description_EditText);
-
-        priceInputLayout = findViewById(R.id.layout_Price);
-        priceEditText = findViewById(R.id.editText_price);
-
-        TextInputLayout expireInputLayout = findViewById(R.id.layout_ExpireDate);
-        expireDate = findViewById(R.id.editText_expireDate);
-
-        TextInputLayout purchaseInputLayout = findViewById(R.id.layout_PurchaseDate);
-        purchaseDate = findViewById(R.id.editText_purchaseDate);
-
-        controller = new CreateOfferController(this);
         setProgressbarState(progressBarStates.NOT_LOADING);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<>(
@@ -99,19 +86,54 @@ public class CreateOfferActivity extends AppCompatActivity {
                 R.layout.dropdown_menu_popup_item,
                 GroceryHandler.getCurrentGroceries());
 
-        catagoryChooser = findViewById(R.id.filled_exposed_dropdown_ctagory);
-        catagoryChooser.setAdapter(adapter);
+        categoryChooser.setAdapter(adapter);
+        categoryChooser.setDropDownWidth(600);
 
-        postOfferBtn.setOnClickListener(v -> {
-            Offer offer = createOfferFromUserInput();
+        offerImage.setImageResource(R.drawable.food_placeholder);
 
-            if (offer != null) {
+        setListeners();
+    }
 
-                controller.invokePostOffer(offer);
+    public void findViews() {
+        descriptionInputLayout = findViewById(R.id.layout_Description);
+        descriptionEditText = findViewById(R.id.description_EditText);
+
+        priceInputLayout = findViewById(R.id.layout_Price);
+        priceEditText = findViewById(R.id.editText_price);
+
+        categoryChooser = findViewById(R.id.filled_exposed_dropdown_ctagory);
+        categoryLayout = findViewById(R.id.layout_Category);
+
+        expireDateInputLayout = findViewById(R.id.layout_ExpireDate);
+        expireDateEditText = findViewById(R.id.editText_expireDate);
+
+        purchaseDateInputLayout = findViewById(R.id.layout_PurchaseDate);
+        purchaseDateEditText = findViewById(R.id.editText_purchaseDate);
+    }
+
+    public void setListeners() {
+        descriptionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                checkDescriptionInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
-        offerImage.setImageResource(R.drawable.food_placeholder);
+        descriptionEditText.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                checkDescriptionInput();
+            }
+        });
 
         priceEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -130,49 +152,20 @@ public class CreateOfferActivity extends AppCompatActivity {
             }
         });
 
-        priceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    checkPriceInput();
-                }
+        priceEditText.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                checkPriceInput();
             }
         });
 
-        description.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        // TODO: Category Chooser
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                checkDescriptionInput();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+        expireDateEditText.setOnClickListener(view -> {
+            expireDateEditText.requestFocus();
+            createAndShowDatePickerDialog(expireDateEditText);
         });
 
-        description.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    checkDescriptionInput();
-                }
-            }
-        });
-
-        catagoryChooser.setDropDownWidth(600);
-
-        expireDate.setOnClickListener(view -> {
-            expireDate.requestFocus();
-            createAndShowDatePickerDialog(expireDate);
-        });
-
-        expireDate.addTextChangedListener(new TextWatcher() {
+        expireDateEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -185,22 +178,16 @@ public class CreateOfferActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                LocalDate expireDateTime = LocalDate.parse(editable,DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)) );
-
-                if (expireDateTime.isBefore(LocalDate.now())){
-                    expireInputLayout.setError(getString(R.string.postOffer_DateError));
-                }else{
-                    expireInputLayout.setError(null);
-                }
+                checkExpireDate(editable);
             }
         });
 
-        purchaseDate.setOnClickListener(view -> {
-            purchaseDate.requestFocus();
-            createAndShowDatePickerDialog(purchaseDate);
+        purchaseDateEditText.setOnClickListener(view -> {
+            purchaseDateEditText.requestFocus();
+            createAndShowDatePickerDialog(purchaseDateEditText);
         });
 
-        purchaseDate.addTextChangedListener(new TextWatcher() {
+        purchaseDateEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -213,80 +200,17 @@ public class CreateOfferActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                LocalDate purchaseDateTime = LocalDate.parse(editable,DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)) );
-
-                if (purchaseDateTime.isAfter(LocalDate.now())){
-                    purchaseInputLayout.setError(getString(R.string.postOffer_DateError));
-                }else{
-                    purchaseInputLayout.setError(null);
-                }
+                checkPurchaseDate(editable);
             }
         });
-    }
 
-    private void createAndShowDatePickerDialog(EditText editText) {
-        int day = calender.get(Calendar.DAY_OF_MONTH);
-        int month = calender.get(Calendar.MONTH);
-        int year = calender.get(Calendar.YEAR);
+        postOfferButton.setOnClickListener(v -> {
+            Offer offer = createOfferFromUserInput();
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
-                (view, year1, monthOfYear, dayOfMonth) -> {
-                    monthOfYear += 1;
-                    LocalDateTime selectedLocalDateTime = LocalDateTime.of(year1, monthOfYear, dayOfMonth, 0, 0);
-
-                    editText.setText(selectedLocalDateTime.format(DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))));
-                }, year, month, day);
-        datePickerDialog.show();
-    }
-
-    public void setProgressbarState(progressBarStates state) {
-        if (state == progressBarStates.LOADING) {
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-        } else if (state == progressBarStates.NOT_LOADING) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(false);
-        } else if (state == progressBarStates.FINISHED) {
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(100, true);
-        } else if (state == progressBarStates.EROOR) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(true);
-        }
-    }
-
-    public void checkDescriptionInput(){
-        if (description.length() > descriptionInputLayout.getCounterMaxLength())
-            descriptionInputLayout.setError(String.format(getString(R.string.general_toLongText), descriptionInputLayout.getCounterMaxLength()));
-        else if (description.length() <= 0) {
-            descriptionInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_description)));
-        } else {
-            descriptionInputLayout.setError(null);
-        }
-    }
-
-    public void checkPriceInput(){
-        if (priceEditText.length() <= 0) {
-            priceInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_price)));
-        } else {
-            priceInputLayout.setError(null);
-        }
-    }
-
-    public Offer createOfferFromUserInput() {
-        try {
-            String offerDescription = description.getText().toString();
-            Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
-            Grocery grocery = GroceryHandler.findGrocery(catagoryChooser.getText().toString());
-            LocalDateTime expireLocalDateTime = LocalDateTime.of(LocalDate.parse(expireDate.getText(),DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0,0));
-            LocalDateTime purchaseLocalDateTime = LocalDateTime.of(LocalDate.parse(purchaseDate.getText(),DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0,0));
-            return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
-        }catch (Exception e){
-            ToastHandler.buildErrorToastHandler(e).makeToast("Deppenleerzeichenmark");
-        }
-
-        return null;
+            if (offer != null) {
+                controller.invokePostOffer(offer);
+            }
+        });
     }
 
     @Override
@@ -323,5 +247,109 @@ public class CreateOfferActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+    }
+
+    private void createAndShowDatePickerDialog(EditText editText) {
+        int day = calender.get(Calendar.DAY_OF_MONTH);
+        int month = calender.get(Calendar.MONTH);
+        int year = calender.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    monthOfYear += 1;
+                    LocalDateTime selectedLocalDateTime = LocalDateTime.of(year1, monthOfYear, dayOfMonth, 0, 0);
+
+                    editText.setText(selectedLocalDateTime.format(DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))));
+                }, year, month, day);
+        datePickerDialog.show();
+    }
+
+    public void setProgressbarState(progressBarStates state) {
+        if (state == progressBarStates.LOADING) {
+            progressBar.setIndeterminate(true);
+            progressBar.setVisibility(View.VISIBLE);
+        } else if (state == progressBarStates.NOT_LOADING) {
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(false);
+        } else if (state == progressBarStates.FINISHED) {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(100, true);
+        } else if (state == progressBarStates.ERROR) {
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(true);
+        }
+    }
+
+    public boolean checkAll() {
+        return checkDescriptionInput() && checkPriceInput() && checkCategoryInput() && checkPurchaseDate(purchaseDateEditText.getEditableText()) && checkExpireDate(expireDateEditText.getEditableText());
+    }
+
+    public boolean checkDescriptionInput() {
+        if (descriptionEditText.length() > descriptionInputLayout.getCounterMaxLength())
+            descriptionInputLayout.setError(String.format(getString(R.string.general_toLongText), descriptionInputLayout.getCounterMaxLength()));
+        else if (descriptionEditText.length() <= 0) {
+            descriptionInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_description)));
+        } else {
+            descriptionInputLayout.setError(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkCategoryInput() {
+        return true;
+    }
+
+    public boolean checkPriceInput() {
+        if (priceEditText.length() <= 0) {
+            priceInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_price)));
+        } else {
+            priceInputLayout.setError(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkPurchaseDate(Editable editable) {
+        LocalDate purchaseDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
+
+        if (purchaseDateTime.isAfter(LocalDate.now())) {
+            purchaseDateInputLayout.setError(getString(R.string.postOffer_DateError));
+        } else {
+            purchaseDateInputLayout.setError(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkExpireDate(Editable editable) {
+        LocalDate expireDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
+
+        if (expireDateTime.isBefore(LocalDate.now())) {
+            expireDateInputLayout.setError(getString(R.string.postOffer_DateError));
+        } else {
+            expireDateInputLayout.setError(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public Offer createOfferFromUserInput() {
+        if (checkAll()) {
+            String offerDescription = descriptionEditText.getText().toString();
+            Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
+            Grocery grocery = GroceryHandler.findGrocery(categoryChooser.getText().toString());
+            LocalDateTime expireLocalDateTime = LocalDateTime.of(LocalDate.parse(expireDateEditText.getText(), DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0, 0));
+            LocalDateTime purchaseLocalDateTime = LocalDateTime.of(LocalDate.parse(purchaseDateEditText.getText(), DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0, 0));
+            return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
+        }
+
+        ToastHandler.buildToastHandler().makeToast(getString(R.string.postOffer_checkInputMessage));
+        return null;
     }
 }

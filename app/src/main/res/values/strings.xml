@@ -36,4 +36,5 @@
     <string name="general_canBeEmpty">The %1$s cant be empty</string>
     <string name="postOffer_categoryIsNeeded">Please select a catagory</string>
     <string name="postOffer_DateError">This Date is not allowed</string>
+    <string name="postOffer_checkInputMessage">Please check your Input</string>
 </resources>
