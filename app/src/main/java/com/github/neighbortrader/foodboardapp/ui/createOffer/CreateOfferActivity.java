@@ -1,11 +1,15 @@
 package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -79,6 +83,8 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         findViews();
 
+        categoryChooser.setHeight(purchaseDateEditText.getHeight());
+
         setProgressbarState(progressBarStates.NOT_LOADING);
 
         ArrayAdapter<Grocery> adapter = new ArrayAdapter<>(
@@ -109,6 +115,13 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         purchaseDateInputLayout = findViewById(R.id.layout_PurchaseDate);
         purchaseDateEditText = findViewById(R.id.editText_purchaseDate);
+    }
+
+    public static int dpToPx(int dp) {
+        float density = ContextHandler.getAppContext().getResources()
+                .getDisplayMetrics()
+                .density;
+        return Math.round((float) dp * density);
     }
 
     public void setListeners() {
@@ -158,7 +171,21 @@ public class CreateOfferActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: Category Chooser
+        categoryChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                checkCategoryInput();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                checkCategoryInput();
+            }
+        });
+
+        categoryChooser.setOnDismissListener(() -> {
+            checkCategoryInput();
+        });
 
         expireDateEditText.setOnClickListener(view -> {
             expireDateEditText.requestFocus();
@@ -271,6 +298,7 @@ public class CreateOfferActivity extends AppCompatActivity {
         } else if (state == progressBarStates.NOT_LOADING) {
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
         } else if (state == progressBarStates.FINISHED) {
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.VISIBLE);
@@ -278,10 +306,17 @@ public class CreateOfferActivity extends AppCompatActivity {
         } else if (state == progressBarStates.ERROR) {
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(true);
+            progressBar.setVisibility(View.GONE);
         }
     }
 
     public boolean checkAll() {
+        checkDescriptionInput();
+        checkPriceInput();
+        checkCategoryInput();
+        checkExpireDate(expireDateEditText.getEditableText());
+        checkPurchaseDate(purchaseDateEditText.getEditableText());
+
         return checkDescriptionInput() && checkPriceInput() && checkCategoryInput() && checkPurchaseDate(purchaseDateEditText.getEditableText()) && checkExpireDate(expireDateEditText.getEditableText());
     }
 
@@ -299,6 +334,13 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public boolean checkCategoryInput() {
+        if(!categoryChooser.hasSelection()){
+            categoryLayout.setError(getString(R.string.postOffer_categoryIsNeeded));
+            return false;
+        }else{
+            categoryLayout.setError(null);
+        }
+
         return true;
     }
 
@@ -314,26 +356,33 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public boolean checkPurchaseDate(Editable editable) {
-        LocalDate purchaseDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
-
-        if (purchaseDateTime.isAfter(LocalDate.now())) {
-            purchaseDateInputLayout.setError(getString(R.string.postOffer_DateError));
+        if (editable.length() > 0) {
+            LocalDate purchaseDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
+            if (purchaseDateTime.isAfter(LocalDate.now())) {
+                purchaseDateInputLayout.setError(getString(R.string.postOffer_DateError));
+            } else {
+                purchaseDateInputLayout.setError(null);
+                return true;
+            }
         } else {
-            purchaseDateInputLayout.setError(null);
-            return true;
+            purchaseDateInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.postOffer_PurchaseDateHint)));
         }
 
         return false;
     }
 
     public boolean checkExpireDate(Editable editable) {
-        LocalDate expireDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
+        if (editable.length() > 0) {
+            LocalDate expireDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
 
-        if (expireDateTime.isBefore(LocalDate.now())) {
-            expireDateInputLayout.setError(getString(R.string.postOffer_DateError));
+            if (expireDateTime.isBefore(LocalDate.now())) {
+                expireDateInputLayout.setError(getString(R.string.postOffer_DateError));
+            } else {
+                expireDateInputLayout.setError(null);
+                return true;
+            }
         } else {
-            expireDateInputLayout.setError(null);
-            return true;
+            expireDateInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.postOffer_ExpireDateHint)));
         }
 
         return false;

@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.createOffer.CreateOfferActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="6dp"
@@ -33,6 +31,7 @@
             android:elevation="10dp"
             android:indeterminate="true"
             android:max="100"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,23 +69,20 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:editable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:hint="@string/postOffer_Category"
             android:inputType=""
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/layout_Price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_ExpireDate">
 
             <AutoCompleteTextView
                 android:id="@+id/filled_exposed_dropdown_ctagory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/component_label_horizontal_margin"
-                android:layout_marginBottom="@dimen/component_label_horizontal_margin"
                 android:focusableInTouchMode="false"
                 android:importantForAutofill="no" />
 
@@ -97,10 +93,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:hint="@string/postOffer_ExpireDateHint"
             android:inputType="none"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/layout_PurchaseDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_Category">
 
             <com.google.android.material.textfield.TextInputEditText
