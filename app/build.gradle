@@ -33,7 +33,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            resValue "string", "BASE_URL", "http://10.20.0.175:3000/api/"
+            resValue "string", "BASE_URL", "http://192.168.178.27:3000/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
             resValue "string", "CREATE_NEW_OFFER", "Offer"
@@ -44,7 +44,7 @@ android {
         debug {
             signingConfig debug.signingConfig
 
-            resValue "string", "BASE_URL", "http://10.20.0.175:3000/api/"
+            resValue "string", "BASE_URL", "http://192.168.178.27:3000/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
             resValue "string", "CREATE_NEW_OFFER", "Offer"

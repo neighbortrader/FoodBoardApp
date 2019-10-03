@@ -82,10 +82,10 @@ public class Offer implements ToNameValueMap, Parcelable {
         try {
             Price price = new Price(jsonObject.getDouble("price"));
             int grocerieId = jsonObject.getInt("grocerieId");
-            String description = jsonObject.getString("descriptionEditText");
+            String description = jsonObject.getString("description");
 
-            LocalDateTime purchaseDate = jsonStringToLocalDateTime(jsonObject, "purchaseDateEditText");
-            LocalDateTime expireDate = jsonStringToLocalDateTime(jsonObject, "expireDateEditText");
+            LocalDateTime purchaseDate = jsonStringToLocalDateTime(jsonObject, "purchaseDate");
+            LocalDateTime expireDate = jsonStringToLocalDateTime(jsonObject, "expireDate");
             LocalDateTime creationDate = jsonStringToLocalDateTime(jsonObject, "creationDate");
 
             return new Offer(UserHandler.getCurrentUserInstance(), price, GroceryHandler.findGrocery(grocerieId), description, purchaseDate, expireDate, creationDate);
@@ -144,9 +144,9 @@ public class Offer implements ToNameValueMap, Parcelable {
                 "user=" + user +
                 ", priceEditText=" + price +
                 ", groceryCategory=" + groceryCategory +
-                ", descriptionEditText='" + description + '\'' +
-                ", purchaseDateEditText=" + purchaseDate +
-                ", expireDateEditText=" + expireDate +
+                ", description='" + description + '\'' +
+                ", purchaseDate=" + purchaseDate +
+                ", expireDate=" + expireDate +
                 ", creationDate=" + creationDate +
                 '}';
     }
@@ -155,10 +155,10 @@ public class Offer implements ToNameValueMap, Parcelable {
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
 
-        nameValueMap.put("descriptionEditText", description);
+        nameValueMap.put("description", description);
         nameValueMap.put("price", Double.toString(price.getValue()));
-        nameValueMap.put("purchaseDateEditText", purchaseDate.toString());
-        nameValueMap.put("expireDateEditText", expireDate.toString());
+        nameValueMap.put("purchaseDate", purchaseDate.toString());
+        nameValueMap.put("expireDate", expireDate.toString());
         nameValueMap.put("grocerieId", Integer.toString(groceryCategory.getGroceryId()));
 
         return nameValueMap;
