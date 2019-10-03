@@ -117,13 +117,6 @@ public class CreateOfferActivity extends AppCompatActivity {
         purchaseDateEditText = findViewById(R.id.editText_purchaseDate);
     }
 
-    public static int dpToPx(int dp) {
-        float density = ContextHandler.getAppContext().getResources()
-                .getDisplayMetrics()
-                .density;
-        return Math.round((float) dp * density);
-    }
-
     public void setListeners() {
         descriptionEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -334,7 +327,7 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public boolean checkCategoryInput() {
-        if(!categoryChooser.hasSelection()){
+        if(GroceryHandler.findGrocery(categoryChooser.getText().toString()).getGroceryId() == -1){
             categoryLayout.setError(getString(R.string.postOffer_categoryIsNeeded));
             return false;
         }else{
