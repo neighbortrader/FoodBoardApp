@@ -13,6 +13,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
@@ -45,6 +46,9 @@ public class CreateOfferActivity extends AppCompatActivity {
     DateTimeFormatter dateTimeFormatter;
 
     public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
+
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
@@ -173,6 +177,12 @@ public class CreateOfferActivity extends AppCompatActivity {
         priceEditText.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) {
                 checkPriceInput();
+
+                if (!priceEditText.getEditableText().toString().contains(getString(R.string.general_currency))) {
+                    priceEditText.setText(new Price(Double.
+                            parseDouble(priceEditText.getText().toString())).
+                            getFormattedPrice());
+                }
             }
         });
 
@@ -240,6 +250,7 @@ public class CreateOfferActivity extends AppCompatActivity {
             Offer offer = createOfferFromUserInput();
 
             if (offer != null) {
+                scrollView.scrollTo(0,0);
                 controller.invokePostOffer(offer);
             }
         });
@@ -396,7 +407,10 @@ public class CreateOfferActivity extends AppCompatActivity {
     public Offer createOfferFromUserInput() {
         if (checkAll()) {
             String offerDescription = descriptionEditText.getText().toString();
-            Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
+
+            String priceString = Price.reformatPrice(priceEditText.getEditableText().toString());
+            Price price = new Price(Double.parseDouble(priceString));
+
             Grocery grocery = GroceryHandler.findGrocery(categoryChooser.getText().toString());
             LocalDateTime expireLocalDateTime = LocalDateTime.of(LocalDate.parse(expireDateEditText.getText(), DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0, 0));
             LocalDateTime purchaseLocalDateTime = LocalDateTime.of(LocalDate.parse(purchaseDateEditText.getText(), DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0, 0));
