@@ -6,19 +6,18 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
-import com.github.neighbortrader.foodboardapp.ui.offerDetail.OfferDetailFragment;
 
 import java.util.ArrayList;
 
 public class OfferOverviewController {
 
     private OfferOverviewModel model;
-    private OfferOverviewFragment offerOverviewFragment;
+    private OfferOverviewFragment offerOverviewActivity;
     Context context;
 
-    public OfferOverviewController(OfferOverviewFragment offerOverviewFragment) {
+    public OfferOverviewController(OfferOverviewFragment offerOverviewActivity) {
         this.model = new OfferOverviewModel(this);
-        this.offerOverviewFragment = offerOverviewFragment;
+        this.offerOverviewActivity = offerOverviewActivity;
         context = ContextHandler.getAppContext();
 
         model.initialize();
@@ -34,7 +33,7 @@ public class OfferOverviewController {
     }
 
     public void invokeUiUpdate() {
-        offerOverviewFragment.updateUi(model.getCurrentOffers());
+        offerOverviewActivity.updateUi(model.getCurrentOffers());
         setProgressBarRefreshing(false);
     }
 
@@ -43,7 +42,7 @@ public class OfferOverviewController {
     }
 
     public void setProgressBarRefreshing(boolean isRefresing){
-        offerOverviewFragment.setRefreshing(isRefresing);
+        offerOverviewActivity.setRefreshing(isRefresing);
     }
 
     public void destroy() {
