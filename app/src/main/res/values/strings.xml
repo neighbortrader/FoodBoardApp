@@ -37,4 +37,6 @@
     <string name="postOffer_categoryIsNeeded">Please select a catagory</string>
     <string name="postOffer_DateError">This Date is not allowed</string>
     <string name="postOffer_checkInputMessage">Please check your Input</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
