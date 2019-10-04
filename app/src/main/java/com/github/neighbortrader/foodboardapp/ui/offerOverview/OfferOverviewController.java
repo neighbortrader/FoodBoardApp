@@ -12,10 +12,10 @@ import java.util.ArrayList;
 public class OfferOverviewController {
 
     private OfferOverviewModel model;
-    private OfferOverviewActivity offerOverviewActivity;
+    private OfferOverviewFragment offerOverviewActivity;
     Context context;
 
-    public OfferOverviewController(OfferOverviewActivity offerOverviewActivity) {
+    public OfferOverviewController(OfferOverviewFragment offerOverviewActivity) {
         this.model = new OfferOverviewModel(this);
         this.offerOverviewActivity = offerOverviewActivity;
         context = ContextHandler.getAppContext();
