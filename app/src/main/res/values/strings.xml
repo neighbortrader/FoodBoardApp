@@ -39,4 +39,5 @@
     <string name="postOffer_checkInputMessage">Please check your Input</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="general_User">User</string>
 </resources>

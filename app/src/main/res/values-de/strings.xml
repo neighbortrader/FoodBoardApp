@@ -35,4 +35,5 @@
     <string name="postOffer_checkInputMessage">Bitte überprüfen Sie ihre Eingaben</string>
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
+    <string name="general_User">Benutzer</string>
 </resources>

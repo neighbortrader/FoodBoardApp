@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
@@ -76,6 +78,8 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(getString(R.string.postOffer_headline));
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         dateTimeFormatter = DateTimeFormatter.ofPattern(getString(R.string.general_dateformat));
 
         findViews();
@@ -112,6 +116,17 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         purchaseDateInputLayout = findViewById(R.id.layout_PurchaseDate);
         purchaseDateEditText = findViewById(R.id.editText_purchaseDate);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void setListeners() {
