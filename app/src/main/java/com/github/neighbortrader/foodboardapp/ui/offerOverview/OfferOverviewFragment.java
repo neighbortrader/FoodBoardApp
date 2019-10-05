@@ -23,19 +23,13 @@ import butterknife.Unbinder;
 
 public class OfferOverviewFragment extends Fragment {
 
-    private Unbinder unbinder;
-
     public static String TAG = OfferOverviewFragment.class.getSimpleName();
-
-    private OfferOverviewController controller;
-
     @BindView(R.id.recyclerView)
     RecyclerView offerRecyclerView;
-
-
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefreshLayout;
-
+    private Unbinder unbinder;
+    private OfferOverviewController controller;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerViewAdapter adapter;
 

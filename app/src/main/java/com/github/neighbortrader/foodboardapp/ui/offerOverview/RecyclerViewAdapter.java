@@ -19,31 +19,15 @@ import java.util.ArrayList;
 import lombok.Setter;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.OfferViewHolder> {
-    public static class OfferViewHolder extends RecyclerView.ViewHolder {
-        CardView cardView;
-
-        TextView groceryAndCreationDate;
-        TextView description;
-        TextView price;
-
-        OfferViewHolder(View itemView) {
-            super(itemView);
-            cardView = itemView.findViewById(R.id.card_view);
-            groceryAndCreationDate = itemView.findViewById(R.id.txtGroceryCategoryAndCreationDate);
-            description = itemView.findViewById(R.id.txtDescription);
-            price = itemView.findViewById(R.id.txtPrice);
-        }
-    }
-
     @Setter
     private ArrayList<Offer> offerList;
 
-    public void clearOfferList(){
-        offerList.clear();
-    }
-
     public RecyclerViewAdapter(ArrayList<Offer> offerList) {
         this.offerList = offerList;
+    }
+
+    public void clearOfferList() {
+        offerList.clear();
     }
 
     @Override
@@ -75,6 +59,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public static class OfferViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
+
+        TextView groceryAndCreationDate;
+        TextView description;
+        TextView price;
+
+        OfferViewHolder(View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.card_view);
+            groceryAndCreationDate = itemView.findViewById(R.id.txtGroceryCategoryAndCreationDate);
+            description = itemView.findViewById(R.id.txtDescription);
+            price = itemView.findViewById(R.id.txtPrice);
+        }
     }
 
 }

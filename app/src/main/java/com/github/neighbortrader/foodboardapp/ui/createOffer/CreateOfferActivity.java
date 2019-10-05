@@ -43,13 +43,6 @@ public class CreateOfferActivity extends AppCompatActivity {
     public static String TAG = CreateOfferActivity.class.getSimpleName();
 
     final Calendar calender = Calendar.getInstance();
-    DateTimeFormatter dateTimeFormatter;
-
-    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
-
-    @BindView(R.id.scrollView)
-    ScrollView scrollView;
-
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
     @BindView(R.id.offerImage)
@@ -66,7 +59,9 @@ public class CreateOfferActivity extends AppCompatActivity {
     public TextInputLayout expireDateInputLayout;
     public TextInputEditText purchaseDateEditText;
     public TextInputLayout purchaseDateInputLayout;
-
+    DateTimeFormatter dateTimeFormatter;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     private CreateOfferController controller;
 
     @Override
@@ -250,7 +245,7 @@ public class CreateOfferActivity extends AppCompatActivity {
             Offer offer = createOfferFromUserInput();
 
             if (offer != null) {
-                scrollView.scrollTo(0,0);
+                scrollView.scrollTo(0, 0);
                 controller.invokePostOffer(offer);
             }
         });
@@ -350,10 +345,10 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public boolean checkCategoryInput() {
-        if(GroceryHandler.findGrocery(categoryChooser.getText().toString()).getGroceryId() == -1){
+        if (GroceryHandler.findGrocery(categoryChooser.getText().toString()).getGroceryId() == -1) {
             categoryLayout.setError(getString(R.string.postOffer_categoryIsNeeded));
             return false;
-        }else{
+        } else {
             categoryLayout.setError(null);
         }
 
@@ -408,7 +403,7 @@ public class CreateOfferActivity extends AppCompatActivity {
         if (checkAll()) {
             String offerDescription = descriptionEditText.getText().toString();
 
-            String priceString = Price.reformatPrice(priceEditText.getEditableText().toString());
+            String priceString = Price.unformatPrice(priceEditText.getEditableText().toString());
             Price price = new Price(Double.parseDouble(priceString));
 
             Grocery grocery = GroceryHandler.findGrocery(categoryChooser.getText().toString());
@@ -420,4 +415,6 @@ public class CreateOfferActivity extends AppCompatActivity {
         ToastHandler.buildToastHandler().makeToast(getString(R.string.postOffer_checkInputMessage));
         return null;
     }
+
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
 }

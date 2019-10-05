@@ -4,12 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +16,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
-import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -30,15 +27,13 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity {
 
     public static String TAG = MainActivity.class.getSimpleName();
-
-    @BindView(R.id.createNewOfferFAB)
-    FloatingActionButton createNewOfferFloatingActionButton;
-
     @BindView(R.id.activity_main)
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     @BindView(R.id.navigation)
     public NavigationView navigationView;
+    @BindView(R.id.createNewOfferFAB)
+    FloatingActionButton createNewOfferFloatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,16 +91,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             return true;
-
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+        if (actionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
 
         return super.onOptionsItemSelected(item);
     }
-
 }

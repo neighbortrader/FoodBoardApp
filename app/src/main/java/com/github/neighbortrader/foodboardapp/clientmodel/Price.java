@@ -33,6 +33,13 @@ public class Price implements ToNameValueMap {
         this.currencyFormatter.setCurrency(this.currency);
     }
 
+    public static String unformatPrice(String formattedPrice) {
+        Context context = ContextHandler.getAppContext();
+        formattedPrice = formattedPrice.replaceAll(context.getString(R.string.general_currency), "");
+        formattedPrice = formattedPrice.replaceAll("\\s", "");
+        return formattedPrice.replaceAll(",", ".");
+    }
+
     @Override
     public String toString() {
         return "Price{" +
@@ -45,13 +52,6 @@ public class Price implements ToNameValueMap {
 
     public String getFormattedPrice() {
         return currencyFormatter.format(value);
-    }
-
-    public static String reformatPrice(String formattedPrice) {
-        Context context = ContextHandler.getAppContext();
-        formattedPrice = formattedPrice.replaceAll(context.getString(R.string.general_currency), "");
-        formattedPrice = formattedPrice.replaceAll("\\s", "");
-        return formattedPrice.replaceAll(",", ".");
     }
 
     @Override

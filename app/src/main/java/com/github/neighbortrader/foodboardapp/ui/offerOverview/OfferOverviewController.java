@@ -4,16 +4,15 @@ import android.content.Context;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 
 import java.util.ArrayList;
 
 public class OfferOverviewController {
 
+    Context context;
     private OfferOverviewModel model;
     private OfferOverviewFragment offerOverviewActivity;
-    Context context;
 
     public OfferOverviewController(OfferOverviewFragment offerOverviewActivity) {
         this.model = new OfferOverviewModel(this);
@@ -41,7 +40,7 @@ public class OfferOverviewController {
         ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(message);
     }
 
-    public void setProgressBarRefreshing(boolean isRefresing){
+    public void setProgressBarRefreshing(boolean isRefresing) {
         offerOverviewActivity.setRefreshing(isRefresing);
     }
 
