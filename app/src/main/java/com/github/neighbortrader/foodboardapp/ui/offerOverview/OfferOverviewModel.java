@@ -19,20 +19,22 @@ import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 
 import java.util.ArrayList;
 
-import lombok.Getter;
+public class OfferOverviewModel extends ViewModel {
+    public String TAG = OfferOverviewModel.class.getSimpleName();
 
-public class AllOffersModel extends ViewModel {
-    public String TAG = AllOffersModel.class.getSimpleName();
-
-    private AllOffersController allOffersController;
+    private OfferOverviewController offerOverviewController;
     private Context context = ContextHandler.getAppContext();
 
-    @Getter
     private ArrayList<Offer> currentOffers = new ArrayList<>();
 
-    public AllOffersModel(AllOffersController allOffersController) {
-        this.allOffersController = allOffersController;
+    public OfferOverviewModel(OfferOverviewController offerOverviewController) {
+        this.offerOverviewController = offerOverviewController;
     }
+
+    public ArrayList<Offer> getCurrentOffers() {
+        return currentOffers;
+    }
+
 
     public void initialize() {
         GroceryHandler.loadGroceriesFromSharedPreferences();
@@ -61,7 +63,7 @@ public class AllOffersModel extends ViewModel {
             @Override
             public void onFailure(Exception e) {
                 Log.d(TAG, "onFailure() in updateGroceryCategories()");
-                allOffersController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdaterGroceries));
+                offerOverviewController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdaterGroceries));
             }
 
             @Override
@@ -76,15 +78,15 @@ public class AllOffersModel extends ViewModel {
         OfferRequestHandler.builder(RequestTyps.GET_ALL_OFFERS, context, new OnRequestEventListener<OfferRequestHandler>() {
             @Override
             public void onResponse(OfferRequestHandler offerRequestHandler) {
-                currentOffers.addAll(offerRequestHandler.getReceivedOffers());
-                allOffersController.invokeUiUpdate(offerRequestHandler);
+                currentOffers = offerRequestHandler.getReceivedOffers();
+                offerOverviewController.invokeUiUpdate();
             }
 
             @Override
             public void onFailure(Exception e) {
                 Log.d(TAG, "onFailure() in updateOffers()");
-                allOffersController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdateOffers));
-                allOffersController.setProgressBarRefreshing(false);
+                offerOverviewController.invokeUiUpdate(e, context.getResources().getString(R.string.general_unableToUpdateOffers));
+                offerOverviewController.setProgressBarRefreshing(false);
             }
 
             @Override

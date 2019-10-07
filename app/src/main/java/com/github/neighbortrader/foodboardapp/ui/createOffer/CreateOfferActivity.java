@@ -2,25 +2,37 @@ package com.github.neighbortrader.foodboardapp.ui.createOffer;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
+import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.clientmodel.Price;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import butterknife.BindView;
@@ -29,109 +41,215 @@ import butterknife.ButterKnife;
 public class CreateOfferActivity extends AppCompatActivity {
 
     public static String TAG = CreateOfferActivity.class.getSimpleName();
+
     final Calendar calender = Calendar.getInstance();
-
-    @BindView(R.id.createOffer)
-    public Button postOfferBtn;
-
-    @BindView(R.id.foodCategorySpinner)
-    public Spinner categorySpinner;
-
-    @BindView(R.id.createOffer_EdTxt_Description)
-    public EditText description;
-
-    @BindView(R.id.editTextPreis)
-    public EditText priceEditText;
-
-    @BindView(R.id.editTextmhd)
-    public EditText expireDate;
-
-    @BindView(R.id.editTextpurchaseDate)
-    public EditText purchaseDate;
-
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @BindView(R.id.offerImage)
     public ImageView offerImage;
-
-    public enum progressBarStates{NOT_LOADING, LOADING, FINISHED, EROOR};
-
+    @BindView(R.id.createOffer)
+    public MaterialButton postOfferButton;
+    public TextInputEditText descriptionEditText;
+    public TextInputLayout descriptionInputLayout;
+    public TextInputEditText priceEditText;
+    public TextInputLayout priceInputLayout;
+    public AutoCompleteTextView categoryChooser;
+    public TextInputLayout categoryLayout;
+    public TextInputEditText expireDateEditText;
+    public TextInputLayout expireDateInputLayout;
+    public TextInputEditText purchaseDateEditText;
+    public TextInputLayout purchaseDateInputLayout;
+    DateTimeFormatter dateTimeFormatter;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     private CreateOfferController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
+
         super.onCreate(savedInstanceState);
+
+        controller = new CreateOfferController(this);
 
         setContentView(R.layout.createoffer);
         ButterKnife.bind(this);
 
-        controller = new CreateOfferController(this);
+        getSupportActionBar().setTitle(getString(R.string.postOffer_headline));
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        dateTimeFormatter = DateTimeFormatter.ofPattern(getString(R.string.general_dateformat));
+
+        findViews();
+
+        categoryChooser.setHeight(purchaseDateEditText.getHeight());
+
         setProgressbarState(progressBarStates.NOT_LOADING);
 
-        ArrayAdapter<Grocery> adapter = new ArrayAdapter<Grocery>(this,
-                android.R.layout.simple_spinner_item, GroceryHandler.getCurrentGroceries());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Grocery> adapter = new ArrayAdapter<>(
+                ContextHandler.getAppContext(),
+                R.layout.dropdown_menu_popup_item,
+                GroceryHandler.getCurrentGroceries());
 
-        categorySpinner.setAdapter(adapter);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        categorySpinner.setAdapter(adapter);
-
-        setSupportActionBar(toolbar);
-
-        postOfferBtn.setOnClickListener(v -> {
-            Offer offer = createOfferFromUserInput();
-            controller.invokePostOffer(offer);
-        });
+        categoryChooser.setAdapter(adapter);
+        categoryChooser.setDropDownWidth(600);
 
         offerImage.setImageResource(R.drawable.food_placeholder);
 
-        expireDate.setOnClickListener(v -> createAndShowDatePickerDialog(expireDate));
-
-        purchaseDate.setOnClickListener(v -> createAndShowDatePickerDialog(purchaseDate));
+        setListeners();
     }
 
-    private void createAndShowDatePickerDialog(EditText editText){
-        int day = calender.get(Calendar.DAY_OF_MONTH);
-        int month = calender.get(Calendar.MONTH);
-        int year = calender.get(Calendar.YEAR);
+    public void findViews() {
+        descriptionInputLayout = findViewById(R.id.layout_Description);
+        descriptionEditText = findViewById(R.id.description_EditText);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
-                (view, year1, monthOfYear, dayOfMonth) -> editText.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1), year, month, day);
-        datePickerDialog.show();
+        priceInputLayout = findViewById(R.id.layout_Price);
+        priceEditText = findViewById(R.id.editText_price);
+
+        categoryChooser = findViewById(R.id.filled_exposed_dropdown_ctagory);
+        categoryLayout = findViewById(R.id.layout_Category);
+
+        expireDateInputLayout = findViewById(R.id.layout_ExpireDate);
+        expireDateEditText = findViewById(R.id.editText_expireDate);
+
+        purchaseDateInputLayout = findViewById(R.id.layout_PurchaseDate);
+        purchaseDateEditText = findViewById(R.id.editText_purchaseDate);
     }
 
-    public void setProgressbarState(progressBarStates state) {
-        if (state == progressBarStates.LOADING) {
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-        } else if (state == progressBarStates.NOT_LOADING){
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(false);
-        } else if (state == progressBarStates.FINISHED){
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(100, true);
-        }else if (state == progressBarStates.EROOR){
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(true);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
-    public Offer createOfferFromUserInput() {
-        String offerDescription = description.getText().toString();
-        Price price = new Price(Double.parseDouble(priceEditText.getText().toString()));
-        Grocery grocery = GroceryHandler.findGrocery(categorySpinner.getSelectedItem().toString());
-        LocalDateTime expireLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
-        LocalDateTime purchaseLocalDateTime = LocalDateTime.of(calender.get(Calendar.YEAR), calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH), 0, 0);
+    public void setListeners() {
+        descriptionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                checkDescriptionInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        descriptionEditText.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                checkDescriptionInput();
+            }
+        });
+
+        priceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                checkPriceInput();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        priceEditText.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) {
+                checkPriceInput();
+
+                if (!priceEditText.getEditableText().toString().contains(getString(R.string.general_currency)) &&
+                        !priceEditText.getEditableText().toString().isEmpty()) {
+                    priceEditText.setText(new Price(Double.
+                            parseDouble(priceEditText.getText().toString())).
+                            getFormattedPrice());
+                }
+            }
+        });
+
+        categoryChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                checkCategoryInput();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                checkCategoryInput();
+            }
+        });
+
+        categoryChooser.setOnDismissListener(() -> {
+            checkCategoryInput();
+        });
+
+        expireDateEditText.setOnClickListener(view -> {
+            expireDateEditText.requestFocus();
+            createAndShowDatePickerDialog(expireDateEditText);
+        });
+
+        expireDateEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                checkExpireDate(editable);
+            }
+        });
+
+        purchaseDateEditText.setOnClickListener(view -> {
+            purchaseDateEditText.requestFocus();
+            createAndShowDatePickerDialog(purchaseDateEditText);
+        });
+
+        purchaseDateEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                checkPurchaseDate(editable);
+            }
+        });
+
+        postOfferButton.setOnClickListener(v -> {
+            Offer offer = createOfferFromUserInput();
+
+            if (offer != null) {
+                scrollView.scrollTo(0, 0);
+                controller.invokePostOffer(offer);
+            }
+        });
     }
 
     @Override
@@ -169,4 +287,135 @@ public class CreateOfferActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
     }
+
+    private void createAndShowDatePickerDialog(EditText editText) {
+        int day = calender.get(Calendar.DAY_OF_MONTH);
+        int month = calender.get(Calendar.MONTH);
+        int year = calender.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOfferActivity.this,
+                (view, year1, monthOfYear, dayOfMonth) -> {
+                    monthOfYear += 1;
+                    LocalDateTime selectedLocalDateTime = LocalDateTime.of(year1, monthOfYear, dayOfMonth, 0, 0);
+
+                    editText.setText(selectedLocalDateTime.format(DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))));
+                }, year, month, day);
+        datePickerDialog.show();
+    }
+
+    public void setProgressbarState(progressBarStates state) {
+        if (state == progressBarStates.LOADING) {
+            progressBar.setIndeterminate(true);
+            progressBar.setVisibility(View.VISIBLE);
+        } else if (state == progressBarStates.NOT_LOADING) {
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+        } else if (state == progressBarStates.FINISHED) {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(100, true);
+        } else if (state == progressBarStates.ERROR) {
+            progressBar.setVisibility(View.INVISIBLE);
+            progressBar.setIndeterminate(true);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    public boolean checkAll() {
+        checkDescriptionInput();
+        checkPriceInput();
+        checkCategoryInput();
+        checkExpireDate(expireDateEditText.getEditableText());
+        checkPurchaseDate(purchaseDateEditText.getEditableText());
+
+        return checkDescriptionInput() && checkPriceInput() && checkCategoryInput() && checkPurchaseDate(purchaseDateEditText.getEditableText()) && checkExpireDate(expireDateEditText.getEditableText());
+    }
+
+    public boolean checkDescriptionInput() {
+        if (descriptionEditText.length() > descriptionInputLayout.getCounterMaxLength())
+            descriptionInputLayout.setError(String.format(getString(R.string.general_toLongText), descriptionInputLayout.getCounterMaxLength()));
+        else if (descriptionEditText.length() <= 0) {
+            descriptionInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_description)));
+        } else {
+            descriptionInputLayout.setError(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkCategoryInput() {
+        if (GroceryHandler.findGrocery(categoryChooser.getText().toString()).getGroceryId() == -1) {
+            categoryLayout.setError(getString(R.string.postOffer_categoryIsNeeded));
+            return false;
+        } else {
+            categoryLayout.setError(null);
+        }
+
+        return true;
+    }
+
+    public boolean checkPriceInput() {
+        if (priceEditText.length() <= 0) {
+            priceInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.general_price)));
+        } else {
+            priceInputLayout.setError(null);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean checkPurchaseDate(Editable editable) {
+        if (editable.length() > 0) {
+            LocalDate purchaseDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
+            if (purchaseDateTime.isAfter(LocalDate.now())) {
+                purchaseDateInputLayout.setError(getString(R.string.postOffer_DateError));
+            } else {
+                purchaseDateInputLayout.setError(null);
+                return true;
+            }
+        } else {
+            purchaseDateInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.postOffer_PurchaseDateHint)));
+        }
+
+        return false;
+    }
+
+    public boolean checkExpireDate(Editable editable) {
+        if (editable.length() > 0) {
+            LocalDate expireDateTime = LocalDate.parse(editable, DateTimeFormatter.ofPattern(getString(R.string.general_dateformat)));
+
+            if (expireDateTime.isBefore(LocalDate.now())) {
+                expireDateInputLayout.setError(getString(R.string.postOffer_DateError));
+            } else {
+                expireDateInputLayout.setError(null);
+                return true;
+            }
+        } else {
+            expireDateInputLayout.setError(String.format(getString(R.string.general_canBeEmpty), getString(R.string.postOffer_ExpireDateHint)));
+        }
+
+        return false;
+    }
+
+    public Offer createOfferFromUserInput() {
+        if (checkAll()) {
+            String offerDescription = descriptionEditText.getText().toString();
+
+            String priceString = Price.reformatPrice(priceEditText.getEditableText().toString());
+            Price price = new Price(Double.parseDouble(priceString));
+
+            Grocery grocery = GroceryHandler.findGrocery(categoryChooser.getText().toString());
+            LocalDateTime expireLocalDateTime = LocalDateTime.of(LocalDate.parse(expireDateEditText.getText(), DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0, 0));
+            LocalDateTime purchaseLocalDateTime = LocalDateTime.of(LocalDate.parse(purchaseDateEditText.getText(), DateTimeFormatter.ofPattern(getString(R.string.general_dateformat))), LocalTime.of(0, 0));
+            return Offer.createOffer(price, grocery, offerDescription, purchaseLocalDateTime, expireLocalDateTime);
+        }
+
+        ToastHandler.buildToastHandler().makeToast(getString(R.string.postOffer_checkInputMessage));
+        return null;
+    }
+
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
 }

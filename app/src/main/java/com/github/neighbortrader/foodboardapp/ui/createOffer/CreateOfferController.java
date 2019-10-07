@@ -6,9 +6,9 @@ import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 
 public class CreateOfferController {
+    Context context;
     private CreateOfferModel model;
     private CreateOfferActivity createOfferActivity;
-    Context context;
 
     public CreateOfferController(CreateOfferActivity createOfferActivity) {
         this.model = new CreateOfferModel(this);
@@ -21,8 +21,8 @@ public class CreateOfferController {
         createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.LOADING);
     }
 
-    public void onError(){
-        createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.EROOR);
+    public void onError() {
+        createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.ERROR);
     }
 
     public void invokeFinish() {

@@ -84,7 +84,6 @@ public class Offer implements ToNameValueMap, Parcelable {
             int grocerieId = jsonObject.getInt("grocerieId");
             String description = jsonObject.getString("description");
 
-
             LocalDateTime purchaseDate = jsonStringToLocalDateTime(jsonObject, "purchaseDate");
             LocalDateTime expireDate = jsonStringToLocalDateTime(jsonObject, "expireDate");
             LocalDateTime creationDate = jsonStringToLocalDateTime(jsonObject, "creationDate");
