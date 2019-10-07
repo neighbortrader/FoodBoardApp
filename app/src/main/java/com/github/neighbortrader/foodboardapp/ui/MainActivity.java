@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.app_name) + BuildConfig.VERSION_NAME);
+        getSupportActionBar().setTitle(getString(R.string.app_name) + getString(R.string.app_version));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();

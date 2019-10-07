@@ -14,6 +14,10 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+def versionMajor = 1
+def versionMinor = 7
+def versionPatch = 58
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -21,8 +25,8 @@ android {
         applicationId "com.github.neighbortrader.foodboardapp"
         minSdkVersion 26
         targetSdkVersion 29
-        versionCode 8
-        versionName "1.7alpha"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -40,6 +44,9 @@ android {
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
+
+            resValue "string", "app_version",
+            "${defaultConfig.versionName}"
         }
         debug {
             signingConfig debug.signingConfig
@@ -51,17 +58,10 @@ android {
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
-        }
-        dummyDebug {
-            signingConfig debug.signingConfig
 
-            resValue "string", "BASE_URL", "http://dummy.restapiexample.com/api/v1/employees"
-            resValue "string", "GET_ALL_OFFERS_URL", ""
-            resValue "string", "CREATE_NEW_USER", "User"
-            resValue "string", "CREATE_NEW_OFFER", "Offer"
-            resValue "string", "GET_JWT_TOKEN", "Authorization"
-            resValue "string", "POST_NEW_OFFER", ""
-            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
+            versionNameSuffix ".debug"
+            resValue "string", "app_version",
+                    "${defaultConfig.versionName}${versionNameSuffix}"
         }
     }
     compileOptions {
