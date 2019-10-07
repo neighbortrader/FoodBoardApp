@@ -173,7 +173,8 @@ public class CreateOfferActivity extends AppCompatActivity {
             if (!hasFocus) {
                 checkPriceInput();
 
-                if (!priceEditText.getEditableText().toString().contains(getString(R.string.general_currency))) {
+                if (!priceEditText.getEditableText().toString().contains(getString(R.string.general_currency)) &&
+                        !priceEditText.getEditableText().toString().isEmpty()) {
                     priceEditText.setText(new Price(Double.
                             parseDouble(priceEditText.getText().toString())).
                             getFormattedPrice());
