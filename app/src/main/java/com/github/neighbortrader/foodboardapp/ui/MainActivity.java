@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.crashlytics.android.Crashlytics;
+import com.github.neighbortrader.foodboardapp.BuildConfig;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
@@ -56,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getString(R.string.app_name) + BuildConfig.VERSION_NAME);
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
-
                 case R.id.settings:
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                     LayoutInflater inflater = this.getLayoutInflater();
