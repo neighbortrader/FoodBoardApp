@@ -33,7 +33,7 @@ public class Price implements ToNameValueMap {
         this.currencyFormatter.setCurrency(this.currency);
     }
 
-    public static String unformatPrice(String formattedPrice) {
+    public static String reformatPrice(String formattedPrice) {
         Context context = ContextHandler.getAppContext();
         formattedPrice = formattedPrice.replaceAll(context.getString(R.string.general_currency), "");
         formattedPrice = formattedPrice.replaceAll("\\s", "");

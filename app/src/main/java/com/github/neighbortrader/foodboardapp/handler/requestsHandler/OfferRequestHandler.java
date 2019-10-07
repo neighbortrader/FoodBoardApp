@@ -62,11 +62,11 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     }
 
     public ArrayList<Offer> getReceivedOffers() {
-        sortOfferstOffers();
+        sortOffers();
         return receivedOffers;
     }
 
-    private void sortOfferstOffers() {
+    private void sortOffers() {
         Collections.sort(receivedOffers, (offer, t1) -> offer.getCreationDate().compareTo(t1.getCreationDate()) * -1);
     }
 

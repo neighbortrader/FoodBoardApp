@@ -36,7 +36,6 @@ public class UserHandler {
         String username = UUID.randomUUID().toString();
         String password = "adm!n9Asswor!d";
         String email = String.format("%s@testmail.com", username);
-
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
         return User.userBuilder(username, password, email, address);

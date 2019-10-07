@@ -404,7 +404,7 @@ public class CreateOfferActivity extends AppCompatActivity {
         if (checkAll()) {
             String offerDescription = descriptionEditText.getText().toString();
 
-            String priceString = Price.unformatPrice(priceEditText.getEditableText().toString());
+            String priceString = Price.reformatPrice(priceEditText.getEditableText().toString());
             Price price = new Price(Double.parseDouble(priceString));
 
             Grocery grocery = GroceryHandler.findGrocery(categoryChooser.getText().toString());
