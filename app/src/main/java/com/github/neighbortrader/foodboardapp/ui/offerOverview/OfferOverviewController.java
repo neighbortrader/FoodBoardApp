@@ -4,20 +4,19 @@ import android.content.Context;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.Offer;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.OfferRequestHandler;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 
 import java.util.ArrayList;
 
-public class AllOffersController {
+public class OfferOverviewController {
 
-    private AllOffersModel model;
-    private AllOffersActivity allOffersActivity;
     Context context;
+    private OfferOverviewModel model;
+    private OfferOverviewFragment offerOverviewActivity;
 
-    public AllOffersController(AllOffersActivity allOffersActivity) {
-        this.model = new AllOffersModel(this);
-        this.allOffersActivity = allOffersActivity;
+    public OfferOverviewController(OfferOverviewFragment offerOverviewActivity) {
+        this.model = new OfferOverviewModel(this);
+        this.offerOverviewActivity = offerOverviewActivity;
         context = ContextHandler.getAppContext();
 
         model.initialize();
@@ -32,8 +31,8 @@ public class AllOffersController {
         return model.getCurrentOffers();
     }
 
-    public void invokeUiUpdate(OfferRequestHandler offerRequestHandler) {
-        allOffersActivity.updateUi(offerRequestHandler.getReceivedOffers());
+    public void invokeUiUpdate() {
+        offerOverviewActivity.updateUi(model.getCurrentOffers());
         setProgressBarRefreshing(false);
     }
 
@@ -41,8 +40,8 @@ public class AllOffersController {
         ToastHandler.buildErrorToastHandler(e).errorToastWithCostumeMassage(message);
     }
 
-    public void setProgressBarRefreshing(boolean isRefresing){
-        allOffersActivity.setRefreshing(isRefresing);
+    public void setProgressBarRefreshing(boolean isRefresing) {
+        offerOverviewActivity.setRefreshing(isRefresing);
     }
 
     public void destroy() {

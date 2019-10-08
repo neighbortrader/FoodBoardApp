@@ -12,8 +12,8 @@ import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +28,8 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
     @Getter
     private Offer offerToPost;
 
-    @Getter
     @Setter
     private ArrayList<Offer> receivedOffers;
-
     @Getter
     private boolean wasSuccessful;
 
@@ -61,6 +59,15 @@ public class OfferRequestHandler extends AsyncRequestHandler<OfferRequestHandler
         }
 
         return offerRequestController;
+    }
+
+    public ArrayList<Offer> getReceivedOffers() {
+        sortOffers();
+        return receivedOffers;
+    }
+
+    private void sortOffers() {
+        Collections.sort(receivedOffers, (offer, t1) -> offer.getCreationDate().compareTo(t1.getCreationDate()) * -1);
     }
 
     public void setOfferToPost(Offer offerToPost) {

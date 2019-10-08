@@ -14,15 +14,19 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+def versionMajor = 1
+def versionMinor = 7
+def versionPatch = 62
+
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.github.neighbortrader.foodboardapp"
-        minSdkVersion 26
+        minSdkVersion 15
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.6"
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -33,13 +37,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            resValue "string", "BASE_URL", "192.168.178.27:3000/api/"
+            resValue "string", "BASE_URL", "http://192.168.178.27:3000/api/"
             resValue "string", "GET_ALL_OFFERS_URL", "Offer"
             resValue "string", "CREATE_NEW_USER", "User"
             resValue "string", "CREATE_NEW_OFFER", "Offer"
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
+
+            resValue "string", "app_version",
+            "${defaultConfig.versionName}"
         }
         debug {
             signingConfig debug.signingConfig
@@ -51,17 +58,10 @@ android {
             resValue "string", "GET_JWT_TOKEN", "Authorization"
             resValue "string", "POST_NEW_OFFER", ""
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
-        }
-        dummyDebug {
-            signingConfig debug.signingConfig
 
-            resValue "string", "BASE_URL", "http://dummy.restapiexample.com/api/v1/employees"
-            resValue "string", "GET_ALL_OFFERS_URL", ""
-            resValue "string", "CREATE_NEW_USER", "User"
-            resValue "string", "CREATE_NEW_OFFER", "Offer"
-            resValue "string", "GET_JWT_TOKEN", "Authorization"
-            resValue "string", "POST_NEW_OFFER", ""
-            resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
+            versionNameSuffix ".debug"
+            resValue "string", "app_version",
+                    "${defaultConfig.versionName}${versionNameSuffix}"
         }
     }
     compileOptions {
@@ -73,34 +73,37 @@ android {
 dependencies {
 
     // okHttp
-    implementation("com.squareup.okhttp3:okhttp:4.1.0")
+    implementation('com.squareup.okhttp3:okhttp:4.2.2')
 
     // Crashlytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     // Butterknife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
     // JWT
     implementation 'com.auth0.android:jwtdecode:1.3.0'
 
     // gson
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // design
+    implementation 'com.google.android.material:material:1.1.0-beta01'
 
     // etc
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.navigation:navigation-fragment:2.0.0'
-    implementation 'androidx.navigation:navigation-ui:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 }

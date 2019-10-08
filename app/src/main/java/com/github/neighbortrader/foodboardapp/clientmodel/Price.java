@@ -1,5 +1,10 @@
 package com.github.neighbortrader.foodboardapp.clientmodel;
 
+import android.content.Context;
+
+import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
+
 import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Hashtable;
@@ -26,6 +31,13 @@ public class Price implements ToNameValueMap {
         this.currency = Currency.getInstance(this.currentLocal);
         this.currencyFormatter = NumberFormat.getCurrencyInstance(this.currentLocal);
         this.currencyFormatter.setCurrency(this.currency);
+    }
+
+    public static String reformatPrice(String formattedPrice) {
+        Context context = ContextHandler.getAppContext();
+        formattedPrice = formattedPrice.replaceAll(context.getString(R.string.general_currency), "");
+        formattedPrice = formattedPrice.replaceAll("\\s", "");
+        return formattedPrice.replaceAll(",", ".");
     }
 
     @Override
