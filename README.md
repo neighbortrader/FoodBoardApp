@@ -7,7 +7,7 @@ FoodBoard is a food saving and sharing platform for non corporate users to other
 ## Current state of the software
 
 Currently the Front- and Backend are prototyped.
-The initial release date is early 2020.
+The initial release date is in early 2020.
 
 ## How to build the project
 
