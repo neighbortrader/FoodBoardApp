@@ -1,6 +1,6 @@
 # FoodBoardApp
 
-## What is Foodboard
+## What is Foodboard?
 
 FoodBoard is a food saving and sharing platform for non corporate users to other non corporate users. It is a software engeneering student project. 
 
