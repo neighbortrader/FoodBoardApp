@@ -36,4 +36,8 @@
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
     <string name="general_User">Benutzer</string>
+    <string name="postOffer_OfferingMessageTitle">Wichtiger Hinweis</string>
+    <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
+    <string name="general_yes">Ja</string>
+    <string name="general_no">Nein</string>
 </resources>

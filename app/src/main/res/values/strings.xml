@@ -41,4 +41,8 @@
     <string name="close">Close</string>
     <string name="general_User">User</string>
     <string name="general_currency" translatable="false">€</string>
+    <string name="postOffer_OfferingMessageTitle">Important information</string>
+    <string name="postOffer_OfferingMessage">Please not that you are in contect with user created content</string>
+    <string name="general_yes">yes</string>
+    <string name="general_no">no</string>
 </resources>

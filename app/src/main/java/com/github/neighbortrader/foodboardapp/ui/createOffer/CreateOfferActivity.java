@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
@@ -34,9 +35,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lombok.Setter;
 
 public class CreateOfferActivity extends AppCompatActivity {
 
@@ -48,6 +51,7 @@ public class CreateOfferActivity extends AppCompatActivity {
     @BindView(R.id.offerImage)
     public ImageView offerImage;
     @BindView(R.id.createOffer)
+    @Setter
     public MaterialButton postOfferButton;
     public TextInputEditText descriptionEditText;
     public TextInputLayout descriptionInputLayout;
@@ -246,8 +250,23 @@ public class CreateOfferActivity extends AppCompatActivity {
             Offer offer = createOfferFromUserInput();
 
             if (offer != null) {
-                scrollView.scrollTo(0, 0);
-                controller.invokePostOffer(offer);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.custom_dialog2, null);
+                dialogBuilder.setView(dialogView);
+
+                dialogBuilder.setTitle(getString(R.string.postOffer_OfferingMessageTitle));
+                dialogBuilder.setMessage(getString(R.string.postOffer_OfferingMessage));
+                dialogBuilder.setPositiveButton(getString(R.string.general_yes), (dialog, whichButton) -> {
+                    scrollView.scrollTo(0, 0);
+                    controller.invokePostOffer(offer);
+                    postOfferButton.setEnabled(false);
+                });
+                dialogBuilder.setNegativeButton(getString(R.string.general_no), (dialog, whichButton) -> {
+
+                });
+                AlertDialog b = dialogBuilder.create();
+                b.show();
             }
         });
     }

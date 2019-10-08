@@ -23,6 +23,7 @@ public class CreateOfferController {
 
     public void onError() {
         createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.ERROR);
+        createOfferActivity.setPostOfferButton();
     }
 
     public void invokeFinish() {
