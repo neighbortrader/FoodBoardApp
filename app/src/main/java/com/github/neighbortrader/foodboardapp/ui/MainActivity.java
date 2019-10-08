@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
             switch (id) {
                 case R.id.settings:
+
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                     LayoutInflater inflater = this.getLayoutInflater();
                     final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
