@@ -40,4 +40,6 @@
     <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
     <string name="general_yes">Ja</string>
     <string name="general_no">Nein</string>
+    <string name="postOffer_understand">Ich verstehe</string>
+    <string name="postOffer_abort">Abbrechen</string>
 </resources>

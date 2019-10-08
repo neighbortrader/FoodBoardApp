@@ -35,11 +35,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import lombok.Setter;
 
 public class CreateOfferActivity extends AppCompatActivity {
 
@@ -51,7 +49,6 @@ public class CreateOfferActivity extends AppCompatActivity {
     @BindView(R.id.offerImage)
     public ImageView offerImage;
     @BindView(R.id.createOffer)
-    @Setter
     public MaterialButton postOfferButton;
     public TextInputEditText descriptionEditText;
     public TextInputLayout descriptionInputLayout;
@@ -252,18 +249,16 @@ public class CreateOfferActivity extends AppCompatActivity {
             if (offer != null) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.custom_dialog2, null);
+                final View dialogView = inflater.inflate(R.layout.custom_dialog2,  null);
                 dialogBuilder.setView(dialogView);
-
                 dialogBuilder.setTitle(getString(R.string.postOffer_OfferingMessageTitle));
                 dialogBuilder.setMessage(getString(R.string.postOffer_OfferingMessage));
-                dialogBuilder.setPositiveButton(getString(R.string.general_yes), (dialog, whichButton) -> {
+                dialogBuilder.setPositiveButton(getString(R.string.postOffer_understand), (dialog, whichButton) -> {
                     scrollView.scrollTo(0, 0);
                     controller.invokePostOffer(offer);
                     postOfferButton.setEnabled(false);
                 });
-                dialogBuilder.setNegativeButton(getString(R.string.general_no), (dialog, whichButton) -> {
-
+                dialogBuilder.setNegativeButton(getString(R.string.postOffer_abort), (dialog, whichButton) -> {
                 });
                 AlertDialog b = dialogBuilder.create();
                 b.show();
@@ -437,4 +432,12 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
+
+    public void setPostOfferButtonEnabeld() {
+        postOfferButton.setEnabled(true);
+    }
+
+    public void setPostOfferButtonDisabeld() {
+        postOfferButton.setEnabled(false);
+    }
 }
