@@ -3,16 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <PreferenceCategory
+        app:title="@string/settings_general_title"
+        app:iconSpaceReserved="false">
     <EditTextPreference
-        android:key="@string/settings_baseUrl_key"
-        android:defaultValue="@string/BASE_URL"
-        android:summaryOff="Invisible"
-        android:summaryOn="Visible"
-        android:title="@string/settings_baseUrl_title" />
+        app:icon="@drawable/ic_base_url_black_24dp"
+        app:key="@string/settings_baseUrl_key"
+        app:defaultValue="@string/BASE_URL"
+        app:summary="@string/setting_baseUrl_summary"
+        app:title="@string/settings_baseUrl_title" />
 
     <Preference
+        app:icon="@drawable/ic_feedback_black_24dp"
         app:key="@string/settings_feedback_key"
         app:summary="@string/settings_feedback_summary"
         app:title="@string/settings_feedback_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
