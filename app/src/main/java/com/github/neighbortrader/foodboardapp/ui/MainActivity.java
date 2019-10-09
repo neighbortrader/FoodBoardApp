@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +16,15 @@ import androidx.preference.PreferenceManager;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textview.MaterialTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initializeGroceryAndUser();
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
             Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
@@ -66,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     startActivity(new Intent(this, SettingsActivity.class));
                     break;
 
+                case R.id.user:
+                    UserHandler.loadUserAndUserData();
+                    break;
+
                 default:
                     return true;
             }
@@ -75,6 +85,20 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         setupSharedPreferences();
     }
+
+    public void initializeGroceryAndUser() {
+        GroceryHandler.loadGroceriesFromSharedPreferences();
+
+        UserHandler.iniUserHandler(hasUser -> {
+            ToastHandler.buildToastHandler().makeToast("OnUserChangedListener");
+            MaterialTextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
+
+            userState.setText("has User:" + hasUser);
+        });
+
+        UserHandler.loadUserAndUserData();
+    }
+
 
     @Override
     protected void onDestroy() {

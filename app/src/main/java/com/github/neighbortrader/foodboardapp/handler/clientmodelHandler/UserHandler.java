@@ -19,10 +19,11 @@ import java.util.UUID;
 import static android.content.Context.MODE_PRIVATE;
 
 public class UserHandler {
-
     public static final String TAG = UserHandler.class.getSimpleName();
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
     private static User userInstance;
+
+    private static OnUserChangedListener callback;
 
     public static User getCurrentUserInstance() {
         return UserHandler.userInstance;
@@ -30,6 +31,12 @@ public class UserHandler {
 
     public static void setCurrentUserInstance(User userInstance) {
         UserHandler.userInstance = userInstance;
+        callback.onUserStateChanged(true);
+    }
+
+    public static void iniUserHandler(OnUserChangedListener onUserChangedListener){
+        callback = onUserChangedListener;
+        callback.onUserStateChanged(false);
     }
 
     public static User generateRandomUser() {
@@ -71,6 +78,7 @@ public class UserHandler {
     }
 
     public static void loadUserAndUserData() {
+        callback.onUserStateChanged(false);
         User loadedUser = UserHandler.loadUserFromSharedPreferences();
         Context context = ContextHandler.getAppContext();
 

@@ -18,8 +18,6 @@ public class OfferOverviewController {
         this.model = new OfferOverviewModel(this);
         this.offerOverviewActivity = offerOverviewActivity;
         context = ContextHandler.getAppContext();
-
-        model.initialize();
     }
 
     public void invokeUpdate() {

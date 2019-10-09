@@ -1,5 +1,5 @@
 package com.github.neighbortrader.foodboardapp.handler.clientmodelHandler;
 
-public interface OnUserChange {
-    void userState(boolean hasUser);
+public interface OnUserChangedListener {
+    void onUserStateChanged(boolean hasUser);
 }

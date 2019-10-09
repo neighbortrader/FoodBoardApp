@@ -35,12 +35,6 @@ public class OfferOverviewModel extends ViewModel {
         return currentOffers;
     }
 
-
-    public void initialize() {
-        GroceryHandler.loadGroceriesFromSharedPreferences();
-        UserHandler.loadUserAndUserData();
-    }
-
     public void destroy() {
         User currentUser = UserHandler.getCurrentUserInstance();
 
