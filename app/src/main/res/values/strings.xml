@@ -41,4 +41,10 @@
     <string name="close">Close</string>
     <string name="general_User">User</string>
     <string name="general_currency" translatable="false">€</string>
+    <string name="preferences_general_titel">General</string>
+    <string name="settings_baseUrl_key" translatable="false">base_url</string>
+    <string name="settings_baseUrl_title" translatable="false">URL</string>
+    <string name="settings_feedback_key" translatable="false">feedback</string>
+    <string name="settings_feedback_title">Send Feedback</string>
+    <string name="settings_feedback_summary">Report technical issues or suggest new features</string>
 </resources>

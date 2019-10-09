@@ -28,7 +28,6 @@ public class OfferOverviewFragment extends Fragment {
     RecyclerView offerRecyclerView;
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefreshLayout;
-    private Unbinder unbinder;
     private OfferOverviewController controller;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerViewAdapter adapter;
@@ -37,7 +36,7 @@ public class OfferOverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.offeroverview, container, false);
 
-        unbinder = ButterKnife.bind(this, view);
+        Unbinder unbinder = ButterKnife.bind(this, view);
 
         controller = new OfferOverviewController(this);
 

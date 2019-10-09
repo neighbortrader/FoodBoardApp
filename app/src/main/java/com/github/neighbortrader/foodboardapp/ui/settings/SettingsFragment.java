@@ -1,15 +1,15 @@
-package com.github.neighbortrader.foodboardapp.ui.SettingsFragment;
+package com.github.neighbortrader.foodboardapp.ui.settings;
 
 import android.os.Bundle;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.github.neighbortrader.foodboardapp.R;
 
-
 public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.preferences, rootKey);
+        addPreferencesFromResource(R.xml.preferences);
     }
 }

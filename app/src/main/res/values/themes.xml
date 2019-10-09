@@ -52,6 +52,9 @@
         <item name="textAppearanceCaption">@style/TextAppearance.MyTheme.Caption</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MyTheme.Overline</item>
 
+        <!-- TODO: check the theme-->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+
         <item name="popupMenuStyle">@style/Widget.MaterialComponents.PopupMenu</item>
         <item name="android:contextPopupMenuStyle">
             @style/Widget.MaterialComponents.PopupMenu.ContextMenu

@@ -1,23 +1,21 @@
 package com.github.neighbortrader.foodboardapp.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.preference.PreferenceManager;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.BuildConfig;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.activity_main)
@@ -64,29 +62,7 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
             switch (id) {
                 case R.id.settings:
-
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-                    LayoutInflater inflater = this.getLayoutInflater();
-                    final View dialogView = inflater.inflate(R.layout.custom_dialog, null);
-                    dialogBuilder.setView(dialogView);
-
-                    final EditText edt = dialogView.findViewById(R.id.edit1);
-
-                    edt.setOnClickListener(view1 -> {
-                        edt.setText(Urls.BASE_URL);
-                        edt.setSelection(7);
-                    });
-
-                    dialogBuilder.setTitle("IP-Adresse");
-                    dialogBuilder.setMessage("IP-Adresse und Port des Servers eingeben");
-                    dialogBuilder.setPositiveButton("Okay", (dialog, whichButton) -> {
-                        Urls.BASE_URL = edt.getText().toString();
-                    });
-                    dialogBuilder.setNegativeButton("Abbrechen", (dialog, whichButton) -> {
-
-                    });
-                    AlertDialog b = dialogBuilder.create();
-                    b.show();
+                    startActivity(new Intent(this, SettingsActivity.class));
                     break;
 
                 default:
@@ -95,6 +71,15 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+
+        setupSharedPreferences();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -103,5 +88,28 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+        setBaseUrl(sharedPreferences.getString(getString(R.string.settings_baseUrl_key), getString(R.string.BASE_URL)));
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.settings_baseUrl_key))) {
+            setBaseUrl(sharedPreferences.getString(key, getString(R.string.BASE_URL)));
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    public void setBaseUrl(String baseUrl){
+        Urls.BASE_URL = baseUrl;
     }
 }

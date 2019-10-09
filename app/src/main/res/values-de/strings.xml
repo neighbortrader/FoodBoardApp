@@ -36,4 +36,7 @@
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
     <string name="general_User">Benutzer</string>
+    <string name="preferences_general_titel">Allgmeien</string>
+    <string name="settings_feedback_title">Feedback senden</string>
+    <string name="settings_feedback_summary">Technische Fehler oder anregungen senden</string>
 </resources>
