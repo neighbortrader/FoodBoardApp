@@ -47,4 +47,5 @@
     <string name="general_no">no</string>
     <string name="postOffer_understand">I understand</string>
     <string name="postOffer_abort">Abort</string>
+    <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
 </resources>

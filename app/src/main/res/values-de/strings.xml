@@ -42,4 +42,5 @@
     <string name="general_no">Nein</string>
     <string name="postOffer_understand">Ich verstehe</string>
     <string name="postOffer_abort">Abbrechen</string>
+    <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
 </resources>
