@@ -36,4 +36,5 @@
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
     <string name="general_User">Benutzer</string>
+    <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
 </resources>
