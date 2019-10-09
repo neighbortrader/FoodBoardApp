@@ -16,10 +16,12 @@ import androidx.preference.PreferenceManager;
 
 import com.crashlytics.android.Crashlytics;
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.GroceryHandler;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -44,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
-
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
         super.onCreate(savedInstanceState);
+        setupSharedPreferences();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initializeGroceryAndUser();
@@ -82,18 +84,33 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             return true;
         });
-
-        setupSharedPreferences();
     }
 
     public void initializeGroceryAndUser() {
         GroceryHandler.loadGroceriesFromSharedPreferences();
 
         UserHandler.iniUserHandler(hasUser -> {
-            ToastHandler.buildToastHandler().makeToast("OnUserChangedListener");
             MaterialTextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
+            MaterialTextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
+            MaterialTextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
+            MaterialTextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
+            MaterialTextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
 
-            userState.setText("has User:" + hasUser);
+            userState.setText("has User: " + hasUser);
+
+            if (hasUser){
+                User user = UserHandler.getCurrentUserInstance();
+                userName.setText("Username: " + user.getUsername());
+                userPassword.setText("Password: " + user.getPassword());
+                userEmail.setText("Email: " + user.getEmail());
+                userAddress.setText("Address: " + user.getAddress().getFormattedSting());
+
+            }else{
+                userName.setText("Username:");
+                userPassword.setText("Password");
+                userEmail.setText("Email:");
+                userAddress.setText("Address:");
+            }
         });
 
         UserHandler.loadUserAndUserData();
