@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate");
 
         Fabric.with(this, new Crashlytics());
+        Crashlytics.setString("versionName", getString(R.string.app_version));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
