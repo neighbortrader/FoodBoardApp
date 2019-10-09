@@ -15,15 +15,15 @@ repositories {
 }
 
 def versionMajor = 1
-def versionMinor = 8
+def versionMinor = 9
 def versionPatch = 0
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.github.neighbortrader.foodboardapp"
-        minSdkVersion 26
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
@@ -83,8 +83,8 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.8'
-    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
     // JWT
     implementation 'com.auth0.android:jwtdecode:1.3.0'
