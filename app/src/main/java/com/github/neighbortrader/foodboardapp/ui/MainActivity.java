@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +19,6 @@ import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.Grocery
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
-import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,8 +52,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         initializeGroceryAndUser();
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
-            Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
-            MainActivity.this.startActivity(startPostOfferIntent);
+            if (UserHandler.getCurrentUserInstance() != null) {
+                Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
+                MainActivity.this.startActivity(startPostOfferIntent);
+            }else{
+                ToastHandler.buildToastHandler().makeToast(getString(R.string.general_NoUserFound));
+            }
         });
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);

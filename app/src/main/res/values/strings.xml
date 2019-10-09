@@ -39,7 +39,7 @@
     <string name="postOffer_checkInputMessage">Please check your Input</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="general_User">User erstellen</string>
+    <string name="general_User">create User</string>
     <string name="general_currency" translatable="false">€</string>
     <string name="preferences_general_titel">General</string>
     <string name="settings_baseUrl_key" translatable="false">base_url</string>
@@ -50,4 +50,5 @@
     <string name="feedback_email" translatable="false">mailto:lindner197@gmail.com</string>
     <string name="feedback_email_subject" translatable="false">Issue or feedback</string>
     <string name="sendFeedback_title">Send email</string>
+    <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
 </resources>
