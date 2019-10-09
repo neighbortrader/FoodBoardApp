@@ -47,4 +47,7 @@
     <string name="settings_feedback_key" translatable="false">feedback</string>
     <string name="settings_feedback_title">Send Feedback</string>
     <string name="settings_feedback_summary">Report technical issues or suggest new features</string>
+    <string name="feedback_email" translatable="false">mailto:lindner197@gmail.com</string>
+    <string name="feedback_email_subject" translatable="false">Issue or feedback</string>
+    <string name="sendFeedback_title">Send email</string>
 </resources>

@@ -104,11 +104,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
     public void setBaseUrl(String baseUrl){
         Urls.BASE_URL = baseUrl;
     }

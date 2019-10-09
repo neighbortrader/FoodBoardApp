@@ -8,7 +8,7 @@
         android:defaultValue="@string/BASE_URL"
         android:summaryOff="Invisible"
         android:summaryOn="Visible"
-        android:title="@string/settings_baseUrl_title"/>
+        android:title="@string/settings_baseUrl_title" />
 
     <Preference
         app:key="@string/settings_feedback_key"

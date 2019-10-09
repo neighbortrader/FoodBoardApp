@@ -5,15 +5,12 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.github.neighbortrader.foodboardapp.R;
 
 import butterknife.ButterKnife;
 
 public class SettingsActivity extends AppCompatActivity {
-
-    Fragment ipFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
