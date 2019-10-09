@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    public void setBaseUrl(String baseUrl){
+    public void setBaseUrl(String baseUrl) {
         Urls.BASE_URL = baseUrl;
     }
 }
