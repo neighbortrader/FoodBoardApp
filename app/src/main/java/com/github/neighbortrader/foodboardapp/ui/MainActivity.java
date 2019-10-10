@@ -18,8 +18,8 @@ import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
-import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -91,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
                     });
                     AlertDialog b = dialogBuilder.create();
                     b.show();
+                    break;
+
+                case R.id.user:
+                    Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
+                    MainActivity.this.startActivity(startSignUpIntent);
                     break;
 
                 default:
