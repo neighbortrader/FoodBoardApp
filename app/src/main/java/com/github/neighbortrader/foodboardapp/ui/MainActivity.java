@@ -22,6 +22,7 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
+import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Log.d(TAG, "onCreate");
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
+
         super.onCreate(savedInstanceState);
         setupSharedPreferences();
         setContentView(R.layout.activity_main);
@@ -77,10 +79,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.user:
+                    UserHandler.loadUserAndUserData();
+
                     if (UserHandler.getCurrentUserInstance() != null) {
-                        // TODO: start signUp/In activity
+                     
                     } else {
-                        UserHandler.loadUserAndUserData();
+                        Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
+                        MainActivity.this.startActivity(startSignUpIntent);
                     }
                     break;
 

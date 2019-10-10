@@ -51,6 +51,13 @@
     <string name="feedback_email" translatable="false">mailto:lindner197@gmail.com</string>
     <string name="feedback_email_subject" translatable="false">Issue or feedback</string>
     <string name="sendFeedback_title">Send email</string>
+    <string name="sign_in_editTextUsername_hint">Username</string>
+    <string name="sign_in_signInButton_Text">Sign in now</string>
+    <string name="sign_in_signUpHereButton_Text">No account yet? Sign up here</string>
+    <string name="sign_in_headline">Sign in</string>
+    <string name="sign_in_editTextEmail_hint" translatable="false">E-Mail</string>
+    <string name="sign_in_editTextPassword_hint">Password</string>
+    <string name="sign_in_staySignedIn_Text">Stay signed in</string>
     <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
     <string name="setting_baseUrl_summary">Set base URL to the backend</string>
     <string name="general_offer">Offers</string>
