@@ -21,16 +21,27 @@ public class User implements ToNameValueMap {
     @Getter
     @Setter
     private Address address;
+    @Getter
+    @Setter
+    private boolean staySignedIn;
 
-    private User(String username, String password, String email, Address address) {
+    private User(String username, String password, String email, Address address, boolean staySignedIn) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.address = address;
+        this.staySignedIn = staySignedIn;
     }
 
-    public static User userBuilder(String username, String password, String email, Address address) {
-        return new User(username, password, email, address);
+    public User() {
+    }
+
+    public static User userBuilder(String username, String password, String email, Address address, boolean staySignedIn) {
+        return new User(username, password, email, address, staySignedIn);
+    }
+
+    public static User userBuilder(){
+        return new User();
     }
 
     @Override
