@@ -77,7 +77,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.user:
-                    UserHandler.loadUserAndUserData();
+                    if (UserHandler.getCurrentUserInstance() != null) {
+                        // TODO: start signUp/In activity
+                    } else {
+                        UserHandler.loadUserAndUserData();
+                    }
                     break;
 
                 case R.id.issueReporting:
@@ -127,13 +131,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 userPassword.setText("Password: " + user.getPassword());
                 userEmail.setText("Email: " + user.getEmail());
                 userAddress.setText("Address: " + user.getAddress().getFormattedSting());
-
             } else {
                 userName.setText("Username:");
                 userPassword.setText("Password");
                 userEmail.setText("Email:");
                 userAddress.setText("Address:");
             }
+
         });
 
         UserHandler.loadUserAndUserData();

@@ -60,4 +60,5 @@
     <string name="settings_staySignedInTitle">Stay signed in</string>
     <string name="settings_staySigendIn_Summary">Set if you want to stay sigend in after closing the app.</string>
     <string name="settings_staySignedIn_Key" translatable="false">staySigendIn</string>
+    <string name="general_modifie_user">Modifie User</string>
 </resources>

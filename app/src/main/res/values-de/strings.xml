@@ -48,4 +48,5 @@
     <string name="general_about">Über</string>
     <string name="settings_staySignedInTitle">Eingeloggt bleiben</string>
     <string name="settings_staySigendIn_Summary">Stelle Sie ein ob sie nach dem schließen der App angemeldet bleiben wollen.</string>
+    <string name="general_modifie_user">Benutzer verwalten</string>
 </resources>
