@@ -249,7 +249,7 @@ public class CreateOfferActivity extends AppCompatActivity {
             if (offer != null) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.custom_dialog2,  null);
+                final View dialogView = inflater.inflate(R.layout.custom_dialog2, null);
                 dialogBuilder.setView(dialogView);
                 dialogBuilder.setTitle(getString(R.string.postOffer_OfferingMessageTitle));
                 dialogBuilder.setMessage(getString(R.string.postOffer_OfferingMessage));
@@ -431,8 +431,6 @@ public class CreateOfferActivity extends AppCompatActivity {
         return null;
     }
 
-    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
-
     public void setPostOfferButtonEnabeld() {
         postOfferButton.setEnabled(true);
     }
@@ -440,4 +438,6 @@ public class CreateOfferActivity extends AppCompatActivity {
     public void setPostOfferButtonDisabeld() {
         postOfferButton.setEnabled(false);
     }
+
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
 }
