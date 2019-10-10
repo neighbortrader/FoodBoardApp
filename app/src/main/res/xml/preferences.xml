@@ -4,20 +4,35 @@
     android:layout_height="match_parent">
 
     <PreferenceCategory
-        app:title="@string/settings_general_title"
-        app:iconSpaceReserved="false">
-    <EditTextPreference
-        app:icon="@drawable/ic_base_url_black_24dp"
-        app:key="@string/settings_baseUrl_key"
-        app:defaultValue="@string/BASE_URL"
-        app:summary="@string/setting_baseUrl_summary"
-        app:title="@string/settings_baseUrl_title" />
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_general_title">
 
-    <Preference
-        app:icon="@drawable/ic_feedback_black_24dp"
-        app:key="@string/settings_feedback_key"
-        app:summary="@string/settings_feedback_summary"
-        app:title="@string/settings_feedback_title" />
+        <EditTextPreference
+            app:defaultValue="@string/BASE_URL"
+            app:icon="@drawable/ic_base_url_black_24dp"
+            app:key="@string/settings_baseUrl_key"
+            app:summary="@string/setting_baseUrl_summary"
+            app:title="@string/settings_baseUrl_title" />
+
+        <Preference
+            app:icon="@drawable/ic_feedback_black_24dp"
+            app:key="@string/settings_feedback_key"
+            app:summary="@string/settings_feedback_summary"
+            app:title="@string/settings_feedback_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/general_user">
+
+        <CheckBoxPreference
+            app:key="@string/settings_staySignedIn_Key"
+            app:title="@string/settings_staySignedInTitle"
+            app:summary="@string/settings_staySigendIn_Summary"
+            app:icon="@drawable/ic_account_circle_white_24dp">
+        </CheckBoxPreference>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

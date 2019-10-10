@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">Einstellungen</string>
-    <string name="general_user">Benutzername</string>
+    <string name="general_user_name">Benutzername</string>
+    <string name="general_user">Benutzer</string>
     <string name="postOffer_SuccessfullPostedOffer">Dein Angebot wurde erfolgreich erstellt</string>
     <string name="postOffer_UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
     <string name="postOffer_headline">Ein Angebot erstellen</string>
@@ -43,6 +44,8 @@
     <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
     <string name="setting_baseUrl_summary">Base URL zum Backend festlegen</string>
     <string name="general_offer">Angebote</string>
-    <string name="general_issue_report">Einene Fehler melden</string>
+    <string name="general_issue_report">Einen Fehler melden</string>
     <string name="general_about">Über</string>
+    <string name="settings_staySignedInTitle">Eingeloggt bleiben</string>
+    <string name="settings_staySigendIn_Summary">Stelle Sie ein ob sie nach dem schließen der App angemeldet bleiben wollen.</string>
 </resources>

@@ -28,7 +28,8 @@
     <string name="general_price">Price</string>
     <string name="general_description">Description</string>
     <string name="general_passwort">Password</string>
-    <string name="general_user">Username</string>
+    <string name="general_user">User</string>
+    <string name="general_user_name">Username</string>
     <string name="general_unableToUpdaterGroceries">Unable to update Groceries</string>
     <string name="postOffer_purchaseDate">Purchase Date</string>
     <string name="postOffer_Category">Category</string>
@@ -56,4 +57,7 @@
     <string name="general_issue_report">Report an issue</string>
     <string name="general_faq" translatable="false">FAQ</string>
     <string name="general_about">About</string>
+    <string name="settings_staySignedInTitle">Stay signed in</string>
+    <string name="settings_staySigendIn_Summary">Set if you want to stay sigend in after closing the app.</string>
+    <string name="settings_staySignedIn_Key" translatable="false">staySigendIn</string>
 </resources>
