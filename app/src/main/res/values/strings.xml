@@ -48,4 +48,5 @@
     <string name="sign_in_editTextEmail_hint" translatable="false">E-Mail</string>
     <string name="sign_in_editTextPassword_hint">Password</string>
     <string name="sign_in_staySignedIn_Text">Stay signed in</string>
+    <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
 </resources>

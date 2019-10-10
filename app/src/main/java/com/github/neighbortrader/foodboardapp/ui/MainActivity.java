@@ -14,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.BuildConfig;
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.github.neighbortrader.foodboardapp.ui.signUp.SignUpActivity;
@@ -49,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
-            Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
-            MainActivity.this.startActivity(startPostOfferIntent);
+            if (UserHandler.getCurrentUserInstance() != null) {
+                Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
+                MainActivity.this.startActivity(startPostOfferIntent);
+            }else{
+                ToastHandler.buildToastHandler().makeToast(getString(R.string.general_NoUserFound));
+            }
         });
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
