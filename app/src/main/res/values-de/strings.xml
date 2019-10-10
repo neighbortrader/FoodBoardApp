@@ -35,11 +35,14 @@
     <string name="postOffer_checkInputMessage">Bitte überprüfen Sie ihre Eingaben</string>
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
-    <string name="general_User">Benutzer erstellen</string>
+    <string name="general_create_user">Benutzer erstellen</string>
     <string name="settings_general_title">Allgemein</string>
     <string name="settings_feedback_title">Feedback senden</string>
     <string name="settings_feedback_summary">Technische Fehler oder Anregungen senden</string>
     <string name="sendFeedback_title">Email senden</string>
     <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
     <string name="setting_baseUrl_summary">Base URL zum Backend festlegen</string>
+    <string name="general_offer">Angebot</string>
+    <string name="general_issue_report">Einene Fehler melden</string>
+    <string name="general_about">Über</string>
 </resources>

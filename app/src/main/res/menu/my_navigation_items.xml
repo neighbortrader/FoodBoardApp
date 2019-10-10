@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/foodBoardUsageItems" android:checkableBehavior="single">
+        <item
+            android:id="@+id/offerOverview"
+            android:icon="@drawable/ic_local_offer_black_24dp"
+            android:title="@string/general_offer" />
 
-    <item android:id="@+id/user"
-        android:icon="@drawable/ic_account_circle_white_24dp"
-        android:title="@string/general_User"/>
+        <item
+            android:id="@+id/user"
+            android:icon="@drawable/ic_account_circle_white_24dp"
+            android:title="@string/general_create_user" />
+    </group>
 
-    <item android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_white_24dp"
-        android:title="@string/action_settings"/>
+    <group android:id="@+id/foodBoardSettingsItems" android:checkableBehavior="single">
+        <item
+            android:id="@+id/issueReporting"
+            android:icon="@drawable/ic_bug_report_black_24dp"
+            android:title="@string/general_issue_report" />
 
+        <item
+            android:id="@+id/faq"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="@string/general_faq" />
+
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="@string/action_settings" />
+
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="@string/general_about" />
+    </group>
 </menu>
