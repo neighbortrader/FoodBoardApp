@@ -25,32 +25,13 @@
             android:layout_height="wrap_content"
             android:hint="@string/sign_in_editTextUsername_hint"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toTopOf="@id/layout_Email"
+            app:layout_constraintBottom_toTopOf="@id/layout_Password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBar">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:importantForAutofill="no" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_Email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/sign_in_editTextEmail_hint"
-            app:errorEnabled="true"
-            app:layout_constraintBottom_toTopOf="@id/layout_Password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_Username">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no" />
@@ -67,7 +48,7 @@
             app:layout_constraintBottom_toTopOf="@id/stay_signedin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_Email">
+            app:layout_constraintTop_toBottomOf="@id/layout_Username">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText_password"

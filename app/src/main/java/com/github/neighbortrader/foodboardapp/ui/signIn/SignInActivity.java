@@ -30,10 +30,6 @@ public class SignInActivity extends AppCompatActivity {
     TextInputEditText usernameEditText;
     @BindView(R.id.layout_Username)
     TextInputLayout usernameInputLayout;
-    @BindView(R.id.editText_email)
-    TextInputEditText emailEditText;
-    @BindView(R.id.layout_Email)
-    TextInputLayout emailInputLayout;
     @BindView(R.id.editText_password)
     TextInputEditText passwordEditText;
     @BindView(R.id.layout_Password)
@@ -56,6 +52,8 @@ public class SignInActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         controller = new SignInController(this);
+
+        getSupportActionBar().setTitle(getString(R.string.sign_in_headline));
     }
 
     public void setProgressbarState(CreateOfferActivity.progressBarStates state) {
