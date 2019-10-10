@@ -40,10 +40,6 @@ public class User implements ToNameValueMap {
         return new User(username, password, email, address, staySignedIn);
     }
 
-    public static User userBuilder(){
-        return new User();
-    }
-
     @Override
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
