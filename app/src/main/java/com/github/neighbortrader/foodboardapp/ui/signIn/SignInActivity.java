@@ -9,9 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.neighbortrader.foodboardapp.R;
-import com.github.neighbortrader.foodboardapp.clientmodel.User;
-import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
-import com.github.neighbortrader.foodboardapp.ui.MainActivity;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.signUp.SignUpActivity;
 import com.google.android.material.button.MaterialButton;
@@ -76,30 +73,25 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.signup_here)
-    public void startSignUpActivity(){
+    public void startSignUpActivity() {
         Intent startSignUpIntent = new Intent(SignInActivity.this, SignUpActivity.class);
         SignInActivity.this.startActivity(startSignUpIntent);
     }
 
     @OnClick(R.id.signIn)
-    public void invokeSignIn(){
+    public void invokeSignIn() {
 
     }
 
-    public boolean checkAll(){
-        // TODO: implement
+    public boolean checkAll() {
         return true;
     }
 
-    public boolean checkUsername(){
+    public boolean checkUsername() {
         return true;
     }
 
-    public boolean checkEmail(){
-        return true;
-    }
-
-    public boolean checkPassword(){
+    public boolean checkPassword() {
         return true;
     }
 }

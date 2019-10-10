@@ -38,7 +38,7 @@
     <string name="general_User">Benutzer</string>
     <string name="sign_in_editTextUsername_hint">Benutzername</string>
     <string name="sign_in_signInButton_Text">Jetzt Anmelden</string>
-    <string name="sign_in_signUpHereButton_Text">Hier registrieren</string>
+    <string name="sign_in_signUpHereButton_Text">Noch kein Account? Hier registrieren</string>
     <string name="sign_in_headline">Anmelden</string>
     <string name="sign_in_editTextPassword_hint">Passwort</string>
     <string name="sign_in_staySignedIn_Text">Angemeldet bleiben</string>

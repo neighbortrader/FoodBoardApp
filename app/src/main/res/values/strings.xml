@@ -43,7 +43,7 @@
     <string name="general_currency" translatable="false">€</string>
     <string name="sign_in_editTextUsername_hint">Username</string>
     <string name="sign_in_signInButton_Text">Sign in now</string>
-    <string name="sign_in_signUpHereButton_Text">Sign up here</string>
+    <string name="sign_in_signUpHereButton_Text">No account yet? Sign up here</string>
     <string name="sign_in_headline">Sign in</string>
     <string name="sign_in_editTextEmail_hint" translatable="false">E-Mail</string>
     <string name="sign_in_editTextPassword_hint">Password</string>
