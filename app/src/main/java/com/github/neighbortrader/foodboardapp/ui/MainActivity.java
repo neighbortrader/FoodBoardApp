@@ -2,6 +2,7 @@ package com.github.neighbortrader.foodboardapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             if (UserHandler.getCurrentUserInstance() != null) {
                 Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
                 MainActivity.this.startActivity(startPostOfferIntent);
-            }else{
+            } else {
                 ToastHandler.buildToastHandler().makeToast(getString(R.string.general_NoUserFound));
             }
         });
@@ -71,12 +72,33 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             switch (id) {
-                case R.id.settings:
-                    startActivity(new Intent(this, SettingsActivity.class));
+                case R.id.offerOverview:
+                    onBackPressed();
                     break;
 
                 case R.id.user:
                     UserHandler.loadUserAndUserData();
+                    break;
+
+                case R.id.issueReporting:
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setType("text/plain");
+                    intent.setData(Uri.parse(getString(R.string.feedback_email)));
+                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_email_subject));
+
+                    startActivity(Intent.createChooser(intent, getString(R.string.sendFeedback_title)));
+                    break;
+
+                case R.id.faq:
+
+                    break;
+
+                case R.id.settings:
+                    startActivity(new Intent(this, SettingsActivity.class));
+                    break;
+
+                case R.id.about:
+
                     break;
 
                 default:
@@ -99,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             userState.setText("has User: " + hasUser);
 
-            if (hasUser){
+            if (hasUser) {
                 User user = UserHandler.getCurrentUserInstance();
                 userName.setText("Username: " + user.getUsername());
                 userPassword.setText("Password: " + user.getPassword());
                 userEmail.setText("Email: " + user.getEmail());
                 userAddress.setText("Address: " + user.getAddress().getFormattedSting());
 
-            }else{
+            } else {
                 userName.setText("Username:");
                 userPassword.setText("Password");
                 userEmail.setText("Email:");

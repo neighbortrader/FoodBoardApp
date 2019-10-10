@@ -42,7 +42,7 @@
     <string name="sendFeedback_title">Email senden</string>
     <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
     <string name="setting_baseUrl_summary">Base URL zum Backend festlegen</string>
-    <string name="general_offer">Angebot</string>
+    <string name="general_offer">Angebote</string>
     <string name="general_issue_report">Einene Fehler melden</string>
     <string name="general_about">Über</string>
 </resources>

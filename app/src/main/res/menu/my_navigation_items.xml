@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/foodBoardUsageItems" android:checkableBehavior="single">
+    <group android:id="@+id/foodBoardUsageItems" android:checkableBehavior="none">
         <item
             android:id="@+id/offerOverview"
             android:icon="@drawable/ic_local_offer_black_24dp"
@@ -12,7 +12,7 @@
             android:title="@string/general_create_user" />
     </group>
 
-    <group android:id="@+id/foodBoardSettingsItems" android:checkableBehavior="single">
+    <group android:id="@+id/foodBoardSettingsItems" android:checkableBehavior="none">
         <item
             android:id="@+id/issueReporting"
             android:icon="@drawable/ic_bug_report_black_24dp"
