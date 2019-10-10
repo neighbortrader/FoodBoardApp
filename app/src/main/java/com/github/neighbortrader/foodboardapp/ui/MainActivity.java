@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
+
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
 
