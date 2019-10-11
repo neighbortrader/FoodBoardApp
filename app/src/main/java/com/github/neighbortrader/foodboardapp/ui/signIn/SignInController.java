@@ -1,6 +1,6 @@
 package com.github.neighbortrader.foodboardapp.ui.signIn;
 
-import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
 
 public class SignInController {
     SignInActivity signInActivity;
@@ -10,6 +10,16 @@ public class SignInController {
         this.signInActivity = signInActivity;
         model = new SignInModel(this);
 
-        signInActivity.setProgressbarState(CreateOfferActivity.progressBarStates.NOT_LOADING);
+        signInActivity.setProgressbarState(SignInActivity.progressBarStates.NOT_LOADING);
+    }
+
+    public void invokeLogin(User userToSignIn){
+        model.invokeSignIn(userToSignIn);
+        signInActivity.setProgressbarState(SignInActivity.progressBarStates.LOADING);
+    }
+
+    public void onSuccess(){
+        signInActivity.setProgressbarState(SignInActivity.progressBarStates.FINISHED);
+        signInActivity.finish();
     }
 }

@@ -40,15 +40,22 @@ public class User implements ToNameValueMap {
         return new User(username, password, email, address, staySignedIn);
     }
 
+    public static User userBuilder() {
+        return new User();
+    }
+
+
     @Override
     public Map<String, String> toNameValueMap() {
         Map<String, String> nameValueMap = new Hashtable<>();
 
         nameValueMap.put("username", username);
         nameValueMap.put("password", password);
-        nameValueMap.put("email", email);
 
-        nameValueMap.putAll(address.toNameValueMap());
+        if (email != null && address != null) {
+            nameValueMap.put("email", email);
+            nameValueMap.putAll(address.toNameValueMap());
+        }
 
         return nameValueMap;
     }
