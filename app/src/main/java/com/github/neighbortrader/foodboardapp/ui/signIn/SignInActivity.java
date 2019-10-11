@@ -41,9 +41,6 @@ public class SignInActivity extends AppCompatActivity {
     MaterialButton signInRadioButton;
     @BindView(R.id.signup_here)
     MaterialButton signUpRadioButton;
-
-    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
-
     private SignInController controller;
 
     @Override
@@ -111,4 +108,6 @@ public class SignInActivity extends AppCompatActivity {
     public boolean checkPassword() {
         return true;
     }
+
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
 }

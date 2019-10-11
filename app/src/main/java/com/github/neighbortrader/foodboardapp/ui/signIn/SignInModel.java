@@ -14,9 +14,9 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserReques
 public class SignInModel {
 
     public static String TAG = SignInModel.class.getSimpleName();
-
     SignInController controller;
     Context context;
+    
     public SignInModel(SignInController controller) {
         this.controller = controller;
         context = ContextHandler.getAppContext();
