@@ -29,9 +29,18 @@ public class User implements ToNameValueMap {
         this.address = address;
     }
 
+    private User() {
+
+    }
+
     public static User userBuilder(String username, String password, String email, Address address) {
         return new User(username, password, email, address);
     }
+
+    public static User userBuilder() {
+        return new User();
+    }
+
 
     @Override
     public Map<String, String> toNameValueMap() {
@@ -39,9 +48,11 @@ public class User implements ToNameValueMap {
 
         nameValueMap.put("username", username);
         nameValueMap.put("password", password);
-        nameValueMap.put("email", email);
 
-        nameValueMap.putAll(address.toNameValueMap());
+        if (email != null && address != null) {
+            nameValueMap.put("email", email);
+            nameValueMap.putAll(address.toNameValueMap());
+        }
 
         return nameValueMap;
     }

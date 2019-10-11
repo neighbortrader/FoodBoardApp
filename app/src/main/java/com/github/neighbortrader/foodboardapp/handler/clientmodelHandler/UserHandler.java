@@ -41,6 +41,13 @@ public class UserHandler {
         return User.userBuilder(username, password, email, address);
     }
 
+    public static User buildLoginUser(String username, String password){
+        User loginUser = User.userBuilder();
+        loginUser.setUsername(username);
+        loginUser.setPassword(password);
+        return loginUser;
+    }
+
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveCurrentGroceriesToSharedPreferences()");
 
