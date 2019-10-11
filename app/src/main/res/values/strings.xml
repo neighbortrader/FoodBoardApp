@@ -65,7 +65,10 @@
     <string name="general_faq" translatable="false">FAQ</string>
     <string name="general_about">About</string>
     <string name="settings_staySignedInTitle">Stay signed in</string>
-    <string name="settings_staySigendIn_Summary">Set if you want to stay sigend in after closing the app.</string>
+    <string name="settings_staySigendIn_Summary">Set if you want to stay sigend in after closing the app</string>
     <string name="settings_staySignedIn_Key" translatable="false">staySigendIn</string>
     <string name="general_modifie_user">Modifie User</string>
+    <string name="settings_notifications_key" translatable="false">notifications</string>
+    <string name="settings_notification_summery">Enabled or disable notifications</string>
+    <string name="settings_notifications_title">Notifications</string>
 </resources>
