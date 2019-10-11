@@ -16,7 +16,7 @@ repositories {
 
 def versionMajor = 1
 def versionMinor = 10
-def versionPatch = 5
+def versionPatch = 6
 
 android {
     compileSdkVersion 29
@@ -46,7 +46,7 @@ android {
             resValue "string", "GET_ALL_CATEGORIES", "Grocerie";
 
             resValue "string", "app_version",
-            "${defaultConfig.versionName}"
+                    "${defaultConfig.versionName}"
         }
         debug {
             signingConfig debug.signingConfig

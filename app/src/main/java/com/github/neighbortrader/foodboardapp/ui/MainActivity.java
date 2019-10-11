@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             if (UserHandler.getCurrentUserInstance() != null) {
                 Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
                 MainActivity.this.startActivity(startPostOfferIntent);
-            }else{
+            } else {
                 ToastHandler.buildToastHandler().makeToast(getString(R.string.general_NoUserFound));
             }
         });
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.app_name) + getString(R.string.app_version));
+        getSupportActionBar().setTitle(String.format("%s %s", getString(R.string.app_name), getString(R.string.app_version)));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();

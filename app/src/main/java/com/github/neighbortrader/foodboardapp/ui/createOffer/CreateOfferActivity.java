@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Grocery;
@@ -246,8 +247,21 @@ public class CreateOfferActivity extends AppCompatActivity {
             Offer offer = createOfferFromUserInput();
 
             if (offer != null) {
-                scrollView.scrollTo(0, 0);
-                controller.invokePostOffer(offer);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.custom_dialog2, null);
+                dialogBuilder.setView(dialogView);
+                dialogBuilder.setTitle(getString(R.string.postOffer_OfferingMessageTitle));
+                dialogBuilder.setMessage(getString(R.string.postOffer_OfferingMessage));
+                dialogBuilder.setPositiveButton(getString(R.string.postOffer_understand), (dialog, whichButton) -> {
+                    scrollView.scrollTo(0, 0);
+                    controller.invokePostOffer(offer);
+                    postOfferButton.setEnabled(false);
+                });
+                dialogBuilder.setNegativeButton(getString(R.string.postOffer_abort), (dialog, whichButton) -> {
+                });
+                AlertDialog b = dialogBuilder.create();
+                b.show();
             }
         });
     }
@@ -415,6 +429,14 @@ public class CreateOfferActivity extends AppCompatActivity {
 
         ToastHandler.buildToastHandler().makeToast(getString(R.string.postOffer_checkInputMessage));
         return null;
+    }
+
+    public void setPostOfferButtonEnabeld() {
+        postOfferButton.setEnabled(true);
+    }
+
+    public void setPostOfferButtonDisabeld() {
+        postOfferButton.setEnabled(false);
     }
 
     public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
