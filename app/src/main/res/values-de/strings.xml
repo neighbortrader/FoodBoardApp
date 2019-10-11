@@ -36,6 +36,12 @@
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
     <string name="general_User">Benutzer</string>
+    <string name="postOffer_OfferingMessageTitle">Wichtiger Hinweis</string>
+    <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
+    <string name="general_yes">Ja</string>
+    <string name="general_no">Nein</string>
+    <string name="postOffer_understand">Ich verstehe</string>
+    <string name="postOffer_abort">Abbrechen</string>
     <string name="sign_in_editTextUsername_hint">Benutzername</string>
     <string name="sign_in_signInButton_Text">Jetzt Anmelden</string>
     <string name="sign_in_signUpHereButton_Text">Noch kein Account? Hier registrieren</string>
