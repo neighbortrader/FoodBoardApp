@@ -37,7 +37,7 @@ public class UserHandler {
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveCurrentGroceriesToSharedPreferences()");
 
-        if (user != null) {
+        if (user != null  && user.isStaySignedIn()) {
             Gson gson = GsonHandler.getGsonInstance();
 
             String userToSaveAsJsonString = gson.toJson(user);
@@ -74,5 +74,4 @@ public class UserHandler {
             UserHandler.setCurrentUserInstance(loadedUser);
         }
     }
-
 }

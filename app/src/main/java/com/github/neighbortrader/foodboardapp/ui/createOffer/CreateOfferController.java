@@ -19,16 +19,16 @@ public class CreateOfferController {
     public void invokePostOffer(Offer offer) {
         model.postOffer(offer);
         createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.LOADING);
+        createOfferActivity.setPostOfferButtonDisabeld();
     }
 
     public void onError() {
         createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.ERROR);
+        createOfferActivity.setPostOfferButtonEnabeld();
     }
 
     public void invokeFinish() {
         createOfferActivity.setProgressbarState(CreateOfferActivity.progressBarStates.FINISHED);
         createOfferActivity.finish();
     }
-
-
 }

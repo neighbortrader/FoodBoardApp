@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.app_name) + getString(R.string.app_version));
+        getSupportActionBar().setTitle(String.format("%s %s", getString(R.string.app_name), getString(R.string.app_version)));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
