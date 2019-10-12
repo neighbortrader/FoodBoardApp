@@ -22,8 +22,13 @@ public class UserHandler {
     }
 
     public static void setCurrentUserInstance(User userInstance) {
-        UserHandler.userInstance = userInstance;
-        callback.onUserStateChanged(true);
+        if (userInstance != null) {
+            UserHandler.userInstance = userInstance;
+            callback.onUserStateChanged(true);
+        } else {
+            UserHandler.userInstance = null;
+            callback.onUserStateChanged(false);
+        }
     }
 
     public static void iniUserHandler(OnUserChangedListener onUserChangedListener) {
@@ -39,47 +44,64 @@ public class UserHandler {
         return loginUser;
     }
 
-    public static void saveToSharedPreferences(User user) {
-        Log.d(TAG, "saveCurrentGroceriesToSharedPreferences()");
+    public static void saveUser(User user) {
+        Log.d(TAG, "saveUser()");
 
         if (user != null && user.isStaySignedIn()) {
-            Gson gson = GsonHandler.getGsonInstance();
-
-            String userToSaveAsJsonString = gson.toJson(user);
-
-            SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-            editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
-            editor.commit();
+            toSharedPreferences(user);
         }
     }
 
-    public static User loadUserFromSharedPreferences() {
-        Log.d(TAG, "loadGroceriesFromSharedPreferences()");
+    public static void deleteUser() {
+        Log.d(TAG, "deleteUser");
+        toSharedPreferences(null);
+        UserHandler.setCurrentUserInstance(null);
+    }
+
+    private static void toSharedPreferences(User user) {
+        Gson gson = GsonHandler.getGsonInstance();
+
+        String userToSaveAsJsonString = gson.toJson(user);
 
         SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        editor.putString(SHARED_PREFERENCES_FILE_USER_INFO, userToSaveAsJsonString);
+        editor.commit();
+    }
+
+    public static User loadUser() {
+        Log.d(TAG, "loadUser()");
+
+        SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
         String userToSaveAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
 
         Gson gson = GsonHandler.getGsonInstance();
         User user = gson.fromJson(userToSaveAsJsonString, User.class);
+
+        if (user != null) {
+            Log.d(TAG, String.format("loaded user %s", user.toString()));
+        }else{
+            Log.d(TAG, "no user loaded");
+        }
 
         return user;
     }
 
     public static void loadUserAndUserData() {
         callback.onUserStateChanged(false);
-        User loadedUser = UserHandler.loadUserFromSharedPreferences();
+        User loadedUser = UserHandler.loadUser();
 
         if (loadedUser == null) {
             Log.d(TAG, "no user found");
         } else {
             if (loadedUser.isStaySignedIn()) {
                 Log.d(TAG, "found user and added to current user instance");
+                callback.onUserStateChanged(true);
                 UserHandler.setCurrentUserInstance(loadedUser);
             } else if (!loadedUser.isStaySignedIn()) {
                 Log.d(TAG, "found user but not added to current user instance because of isStaySignedIn equals false");
+                UserHandler.setCurrentUserInstance(null);
             }
         }
     }

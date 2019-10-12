@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,13 +82,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.user:
-                    UserHandler.loadUserAndUserData();
-
                     if (UserHandler.getCurrentUserInstance() != null) {
                         notImplementedPlaceHolder();
                     } else {
-                        Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
-                        MainActivity.this.startActivity(startSignUpIntent);
+                        UserHandler.loadUserAndUserData();
+
+                        if (UserHandler.getCurrentUserInstance() == null) {
+                            Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
+                            MainActivity.this.startActivity(startSignUpIntent);
+                        }
                     }
                     break;
 
@@ -123,11 +126,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         GroceryHandler.loadGroceriesFromSharedPreferences();
 
         UserHandler.iniUserHandler(hasUser -> {
-            MaterialTextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
-            MaterialTextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
-            MaterialTextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
-            MaterialTextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
-            MaterialTextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
+            TextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
+            TextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
+            TextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
+            TextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
+            TextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
 
             int userItemIndex = 1;
 
@@ -142,13 +145,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 if (user.getEmail() != null) {
                     userEmail.setText("Email: " + user.getEmail());
-                }else {
+                } else {
                     userEmail.setText("Email: not able to get");
                 }
 
                 if (user.getAddress() != null) {
                     userAddress.setText("Address: " + user.getAddress().getFormattedSting());
-                }else{
+                } else {
                     userAddress.setText("Address: not able to get");
                 }
 
@@ -167,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         UserHandler.loadUserAndUserData();
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -177,11 +179,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if (currentUser != null) {
             if (currentUser.isStaySignedIn()) {
                 TokenHandler.removeToken();
-                UserHandler.saveToSharedPreferences(currentUser);
+                UserHandler.saveUser(currentUser);
+            } else {
+                UserHandler.deleteUser();
             }
-
-            GroceryHandler.saveCurrentGroceriesToSharedPreferences();
+        } else {
+            UserHandler.deleteUser();
         }
+
+        GroceryHandler.saveCurrentGroceriesToSharedPreferences();
 
         androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this);
