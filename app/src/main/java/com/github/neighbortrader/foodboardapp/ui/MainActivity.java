@@ -1,5 +1,6 @@
 package com.github.neighbortrader.foodboardapp.ui;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -128,6 +129,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             MaterialTextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
             MaterialTextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
 
+            int userItemIndex = 1;
+
+            MenuItem userItem = navigationView.getMenu().getItem(userItemIndex);
+
             userState.setText("has User: " + hasUser);
 
             if (hasUser) {
@@ -136,11 +141,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 userPassword.setText("Password: " + user.getPassword());
                 userEmail.setText("Email: " + user.getEmail());
                 userAddress.setText("Address: " + user.getAddress().getFormattedSting());
+
+                userItem.setTitle(getString(R.string.general_modifie_user));
             } else {
                 userName.setText("Username:");
                 userPassword.setText("Password");
                 userEmail.setText("Email:");
                 userAddress.setText("Address:");
+
+                userItem.setTitle(getString(R.string.general_create_user));
             }
 
         });
