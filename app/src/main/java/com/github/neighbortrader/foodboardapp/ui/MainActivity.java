@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     UserHandler.loadUserAndUserData();
 
                     if (UserHandler.getCurrentUserInstance() != null) {
-                     
+                        notImplementedPlaceHolder();
                     } else {
                         Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
                         MainActivity.this.startActivity(startSignUpIntent);
@@ -101,17 +101,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 case R.id.faq:
 
+                case R.id.about:
+                    notImplementedPlaceHolder();
                     break;
 
                 case R.id.settings:
                     startActivity(new Intent(this, SettingsActivity.class));
                     break;
 
-                case R.id.about:
-
-                    break;
-
                 default:
+                    notImplementedPlaceHolder();
                     return true;
             }
 
@@ -190,5 +189,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void setBaseUrl(String baseUrl) {
         Urls.BASE_URL = baseUrl;
+    }
+
+    public void notImplementedPlaceHolder(){
+        ToastHandler.buildToastHandler().makeToast("not yet implemented");
     }
 }
