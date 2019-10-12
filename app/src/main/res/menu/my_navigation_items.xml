@@ -9,7 +9,7 @@
         <item
             android:id="@+id/user"
             android:icon="@drawable/ic_account_circle_white_24dp"
-            android:title="@string/general_create_user" />
+            android:title="@string/general_signUp_singIn_User" />
     </group>
 
     <group android:id="@+id/foodBoardSettingsItems" android:checkableBehavior="none">

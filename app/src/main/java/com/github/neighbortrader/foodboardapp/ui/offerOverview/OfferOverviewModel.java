@@ -36,13 +36,6 @@ public class OfferOverviewModel extends ViewModel {
     }
 
     public void destroy() {
-        User currentUser = UserHandler.getCurrentUserInstance();
-
-        if (currentUser != null) {
-            TokenHandler.removeToken();
-            UserHandler.saveToSharedPreferences(currentUser);
-            GroceryHandler.saveCurrentGroceriesToSharedPreferences();
-        }
     }
 
     public void updateGroceryCategories() {

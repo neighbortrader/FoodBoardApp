@@ -40,7 +40,7 @@
     <string name="postOffer_checkInputMessage">Please check your Input</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="general_create_user">create User</string>
+    <string name="general_signUp_singIn_User">SignIn or SignUp</string>
     <string name="general_currency" translatable="false">€</string>
     <string name="settings_general_title">General</string>
     <string name="settings_baseUrl_key" translatable="false">base_url</string>

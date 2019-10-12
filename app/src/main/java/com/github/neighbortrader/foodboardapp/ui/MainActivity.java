@@ -1,6 +1,5 @@
 package com.github.neighbortrader.foodboardapp.ui;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -21,6 +20,7 @@ import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.Grocery
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
@@ -139,8 +139,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 User user = UserHandler.getCurrentUserInstance();
                 userName.setText("Username: " + user.getUsername());
                 userPassword.setText("Password: " + user.getPassword());
-                userEmail.setText("Email: " + user.getEmail());
-                userAddress.setText("Address: " + user.getAddress().getFormattedSting());
+
+                if (user.getEmail() != null) {
+                    userEmail.setText("Email: " + user.getEmail());
+                }else {
+                    userEmail.setText("Email: not able to get");
+                }
+
+                if (user.getAddress() != null) {
+                    userAddress.setText("Address: " + user.getAddress().getFormattedSting());
+                }else{
+                    userAddress.setText("Address: not able to get");
+                }
 
                 userItem.setTitle(getString(R.string.general_modifie_user));
             } else {
@@ -149,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 userEmail.setText("Email:");
                 userAddress.setText("Address:");
 
-                userItem.setTitle(getString(R.string.general_create_user));
+                userItem.setTitle(getString(R.string.general_signUp_singIn_User));
             }
 
         });
@@ -161,6 +171,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        User currentUser = UserHandler.getCurrentUserInstance();
+
+        if (currentUser != null) {
+            if (currentUser.isStaySignedIn()) {
+                TokenHandler.removeToken();
+                UserHandler.saveToSharedPreferences(currentUser);
+            }
+
+            GroceryHandler.saveCurrentGroceriesToSharedPreferences();
+        }
+
         androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
@@ -200,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Urls.BASE_URL = baseUrl;
     }
 
-    public void notImplementedPlaceHolder(){
+    public void notImplementedPlaceHolder() {
         ToastHandler.buildToastHandler().makeToast("not yet implemented");
     }
 }

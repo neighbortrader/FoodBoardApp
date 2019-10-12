@@ -11,9 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.RequestTyps;
-import com.github.neighbortrader.foodboardapp.handler.requestsHandler.UserRequestHandler;
-import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.signUp.SignUpActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -83,14 +80,15 @@ public class SignInActivity extends AppCompatActivity {
     public void invokeSignIn() {
         User userToLogIn = buildUserFromInput();
 
-        controller.invokeLogin(userToLogIn);
+        controller.invokeSignIn(userToLogIn);
     }
 
     public User buildUserFromInput(){
         String username = usernameEditText.getEditableText().toString();
         String password = passwordEditText.getEditableText().toString();
+        boolean staySignedIn = staySignedInRadioButton.isSelected();
 
-        return UserHandler.buildLoginUser(username, password);
+        return UserHandler.buildLoginUser(username, password, staySignedIn);
     }
 
     public void setError(String message){

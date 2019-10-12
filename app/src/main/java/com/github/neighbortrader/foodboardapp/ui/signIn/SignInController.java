@@ -13,7 +13,7 @@ public class SignInController {
         signInActivity.setProgressbarState(SignInActivity.progressBarStates.NOT_LOADING);
     }
 
-    public void invokeLogin(User userToSignIn){
+    public void invokeSignIn(User userToSignIn){
         model.invokeSignIn(userToSignIn);
         signInActivity.setProgressbarState(SignInActivity.progressBarStates.LOADING);
     }

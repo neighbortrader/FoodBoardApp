@@ -3,13 +3,10 @@ package com.github.neighbortrader.foodboardapp.handler.clientmodelHandler;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.github.neighbortrader.foodboardapp.clientmodel.Address;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.gsonHandler.GsonHandler;
 import com.google.gson.Gson;
-
-import java.util.UUID;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -29,22 +26,23 @@ public class UserHandler {
         callback.onUserStateChanged(true);
     }
 
-    public static void iniUserHandler(OnUserChangedListener onUserChangedListener){
+    public static void iniUserHandler(OnUserChangedListener onUserChangedListener) {
         callback = onUserChangedListener;
         callback.onUserStateChanged(false);
     }
 
-    public static User buildLoginUser(String username, String password){
+    public static User buildLoginUser(String username, String password, boolean staySignedIn) {
         User loginUser = User.userBuilder();
         loginUser.setUsername(username);
         loginUser.setPassword(password);
+        loginUser.setStaySignedIn(staySignedIn);
         return loginUser;
     }
 
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveCurrentGroceriesToSharedPreferences()");
 
-        if (user != null  && user.isStaySignedIn()) {
+        if (user != null && user.isStaySignedIn()) {
             Gson gson = GsonHandler.getGsonInstance();
 
             String userToSaveAsJsonString = gson.toJson(user);
@@ -77,8 +75,12 @@ public class UserHandler {
         if (loadedUser == null) {
             Log.d(TAG, "no user found");
         } else {
-            Log.d(TAG, "found user and added to current user instance");
-            UserHandler.setCurrentUserInstance(loadedUser);
+            if (loadedUser.isStaySignedIn()) {
+                Log.d(TAG, "found user and added to current user instance");
+                UserHandler.setCurrentUserInstance(loadedUser);
+            } else if (!loadedUser.isStaySignedIn()) {
+                Log.d(TAG, "found user but not added to current user instance because of isStaySignedIn equals false");
+            }
         }
     }
 }

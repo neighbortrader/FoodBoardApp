@@ -36,7 +36,7 @@
     <string name="postOffer_checkInputMessage">Bitte überprüfen Sie ihre Eingaben</string>
     <string name="close">Schließen</string>
     <string name="open">Öffnen</string>
-    <string name="general_create_user">Benutzer erstellen</string>
+    <string name="general_signUp_singIn_User">Anmelden oder Registrieren</string>
     <string name="settings_general_title">Allgemein</string>
     <string name="settings_feedback_title">Feedback senden</string>
     <string name="settings_feedback_summary">Technische Fehler oder Anregungen senden</string>
