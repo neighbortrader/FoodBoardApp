@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">FoodBoard</string>
+    <string name="general_User">Usuario</string>
+    <string name="general_description">descripcion</string>
+    <string name="postOffer_Image">imagen</string>
+    <string name="postOffer_editTextPrice_hint">precio</string>
+    <string name="postOffer_editTextDescription_hint">lechuga fresca</string>
+    <string name="sign_in_editTextNumber_hint">numero de casa</string>
+    <string name="sign_in_editTextPassword_hint">contraseña</string>
+    <string name="sign_in_editTextPostcode_hint">codigo postal</string>
+    <string name="sign_in_editTextStreet_hint">calle</string>
+    <string name="sign_in_editTextTown_hint">ciudad</string>
+    <string name="sign_in_registerButton_Text">Registrarse ahora</string>
+</resources>

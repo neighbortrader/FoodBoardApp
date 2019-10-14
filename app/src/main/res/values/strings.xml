@@ -41,4 +41,12 @@
     <string name="close">Close</string>
     <string name="general_User">User</string>
     <string name="general_currency" translatable="false">€</string>
+    <string name="sign_in_registerButton_Text">Registrate now</string>
+    <string name="sign_in_editTextUsername_hint">Username</string>
+    <string name="sign_in_editTextEmail_hint" translatable="false">E-Mail</string>
+    <string name="sign_in_editTextPassword_hint">Password</string>
+    <string name="sign_in_editTextStreet_hint">Street</string>
+    <string name="sign_in_editTextNumber_hint">Number</string>
+    <string name="sign_in_editTextPostcode_hint">Postcode</string>
+    <string name="sign_in_editTextTown_hint">Town</string>
 </resources>
