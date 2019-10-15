@@ -125,6 +125,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/sign_up_editTextPostcode_hint"
             app:errorEnabled="true"
+            app:counterMaxLength="5"
+            app:counterEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/signupButton"
             app:layout_constraintEnd_toStartOf="@id/layout_Town"
             app:layout_constraintStart_toStartOf="parent"

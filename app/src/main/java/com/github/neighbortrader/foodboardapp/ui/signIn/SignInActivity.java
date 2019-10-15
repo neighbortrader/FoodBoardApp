@@ -2,6 +2,7 @@ package com.github.neighbortrader.foodboardapp.ui.signIn;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -108,4 +109,13 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

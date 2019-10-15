@@ -1,6 +1,7 @@
 package com.github.neighbortrader.foodboardapp.ui.signUp;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,5 +16,14 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
