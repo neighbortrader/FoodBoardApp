@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/sign_up_editTextPostcode_hint"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toTopOf="@id/register"
+            app:layout_constraintBottom_toTopOf="@id/signupButton"
             app:layout_constraintEnd_toStartOf="@id/layout_Town"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_Street"
@@ -148,7 +148,7 @@
             android:layout_marginLeft="8dp"
             android:hint="@string/sign_up_editTextTown_hint"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toTopOf="@id/register"
+            app:layout_constraintBottom_toTopOf="@id/signupButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/layout_Postcode"
             app:layout_constraintTop_toBottomOf="@id/layout_Street"
@@ -163,7 +163,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/register"
+            android:id="@+id/signupButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
