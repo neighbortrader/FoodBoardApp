@@ -14,10 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.crashlytics.android.Crashlytics;
-import com.github.neighbortrader.foodboardapp.BuildConfig;
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -47,8 +49,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
-            Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
-            MainActivity.this.startActivity(startPostOfferIntent);
+            if (UserHandler.getCurrentUserInstance() != null) {
+                Intent startPostOfferIntent = new Intent(MainActivity.this, CreateOfferActivity.class);
+                MainActivity.this.startActivity(startPostOfferIntent);
+            } else {
+                ToastHandler.buildToastHandler().makeToast(getString(R.string.general_NoUserFound));
+            }
         });
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.app_name) + getString(R.string.app_version));
+        getSupportActionBar().setTitle(String.format("%s %s", getString(R.string.app_name), getString(R.string.app_version)));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -85,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
                     });
                     AlertDialog b = dialogBuilder.create();
                     b.show();
+                    break;
+
+                case R.id.user:
+                    Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
+                    MainActivity.this.startActivity(startSignUpIntent);
                     break;
 
                 default:

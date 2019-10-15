@@ -42,10 +42,19 @@
     <string name="sign_up_editTextPostcode_hint">Postleitzahl</string>
     <string name="sign_up_editTextStreet_hint">Straße</string>
     <string name="sign_up_editTextTown_hint">Ort</string>
-    <string name="sign_in_editTextUsername_hint">Benutzername</string>
     <string name="sign_in_editTextPassword_hint">Passwort</string>
     <string name="sign_in_staySignedIn_Text">Angemeldet bleiben</string>
     <string name="sign_in_signInButton_Text">Anmelden</string>
     <string name="sign_in_registerButton_Text">Jetzt registrieren</string>
     <string name="sign_up_signupButton_Text">Registrieren</string>
+    <string name="postOffer_OfferingMessageTitle">Wichtiger Hinweis</string>
+    <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
+    <string name="general_yes">Ja</string>
+    <string name="general_no">Nein</string>
+    <string name="postOffer_understand">Ich verstehe</string>
+    <string name="postOffer_abort">Abbrechen</string>
+    <string name="sign_in_editTextUsername_hint">Benutzername</string>
+    <string name="sign_in_signUpHereButton_Text">Noch kein Account? Hier registrieren</string>
+    <string name="sign_in_headline">Anmelden</string>
+    <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
 </resources>

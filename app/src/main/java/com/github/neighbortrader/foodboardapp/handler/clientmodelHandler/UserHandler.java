@@ -38,13 +38,13 @@ public class UserHandler {
         String email = String.format("%s@testmail.com", username);
         Address address = new Address("Teststareße", "12a", "10315", "Berlin");
 
-        return User.userBuilder(username, password, email, address);
+        return User.userBuilder(username, password, email, address, true);
     }
 
     public static void saveToSharedPreferences(User user) {
         Log.d(TAG, "saveCurrentGroceriesToSharedPreferences()");
 
-        if (user != null) {
+        if (user != null  && user.isStaySignedIn()) {
             Gson gson = GsonHandler.getGsonInstance();
 
             String userToSaveAsJsonString = gson.toJson(user);
