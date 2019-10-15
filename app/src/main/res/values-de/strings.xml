@@ -37,10 +37,11 @@
     <string name="open">Öffnen</string>
     <string name="general_User">Benutzer</string>
     <string name="sign_in_registerButton_Text">Jetzt Registrieren</string>
-    <string name="sign_in_editTextUsername_hint">Benutzername</string>
-    <string name="sign_in_editTextNumber_hint">Hausnummer</string>
-    <string name="sign_in_editTextPassword_hint">Passwort</string>
-    <string name="sign_in_editTextPostcode_hint">Postleitzahl</string>
-    <string name="sign_in_editTextStreet_hint">Straße</string>
-    <string name="sign_in_editTextTown_hint">Ort</string>
+    <string name="sign_up_editTextUsername_hint">Benutzername</string>
+    <string name="sign_up_editTextNumber_hint">Hausnummer</string>
+    <string name="sign_up_editTextPassword_hint">Passwort</string>
+    <string name="sign_up_editTextPostcode_hint">Postleitzahl</string>
+    <string name="sign_up_editTextStreet_hint">Straße</string>
+    <string name="sign_up_editTextTown_hint">Ort</string>
+    <string name="sign_up_registerButton_Text">Jetzt registrieren</string>
 </resources>
