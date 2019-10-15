@@ -41,7 +41,6 @@
     <string name="close">Close</string>
     <string name="general_User">User</string>
     <string name="general_currency" translatable="false">€</string>
-    <string name="sign_in_registerButton_Text">Registrate now</string>
     <string name="sign_up_editTextUsername_hint">Username</string>
     <string name="sign_up_editTextEmail_hint" translatable="false">E-Mail</string>
     <string name="sign_up_editTextPassword_hint">Password</string>
@@ -49,5 +48,10 @@
     <string name="sign_up_editTextNumber_hint">Number</string>
     <string name="sign_up_editTextPostcode_hint">Postcode</string>
     <string name="sign_up_editTextTown_hint">Town</string>
-    <string name="sign_up_registerButton_Text">Register now</string>
+    <string name="sign_in_editTextUsername_hint">Username</string>
+    <string name="sign_in_editTextPassword_hint">Password</string>
+    <string name="sign_in_staySignedIn_Text">Stay signed in</string>
+    <string name="sign_in_signInButton_Text">Sign in now</string>
+    <string name="sign_in_registerButton_Text">Sign up</string>
+    <string name="sign_up_signupButton_Text">Sign up now</string>
 </resources>
