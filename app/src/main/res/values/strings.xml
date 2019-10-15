@@ -51,7 +51,7 @@
     <string name="sign_in_editTextUsername_hint">Username</string>
     <string name="sign_in_editTextPassword_hint">Password</string>
     <string name="sign_in_staySignedIn_Text">Stay signed in</string>
-    <string name="sign_in_signInButton_Text">Sign in now</string>
-    <string name="sign_in_registerButton_Text">Sign up</string>
-    <string name="sign_up_signupButton_Text">Sign up now</string>
+    <string name="sign_in_signInButton_Text">Sign in</string>
+    <string name="sign_in_registerButton_Text">Sign up now</string>
+    <string name="sign_up_signupButton_Text">Sign up</string>
 </resources>

@@ -45,7 +45,7 @@
     <string name="sign_in_editTextUsername_hint">Benutzername</string>
     <string name="sign_in_editTextPassword_hint">Passwort</string>
     <string name="sign_in_staySignedIn_Text">Angemeldet bleiben</string>
-    <string name="sign_in_signInButton_Text">Jetzt anmelden</string>
-    <string name="sign_in_registerButton_Text">hallo</string>
-    <string name="sign_up_signupButton_Text">Jetzt registrieren</string>
+    <string name="sign_in_signInButton_Text">Anmelden</string>
+    <string name="sign_in_registerButton_Text">Jetzt registrieren</string>
+    <string name="sign_up_signupButton_Text">Registrieren</string>
 </resources>

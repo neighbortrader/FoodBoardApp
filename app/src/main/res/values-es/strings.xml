@@ -12,7 +12,6 @@
     <string name="sign_up_editTextStreet_hint">Calle</string>
     <string name="sign_up_editTextTown_hint">Ciudad</string>
     <string name="sign_in_editTextPassword_hint">Contraseña</string>
-    <string name="sign_up_registerButton_Text">Registrarse ahora</string>
     <string name="sign_in_registerButton_Text">Registrarse ahora</string>
-    <string name="sign_up_signupButton_Text">Registrarse ahora</string>
+    <string name="sign_up_signupButton_Text">Registrarse</string>
 </resources>
