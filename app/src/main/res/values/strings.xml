@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">FoodBoard</string>
     <string name="action_settings">Settings</string>
-
     <string name="postOffer_headline">Create a offer</string>
     <string name="postOffer_Image">Picture</string>
     <string name="postOffer_editTextDescription_hint">fresh salad</string>
@@ -14,16 +13,13 @@
     <string name="postOffer_UnsuccessfullPostedOffer">Could not upload your offer</string>
     <string name="postOffer_ExpireDateHint">Expire Date</string>
     <string name="postOffer_PurchaseDateHint">Purchase Date</string>
-
     <string name="offerOverview_map">Map</string>
     <string name="offerOverview_filter">Filter</string>
-
     <string name="offerDetailview_headline">Offerdetail</string>
     <string name="offerDetailview_catagory">Grocerycatagory</string>
     <string name="offerDetailview_expireDate">Expiredate</string>
     <string name="offerDetailview_userInformation">User-Information</string>
     <string name="offerDetailview_creationDate">Creationdate</string>
-
     <string name="general_unableToUpdateOffers">Unable to update Offers</string>
     <string name="general_price">Price</string>
     <string name="general_description">Description</string>
@@ -51,19 +47,28 @@
     <string name="feedback_email" translatable="false">mailto:lindner197@gmail.com</string>
     <string name="feedback_email_subject" translatable="false">Issue or feedback</string>
     <string name="sendFeedback_title">Send email</string>
+    <string name="sign_up_editTextUsername_hint">Username</string>
+    <string name="sign_up_editTextEmail_hint" translatable="false">E-Mail</string>
+    <string name="sign_up_editTextPassword_hint">Password</string>
+    <string name="sign_up_editTextStreet_hint">Street</string>
+    <string name="sign_up_editTextNumber_hint">Number</string>
+    <string name="sign_up_editTextPostcode_hint">Postcode</string>
+    <string name="sign_up_editTextTown_hint">Town</string>
+    <string name="sign_in_editTextUsername_hint">Username</string>
+    <string name="sign_in_editTextPassword_hint">Password</string>
+    <string name="sign_in_staySignedIn_Text">Stay signed in</string>
+    <string name="sign_in_signInButton_Text">Sign in</string>
+    <string name="sign_in_registerButton_Text">Sign up now</string>
+    <string name="sign_up_signupButton_Text">Sign up</string>
     <string name="postOffer_OfferingMessageTitle">Important information</string>
     <string name="postOffer_OfferingMessage">Please not that you are in contact with user created content</string>
     <string name="general_yes">yes</string>
     <string name="general_no">no</string>
     <string name="postOffer_understand">I understand</string>
     <string name="postOffer_abort">Abort</string>
-    <string name="sign_in_editTextUsername_hint">Username</string>
-    <string name="sign_in_signInButton_Text">Sign in now</string>
     <string name="sign_in_signUpHereButton_Text">No account yet? Sign up here</string>
     <string name="sign_in_headline">Sign in</string>
     <string name="sign_in_editTextEmail_hint" translatable="false">E-Mail</string>
-    <string name="sign_in_editTextPassword_hint">Password</string>
-    <string name="sign_in_staySignedIn_Text">Stay signed in</string>
     <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
     <string name="setting_baseUrl_summary">Set base URL to the backend</string>
     <string name="general_offer">Offers</string>
