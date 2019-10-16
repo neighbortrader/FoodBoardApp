@@ -1,4 +1,4 @@
-package com.github.neighbortrader.foodboardapp.ui;
+package com.github.neighbortrader.foodboardapp.ui.mainActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +27,7 @@ import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textview.MaterialTextView;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
