@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -223,6 +226,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
+        if (sharedPreferences.getBoolean("is_started_first_time", true)) {
+            Log.d(TAG, "App is started the first time");
+
+            firstTimeMessage();
+
+            sharedPreferences.edit().putBoolean("is_started_first_time", false).commit();
+        }
+
         setBaseUrl(sharedPreferences.getString(getString(R.string.settings_baseUrl_key), getString(R.string.BASE_URL)));
     }
 
@@ -239,5 +250,20 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void notImplementedPlaceHolder() {
         ToastHandler.buildToastHandler().makeToast("not yet implemented");
+    }
+
+    public void firstTimeMessage(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.custom_dialog2, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setTitle(getString(R.string.postOffer_OfferingMessageTitle));
+        dialogBuilder.setMessage(getString(R.string.postOffer_OfferingMessage));
+        dialogBuilder.setPositiveButton(getString(R.string.postOffer_understand), (dialog, whichButton) -> {
+        });
+        dialogBuilder.setNegativeButton(getString(R.string.postOffer_abort), (dialog, whichButton) -> {
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 }
