@@ -44,12 +44,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
 
+    MainActivityController controller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
 
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
+
+        controller = new MainActivityController(this);
 
         super.onCreate(savedInstanceState);
         setupSharedPreferences();
