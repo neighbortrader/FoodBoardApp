@@ -30,7 +30,7 @@ public class Address implements ToNameValueMap {
         this.city = city;
     }
 
-    public String getFormattedSting(){
+    public String getFormattedSting() {
         return zipCode + " " + city + ", " + street + " " + streetNumber;
     }
 

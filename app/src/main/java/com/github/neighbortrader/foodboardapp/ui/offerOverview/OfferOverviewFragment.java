@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import lombok.Getter;
 
 public class OfferOverviewFragment extends Fragment {
 
@@ -28,6 +29,7 @@ public class OfferOverviewFragment extends Fragment {
     RecyclerView offerRecyclerView;
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefreshLayout;
+    @Getter
     private OfferOverviewController controller;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerViewAdapter adapter;
@@ -52,7 +54,6 @@ public class OfferOverviewFragment extends Fragment {
 
         pullToRefreshLayout.setOnRefreshListener(
                 () -> {
-                    pullToRefreshLayout.setRefreshing(true);
                     controller.invokeUpdate();
                 }
         );

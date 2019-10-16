@@ -23,11 +23,11 @@ import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+import com.github.neighbortrader.foodboardapp.ui.offerOverview.OfferOverviewFragment;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
 import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
 
+
     MainActivityController controller;
 
     @Override
@@ -53,13 +54,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
 
-        controller = new MainActivityController(this);
 
         super.onCreate(savedInstanceState);
         setupSharedPreferences();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initializeGroceryAndUser();
+        OfferOverviewFragment offerOverviewFragment = (OfferOverviewFragment) getSupportFragmentManager().findFragmentById(R.id.offerOverviewFragment);
+        controller = new MainActivityController(this, offerOverviewFragment.getController());
+        startup();
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
             if (UserHandler.getCurrentUserInstance() != null) {
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         });
     }
 
-    public void initializeGroceryAndUser() {
+    public void startup() {
         GroceryHandler.loadGroceriesFromSharedPreferences();
 
         UserHandler.iniUserHandler(hasUser -> {
@@ -172,6 +174,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         });
 
         UserHandler.loadUserAndUserData();
+
+        controller.invokeGroceryUpdate();
+        controller.invokeOfferUpdate();
     }
 
     @Override
