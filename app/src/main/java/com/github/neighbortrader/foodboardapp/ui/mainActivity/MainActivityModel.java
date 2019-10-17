@@ -18,7 +18,7 @@ public class MainActivityModel {
         this.offerOverviewController = offerOverviewController;
         context = ContextHandler.getAppContext();
     }
-    
+
     public void invokeOfferUpdate() {
         offerOverviewController.invokeOfferUpdate();
     }

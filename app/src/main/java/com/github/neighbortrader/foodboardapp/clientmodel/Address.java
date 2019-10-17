@@ -31,7 +31,10 @@ public class Address implements ToNameValueMap {
     }
 
     public String getFormattedSting() {
-        return postCode + " " + city + ", " + street + " " + streetNumber;
+        if (this != null){
+            return postCode + " " + city + ", " + street + " " + streetNumber;
+        }
+        return "";
     }
 
     @Override

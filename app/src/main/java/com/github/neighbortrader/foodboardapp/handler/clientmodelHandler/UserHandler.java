@@ -74,18 +74,20 @@ public class UserHandler {
         Log.d(TAG, "loadUser()");
 
         SharedPreferences sharedPreferences = ContextHandler.getAppContext().getSharedPreferences(SHARED_PREFERENCES_FILE_USER_INFO, MODE_PRIVATE);
-        String userToSaveAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
+        String userToLoadAsJsonString = sharedPreferences.getString(SHARED_PREFERENCES_FILE_USER_INFO, "");
 
-        Gson gson = GsonHandler.getGsonInstance();
-        User user = gson.fromJson(userToSaveAsJsonString, User.class);
+        if (userToLoadAsJsonString != null) {
+            Gson gson = GsonHandler.getGsonInstance();
+            User user = gson.fromJson(userToLoadAsJsonString, User.class);
 
-        if (user != null) {
-            Log.d(TAG, String.format("loaded user %s", user.toString()));
-        } else {
-            Log.d(TAG, "no user loaded");
+            if (user != null) {
+                Log.d(TAG, String.format("loaded user %s", user.toString()));
+                return user;
+            }
         }
+        Log.d(TAG, "no user loaded");
 
-        return user;
+        return null;
     }
 
     public static void loadUserAndUserData() {
