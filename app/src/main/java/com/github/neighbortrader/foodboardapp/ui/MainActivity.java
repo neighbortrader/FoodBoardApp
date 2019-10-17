@@ -18,6 +18,7 @@ import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
+import com.github.neighbortrader.foodboardapp.ui.about.AboutActivity;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.signIn.SignInActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -96,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.user:
                     Intent startSignUpIntent = new Intent(MainActivity.this, SignInActivity.class);
                     MainActivity.this.startActivity(startSignUpIntent);
+                    break;
+
+                case R.id.about:
+                    Intent startAboutIntent = new Intent(MainActivity.this, AboutActivity.class);
+                    MainActivity.this.startActivity(startAboutIntent);
                     break;
 
                 default:

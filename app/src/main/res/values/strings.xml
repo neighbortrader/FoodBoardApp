@@ -64,4 +64,5 @@
     <string name="sign_in_headline">Sign in</string>
     <string name="sign_in_editTextEmail_hint" translatable="false">E-Mail</string>
     <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
+    <string name="about_text">PETER MACH MAL</string>
 </resources>
