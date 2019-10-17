@@ -206,6 +206,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.settings_baseUrl_key))) {
             setBaseUrl(sharedPreferences.getString(key, getString(R.string.BASE_URL)));
+        }else if (key.equals(getString(R.string.settings_staySignedIn_Key))){
+            if (UserHandler.getCurrentUserInstance() != null) {
+                UserHandler.getCurrentUserInstance().setStaySignedIn(sharedPreferences.getBoolean(getString(R.string.settings_staySignedIn_Key), true));
+            }
         }
     }
 
@@ -262,6 +266,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
 
             userItem.setTitle(getString(R.string.general_modifie_user));
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+            String key = getString(R.string.settings_staySignedIn_Key);
+            boolean isStaySigendIn = currentUser.isStaySignedIn();
+            sharedPreferences.edit().putBoolean(key, isStaySigendIn).commit();
         } else {
             userName.setText("Username:");
             userPassword.setText("Password");

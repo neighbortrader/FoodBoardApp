@@ -36,7 +36,8 @@
             app:key="@string/settings_staySignedIn_Key"
             app:title="@string/settings_staySignedInTitle"
             app:summary="@string/settings_staySigendIn_Summary"
-            app:icon="@drawable/ic_account_circle_white_24dp"/>
+            app:icon="@drawable/ic_account_circle_white_24dp"
+            app:defaultValue="true"/>
 
     </PreferenceCategory>
 

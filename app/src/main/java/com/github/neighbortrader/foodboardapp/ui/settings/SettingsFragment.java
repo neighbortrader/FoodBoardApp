@@ -8,6 +8,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.github.neighbortrader.foodboardapp.R;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     @Override

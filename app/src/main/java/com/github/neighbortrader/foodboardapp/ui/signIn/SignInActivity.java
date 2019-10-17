@@ -1,17 +1,21 @@
 package com.github.neighbortrader.foodboardapp.ui.signIn;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserStatusListener;
 import com.github.neighbortrader.foodboardapp.ui.signUp.SignUpActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -80,7 +84,6 @@ public class SignInActivity extends AppCompatActivity {
     @OnClick(R.id.signIn)
     public void invokeSignIn() {
         User userToLogIn = buildUserFromInput();
-
         controller.invokeSignIn(userToLogIn);
     }
 
