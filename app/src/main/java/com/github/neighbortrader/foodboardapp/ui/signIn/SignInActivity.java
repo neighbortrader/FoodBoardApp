@@ -61,7 +61,6 @@ public class SignInActivity extends AppCompatActivity {
         } else if (state == CreateOfferActivity.progressBarStates.FINISHED) {
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(100, true);
         } else if (state == CreateOfferActivity.progressBarStates.ERROR) {
             progressBar.setVisibility(View.INVISIBLE);
             progressBar.setIndeterminate(true);

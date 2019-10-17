@@ -74,7 +74,8 @@
                 android:id="@+id/editText_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no" />
+                android:importantForAutofill="no"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,8 +88,7 @@
             app:layout_constraintBottom_toTopOf="@id/layout_Postcode"
             app:layout_constraintEnd_toStartOf="@id/layout_Number"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_Password"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintTop_toBottomOf="@id/layout_Password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText_street"
@@ -109,8 +109,7 @@
             app:layout_constraintBottom_toTopOf="@id/layout_Postcode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/layout_Street"
-            app:layout_constraintTop_toBottomOf="@id/layout_Password"
-            app:layout_constraintWidth_percent="0.3">
+            app:layout_constraintTop_toBottomOf="@id/stay_signedin">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText_number"
@@ -161,6 +160,14 @@
                 android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/stay_signedin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in_staySignedIn_Text"
+            app:layout_constraintBottom_toTopOf="@id/layout_Street"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_Password" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signupButton"
@@ -173,8 +180,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_Town" />
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
