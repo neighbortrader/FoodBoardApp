@@ -60,6 +60,8 @@ public class SignUpActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         controller = new SignUpController(this);
+
+        getSupportActionBar().setTitle(getString(R.string.sign_up_headline));
     }
 
     @OnClick(R.id.signupButton)
