@@ -87,7 +87,7 @@ public class SignInActivity extends AppCompatActivity {
     public User buildUserFromInput() {
         String username = usernameEditText.getEditableText().toString();
         String password = passwordEditText.getEditableText().toString();
-        boolean staySignedIn = staySignedInRadioButton.isSelected();
+        boolean staySignedIn = staySignedInRadioButton.isChecked();
 
         return UserHandler.buildLoginUser(username, password, staySignedIn);
     }
