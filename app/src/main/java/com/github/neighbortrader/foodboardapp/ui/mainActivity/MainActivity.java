@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    protected void onDestroyUserHandling(){
+    protected void onDestroyUserHandling() {
         User currentUser = UserHandler.getCurrentUserInstance();
 
         if (currentUser != null) {

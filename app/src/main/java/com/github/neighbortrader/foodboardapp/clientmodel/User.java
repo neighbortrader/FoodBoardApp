@@ -32,10 +32,6 @@ public class User implements ToNameValueMap {
         this.staySignedIn = staySignedIn;
     }
 
-    public boolean isStaySignedIn() {
-        return staySignedIn;
-    }
-
     public User() {
     }
 
@@ -45,6 +41,10 @@ public class User implements ToNameValueMap {
 
     public static User userBuilder() {
         return new User();
+    }
+
+    public boolean isStaySignedIn() {
+        return staySignedIn;
     }
 
     @Override

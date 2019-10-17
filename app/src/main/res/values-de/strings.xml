@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">Einstellungen</string>
-    <string name="general_user_name">Benutzername</string>
     <string name="general_user">Benutzer</string>
     <string name="postOffer_SuccessfullPostedOffer">Dein Angebot wurde erfolgreich erstellt</string>
     <string name="postOffer_UnsuccessfullPostedOffer">Dein Angebot konnte nicht erstellt werden</string>
     <string name="postOffer_headline">Ein Angebot erstellen</string>
-    <string name="postOffer_foodCategory">Lebensmittelkategorie</string>
     <string name="general_dateformat">dd-MM-yyyy</string>
-    <string name="postOffer_expireDate">Mindesthaltbarkeitsdatum</string>
-    <string name="postOffer_editTextDescription_hint">frischer Salat</string>
     <string name="postOffer_createOfferButton_Text">Angebot hochladen</string>
     <string name="postOffer_Image">Bild</string>
-    <string name="general_passwort">Passwort</string>
-    <string name="offerOverview_map">Karte</string>
-    <string name="offerOverview_filter">Filter</string>
     <string name="general_price">Preis</string>
     <string name="general_unableToUpdateOffers">Angebote konnten nicht aktualisiert werden</string>
-    <string name="offerDetailview_catagory">Lebensmittelkategorie</string>
-    <string name="offerDetailview_creationDate">Erstelldatum</string>
     <string name="general_description">Beschreibung</string>
-    <string name="offerDetailview_expireDate">Mindesthaltbarkeitsdatum</string>
-    <string name="offerDetailview_headline">"Detailansicht "</string>
-    <string name="offerDetailview_userInformation">Benutzerinformationen</string>
     <string name="general_unableToUpdaterGroceries">Kategorien konnten nicht aktualisiert werden</string>
-    <string name="postOffer_purchaseDate">Kaufdatum</string>
     <string name="postOffer_editTextPrice_hint">Preis</string>
     <string name="postOffer_ExpireDateHint">Verfallsdatum</string>
     <string name="postOffer_PurchaseDateHint">Kaufdatum</string>
@@ -50,12 +37,9 @@
     <string name="sign_in_editTextPassword_hint">Passwort</string>
     <string name="sign_in_staySignedIn_Text">Angemeldet bleiben</string>
     <string name="sign_in_signInButton_Text">Anmelden</string>
-    <string name="sign_in_registerButton_Text">Jetzt registrieren</string>
     <string name="sign_up_signupButton_Text">Registrieren</string>
     <string name="postOffer_OfferingMessageTitle">Wichtiger Hinweis</string>
     <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
-    <string name="general_yes">Ja</string>
-    <string name="general_no">Nein</string>
     <string name="postOffer_understand">Ich verstehe</string>
     <string name="postOffer_abort">Abbrechen</string>
     <string name="sign_in_editTextUsername_hint">Benutzername</string>

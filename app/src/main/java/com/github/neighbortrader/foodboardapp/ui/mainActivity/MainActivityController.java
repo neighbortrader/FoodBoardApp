@@ -13,11 +13,11 @@ public class MainActivityController {
         model = new MainActivityModel(this, offerOverviewController);
     }
 
-    public void invokeGroceryUpdate(){
+    public void invokeGroceryUpdate() {
         model.invokeGroceryUpdate();
     }
 
-    public void invokeOfferUpdate(){
+    public void invokeOfferUpdate() {
         model.invokeOfferUpdate();
     }
 }

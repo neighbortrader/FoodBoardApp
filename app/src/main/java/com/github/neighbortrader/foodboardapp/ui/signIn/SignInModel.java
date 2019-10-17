@@ -16,13 +16,13 @@ public class SignInModel {
     public static String TAG = SignInModel.class.getSimpleName();
     SignInController controller;
     Context context;
-    
+
     public SignInModel(SignInController controller) {
         this.controller = controller;
         context = ContextHandler.getAppContext();
     }
 
-    public void invokeSignIn(User userToSignIn){
+    public void invokeSignIn(User userToSignIn) {
         UserRequestHandler.builder(RequestTyps.GET_JWT_TOKEN, context, new OnRequestEventListener<UserRequestHandler>() {
             @Override
             public void onResponse(UserRequestHandler userRequestController) {

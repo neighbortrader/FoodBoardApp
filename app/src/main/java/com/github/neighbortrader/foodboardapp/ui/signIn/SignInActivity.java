@@ -84,7 +84,7 @@ public class SignInActivity extends AppCompatActivity {
         controller.invokeSignIn(userToLogIn);
     }
 
-    public User buildUserFromInput(){
+    public User buildUserFromInput() {
         String username = usernameEditText.getEditableText().toString();
         String password = passwordEditText.getEditableText().toString();
         boolean staySignedIn = staySignedInRadioButton.isSelected();
@@ -92,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
         return UserHandler.buildLoginUser(username, password, staySignedIn);
     }
 
-    public void setError(String message){
+    public void setError(String message) {
 
     }
 
@@ -108,8 +108,6 @@ public class SignInActivity extends AppCompatActivity {
         return true;
     }
 
-    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -118,4 +116,6 @@ public class SignInActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}
 }

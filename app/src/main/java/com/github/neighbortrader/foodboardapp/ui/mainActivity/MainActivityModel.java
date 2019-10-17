@@ -6,12 +6,10 @@ import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHand
 import com.github.neighbortrader.foodboardapp.ui.offerOverview.OfferOverviewController;
 
 public class MainActivityModel {
+    public static String TAG = MainActivityModel.class.getSimpleName();
     private MainActivityController controller;
     private Context context;
-
     private OfferOverviewController offerOverviewController;
-
-    public static String TAG = MainActivityModel.class.getSimpleName();
 
     public MainActivityModel(MainActivityController controller, OfferOverviewController offerOverviewController) {
         this.controller = controller;
