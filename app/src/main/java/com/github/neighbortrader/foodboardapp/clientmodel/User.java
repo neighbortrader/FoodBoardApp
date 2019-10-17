@@ -47,16 +47,19 @@ public class User implements ToNameValueMap {
 
     @Override
     public Map<String, String> toNameValueMap() {
-        Map<String, String> nameValueMap = new Hashtable<>();
+        if (this != null) {
+            Map<String, String> nameValueMap = new Hashtable<>();
 
-        nameValueMap.put("username", username);
-        nameValueMap.put("password", password);
+            nameValueMap.put("username", username);
+            nameValueMap.put("password", password);
 
-        if (email != null && address != null) {
-            nameValueMap.put("email", email);
-            nameValueMap.putAll(address.toNameValueMap());
+            if (email != null && address != null) {
+                nameValueMap.put("email", email);
+                nameValueMap.putAll(address.toNameValueMap());
+            }
+
+            return nameValueMap;
         }
-
-        return nameValueMap;
+        return null;
     }
 }
