@@ -208,7 +208,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             setBaseUrl(sharedPreferences.getString(key, getString(R.string.BASE_URL)));
         }else if (key.equals(getString(R.string.settings_staySignedIn_Key))){
             if (UserHandler.getCurrentUserInstance() != null) {
-                UserHandler.getCurrentUserInstance().setStaySignedIn(sharedPreferences.getBoolean(getString(R.string.settings_staySignedIn_Key), true));
+                boolean staySignedIn = sharedPreferences.getBoolean(getString(R.string.settings_staySignedIn_Key), true);
+                UserHandler.getCurrentUserInstance().setStaySignedIn(staySignedIn);
             }
         }
     }

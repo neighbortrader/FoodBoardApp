@@ -65,4 +65,8 @@
     <string name="settings_notifications_key" translatable="false">notifications</string>
     <string name="settings_notification_summery">Enabled or disable notifications</string>
     <string name="settings_notifications_title">Notifications</string>
+    <string name="settings_signOut_Key" translatable="false">signOutKey</string>
+    <string name="settings_signOut_summary">Click her to sign Out</string>
+    <string name="settings_signOut_Title">Sign out</string>
+    <string name="general_successfuly_signed_out">Successfully signed out</string>
 </resources>

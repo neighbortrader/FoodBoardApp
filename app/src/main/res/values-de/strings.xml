@@ -55,4 +55,7 @@
     <string name="general_modifie_user">Benutzer verwalten</string>
     <string name="settings_notification_summery">Aktiviere oder deaktiviere Berichtigungen</string>
     <string name="settings_notifications_title">Benachrichtigung</string>
+    <string name="settings_signOut_summary">Hier klicken zum ausloggen</string>
+    <string name="settings_signOut_Title">Ausloggen</string>
+    <string name="general_successfuly_signed_out">Erfolgreich abgemeldet</string>
 </resources>

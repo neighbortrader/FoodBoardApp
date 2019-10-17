@@ -39,6 +39,12 @@
             app:icon="@drawable/ic_account_circle_white_24dp"
             app:defaultValue="true"/>
 
+        <Preference
+            app:icon="@drawable/ic_assignment_late_black_24dp"
+            app:key="@string/settings_signOut_Key"
+            app:summary="@string/settings_signOut_summary"
+            app:title="@string/settings_signOut_Title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
