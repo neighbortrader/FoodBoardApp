@@ -86,7 +86,7 @@ public class UserRequestHandler extends AsyncRequestHandler<UserRequestHandler> 
 
         JWT jwtToken = new JWT(responseBody);
 
-        if (jwtToken.isExpired(10)) {
+        if (jwtToken.isExpired(0)) {
             throw new Exception("received JWT-Token is expired");
         }
 

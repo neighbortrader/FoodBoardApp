@@ -15,7 +15,7 @@ public class UserHandler {
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
     private static User userInstance;
 
-    private static OnUserChangedListener callback;
+    private static UserStatusListener callback;
 
     public static User getCurrentUserInstance() {
         return UserHandler.userInstance;
@@ -24,16 +24,16 @@ public class UserHandler {
     public static void setCurrentUserInstance(User userInstance) {
         if (userInstance != null) {
             UserHandler.userInstance = userInstance;
-            callback.onUserStateChanged(true);
+            callback.onUserStatusChanged(userInstance, true);
         } else {
             UserHandler.userInstance = null;
-            callback.onUserStateChanged(false);
+            callback.onUserStatusChanged(null, false);
         }
     }
 
-    public static void iniUserHandler(OnUserChangedListener onUserChangedListener) {
-        callback = onUserChangedListener;
-        callback.onUserStateChanged(false);
+    public static void iniUserStatusListener(UserStatusListener userStatusListener) {
+        callback = userStatusListener;
+        callback.onUserStatusChanged(null, false);
     }
 
     public static User buildLoginUser(String username, String password, boolean staySignedIn) {
@@ -81,7 +81,7 @@ public class UserHandler {
 
         if (user != null) {
             Log.d(TAG, String.format("loaded user %s", user.toString()));
-        }else{
+        } else {
             Log.d(TAG, "no user loaded");
         }
 
@@ -89,7 +89,7 @@ public class UserHandler {
     }
 
     public static void loadUserAndUserData() {
-        callback.onUserStateChanged(false);
+        callback.onUserStatusChanged(null, false);
         User loadedUser = UserHandler.loadUser();
 
         if (loadedUser == null) {
@@ -97,10 +97,11 @@ public class UserHandler {
         } else {
             if (loadedUser.isStaySignedIn()) {
                 Log.d(TAG, "found user and added to current user instance");
-                callback.onUserStateChanged(true);
+                callback.onUserStatusChanged(loadedUser, true);
                 UserHandler.setCurrentUserInstance(loadedUser);
             } else if (!loadedUser.isStaySignedIn()) {
                 Log.d(TAG, "found user but not added to current user instance because of isStaySignedIn equals false");
+                callback.onUserStatusChanged(null, false);
                 UserHandler.setCurrentUserInstance(null);
             }
         }

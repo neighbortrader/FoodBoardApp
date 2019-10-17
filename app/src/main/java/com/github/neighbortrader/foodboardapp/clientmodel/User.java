@@ -21,7 +21,6 @@ public class User implements ToNameValueMap {
     @Getter
     @Setter
     private Address address;
-    @Getter
     @Setter
     private boolean staySignedIn;
 
@@ -31,6 +30,10 @@ public class User implements ToNameValueMap {
         this.email = email;
         this.address = address;
         this.staySignedIn = staySignedIn;
+    }
+
+    public boolean isStaySignedIn() {
+        return staySignedIn;
     }
 
     public User() {
@@ -43,7 +46,6 @@ public class User implements ToNameValueMap {
     public static User userBuilder() {
         return new User();
     }
-
 
     @Override
     public Map<String, String> toNameValueMap() {

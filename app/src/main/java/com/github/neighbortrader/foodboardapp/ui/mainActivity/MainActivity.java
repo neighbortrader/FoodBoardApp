@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @BindView(R.id.createNewOfferFAB)
     FloatingActionButton createNewOfferFloatingActionButton;
 
-
     MainActivityController controller;
 
     @Override
@@ -57,13 +56,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Fabric.with(this, new Crashlytics());
         Crashlytics.setString("versionName", getString(R.string.app_version));
 
-
         super.onCreate(savedInstanceState);
         setupSharedPreferences();
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         OfferOverviewFragment offerOverviewFragment = (OfferOverviewFragment) getSupportFragmentManager().findFragmentById(R.id.offerOverviewFragment);
         controller = new MainActivityController(this, offerOverviewFragment.getController());
+
         startup();
 
         createNewOfferFloatingActionButton.setOnClickListener(view -> {
@@ -123,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 default:
-                    notImplementedPlaceHolder();
                     return true;
             }
 
@@ -134,58 +134,30 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void startup() {
         GroceryHandler.loadGroceriesFromSharedPreferences();
 
-        UserHandler.iniUserHandler(hasUser -> {
-            TextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
-            TextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
-            TextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
-            TextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
-            TextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
-
-            int userItemIndex = 1;
-
-            MenuItem userItem = navigationView.getMenu().getItem(userItemIndex);
-
-            userState.setText("has User: " + hasUser);
-
-            if (hasUser) {
-                User user = UserHandler.getCurrentUserInstance();
-                userName.setText("Username: " + user.getUsername());
-                userPassword.setText("Password: " + user.getPassword());
-
-                if (user.getEmail() != null) {
-                    userEmail.setText("Email: " + user.getEmail());
-                } else {
-                    userEmail.setText("Email: not able to get");
-                }
-
-                if (user.getAddress() != null) {
-                    userAddress.setText("Address: " + user.getAddress().getFormattedSting());
-                } else {
-                    userAddress.setText("Address: not able to get");
-                }
-
-                userItem.setTitle(getString(R.string.general_modifie_user));
-            } else {
-                userName.setText("Username:");
-                userPassword.setText("Password");
-                userEmail.setText("Email:");
-                userAddress.setText("Address:");
-
-                userItem.setTitle(getString(R.string.general_signUp_singIn_User));
-            }
-
-        });
-
+        userHandlerStartup();
         UserHandler.loadUserAndUserData();
 
         controller.invokeGroceryUpdate();
         controller.invokeOfferUpdate();
     }
 
+    private void userHandlerStartup() {
+        UserHandler.iniUserStatusListener(this::onUserStatusChanged);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
+        onDestroyUserHandling();
+
+        GroceryHandler.saveCurrentGroceriesToSharedPreferences();
+
+        androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    protected void onDestroyUserHandling(){
         User currentUser = UserHandler.getCurrentUserInstance();
 
         if (currentUser != null) {
@@ -198,11 +170,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         } else {
             UserHandler.deleteUser();
         }
-
-        GroceryHandler.saveCurrentGroceriesToSharedPreferences();
-
-        androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -228,9 +195,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         if (sharedPreferences.getBoolean("is_started_first_time", true)) {
             Log.d(TAG, "App is started the first time");
-
             firstTimeMessage();
-
             sharedPreferences.edit().putBoolean("is_started_first_time", false).commit();
         }
 
@@ -252,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ToastHandler.buildToastHandler().makeToast("not yet implemented");
     }
 
-    public void firstTimeMessage(){
+    public void firstTimeMessage() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.custom_dialog2, null);
@@ -265,5 +230,45 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
+    }
+
+    private void onUserStatusChanged(User currentUser, boolean hasUser) {
+        TextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
+        TextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
+        TextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
+        TextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
+        TextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
+
+        int userNavigatorItemIndex = 1;
+
+        MenuItem userItem = navigationView.getMenu().getItem(userNavigatorItemIndex);
+
+        userState.setText("has User: " + hasUser);
+
+        if (hasUser) {
+            userName.setText("Username: " + currentUser.getUsername());
+            userPassword.setText("Password: " + currentUser.getPassword());
+
+            if (currentUser.getEmail() != null) {
+                userEmail.setText("Email: " + currentUser.getEmail());
+            } else {
+                userEmail.setText("Email: not able to get");
+            }
+
+            if (currentUser.getAddress() != null) {
+                userAddress.setText("Address: " + currentUser.getAddress().getFormattedSting());
+            } else {
+                userAddress.setText("Address: not able to get");
+            }
+
+            userItem.setTitle(getString(R.string.general_modifie_user));
+        } else {
+            userName.setText("Username:");
+            userPassword.setText("Password");
+            userEmail.setText("Email:");
+            userAddress.setText("Address:");
+
+            userItem.setTitle(getString(R.string.general_signUp_singIn_User));
+        }
     }
 }
