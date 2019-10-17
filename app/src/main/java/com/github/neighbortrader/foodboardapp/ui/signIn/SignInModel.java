@@ -37,6 +37,8 @@ public class SignInModel {
             public void onFailure(Exception e) {
                 Log.e(TAG, "Exception while trying to sign in", e);
 
+                controller.onError();
+
                 // TODO: add handling of all variations
             }
 

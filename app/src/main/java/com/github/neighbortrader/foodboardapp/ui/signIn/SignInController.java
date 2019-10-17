@@ -1,6 +1,7 @@
 package com.github.neighbortrader.foodboardapp.ui.signIn;
 
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 
 public class SignInController {
     SignInActivity signInActivity;
@@ -21,5 +22,10 @@ public class SignInController {
     public void onSuccess() {
         signInActivity.setProgressbarState(SignInActivity.progressBarStates.FINISHED);
         signInActivity.finish();
+    }
+
+    public void onError(){
+        signInActivity.setProgressbarState(SignInActivity.progressBarStates.ERROR);
+        ToastHandler.buildToastHandler().makeToast("Error while trying to sign in");
     }
 }
