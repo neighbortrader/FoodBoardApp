@@ -66,7 +66,6 @@ public class SignInActivity extends AppCompatActivity {
             case FINISHED:
                 progressBar.setIndeterminate(false);
                 progressBar.setVisibility(View.VISIBLE);
-                progressBar.setProgress(100, true);
                 break;
             case ERROR:
                 progressBar.setVisibility(View.INVISIBLE);

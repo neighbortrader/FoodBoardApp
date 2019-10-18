@@ -40,6 +40,7 @@
     <string name="sign_up_signupButton_Text">Registrieren</string>
     <string name="postOffer_OfferingMessageTitle">Wichtiger Hinweis</string>
     <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
+    <string name="general_yes">Ja</string>
     <string name="postOffer_understand">Ich verstehe</string>
     <string name="postOffer_abort">Abbrechen</string>
     <string name="sign_in_editTextUsername_hint">Benutzername</string>
@@ -58,4 +59,5 @@
     <string name="settings_signOut_summary">Hier klicken zum ausloggen</string>
     <string name="settings_signOut_Title">Ausloggen</string>
     <string name="general_successfuly_signed_out">Erfolgreich abgemeldet</string>
+    <string name="sign_up_headline">Registrieren</string>
 </resources>

@@ -69,4 +69,5 @@
     <string name="settings_signOut_summary">Click her to sign Out</string>
     <string name="settings_signOut_Title">Sign out</string>
     <string name="general_successfuly_signed_out">Successfully signed out</string>
+    <string name="sign_up_headline">Sign up</string>
 </resources>
