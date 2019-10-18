@@ -1,21 +1,17 @@
 package com.github.neighbortrader.foodboardapp.ui.signIn;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
-import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserStatusListener;
 import com.github.neighbortrader.foodboardapp.ui.signUp.SignUpActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -57,21 +53,26 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void setProgressbarState(SignInActivity.progressBarStates state) {
-        if (state == SignInActivity.progressBarStates.LOADING) {
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-        } else if (state == SignInActivity.progressBarStates.NOT_LOADING) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.GONE);
-        } else if (state == SignInActivity.progressBarStates.FINISHED) {
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(100, true);
-        } else if (state == SignInActivity.progressBarStates.ERROR) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.GONE);
+        switch (state) {
+            case LOADING:
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.VISIBLE);
+                break;
+            case NOT_LOADING:
+                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setIndeterminate(false);
+                progressBar.setVisibility(View.GONE);
+                break;
+            case FINISHED:
+                progressBar.setIndeterminate(false);
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setProgress(100, true);
+                break;
+            case ERROR:
+                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.GONE);
+                break;
         }
     }
 

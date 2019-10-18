@@ -31,7 +31,7 @@ public class UserHandler {
         }
     }
 
-    public static void iniUserStatusListener(UserStatusListener userStatusListener) {
+    public static void initUserStatusListener(UserStatusListener userStatusListener) {
         callback = userStatusListener;
         callback.onUserStatusChanged(null, false);
     }

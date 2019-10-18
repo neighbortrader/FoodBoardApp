@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void userHandlerStartup() {
-        UserHandler.iniUserStatusListener(this::onUserStatusChanged);
+        UserHandler.initUserStatusListener(this::onUserStatusChanged);
     }
 
     @Override
