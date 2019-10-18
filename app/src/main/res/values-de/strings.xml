@@ -50,11 +50,11 @@
     <string name="postOffer_OfferingMessageTitle">Wichtiger Hinweis</string>
     <string name="postOffer_OfferingMessage">Bitte beachte das du öffentlichen Inhalt erstellst.</string>
     <string name="general_yes">Ja</string>
-    <string name="general_no">Nein</string>
     <string name="postOffer_understand">Ich verstehe</string>
     <string name="postOffer_abort">Abbrechen</string>
     <string name="sign_in_editTextUsername_hint">Benutzername</string>
     <string name="sign_in_signUpHereButton_Text">Noch kein Account? Hier registrieren</string>
     <string name="sign_in_headline">Anmelden</string>
     <string name="general_NoUserFound">Um ein Angebot zu erstellen müssen Sie angemeldet sein.</string>
+    <string name="sign_up_headline">Registrieren</string>
 </resources>
