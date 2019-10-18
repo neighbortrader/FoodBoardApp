@@ -1,6 +1,5 @@
 package com.github.neighbortrader.foodboardapp.ui.signUp;
 
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Address;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
-import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -53,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     SignUpController controller;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.signupButton)
-    public void invokeSignUp(){
+    public void invokeSignUp() {
         User userToSignUp = createUserFromInput();
 
         controller.invokeSignUp(userToSignUp);
@@ -89,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private User createUserFromInput(){
+    private User createUserFromInput() {
         String username = usernameEditText.getEditableText().toString();
         String email = emailEditText.getEditableText().toString();
         String password = passwordEditText.getEditableText().toString();
@@ -113,3 +111,4 @@ public class SignUpActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+

@@ -318,20 +318,25 @@ public class CreateOfferActivity extends AppCompatActivity {
     }
 
     public void setProgressbarState(progressBarStates state) {
-        if (state == progressBarStates.LOADING) {
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-        } else if (state == progressBarStates.NOT_LOADING) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.GONE);
-        } else if (state == progressBarStates.FINISHED) {
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.VISIBLE);
-        } else if (state == progressBarStates.ERROR) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.GONE);
+        switch (state) {
+            case LOADING:
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.VISIBLE);
+                break;
+            case NOT_LOADING:
+                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setIndeterminate(false);
+                progressBar.setVisibility(View.GONE);
+                break;
+            case FINISHED:
+                progressBar.setIndeterminate(false);
+                progressBar.setVisibility(View.VISIBLE);
+                break;
+            case ERROR:
+                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.GONE);
+                break;
         }
     }
 
