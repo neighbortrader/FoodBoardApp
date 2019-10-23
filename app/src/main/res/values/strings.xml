@@ -52,7 +52,7 @@
     <string name="postOffer_abort">Abort</string>
     <string name="sign_in_signUpHereButton_Text">No account yet? Sign up here</string>
     <string name="sign_in_headline">Sign in</string>
-    <string name="general_NoUserFound">To create a offer you need to be logged in.</string>
+    <string name="general_NoUserFound">To create an offer you need to be logged in.</string>
     <string name="setting_baseUrl_summary">Set base URL to the backend</string>
     <string name="general_offer">Offers</string>
     <string name="general_issue_report">Report an issue</string>
