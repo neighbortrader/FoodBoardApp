@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.settings:
-                    startActivity(new Intent(this, SettingsActivity.class));
+                    ToastHandler.buildToastHandler().notAvailabel();
                     break;
 
                 default:

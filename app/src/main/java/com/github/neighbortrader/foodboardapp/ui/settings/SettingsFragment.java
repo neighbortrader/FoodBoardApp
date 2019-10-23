@@ -27,7 +27,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_email_subject));
 
             startActivity(Intent.createChooser(intent, getString(R.string.sendFeedback_title)));
-        } else if (key.equals(getString(R.string.settings_signOut_Key))) {
+        } else {
             ToastHandler.buildToastHandler().notAvailabel();
         }
         return false;
