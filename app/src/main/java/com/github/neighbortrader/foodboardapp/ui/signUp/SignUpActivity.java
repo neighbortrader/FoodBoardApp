@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.neighbortrader.foodboardapp.R;
 import com.github.neighbortrader.foodboardapp.clientmodel.Address;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
@@ -64,9 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     @OnClick(R.id.signupButton)
     public void invokeSignUp() {
-        User userToSignUp = createUserFromInput();
-
-        controller.invokeSignUp(userToSignUp);
+        ToastHandler.buildToastHandler().notAvailabel();
     }
 
     public void setProgressbarState(CreateOfferActivity.progressBarStates state) {
@@ -85,21 +84,6 @@ public class SignUpActivity extends AppCompatActivity {
             progressBar.setIndeterminate(true);
             progressBar.setVisibility(View.GONE);
         }
-    }
-
-    private User createUserFromInput() {
-        String username = usernameEditText.getEditableText().toString();
-        String email = emailEditText.getEditableText().toString();
-        String password = passwordEditText.getEditableText().toString();
-        String street = streetEditText.getEditableText().toString();
-        String number = numberEditText.getEditableText().toString();
-        String postCode = postCodeEditText.getEditableText().toString();
-        String town = townEditText.getEditableText().toString();
-        boolean staySigendIn = staySignedInCheckBox.isChecked();
-
-        Address address = new Address(street, number, postCode, town);
-
-        return User.userBuilder(username, password, email, address, staySigendIn);
     }
 
     @Override

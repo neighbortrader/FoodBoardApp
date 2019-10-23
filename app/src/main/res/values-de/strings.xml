@@ -60,4 +60,6 @@
     <string name="settings_signOut_Title">Ausloggen</string>
     <string name="general_successfuly_signed_out">Erfolgreich abgemeldet</string>
     <string name="sign_up_headline">Registrieren</string>
+    <string name="general_not_available">Nicht verfügbar in dieser Demo</string>
+    <string name="general_not_implemented">Noch nicht implementiert</string>
 </resources>

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 case R.id.user:
                     if (UserHandler.getCurrentUserInstance() != null) {
-                        notImplementedPlaceHolder();
+                        ToastHandler.buildToastHandler().notImplementedPlaceHolder();
                     } else {
                         UserHandler.loadUserAndUserData();
 
@@ -114,9 +114,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.faq:
+                    ToastHandler.buildToastHandler().notImplementedPlaceHolder();
 
                 case R.id.about:
-                    notImplementedPlaceHolder();
+                    ToastHandler.buildToastHandler().notImplementedPlaceHolder();
                     break;
 
                 case R.id.settings:
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 default:
+                    ToastHandler.buildToastHandler().notImplementedPlaceHolder();
                     return true;
             }
 
@@ -206,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.settings_baseUrl_key))) {
             setBaseUrl(sharedPreferences.getString(key, getString(R.string.BASE_URL)));
-        }else if (key.equals(getString(R.string.settings_staySignedIn_Key))){
+        } else if (key.equals(getString(R.string.settings_staySignedIn_Key))) {
             if (UserHandler.getCurrentUserInstance() != null) {
                 boolean staySignedIn = sharedPreferences.getBoolean(getString(R.string.settings_staySignedIn_Key), true);
                 UserHandler.getCurrentUserInstance().setStaySignedIn(staySignedIn);
@@ -216,10 +218,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void setBaseUrl(String baseUrl) {
         Urls.BASE_URL = baseUrl;
-    }
-
-    public void notImplementedPlaceHolder() {
-        ToastHandler.buildToastHandler().makeToast("not yet implemented");
     }
 
     public void firstTimeMessage() {
