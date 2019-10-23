@@ -3,6 +3,7 @@ package com.github.neighbortrader.foodboardapp.handler.clientmodelHandler;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.github.neighbortrader.foodboardapp.clientmodel.Address;
 import com.github.neighbortrader.foodboardapp.clientmodel.User;
 import com.github.neighbortrader.foodboardapp.handler.contextHandler.ContextHandler;
 import com.github.neighbortrader.foodboardapp.handler.gsonHandler.GsonHandler;
@@ -42,6 +43,18 @@ public class UserHandler {
         loginUser.setPassword(password);
         loginUser.setStaySignedIn(staySignedIn);
         return loginUser;
+    }
+
+    public static User buildDemoUser(){
+        User demoUser = User.userBuilder();
+        demoUser.setUsername("DemoUser");
+        demoUser.setPassword("Demo_User1");
+        demoUser.setStaySignedIn(true);
+        demoUser.setEmail("demo@user.de");
+        Address demoUserAdress = new Address("Demostraße", "1", "10315", "Berlin");
+        demoUser.setAddress(demoUserAdress);
+
+        return demoUser;
     }
 
     public static void saveUser(User user) {

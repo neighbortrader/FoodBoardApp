@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         userHandlerStartup();
         UserHandler.loadUserAndUserData();
+        UserHandler.setCurrentUserInstance(UserHandler.buildDemoUser());
 
         controller.invokeGroceryUpdate();
         controller.invokeOfferUpdate();
