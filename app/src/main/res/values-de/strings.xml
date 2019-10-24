@@ -50,7 +50,7 @@
     <string name="setting_baseUrl_summary">Base URL zum Backend festlegen</string>
     <string name="general_offer">Angebote</string>
     <string name="general_issue_report">Einen Fehler melden</string>
-    <string name="general_about">Über</string>
+    <string name="general_about">Über uns: Die App FoodBoard richtet sich gegen Essensverschwendung. Du kannst einfach dein nicht gebrauchtes Essen anderen bedürftigen Menschen anbieten.</string>
     <string name="settings_staySignedInTitle">Eingeloggt bleiben</string>
     <string name="settings_staySigendIn_Summary">Stelle Sie ein, ob Sie nach dem schließen der App angemeldet bleiben wollen</string>
     <string name="general_modifie_user">Benutzer verwalten</string>
@@ -62,4 +62,6 @@
     <string name="sign_up_headline">Registrieren</string>
     <string name="general_not_available">Nicht verfügbar in dieser Demo</string>
     <string name="general_not_implemented">Noch nicht implementiert</string>
+    <string name="about_activity_name">Über</string>
+>>>>>>> master
 </resources>

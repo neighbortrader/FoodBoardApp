@@ -25,6 +25,7 @@ import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHan
 import com.github.neighbortrader.foodboardapp.handler.requestsHandler.Urls;
 import com.github.neighbortrader.foodboardapp.handler.toastHandler.ToastHandler;
 import com.github.neighbortrader.foodboardapp.handler.tokenHandler.TokenHandler;
+import com.github.neighbortrader.foodboardapp.ui.about.AboutActivity;
 import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
 import com.github.neighbortrader.foodboardapp.ui.offerOverview.OfferOverviewFragment;
 import com.github.neighbortrader.foodboardapp.ui.settings.SettingsActivity;
@@ -105,19 +106,19 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.issueReporting:
-                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-                    intent.setType("text/plain");
-                    intent.setData(Uri.parse(getString(R.string.feedback_email)));
-                    intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_email_subject));
+                    Intent issueIntent = new Intent(Intent.ACTION_SENDTO);
+                    issueIntent.setType("text/plain");
+                    issueIntent.setData(Uri.parse(getString(R.string.feedback_email)));
+                    issueIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_email_subject));
 
-                    startActivity(Intent.createChooser(intent, getString(R.string.sendFeedback_title)));
+                    startActivity(Intent.createChooser(issueIntent, getString(R.string.sendFeedback_title)));
                     break;
 
                 case R.id.faq:
                     ToastHandler.buildToastHandler().notImplementedPlaceHolder();
 
                 case R.id.about:
-                    ToastHandler.buildToastHandler().notImplementedPlaceHolder();
+                    startActivity(new Intent(this, AboutActivity.class));
                     break;
 
                 case R.id.settings:
