@@ -12,19 +12,28 @@ public class OfferOverviewController {
 
     Context context;
     private OfferOverviewModel model;
-    private OfferOverviewFragment offerOverviewActivity;
+    private OfferOverviewFragment offerOverviewFragment;
 
-    public OfferOverviewController(OfferOverviewFragment offerOverviewActivity) {
+    public OfferOverviewController(OfferOverviewFragment offerOverviewFragment) {
         this.model = new OfferOverviewModel(this);
-        this.offerOverviewActivity = offerOverviewActivity;
+        this.offerOverviewFragment = offerOverviewFragment;
         context = ContextHandler.getAppContext();
-
-        model.initialize();
     }
 
     public void invokeUpdate() {
-        model.updateGroceryCategories();
+        invokeGroceryUpdate();
+        invokeOfferUpdate();
+        setProgressBarRefreshing(true);
+    }
+
+    public void invokeOfferUpdate() {
         model.updateOffers();
+        setProgressBarRefreshing(true);
+    }
+
+    public void invokeGroceryUpdate() {
+        model.updateGroceryCategories();
+        setProgressBarRefreshing(true);
     }
 
     public ArrayList<Offer> getCurrentOffers() {
@@ -32,7 +41,7 @@ public class OfferOverviewController {
     }
 
     public void invokeUiUpdate() {
-        offerOverviewActivity.updateUi(model.getCurrentOffers());
+        offerOverviewFragment.updateUi(model.getCurrentOffers());
         setProgressBarRefreshing(false);
     }
 
@@ -41,7 +50,7 @@ public class OfferOverviewController {
     }
 
     public void setProgressBarRefreshing(boolean isRefresing) {
-        offerOverviewActivity.setRefreshing(isRefresing);
+        offerOverviewFragment.setRefreshing(isRefresing);
     }
 
     public void destroy() {

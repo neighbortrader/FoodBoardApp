@@ -2,6 +2,7 @@ package com.github.neighbortrader.foodboardapp.ui.signIn;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -9,7 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.neighbortrader.foodboardapp.R;
-import com.github.neighbortrader.foodboardapp.ui.createOffer.CreateOfferActivity;
+import com.github.neighbortrader.foodboardapp.clientmodel.User;
+import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHandler;
 import com.github.neighbortrader.foodboardapp.ui.signUp.SignUpActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -50,22 +52,26 @@ public class SignInActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.sign_in_headline));
     }
 
-    public void setProgressbarState(CreateOfferActivity.progressBarStates state) {
-        if (state == CreateOfferActivity.progressBarStates.LOADING) {
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-        } else if (state == CreateOfferActivity.progressBarStates.NOT_LOADING) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.GONE);
-        } else if (state == CreateOfferActivity.progressBarStates.FINISHED) {
-            progressBar.setIndeterminate(false);
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(100, true);
-        } else if (state == CreateOfferActivity.progressBarStates.ERROR) {
-            progressBar.setVisibility(View.INVISIBLE);
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.GONE);
+    public void setProgressbarState(SignInActivity.progressBarStates state) {
+        switch (state) {
+            case LOADING:
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.VISIBLE);
+                break;
+            case NOT_LOADING:
+                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setIndeterminate(false);
+                progressBar.setVisibility(View.GONE);
+                break;
+            case FINISHED:
+                progressBar.setIndeterminate(false);
+                progressBar.setVisibility(View.VISIBLE);
+                break;
+            case ERROR:
+                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.GONE);
+                break;
         }
     }
 
@@ -77,6 +83,19 @@ public class SignInActivity extends AppCompatActivity {
 
     @OnClick(R.id.signIn)
     public void invokeSignIn() {
+        User userToLogIn = buildUserFromInput();
+        controller.invokeSignIn(userToLogIn);
+    }
+
+    public User buildUserFromInput() {
+        String username = usernameEditText.getEditableText().toString();
+        String password = passwordEditText.getEditableText().toString();
+        boolean staySignedIn = staySignedInRadioButton.isChecked();
+
+        return UserHandler.buildLoginUser(username, password, staySignedIn);
+    }
+
+    public void setError(String message) {
 
     }
 
@@ -90,6 +109,15 @@ public class SignInActivity extends AppCompatActivity {
 
     public boolean checkPassword() {
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public enum progressBarStates {NOT_LOADING, LOADING, FINISHED, ERROR}

@@ -35,7 +35,6 @@ public class UserRequestHandler extends AsyncRequestHandler<UserRequestHandler> 
     }
 
     public static UserRequestHandler builder(RequestTyps requestTyps, Context context, OnRequestEventListener callback, User... user) {
-
         UserRequestHandler userRequestController = null;
 
         switch (requestTyps) {
@@ -47,12 +46,13 @@ public class UserRequestHandler extends AsyncRequestHandler<UserRequestHandler> 
             case POST_NEW_USER:
                 userRequestController = new UserRequestHandler(context, callback, RequestTyps.POST_NEW_USER);
                 userRequestController.setUrl(Urls.BASE_URL + Urls.ENDPOINT_CREATE_NEW_USER);
-                if (user.length > 0)
-                    userRequestController.setUserToCreate(user[0]);
                 break;
             default:
                 return null;
         }
+
+        if (user.length > 0)
+            userRequestController.setUserToCreate(user[0]);
 
         return userRequestController;
     }
