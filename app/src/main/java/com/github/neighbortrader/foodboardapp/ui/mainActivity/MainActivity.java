@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 case R.id.user:
                     if (UserHandler.getCurrentUserInstance() != null) {
-                        ToastHandler.buildToastHandler().notImplementedPlaceHolder();
+                        ToastHandler.buildToastHandler().notAvailabel();
                     } else {
                         UserHandler.loadUserAndUserData();
 
