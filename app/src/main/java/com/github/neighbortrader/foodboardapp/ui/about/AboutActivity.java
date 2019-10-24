@@ -10,6 +10,7 @@ import com.github.neighbortrader.foodboardapp.R;
 import com.google.android.material.textview.MaterialTextView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AboutActivity extends AppCompatActivity {
     @BindView(R.id.aboutTextView)
@@ -19,8 +20,9 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
+        ButterKnife.bind(this);
 
-        aboutTextView.setText(getString(R.string.about_text));
+        aboutTextView.setText(getString(R.string.general_about));
     }
 
     @Override
