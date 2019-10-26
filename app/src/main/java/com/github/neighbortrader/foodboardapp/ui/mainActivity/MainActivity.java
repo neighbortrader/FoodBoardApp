@@ -239,11 +239,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void onUserStatusChanged(User currentUser, boolean hasUser) {
-        TextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
-        TextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
-        TextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
-        TextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
-        TextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
+        View navigationHeaderView =  navigationView.getHeaderView(0);
+
+        TextView userState = navigationHeaderView.findViewById(R.id.user_state);
+        TextView userName = navigationHeaderView.findViewById(R.id.username);
+        TextView userPassword = navigationHeaderView.findViewById(R.id.password);
+        TextView userEmail = navigationHeaderView.findViewById(R.id.email);
+        TextView userAddress = navigationHeaderView.findViewById(R.id.address);
 
         int userNavigatorItemIndex = 1;
 
