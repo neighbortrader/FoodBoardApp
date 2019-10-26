@@ -14,4 +14,8 @@ public class TokenHandler {
     public static void removeToken() {
         jwtToken = null;
     }
+
+    public static boolean hasToken() {
+        return (jwtToken != null) ? true : false;
+    }
 }

@@ -238,11 +238,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     private void onUserStatusChanged(User currentUser, boolean hasUser) {
-        TextView userState = navigationView.getHeaderView(0).findViewById(R.id.user_state);
-        TextView userName = navigationView.getHeaderView(0).findViewById(R.id.username);
-        TextView userPassword = navigationView.getHeaderView(0).findViewById(R.id.password);
-        TextView userEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
-        TextView userAddress = navigationView.getHeaderView(0).findViewById(R.id.address);
+        View navigationHeaderView =  navigationView.getHeaderView(0);
+
+        TextView userState = navigationHeaderView.findViewById(R.id.user_state);
+        TextView userName = navigationHeaderView.findViewById(R.id.username);
+        TextView userPassword = navigationHeaderView.findViewById(R.id.password);
+        TextView userEmail = navigationHeaderView.findViewById(R.id.email);
+        TextView userAddress = navigationHeaderView.findViewById(R.id.address);
+        TextView userToken = navigationHeaderView.findViewById(R.id.hasToken);
 
         int userNavigatorItemIndex = 1;
 
@@ -266,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 userAddress.setText("Address: not able to get");
             }
 
+            userToken.setText("has Token: " + TokenHandler.hasToken());
+
             userItem.setTitle(getString(R.string.general_modifie_user));
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -278,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             userPassword.setText("Password");
             userEmail.setText("Email:");
             userAddress.setText("Address:");
+            userToken.setText("has Token: ");
 
             userItem.setTitle(getString(R.string.general_signUp_singIn_User));
         }

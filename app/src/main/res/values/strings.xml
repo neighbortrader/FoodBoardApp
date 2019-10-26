@@ -47,7 +47,7 @@
     <string name="sign_in_signInButton_Text">Sign in</string>
     <string name="sign_up_signupButton_Text">Sign up</string>
     <string name="postOffer_OfferingMessageTitle">Important information</string>
-    <string name="postOffer_OfferingMessage">Please not that you are in contact with user created content</string>
+    <string name="postOffer_OfferingMessage">Please note that you are in contact with user created content</string>
     <string name="postOffer_understand">I understand</string>
     <string name="postOffer_abort">Abort</string>
     <string name="sign_in_signUpHereButton_Text">No account yet? Sign up here</string>
@@ -74,4 +74,5 @@
     <string name="general_not_implemented">Not yet implemented</string>
     <string name="general_not_available">Not availabel in this demo</string>
     <string name="about_activity_name">About</string>
+    <string name="general_yes">Yes</string>
 </resources>
