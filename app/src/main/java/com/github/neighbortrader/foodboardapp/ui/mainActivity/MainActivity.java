@@ -246,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         TextView userPassword = navigationHeaderView.findViewById(R.id.password);
         TextView userEmail = navigationHeaderView.findViewById(R.id.email);
         TextView userAddress = navigationHeaderView.findViewById(R.id.address);
+        TextView userToken = navigationHeaderView.findViewById(R.id.hasToken);
 
         int userNavigatorItemIndex = 1;
 
@@ -269,6 +270,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 userAddress.setText("Address: not able to get");
             }
 
+            userToken.setText("has Token: " + TokenHandler.hasToken());
+
             userItem.setTitle(getString(R.string.general_modifie_user));
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -281,6 +284,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             userPassword.setText("Password");
             userEmail.setText("Email:");
             userAddress.setText("Address:");
+            userToken.setText("has Token: ");
 
             userItem.setTitle(getString(R.string.general_signUp_singIn_User));
         }
