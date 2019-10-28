@@ -19,6 +19,14 @@ def versionMinor = 13
 def versionPatch = 3
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\Programmieren\\Android\\keystore.jks')
+            storePassword 'LH15MCq064LZrIBF'
+            keyAlias = 'FoodBoardKey'
+            keyPassword 'LH15MCq064LZrIBF'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -28,6 +36,7 @@ android {
         versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
     lintOptions {
         abortOnError false
