@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 case R.id.faq:
                     ToastHandler.buildToastHandler().notImplementedPlaceHolder();
+                    break;
 
                 case R.id.about:
                     startActivity(new Intent(this, AboutActivity.class));
