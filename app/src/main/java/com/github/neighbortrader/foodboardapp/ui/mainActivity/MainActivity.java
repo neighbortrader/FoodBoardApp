@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     break;
 
                 case R.id.faq:
+                    break;
 
                 case R.id.about:
                     startActivity(new Intent(this, AboutActivity.class));
