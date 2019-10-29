@@ -32,6 +32,14 @@ public class UserHandler {
         }
     }
 
+    public static void callUserStatusUpdate(){
+        if (UserHandler.userInstance != null) {
+            callback.onUserStatusChanged(userInstance, true);
+        } else {
+            callback.onUserStatusChanged(null, false);
+        }
+    }
+
     public static void initUserStatusListener(UserStatusListener userStatusListener) {
         callback = userStatusListener;
         callback.onUserStatusChanged(null, false);
