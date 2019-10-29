@@ -23,6 +23,10 @@ https://appdistribution.firebase.dev/i/yLWBUzjJ
 The FBS is currently developed as an prototype. The product originates from a software engineering student-project. 
 The initial release date is in early 2020.
 
+## Language Support
+
+We support english, german and spanish!
+
 ## How to build the project
 
 ### Required Android-Studio-Plugins to build the project:
