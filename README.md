@@ -25,7 +25,7 @@ The initial release date is in early 2020.
 
 ## Language Support
 
-We support english, german and spanish!
+We support english, german and spanish.
 
 ## How to build the project
 
