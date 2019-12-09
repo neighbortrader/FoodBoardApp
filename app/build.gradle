@@ -101,7 +101,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // design
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
 
     // preferences
     implementation "androidx.preference:preference:1.1.0"
