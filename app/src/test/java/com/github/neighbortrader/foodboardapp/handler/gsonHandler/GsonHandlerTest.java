@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class GsonHandlerTest {
     @Test
@@ -20,7 +20,7 @@ public class GsonHandlerTest {
             hasSameHashKey = false;
         }
 
-        assertEquals(true, hasSameHashKey);
+        assertTrue(hasSameHashKey);
     }
 
     @Test
@@ -35,6 +35,6 @@ public class GsonHandlerTest {
             gotGsonInstance = false;
         }
 
-        assertEquals(true, gotGsonInstance);
+        assertTrue(gotGsonInstance);
     }
 }
