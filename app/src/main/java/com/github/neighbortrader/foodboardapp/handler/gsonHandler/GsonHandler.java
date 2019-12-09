@@ -3,13 +3,16 @@ package com.github.neighbortrader.foodboardapp.handler.gsonHandler;
 import com.google.gson.Gson;
 
 public class GsonHandler {
-    private static Gson gson;
+    private static volatile Gson gson;
 
     public static Gson getGsonInstance() {
         if (gson == null) {
-            return new Gson();
-        } else {
-            return gson;
+            synchronized (GsonHandler.class) {
+                if (gson == null) {
+                    gson = new Gson();
+                }
+            }
         }
+        return gson;
     }
 }

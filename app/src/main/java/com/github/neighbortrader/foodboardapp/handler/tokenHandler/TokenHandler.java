@@ -6,7 +6,6 @@ import com.github.neighbortrader.foodboardapp.handler.clientmodelHandler.UserHan
 import lombok.Getter;
 
 public class TokenHandler {
-    @Getter
     private static JWT jwtToken;
 
     public static void setJwtToken(JWT jwtToken) {
@@ -17,6 +16,10 @@ public class TokenHandler {
     public static void removeToken() {
         jwtToken = null;
         UserHandler.callUserStatusUpdate();
+    }
+
+    public static JWT getJwtToken(){
+        return jwtToken;
     }
 
     public static boolean hasToken() {
