@@ -13,7 +13,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class UserHandler {
     public static final String TAG = UserHandler.class.getSimpleName();
     private static final String SHARED_PREFERENCES_FILE_USER_INFO = "userInfo";
-    private static User userInstance;
+    private volatile static User userInstance;
 
     private static UserStatusListener callback;
 
@@ -21,7 +21,7 @@ public class UserHandler {
         return UserHandler.userInstance;
     }
 
-    public static void setCurrentUserInstance(User userInstance) {
+    public static synchronized void setCurrentUserInstance(User userInstance) {
         if (userInstance != null) {
             UserHandler.userInstance = userInstance;
             callback.onUserStatusChanged(userInstance, true);
@@ -31,7 +31,7 @@ public class UserHandler {
         }
     }
 
-    public static void callUserStatusUpdate(){
+    public static synchronized void callUserStatusUpdate(){
         if (UserHandler.userInstance != null) {
             callback.onUserStatusChanged(userInstance, true);
         } else {
@@ -60,7 +60,7 @@ public class UserHandler {
         }
     }
 
-    public static void deleteUser() {
+    public static synchronized void deleteUser() {
         Log.d(TAG, "deleteUser");
         toSharedPreferences(null);
         UserHandler.setCurrentUserInstance(null);

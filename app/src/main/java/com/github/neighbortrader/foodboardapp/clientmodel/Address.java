@@ -31,16 +31,13 @@ public class Address implements ToNameValueMap {
     }
 
     public String getFormattedSting() {
-        if (this != null) {
-            return new StringBuilder().append(postCode)
-                    .append(", ")
-                    .append(city)
-                    .append(", ")
-                    .append(street)
-                    .append(", ")
-                    .append(streetNumber).toString();
-        }
-        return "";
+        return new StringBuilder().append(postCode)
+                .append(", ")
+                .append(city)
+                .append(", ")
+                .append(street)
+                .append(", ")
+                .append(streetNumber).toString();
     }
 
     @Override
